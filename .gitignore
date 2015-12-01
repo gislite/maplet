@@ -1,3 +1,7 @@
+
+.idea/
+.idea
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -13,8 +17,7 @@ develop-eggs/
 dist/
 downloads/
 eggs/
-.eggs/
-lib/
+# lib/
 lib64/
 parts/
 sdist/
@@ -37,11 +40,9 @@ pip-delete-this-directory.txt
 htmlcov/
 .tox/
 .coverage
-.coverage.*
 .cache
 nosetests.xml
 coverage.xml
-*,cover
 
 # Translations
 *.mo
@@ -55,3 +56,12 @@ docs/_build/
 
 # PyBuilder
 target/
+
+### Configure for TorCMS/torlite
+
+xx*
+config.py
+*.db
+
+database/whoosh
+static/upload/
