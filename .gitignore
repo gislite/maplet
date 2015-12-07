@@ -62,6 +62,7 @@ target/
 xx*
 config.py
 *.db
+*.sqlite
 
 database/whoosh
 static/upload/
