@@ -61,8 +61,11 @@ target/
 
 xx*
 config.py
+
+.DS_Store
 *.db
 *.sqlite
 
 database/whoosh
 static/upload/
+
