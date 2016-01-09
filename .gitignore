@@ -66,6 +66,6 @@ config.py
 *.db
 *.sqlite
 
-database/whoosh
+database/whoosh*
 static/upload/
 
