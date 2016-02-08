@@ -65,6 +65,7 @@ config.py
 .DS_Store
 *.db
 *.sqlite
+*.pkl
 
 database/whoosh*
 static/upload/
