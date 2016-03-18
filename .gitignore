@@ -69,4 +69,5 @@ config.py
 
 database/whoosh*
 static/upload/
+script/chart/
 
