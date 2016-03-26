@@ -69,4 +69,4 @@ config.py
 
 database/whoosh*
 static/upload/
-
+static/tass/.sass-cache/
