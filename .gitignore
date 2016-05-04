@@ -67,6 +67,7 @@ config.py
 *.sqlite
 *.pkl
 
-database/whoosh*
-static/upload/
-static/tass/.sass-cache/
+./src/database
+./src/database/whoosh*
+./src/static/upload/
+./src/static/tass/.sass-cache/
