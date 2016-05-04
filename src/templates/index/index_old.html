@@ -1,0 +1,386 @@
+{% extends "../theme/base_zhu.html" %}
+{% block head %}
+<title>在线地图 历史地图 专题地图 在线历史地图 中国历史地图 Maplet</title>
+<meta name="keywords"
+      content="地图画板,Maplet,在线地图,历史地图,专题地图,在线历史地图,中国历史地图,在线地图查询,历史地图在线,在线专题地图,专题地图在线">
+<meta name="description"
+      content="地图画板,线地图网站,以云GIS技术为基础,实现了以地图查看为中心的应用模式，实现了地图在线浏览、叠加操作。收集、处理了大量的历史地图,专题地图,尤其是中国历史地图资料.">
+
+{% end %}
+
+{% block base_top_header %}
+
+<header class="jumbotron subhead" id="overview">
+    <div class="container">
+        <p class="lead"> 云GIS应用与地图资源云　在线历史地图与专题地图 　OSGeo中国中心　中科院东北地理所　 长春</p>
+    </div>
+</header>
+
+
+<div class="container marketing">
+
+    <!-- Example row of columns -->
+    <div class="row-fluid home-tab-fluid">
+        <div class="container">
+            <div class="row-fluid tabbedmain hidden-phone" id="tabselector">
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="span4 active main-selector main-tabs">
+                        <a href="#tab1" data-toggle="tab" class="home-tab-a">
+						<span class="tabfix">
+                            <h4><img id="ietabs" src="{{ static_url('tass/images/icon1.png') }}"></img>专业在线地图
+                            </h4>
+							<p>专业的历史地图与专题地图<span
+                                    class="label label-danger">地图突破1000个！</span></p>
+						</span>
+                        </a>
+                    </li>
+                    <li class="span4 main-selector main-tabs">
+                        <a href="#tab2" data-toggle="tab" class="home-tab-a">
+						<span class="tabfix">
+                            <h4><img id="ietabs" src="{{ static_url('tass/images/icon2.png') }}"></img>最近文档</h4>
+							<p>详细的文档说明，学习与了解地图知识<span class="label label-danger">地图资源详细说明！</span></p>
+						</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="#indexcontent">
+
+
+        <div class="tab-pane active fade in" id="tab1">
+            <div class="row-fluid">
+                <div class="container">
+                    <br><br>
+
+                    <div class="row featurette">
+
+
+                        <div class="col-sm-8">
+                            <ul class="list-group">
+                                {% if userinfo is None %}
+                                {% module app_recent_used(7, with_tag = True) %}
+                                {% else %}
+                                {% module app_user_recent(userinfo.user_name, 7, with_tag = True) %}
+                                {% end %}
+                            </ul>
+
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="panel panel-black">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        地图分类
+                                    </h3>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        {% module app_menu(20) %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row featurette" style="background-color:#F7F7F7">
+
+                        <div class="col-sm-4">
+                            <br><br>
+
+                            <h3>网站程序完全开源</h3>
+
+                            <p class="lead">
+                                Maplet，完全开放源代码的WebGIS管理系统，由OSGeo中国中心维护。
+                                系统配置方便，只需要修改配置文件，并设置文件权限即可完成。<br>
+                                <a target="_blank"
+                                   href="http://shang.qq.com/wpa/qunwpa?idkey=099a3448e60aa77c1808582ba44359867c543ba107cf990f9915f11283802778"><img
+                                        border="0" src="http://pub.idqqimg.com/wpa/images/group.png"
+                                        alt="OSGeo:开源GIS技术群" title="OSGeo:开源GIS技术群"></a>
+                            </p>
+
+                        </div>
+
+                        <div class="col-sm-2">
+                            <br>
+                            <img src="{{ static_url('imgs/1452351792025.png')}}" width="90%">
+                            <br>
+                        </div>
+                        <div class="col-sm-6">
+                            <br>
+                            <ul>
+                                <li class="list-group-item">基于Python 3+Tornado框架,实现Web功能.</li>
+                                <li class="list-group-item">使用MapServer地图服务器进行Web地图发布.</li>
+                                <li class="list-group-item">完全采用开源软件技术.</li>
+                                <li class="list-group-item">展示开源WebGIS技术的应用，实现教育、教学、科普的目的.</li>
+                                <li class="list-group-item"><a href="https://github.com/bukun/maplet" target="_blank">Fork
+                                    on Github.</a></li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+<br>
+                    <div class="row featurette">
+
+                        <div class="col-sm-12">
+                            <div class="panel panel-black">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        历史地图
+                                    </h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="col-sm-4">
+                                        <br><br>
+
+                                        <h3>中国历史地图</h3>
+
+                                        <p class="lead">
+                                            历史地图便于人们了解中国各朝代空间分布和地域差异现象，比以往的图集要精确、详细、实用。便于人们对历史的追溯，展示了历史的空间格局。在线地图是研究运动规律的工具，为当代的发展建设提供借鉴，实现教育、教学、科普的目的。
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <a href="http://www.maplet.org/map/0305" title="中国夏朝时期历史地图"> <span
+                                                        class="glyphicon glyphicon-map-marker"></span> 中国夏朝时期历史地图 </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <a href="http://www.maplet.org/map/0306" title="中国商朝时期历史地图"> <span
+                                                        class="glyphicon glyphicon-map-marker"></span> 中国商朝时期历史地图 </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <a href="http://www.maplet.org/map/0308" title="中国西周时期历史地图"> <span
+                                                        class="glyphicon glyphicon-map-marker"></span> 中国西周时期历史地图 </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <a href="http://www.maplet.org/map/030b" title="中国春秋时期历史地图"> <span
+                                                        class="glyphicon glyphicon-map-marker"></span> 中国春秋时期历史地图 </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <a href="http://www.maplet.org/map/0311" title="中国战国时期历史地图"> <span
+                                                        class="glyphicon glyphicon-map-marker"></span> 中国战国时期历史地图 </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <a href="http://www.maplet.org/map/031f" title="中国秦朝时期历史地图"> <span
+                                                        class="glyphicon glyphicon-map-marker"></span> 中国秦朝时期历史地图 </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <a href="http://www.maplet.org/map/0324" title="中国西汉时期历史地图"> <span
+                                                        class="glyphicon glyphicon-map-marker"></span> 中国西汉时期历史地图 </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <a href="http://www.maplet.org/map/0334" title="中国东汉时期历史地图"> <span
+                                                        class="glyphicon glyphicon-map-marker"></span> 中国东汉时期历史地图 </a>
+                                            </li>
+
+
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <a href="http://www.maplet.org/map/0346" title="中国三国时期历史地图"> <span
+                                                        class="glyphicon glyphicon-map-marker"></span> 中国三国时期历史地图 </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <a href="http://www.maplet.org/map/03c9" title="中国隋朝时期历史地图"> <span
+                                                        class="glyphicon glyphicon-map-marker"></span> 中国隋朝时期历史地图 </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <a href="http://www.maplet.org/map/03db" title="中国唐朝时期历史地图"> <span
+                                                        class="glyphicon glyphicon-map-marker"></span> 中国唐朝时期历史地图 </a>
+                                            </li>
+
+                                            <li class="list-group-item">
+                                                <a href="http://www.maplet.org/map/0154" title="中国北宋时期历史地图"> <span
+                                                        class="glyphicon glyphicon-map-marker"></span> 中国北宋时期历史地图 </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <a href="http://www.maplet.org/map/053e" title="中国南宋时期历史地图"> <span
+                                                        class="glyphicon glyphicon-map-marker"></span> 中国南宋时期历史地图 </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <a href="http://www.maplet.org/map/056c" title="中国元朝时期历史地图"> <span
+                                                        class="glyphicon glyphicon-map-marker"></span> 中国元朝时期历史地图 </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <a href="http://www.maplet.org/map/0589" title="中国明朝时期历史地图"> <span
+                                                        class="glyphicon glyphicon-map-marker"></span> 中国明朝时期历史地图 </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <a href="http://www.maplet.org/map/05c1" title="中国清朝时期历史地图"> <span
+                                                        class="glyphicon glyphicon-map-marker"></span> 中国清朝时期历史地图 </a>
+                                            </li>
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row featurette">
+                        <div class="col-sm-5">
+                            <img src="{{ static_url('tass/images/tp2.jpg')}}"
+                                 class="featurette-image img-thumbnail">
+                        </div>
+                        <div class="col-sm-7">
+                            <h3 class="featurette-heading">Maplet在线地图可以实时缩放、完美叠加，满足您的各种需求。</h3>
+                            <ul>
+                                <li>贴心的用户中心 记录您的使用、收藏 方便下次查找、使用。</li>
+                                <li>简洁明了的导航 20余种分类 让您所需要的地图一目了然。</li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+<br>
+
+                    <div class="row featurette" style="background-color:#F7F7F7">
+
+                        <div class="col-sm-6">
+                            <br>
+
+                            <h3>专业GIS团队</h3>
+                            <ul>
+                                <li>中国科学院东北地理与农业生态研究所</li>
+                                <li>中国科学院地理科学与资源研究所</li>
+
+                            </ul>
+
+                            <a href="http://www.geodata.cn" target="_blank" class="thumbnail" style="text-align: center; width:90%;">
+                                <img src="{{ static_url('fixed/geodata.png') }}"       alt="国家科技基础平台地球系统科学数据共享网">
+                            </a>
+                        </div>
+                        <div class="col-sm-6">
+                            <br>
+                            <p class="lead">
+                                在线地图集的本质是一个多技术手段综合支撑下的地图集信息系统（Atlas Information System,
+                                AIS），是传统专题地图集的在线版本，通过数据可视化和数据空间化等技术手段，
+                                设计建立一个集数据、软件于一体的Web专题地图集系统，
+                                也可通俗理解为是适合各类用户使用的地理信息云计算工具，能够在线查看、叠加传统图集所反映的各种信息。<br>
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade in" style="border: 0px solid #ddd;" id="tab2">
+            <div class="row-fluid">
+                <div class="container">
+                    <br><br>
+
+                    <div class="row featurette">
+                        <div class="col-md-5">
+                            <div class="panel panel-black">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        最近文档
+                                    </h3>
+                                </div>
+
+                                <ul class="list-group">
+                                    {% module post_recent(6, with_catalog=False, with_date = False) %}
+                                </ul>
+
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <h2 class="featurette-heading">开源GIS技术支持,开放源代码!</h2>
+
+                            <p class="lead">网站程序使用Python+Tornado Web框架开发,并使用了MapServer作为地图发布器.
+                                专业的网站程序,源代码托管于 GitHub .</p>
+                        </div>
+                    </div>
+
+                     <div class="row featurette" style="background-color:#F7F7F7">
+
+
+                         <div class="col-sm-8">
+                            <br>
+                             <br>
+                             <br>
+                            <p class="lead">
+                                中国历史朝代歌是为了巧妙的记忆中国历史各朝代顺序而创造出来的，其形式多为简单易记、朗朗上口的儿歌，或顺口溜。 历史朝代歌多是配合着“历史朝代年表”一同使用。编入小学课本。
+                                <br>
+                                地图画板网站根据各时期的历史地图，添加了对应的超级链接，这样使用起来更加方便。
+
+                             </p>
+
+
+                        </div>
+
+
+                        <div class="col-sm-4">
+                           <br>
+
+
+                            <h3>中国历史朝代歌</h3>
+
+                            <p class="lead">
+
+                                <p>
+                                <a href="http://www.maplet.org/map/0305" target="_blank">夏</a><a
+                                    href="http://www.maplet.org/map/0306" target="_blank">商</a>与<a
+                                    href="http://www.maplet.org/map/0308" target="_blank">西周</a>，东周分两段，</p>
+
+                            <p><a href="http://www.maplet.org/map/030b" target="_blank">春秋</a>和<a
+                                    href="http://www.maplet.org/map/0311" target="_blank">战国</a>，
+                                一统<a href="http://www.maplet.org/map/031f" target="_blank">秦</a><a
+                                    href="http://www.maplet.org/map/0324" target="_blank">两汉</a>，</p>
+
+                            <p><a href="http://www.maplet.org/map/0346" target="_blank">三分</a><a
+                                    href="http://www.maplet.org/map/034a" target="_blank">魏</a><a
+                                    href="http://www.maplet.org/map/0351" target="_blank">蜀</a><a
+                                    href="http://www.maplet.org/map/0354" target="_blank">吴</a>，
+                                二晋<a href="http://www.maplet.org/map/035a" target="_blank">前</a><a
+                                    href="http://www.maplet.org/map/0374" target="_blank">后</a>沿，</p>
+
+                            <p><a href="http://www.maplet.org/map/0394" target="_blank">南北朝</a>并立，
+                                <a href="http://www.maplet.org/map/03c9" target="_blank">隋</a><a
+                                    href="http://www.maplet.org/map/03db" target="_blank">唐</a><a
+                                    href="http://www.maplet.org/map/0500" target="_blank">五代</a>传，</p>
+
+                            <p><a href="http://www.maplet.org/map/0513" target="_blank">宋</a><a
+                                    href="http://www.maplet.org/map/056c" target="_blank">元</a><a
+                                    href="http://www.maplet.org/map/058a" target="_blank">明</a><a
+                                    href="http://www.maplet.org/map/0157" target="_blank">清</a>后，皇朝至此完。</p>
+                            </p>
+
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% end %}
+{% block link_list %}
+
+<div class="col-sm-12">
+    友情链接：{% module link_list(12 ) %}
+</div>
+<br><br>
+{% end %}

@@ -1,0 +1,136 @@
+{% extends "../../theme/base.html" %}
+
+
+{% block zhuti %}
+
+<script type="text/javascript">
+    $().ready(function () {
+        // jquery.validate.js 验证
+        $("#form_spec").validate(
+                {
+                    rules: {
+                        title: {
+                            required: true
+                        },
+                        img: {
+                            required: true
+                        },
+                        slug: {
+                            required: true
+                        },
+
+                        order: {
+                            required: true
+                        },
+
+                        abstract: {
+                            required: true
+
+                        },
+                        desc: {
+                            required: true
+                        }
+
+                    },
+                    messages: {
+                        title: {
+                            required: "<span class='red'>请输入用户名</span>"
+                        },
+
+                        img: {
+                            required: "<span class='red'>请输入密码</span>"
+                        },
+                        slug: {
+                            required: "<span class='red'>请输入密码</span>"
+                        },
+
+                        order: {
+                            required: "<span class='red'>请输入E-mail</span>"
+                        },
+
+                        abstract: {
+                            required: "<span class='red'>请输入手机号码</span>"
+
+                        },
+                        desc: {
+                            required: "<span class='red'>请输入手机号码</span>"
+
+                        }
+
+                    }
+                }
+        );
+    });
+</script>
+
+
+<div class="content">
+
+    <form action="" id='form_spec' method="post" class="pure-form pure-form-aligned">
+
+
+        <fieldset>
+
+            <div class="pure-control-group">
+
+                <label for="title">标题</label>
+
+                <input type="text" id="title" name="title" value="{{ spec_rec.name }}"/>
+
+            </div>
+
+
+            <div class="pure-control-group">
+                <label for="img">Logo</label>
+
+                <input type="text" id="img" name="img" value="{{ spec_rec.img }}"/>
+
+            </div>
+
+            <div class="pure-control-group">
+
+
+                <label for="up"></label>
+
+                <label id="up"><a href="/pic/add" target="_blank">上传图片</a></label>
+
+            </div>
+
+
+            <div class="pure-control-group">
+                <label for="slug">英文别名</label>
+                <input type="text" id="slug" name="slug" value="{{ spec_rec.slug }}"/>
+            </div>
+
+            <div class="pure-control-group">
+                <label for="order">顺序</label>
+                <input type="text" id="order" name="order" value="{{ spec_rec.order }}"/>
+            </div>
+            <div class="pure-control-group">
+                <label for="abstract">摘要</label>
+
+                <textarea rows=4 id="abstract" name="abstract" cols="76">{{ spec_rec.abstract }}</textarea> <br/>
+
+            </div>
+
+            <div class="pure-control-group">
+                <label for="desc">内容</label>
+
+                <textarea rows=16 id="desc" name="desc" cols="76">{{ spec_rec.desc }}</textarea> <br/>
+
+            </div>
+
+            <div class="pure-control-group">
+                <label for="sub1"></label>
+                <input id="sub1" type="submit" value="修改数据"/>
+            </div>
+
+        </fieldset>
+
+    </form>
+</div>
+<div class="pagebar clear">
+</div>
+
+
+{% end %}

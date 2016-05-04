@@ -1,0 +1,77 @@
+{% extends "../../theme/base.html" %}
+{% block head %}
+<title>在线地图|历史地图</title>
+<meta name="keywords" content=",在线地图,历史地图">
+<meta name="description" content="">
+
+<script type="text/javascript" src="{{ static_url('jslib/leaflet/leaflet.js') }}"></script>
+<link rel="stylesheet" href="{{ static_url('jslib/leaflet/leaflet.css') }}">
+
+{% block headinfo %}
+{% end %}
+{% end %}
+{% block zhuti %}
+
+    <div class="row">
+
+        <div class="col-sm-4">
+
+         <div class="panel panel-black"> {% module  app_catalog_of('09') %} </div>
+
+ <div class="panel panel-black"> {% module  app_catalog_of('13') %} </div>
+        </div>
+        <div class="col-sm-4">
+           <div class="panel panel-black"> {% module  app_catalog_of('03') %} </div>
+         <div class="panel panel-black"> {% module  app_catalog_of('05') %} </div>
+
+        </div>
+        <div class="col-sm-4">
+
+           <div class="panel panel-black"> {% module  app_catalog_of('01') %} </div>
+         <div class="panel panel-black"> {% module  app_catalog_of('07') %} </div>
+ <div class="panel panel-black"> {% module  app_catalog_of('11') %} </div>
+
+        </div>
+
+    </div>
+
+{% end %}
+
+{% block right %}
+
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            最近使用
+        </h3>
+    </div>
+
+    <ul class="list-group">
+        {% if userinfo is None %}
+        {% module app_recent_used(10) %}
+        {% else %}
+        {% module app_user_recent(userinfo.user_name,6) %}
+        {% end %}
+    </ul>
+
+</div>
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            使用最多
+        </h3>
+    </div>
+
+    <ul class="list-group">
+        {% if userinfo is None %}
+        {% module app_most_used(10) %}
+        {% else %}
+        {% module app_user_most(userinfo.user_name, 6) %}
+        {% end %}
+    </ul>
+
+</div>
+
+{% end %}

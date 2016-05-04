@@ -1,0 +1,50 @@
+{% extends "../theme/base.html" %}
+
+{% block zhuti %}
+
+<div class="panel panel-black">
+<div class="panel-heading">
+    <h1>对不起，出错了</h1>
+</div>
+<div class="panel-body">
+
+
+
+<p>非常抱歉，由于下面原因，网站出错了。</p>
+
+
+
+    <div class="alert alert-warning">
+        <h3>详细信息</h3>
+
+    {% if kwd is not None %}
+
+    <div> {% raw kwd['info'] %}</div>
+
+    {% end %}
+        </div>
+</div>
+
+    </div>
+{% end %}
+
+{% block right %}
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            地图分类
+        </h3>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+
+            {% module app_menu(20) %}
+
+        </ul>
+    </div>
+</div>
+
+
+
+{% end %}

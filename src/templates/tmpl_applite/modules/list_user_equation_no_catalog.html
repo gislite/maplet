@@ -1,0 +1,8 @@
+
+{% for rec in recs %}
+<li  class="list-group-item">
+
+        <a href="/map/{{ rec.signature.uid }}">{{ rec.signature.title }} </a> <span class="glyphicon glyphicon-map-marker"></span><span style="font-size: small; color: #5e5e5e"> ({{ rec.count }})</span>
+
+</li>
+{% end %}

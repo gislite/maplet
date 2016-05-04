@@ -1,0 +1,569 @@
+/* GLOBAL STYLES
+ *-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+/* line 7, ../sass/inc/_carousel.sass */
+body {
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+}
+
+/* line 11, ../sass/inc/_carousel.sass */
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+}
+
+/* line 15, ../sass/inc/_carousel.sass */
+a {
+  color: #006699;
+  text-decoration: none;
+}
+/* line 24, ../../../../../../usr/share/compass/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+a:hover {
+  color: #006699;
+}
+/* line 4, ../../../../../../usr/share/compass/frameworks/compass/stylesheets/compass/typography/links/_hover-link.scss */
+a:hover, a:focus {
+  text-decoration: underline;
+}
+
+/* CUSTOMIZE THE NAVBAR
+ *-------------------------------------------------- */
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+/* line 27, ../sass/inc/_carousel.sass */
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+}
+/* line 33, ../sass/inc/_carousel.sass */
+.navbar-wrapper .container {
+  padding-left: 0;
+  padding-right: 0;
+}
+/* line 36, ../sass/inc/_carousel.sass */
+.navbar-wrapper .navbar {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Flip around the padding for proper display in narrow viewports */
+/* CUSTOMIZE THE CAROUSEL
+ *-------------------------------------------------- */
+/* Carousel base class */
+/* line 47, ../sass/inc/_carousel.sass */
+.carousel {
+  height: 500px;
+  margin-bottom: 60px;
+}
+
+/* Since positioning the image, we need to help out the caption */
+/* line 53, ../sass/inc/_carousel.sass */
+.carousel-caption {
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+/* line 58, ../sass/inc/_carousel.sass */
+.carousel .item {
+  height: 500px;
+  background-color: #777;
+}
+
+/* line 62, ../sass/inc/_carousel.sass */
+.carousel-inner > .item > img {
+  position: absolute;
+  top: 21px;
+  left: 0;
+  min-width: 100%;
+  height: 500px;
+}
+
+/* MARKETING CONTENT
+ *-------------------------------------------------- */
+/* Pad the edges of the mobile views a bit */
+/* line 74, ../sass/inc/_carousel.sass */
+.marketing {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+/* line 77, ../sass/inc/_carousel.sass */
+.marketing .col-lg-4 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+/* line 80, ../sass/inc/_carousel.sass */
+.marketing h2 {
+  font-weight: normal;
+}
+/* line 82, ../sass/inc/_carousel.sass */
+.marketing .col-lg-4 p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Center align the text within the three columns below the carousel */
+/* Featurettes
+ *------------------------- */
+/* line 91, ../sass/inc/_carousel.sass */
+.featurette-divider {
+  margin: 80px 0;
+}
+
+/* Space out the Bootstrap <hr> more */
+/* Thin out the marketing headings */
+/* line 97, ../sass/inc/_carousel.sass */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+/* RESPONSIVE CSS
+ *-------------------------------------------------- */
+@media (min-width: 768px) {
+  /* Remove the edge padding needed for mobile */
+  /* line 107, ../sass/inc/_carousel.sass */
+  .marketing {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Navbar positioning foo */
+  /* line 111, ../sass/inc/_carousel.sass */
+  .navbar-wrapper {
+    margin-top: 20px;
+  }
+  /* line 113, ../sass/inc/_carousel.sass */
+  .navbar-wrapper .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  /* line 116, ../sass/inc/_carousel.sass */
+  .navbar-wrapper .navbar {
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 4px;
+  }
+
+  /* The navbar becomes detached from the top, so we round the corners */
+  /* Bump up size of carousel content */
+  /* line 122, ../sass/inc/_carousel.sass */
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  /* line 126, ../sass/inc/_carousel.sass */
+  .featurette-heading {
+    font-size: 38px;
+    line-height: 50px;
+  }
+}
+@media (min-width: 992px) {
+  /* line 131, ../sass/inc/_carousel.sass */
+  .featurette-heading {
+    margin-top: 90px;
+  }
+}
+/* Common styles for all types */
+/* line 136, ../sass/inc/_carousel.sass */
+.bs-callout {
+  margin: 20px 0;
+  padding: 20px;
+  border-left: 3px solid #eee;
+}
+/* line 140, ../sass/inc/_carousel.sass */
+.bs-callout h4 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+/* line 143, ../sass/inc/_carousel.sass */
+.bs-callout p:last-child {
+  margin-bottom: 0;
+}
+
+/* Variations */
+/* line 148, ../sass/inc/_carousel.sass */
+.bs-callout-danger {
+  background-color: #fdf7f7;
+  border-color: #eed3d7;
+}
+/* line 151, ../sass/inc/_carousel.sass */
+.bs-callout-danger h4 {
+  color: #b94a48;
+}
+
+/* line 154, ../sass/inc/_carousel.sass */
+.bs-callout-warning {
+  background-color: #faf8f0;
+  border-color: #faebcc;
+}
+/* line 157, ../sass/inc/_carousel.sass */
+.bs-callout-warning h4 {
+  color: #8a6d3b;
+}
+
+/* line 160, ../sass/inc/_carousel.sass */
+.bs-callout-info {
+  background-color: #f4f8fa;
+  border-color: #bce8f1;
+}
+/* line 163, ../sass/inc/_carousel.sass */
+.bs-callout-info h4 {
+  color: #34789a;
+}
+
+/* Side navigation
+ *
+ * Scrollspy and affixed enhanced navigation to highlight sections and secondary
+ * sections of docs content. */
+/* By default it's not affixed in mobile views, so undo that */
+/* line 174, ../sass/inc/_carousel.sass */
+.bs-sidebar.affix {
+  position: static;
+}
+
+/* First level of nav */
+/* line 179, ../sass/inc/_carousel.sass */
+.bs-sidenav {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-shadow: 0 1px 0 #fff;
+  background-color: #f7f5fa;
+  border-radius: 5px;
+}
+
+/* All levels of nav */
+/* line 192, ../sass/inc/_carousel.sass */
+.bs-sidebar .nav li a {
+  display: block;
+  color: #716b7a;
+  padding: 5px 20px;
+}
+/* line 196, ../sass/inc/_carousel.sass */
+.bs-sidebar .nav li a:hover, .bs-sidebar .nav li a:focus {
+  text-decoration: none;
+  background-color: #e5e3e9;
+  border-right: 1px solid #dbd8e0;
+}
+/* line 201, ../sass/inc/_carousel.sass */
+.bs-sidebar .nav li .active > a, .bs-sidebar .nav li .active:hover > a, .bs-sidebar .nav li .active:focus > a {
+  font-weight: bold;
+  color: #563d7c;
+  background-color: transparent;
+  border-right: 1px solid #563d7c;
+}
+/* line 206, ../sass/inc/_carousel.sass */
+.bs-sidebar .nav .nav {
+  display: none;
+  /* Hide by default, but at >768px, show it */
+  margin-bottom: 8px;
+}
+/* line 210, ../sass/inc/_carousel.sass */
+.bs-sidebar .nav .nav > li > a {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 30px;
+  font-size: 90%;
+}
+
+/* Nav: second level (shown on .active) */
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) {
+  /* line 221, ../sass/inc/_carousel.sass */
+  .bs-sidebar .nav > .active > ul {
+    display: block;
+  }
+  /* line 223, ../sass/inc/_carousel.sass */
+  .bs-sidebar.affix, .bs-sidebar.affix-bottom {
+    width: 213px;
+  }
+  /* line 225, ../sass/inc/_carousel.sass */
+  .bs-sidebar.affix {
+    position: fixed;
+    /* Undo the static from mobile first approach */
+    top: 80px;
+  }
+  /* line 229, ../sass/inc/_carousel.sass */
+  .bs-sidebar.affix-bottom {
+    position: absolute;
+    /* Undo the static from mobile first approach */
+  }
+  /* line 232, ../sass/inc/_carousel.sass */
+  .bs-sidebar.affix-bottom .bs-sidenav {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  /* line 235, ../sass/inc/_carousel.sass */
+  .bs-sidebar.affix .bs-sidenav {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+/* Widen the fixed sidebar */
+@media (min-width: 1200px) {
+  /* Widen the fixed sidebar again */
+  /* line 243, ../sass/inc/_carousel.sass */
+  .bs-sidebar.affix-bottom, .bs-sidebar.affix {
+    width: 263px;
+  }
+}
+/* Docs sections
+ *
+ * Content blocks for each component or feature. */
+/* Space things out */
+/* line 253, ../sass/inc/_carousel.sass */
+.bs-docs-section + .bs-docs-section {
+  padding-top: 40px;
+}
+
+/* Janky fix for preventing navbar from overlapping */
+/* line 258, ../sass/inc/_carousel.sass */
+h1[id] {
+  padding-top: 80px;
+  margin-top: -45px;
+}
+
+/* line 262, ../sass/inc/_carousel.sass */
+.footer {
+  color: #999;
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 70px;
+  border-top: 1px solid #e5e5e5;
+  background-color: #f5f5f5;
+}
+
+/* line 270, ../sass/inc/_carousel.sass */
+.subhead {
+  padding-top: 80px;
+  padding-bottom: 20px;
+  color: #fff;
+  background-repeat: repeat-x;
+  background-image: -webkit-linear-gradient(45deg, #020031, #6d3353);
+  background-image: -moz-linear-gradient(45deg, #020031, #6d3353);
+  background-image: linear-gradient(45deg, #020031, #6d3353);
+}
+/* line 278, ../sass/inc/_carousel.sass */
+.subhead:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* line 287, ../sass/inc/_carousel.sass */
+.redhead {
+  padding-top: 80px;
+  padding-bottom: 20px;
+  color: #fff;
+  background-repeat: repeat-x;
+  background-image: -webkit-linear-gradient(45deg, #FF3030, #FF3030);
+  background-image: -moz-linear-gradient(45deg, #020031, #6d3353);
+  background-image: linear-gradient(45deg, #4b0082, #ff3030);
+}
+
+/* line 296, ../sass/inc/_carousel.sass */
+.subhead:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* line 305, ../sass/inc/_carousel.sass */
+#scrollUp {
+  bottom: 20px;
+  right: 20px;
+  height: 38px;
+  width: 38px;
+}
+
+/* background: url("../images/top.png") no-repeat; */
+/* line 313, ../sass/inc/_carousel.sass */
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+  text-decoration: none;
+  background-image: -webkit-gradient(linear, left 0, left 100%, from(#428bca), to(#357ebd));
+  background-image: -webkit-linear-gradient(top, #428bca 0, #357ebd 100%);
+  background-image: -moz-linear-gradient(top, #428bca 0, #357ebd 100%);
+  background-image: linear-gradient(to bottom, #428bca 0%, #357ebd 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff428bca', endColorstr='#ff357ebd', GradientType=0);
+  color: #FFF;
+  background-color: #357ebd;
+}
+
+/* line 324, ../sass/inc/_carousel.sass */
+.red {
+  color: #fff;
+}
+
+/* line 329, ../sass/inc/_carousel.sass */
+.post_cat1 a {
+  color: #fff;
+  margin-right: 5px;
+}
+/* line 332, ../sass/inc/_carousel.sass */
+.post_cat1 a:hover {
+  color: #333;
+}
+
+/* line 335, ../sass/inc/_carousel.sass */
+.post_cat a {
+  color: #333;
+  margin-right: 5px;
+}
+/* line 338, ../sass/inc/_carousel.sass */
+.post_cat a:hover {
+  color: #333;
+}
+
+/* line 341, ../sass/inc/_carousel.sass */
+.lead {
+  font-size: 1.3em;
+}
+/* line 343, ../sass/inc/_carousel.sass */
+.lead a:hover {
+  cursor: pointer;
+}
+
+/* line 348, ../sass/inc/_carousel.sass */
+.panel-black {
+  border-color: #666;
+}
+/* line 350, ../sass/inc/_carousel.sass */
+.panel-black .panel-heading {
+  color: #fff;
+  background-color: #666;
+  border-color: #666;
+}
+/* line 354, ../sass/inc/_carousel.sass */
+.panel-black .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #666;
+}
+/* line 356, ../sass/inc/_carousel.sass */
+.panel-black .panel-heading .panel-footer + .panel-collapse > .panel-body {
+  border-color: #337ab7;
+}
+
+/* line 359, ../sass/inc/_carousel.sass */
+input select textarea {
+  font-family: "Lucida Console", Monaco, monospace;
+}
+
+/* line 364, ../sass/inc/_carousel.sass */
+.panel-heading h1 {
+  font-size: 1.4em;
+  text-align: center;
+}
+
+/* line 371, ../sass/inc/_carousel.sass */
+#wiki_cnt {
+  text-align: justify;
+}
+/* line 373, ../sass/inc/_carousel.sass */
+#wiki_cnt p {
+  text-indent: 2em;
+  line-height: 1.6em;
+}
+/* line 376, ../sass/inc/_carousel.sass */
+#wiki_cnt h1, #wiki_cnt h2, #wiki_cnt h3, #wiki_cnt h4, #wiki_cnt h5 {
+  text-indent: 0;
+}
+/* line 378, ../sass/inc/_carousel.sass */
+#wiki_cnt h1 {
+  font-size: 1.5em;
+  line-height: 1.6em;
+}
+/* line 381, ../sass/inc/_carousel.sass */
+#wiki_cnt h2 {
+  font-size: 1.4em;
+  line-height: 1.5em;
+}
+/* line 384, ../sass/inc/_carousel.sass */
+#wiki_cnt h3 {
+  font-size: 1.3em;
+  line-height: 1.4em;
+}
+/* line 387, ../sass/inc/_carousel.sass */
+#wiki_cnt h4 {
+  font-size: 1.2em;
+  line-height: 1.3em;
+}
+/* line 390, ../sass/inc/_carousel.sass */
+#wiki_cnt h5 {
+  font-size: 1.1em;
+  line-height: 1.2em;
+}
+
+/* line 4, ../sass/inc/_tags.sass */
+.app_tag, .post_cat {
+  font-size: 0.9em;
+  margin: 0px;
+  padding: 0px;
+  display: inline;
+}
+
+/* line 25, ../sass/inc/_tags.sass */
+/* line 12, ../sass/inc/_tags.sass */
+.app_tag a, .post_cat a {
+  color: #fff;
+  text-decoration: none;
+  margin: 1px 3px 1px 3px;
+  padding: 1px 3px 1px 3px;
+}
+/* line 17, ../sass/inc/_tags.sass */
+.app_tag a:hover, .app_tag a:focus, .post_cat a:hover, .post_cat a:focus {
+  color: #ddd;
+  font-size: 1.1em;
+  text-decoration: underline;
+}
+
+/* line 28, ../sass/inc/_tags.sass */
+.post_cat a.tag1 {
+  background-color: #88b9b9;
+}
+/* line 30, ../sass/inc/_tags.sass */
+.post_cat a.tag2 {
+  background-color: #de958f;
+}
+/* line 32, ../sass/inc/_tags.sass */
+.post_cat a.tag3 {
+  background-color: #a9c365;
+}
+/* line 34, ../sass/inc/_tags.sass */
+.post_cat a.tag4 {
+  background-color: #99b3dd;
+}
+
+/* line 47, ../sass/inc/_tags.sass */
+/* line 40, ../sass/inc/_tags.sass */
+.app_tag a.tag1 {
+  background-color: #00adef;
+}
+/* line 42, ../sass/inc/_tags.sass */
+.app_tag a.tag2 {
+  background-color: #e85461;
+}
+/* line 44, ../sass/inc/_tags.sass */
+.app_tag a.tag3 {
+  background-color: #469c69;
+}
+/* line 46, ../sass/inc/_tags.sass */
+.app_tag a.tag4 {
+  background-color: #c7e63f;
+}
+/* line 48, ../sass/inc/_tags.sass */
+.app_tag a.tag5 {
+  background-color: #fc8e2c;
+}

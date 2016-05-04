@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="bukun">
+    <meta name="Copyright" content="Maplet">
+
+    <script type="text/javascript" src="{{ static_url('jslib/jquery-2.2.2.min.js')}}"></script>
+
+    <link rel="stylesheet" href="{{ static_url('csslib/bootstrap/css/bootstrap.min.css')}}">
+<script src="{{ static_url('csslib/bootstrap/js/bootstrap.min.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ static_url('tass/css/style.css')}}">
+
+    <link rel="icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
+
+    <link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
+    <script type="text/javascript" src="{{ static_url('jslib/validate/jquery.validate.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#find_calc").validate(
+                    {
+                        rules: {
+                            keyword: {
+                                required: true
+                            }
+                        },
+                        messages: {
+                            keyword: {
+                                required: "<span class='red'>请输入要查询的关键词</span>"
+                            }
+                        }
+                    }
+            );
+        });
+    </script>
+
+    {% block head %}{% end %}
+
+{% if not (userinfo and userinfo.privilege == '1') %}
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?03efa86cde19ab228f1d85eba1bdc379";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+{% end %}
+
+</head>
+<body>
+
+
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-globe"></span> 地图画板</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/geojson/">画图</a></li> 
+                        <li><a href="/post/recent">文档</a></li>
+                        <li class="dropdown">
+                            <a href="/page/help.html" class="dropdown-toggle" data-toggle="dropdown">用户<b
+                                    class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% if 1 ==2 %}
+                                <li class="pure-menu-item">
+                                    <a class="pure-menu-link" href="/toolbox">我的工具箱</a></li>
+                                {% end %}
+
+                                <li><a href="/user_list/user_recent">最近使用</a></li>
+                                <li><a href="/user_list/user_most">使用最多</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/collect/list">我的收藏</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/user/info">我的信息</a></li>
+
+                            </ul>
+                        </li>
+
+
+                        <li><a href="http://www.yunsuan.org" target="_blank" style="color:red;"><span class="badge"
+                                                                                                          style="color:yellow">云算</span></a>
+                        </li>
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <div>
+                                {% module widget_search() %}
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </div>
+               </div>
+    </div>
+
+
+{% block base_top_header %}
+
+{% end %}
+
+<footer class="footer">
+    <div class="container">
+        {% block link_list %}
+        {% end %}
+
+        <div class="row">
+         <ul class="nav navbar-nav">
+ <li><a href="/page/about.html">关于</a></li>
+                                <li><a href="/page/terms.html">免责声明</a></li>
+                                <li><a href="/page/contact.html">联系我们</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/page/how-to-use.html">如何使用</a></li>
+             </ul>
+             </div>
+
+
+        <div class="row">
+            <div class="bg-waring text-info">本网站的开发与维护，得到下面机构的经费与技术支持,特此表示感谢:</div>
+            <div class="col-sm-12">
+                <div class="col-sm-6 col-md-4"></div>
+                <div class="col-sm-6 col-md-4">
+                    <a href="http://www.geodata.cn" target="_blank" class="thumbnail" style="text-align: center">
+                        <img src="{{ static_url('fixed/geodata.png') }}"
+                             alt="国家科技基础平台地球系统科学数据共享网">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div style="font-size:.9em; color:darkgray; text-align: center; ">
+            <span>&copy; 2016 地图画板 版权所有</span>
+
+            <p>Powered by <a href="http://torcms.yunsuan.org/" target="_blank">TorCMS</a></p>
+        </div>
+    </div>
+
+
+</footer>
+<a id="scrollUp" href="#top" title="" style="position: fixed; z-index: 2147483647;"></a>
+
+
+</body>
+</html>

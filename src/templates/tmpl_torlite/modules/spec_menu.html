@@ -1,0 +1,6 @@
+<ul class="fllj">
+
+    {% for x in kwd['cats'] %}
+    <li><a href="{% module site_url() %}/spec/{{ x.slug }}">{{ x.name }}</a></li>
+    {% end %}
+</ul>

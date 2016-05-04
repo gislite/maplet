@@ -1,0 +1,64 @@
+{% extends "../../theme/base.html" %}
+{% block head%}
+<title>在线地图全文检索结果</title>
+<meta name="keywords" content="在线地图,历史地图,在线地图查找结果">
+<meta name="description" content="在线地图,历史地图,对网站进行查找得到的结果">
+<style type="text/css">
+    .match{color: #000000}
+</style>
+{% end %}
+{% block zhuti %}
+
+<div class="panel panel-black">
+<div class="panel-heading">
+     {{ kwd['title'] }}
+</div>
+    <ul class="list-group">
+        {% for x in srecs %}
+        <li class="list-group-item"><b>{% raw x['type'] %}</b>
+            <a href="{% raw x['link'] %}" title="{{x['title']}}">{{x['title']}}</a><br />
+            <span style="color: #888;">{% raw (x.highlights('content')) %}</span>
+        </li>
+        {% end %}
+    </ul>
+    <div class="panel-footer">
+        <ul class="pagination">
+        {% raw pager %}
+        </ul>
+    </div>
+</div>
+{% end %}
+
+{% block right %}
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            最近地图
+        </h3>
+    </div>
+
+    <ul class="list-group">
+
+        {% module app_most_used(5) %}
+
+    </ul>
+
+</div>
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            最近文档
+        </h3>
+    </div>
+
+    <ul class="list-group">
+
+        {% module post_recent(8, with_catalog=False, with_date = False) %}
+
+    </ul>
+</div>
+
+
+{% end %}

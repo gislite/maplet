@@ -1,0 +1,127 @@
+{% extends "../theme/base_view.html" %}
+{% block head %}
+   <script type="text/javascript" src="{{ static_url('jslib/leaflet/leaflet.js') }}"></script>
+<link rel="stylesheet" href="{{ static_url('jslib/leaflet/leaflet.css') }}" >
+<script src="{{ static_url('./jslib/chart/sheng/j' + chart_info.uid + '.js') }}"></script>
+    <style>
+        #map {
+            width: 99%;
+            height: 700px;
+        }
+        .info {
+            padding: 6px 8px;
+            font: 14px/16px Arial, Helvetica, sans-serif;
+            background: white;
+            background: rgba(255,255,255,0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+        .info h4 {
+            margin: 0 0 5px;
+            color: #777;
+        }
+
+        .legend {
+            text-align: left;
+            line-height: 18px;
+            color: #555;
+        }
+        .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+    </style>
+{% end %}
+
+{% block zhuti %}
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+
+        <H1 >{{ chart_info.title }}</H1>
+
+        <div class="container" style="width: auto;">
+            <div class="row">
+
+                <div class="col-md-9" style="text-align: left">
+
+                        <span>发布日期:</span>
+                        <span class="">{{ str(chart_info.date)[:-9] }}</span>
+
+                        {% if userinfo is not None and userinfo.privilege[4] == '1' %}
+
+                     <a id="act_note" href="/chart/edit/{{ chart_info.uid }}"
+                            class="btn btn-danger btn-xs" ><span class="glyphicon glyphicon-pencil"></span>修改信息</a>
+
+                    {% end %}
+
+                </div>
+
+                <div class="col-md-3" style="text-align: right;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div id="map" class="map" tabindex="0"></div>
+    </div>
+
+    <div class="panel-body">
+
+  </div>
+
+
+ <div class="panel-heading">
+<h4 class="panel-title">地图说明
+</h4>
+</div>
+    <div class="panel-body">
+        <div>
+            {% raw unescape(chart_info.cnt_html) %}
+        </div>
+    </div>
+</div>
+
+{% end %}
+
+{% block right %}
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">地图导航</h3>
+    </div>
+
+    <ul class="list-group" style="overflow: hidden;">
+
+        <li class="list-group-item" style="overflow: hidden;">
+            <a href="/page/chart_list.html">
+                 <span class="glyphicon glyphicon-map-marker"></span>地图列表
+
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            地图分类
+        </h3>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+
+            {% module app_menu(20) %}
+
+        </ul>
+    </div>
+</div>
+
+<script src="{{ static_url('./jslib/chart/gnchina.min.js') }}"></script>
+{% end %}

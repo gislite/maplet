@@ -1,0 +1,325 @@
+{% extends "tpl_basic.html" %}
+
+{% block headinfo %}
+
+<script type="text/javascript" src="{{ static_url('jslib/validate/jquery.validate.min.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('jslib/validate/message_cn.js') }}"></script>
+
+<script type="text/javascript">
+
+    jQuery.validator.addMethod("isMobile", function (value, element) {
+        var length = value.length;
+        var mobile = /^(((13[0-9]{1})|(15[0-9]{1}))+\d{8})$/;
+        return this.optional(element) || (length == 11 && mobile.test(value));
+    }, "请正确填写您的手机号码");
+
+    jQuery.validator.addMethod("isphone", function (value, element) {
+        var length = value.length;
+        var phone = /(^(\d{3,4}-)?\d{6,8}$)|(^(\d{3,4}-)?\d{6,8}(-\d{1,5})?$)|(\d{11})/;
+        return this.optional(element) || (phone.test(value));
+    }, "请填写正确的电话号码");
+
+    $().ready(function () {
+        $("#form_add_info").validate(
+                {
+
+                    errorPlacement: function (error, element) { //指定错误信息位置
+                        if (element.is(':radio') || element.is(':checkbox')) { //如果是radio或checkbox
+                            var eid = element.attr('name'); //获取元素的name属性
+                            error.appendTo(element.parent()); //将错误信息添加当前元素的父结点后面
+                        } else {
+                            error.insertAfter(element);
+                        }
+                    }
+                }
+        );
+    });
+
+    // 提交预约刷新的动作
+    function chuli_kw() {
+        $.ajaxSetup({cache: false});
+        // 预约刷新
+        // 模拟Form提交
+        var myVAriable = $("#keywords")[0].value;
+        // alert(myVAriable);
+        var stringArray = myVAriable.split(",");
+        var out_str = '<span class="btn btn-warning btn-xs">';
+        out_str += stringArray.join('</span> <span class="btn btn-warning btn-xs">');
+        out_str += '</span';
+        // alert(out_str);
+        // $('#kwlist').html('');
+        $('#kwlist').html(out_str);
+
+    }
+
+</script>
+
+
+{% end %}
+
+
+{% block typebody %}
+
+
+<div class="row">
+    <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {% module BreadcrumbPublish(2) %}
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h2>发布信息</h2>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form" id="form_add_info" name="form_add_info" method="post"
+                      enctype="multipart/form-data" action="/map/to_add">
+
+                    <input type='hidden' name="catid" value="{% raw kwd['catid'] %}"/>
+                    <input type='hidden' name="cat_1" value="{% raw kwd['catid'] %}"/>
+                    <input type='hidden' name="uid" value="{% raw kwd['uid'] %}"/>
+                    <input type='hidden' name="parentid" value="{% raw kwd['parentid'] %}"/>
+                    <input type="hidden" name="userip" value="{{ kwd['userip'] }}"/>
+
+                    <input name="action" value="dopost" type="hidden">
+                    <input name="ismember" value="0" type="hidden">
+
+                    <input name="id" value="" type="hidden">
+                    <input name="mixcode" value="4c9734774f6b40682d35c0ccee0b0845" type="hidden">
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+
+                            数据基本信息
+                        </label>
+
+                        <div class="col-sm-10">
+                            {{ kwd['parentname'] }} > {{ kwd['catname'] }}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="title">
+                            <span class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></span>
+                            数据标题：</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="title" id="title" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            <span class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></span>
+                            信息内容(请详细说明)：</label>
+
+                        <div class="col-sm-10">
+                            <textarea id="contentx" name="cnt_md" class="form-control" rows="8"></textarea>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="keywords">
+                            <span class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></span>
+                            关键词(英文逗号分割)：</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="keywords" id="keywords" onkeyup="chuli_kw();">
+                        </div>
+
+
+                        <label class="col-sm-2 control-label" for="keywords">
+                        </label>
+
+                        <div class="col-sm-10">
+                            <span id="kwlist"></span>
+                        </div>
+                    </div>
+
+
+                                    <div class="form-group">
+                    <label for="tags" class="col-sm-2 control-label">标签</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="tags" name="tags" class="form-control" value="">
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label for="desc" class="col-sm-2 control-label">描述</label>
+
+                    <div class="col-sm-10">
+                        <textarea rows=4 id="desc" name="desc" cols="70" class="form-control"></textarea>
+                    </div>
+
+                </div>
+
+
+                    <hr>
+
+                <div class="form-group">
+                    <label for="ext_lat" class="col-sm-2 control-label">lat</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="ext_lat" name="ext_lat" class="form-control" value="">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="ext_lon" class="col-sm-2 control-label">lon</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="ext_lon" name="ext_lon" class="form-control" value="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ext_zoom_max" class="col-sm-2 control-label">zoom_max</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="ext_zoom_max" name="ext_zoom_max" class="form-control"
+                               value="">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="ext_zoom_min" class="col-sm-2 control-label">zoom_min</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="ext_zoom_min" name="ext_zoom_min" class="form-control"
+                               value="">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="ext_zoom_current" class="col-sm-2 control-label">zoom_current</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="ext_zoom_current" name="ext_zoom_current" class="form-control"
+                               value="">
+                    </div>
+                </div>
+
+
+
+                    <hr/>
+
+                    {% block extrainfo %}{% end %}
+
+                    <hr/>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                        <span class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"
+                              for="mymps_img"></span>
+                            图片</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="mymps_img" name="mymps_img">
+                            <input type="text" class="form-control" id="mymps_img" name="mymps_img">
+                            <input type="text" class="form-control" id="mymps_img" name="mymps_img">
+                            <input type="text" class="form-control" id="mymps_img" name="mymps_img">
+                        </div>
+
+                        <div class="col-sm-2">
+
+                        </div>
+                        <div class="col-sm-4">
+                            <a href="/entry/add" target="_blank" class="btn btn-primary" role="button">上传图片</a>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="baidumap1">
+                            <span class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></span>
+                            地图位置(点击图标，获取位置)
+                        </label>
+
+                        <div class="col-sm-10" id="baidumap1">
+                        <textarea id="baidumap" name="baidumap" class="form-control" readonly="readonly">
+                        </textarea>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="title">
+                            <span class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></span>
+                            贡献者：</label>
+
+                        <div class="col-sm-10">
+                        <textarea class="form-control" name="ext_contributor" id="ext_contributor" rows="4">
+                            贡献者：
+                            单位：
+                            联系方式：
+                        </textarea>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="ext_contact">
+                            <span class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></span>
+                            联系人：</label>
+
+                        <div class="col-sm-10">
+                        <textarea class="form-control" name="ext_contact" id="ext_contact" rows="6">
+                            联系人：
+                            单位：
+                            电话：
+                            Email:
+                            联系方式:
+                        </textarea>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="Button1"></label>
+
+                        <div class="col-sm-10">
+                            <input type="submit" name="post_submit" value="提交发布" id="Button1"
+                                   class="btn btn-primary" role="button"/>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="panel-footer">
+                带<span class="red">*</span>为必填项
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                发布秘籍
+            </div>
+            <div class="panel-body">
+                信息填写越完整详细，越能提高排名增加可信度！
+                您的IP是：<span style="color:red">{{ kwd['userip'] }}</span>，请不要发布虚假信息、重复信息
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% end %}

@@ -1,0 +1,57 @@
+{% extends "../../theme/calcubic.html" %}
+
+{% block head %}
+
+<title>{{ equation_info.title }}</title>
+<meta name="keywords" content="{{ equation_info.keywords }}"/>
+<meta name="description" content="{{ equation_info.desc }}"/>
+
+
+{% end %}
+
+
+{% block zhuti %}
+
+<div class="panel-heading">
+    <h1>{{ equation_info.title }}</h1>
+
+
+</div>
+
+<div class="panel-body">
+
+
+    <p>{{ equation_info.keywords}}</p>
+
+    <p>{{ equation_info.desc }}</p>
+
+
+    <form class="pure-form pure-form-aligned" action="/tag/edit/{{equation_info.uid}}" method="post">
+
+        {% for ii in range(1,6) %}
+        <div class="pure-control-group">
+            <label for="tag{{ii}}">标签{{ii}}</label>
+            <select name="tag{{ii}}" id="tag1">
+                <option value="">请选择</option>
+                {% for taginfo in tag_infos %}
+                <option value="{{ taginfo.uid }}"
+                        {% for tt in app2tag_info %}
+                        {% if tt.order== ii and tt.tag.uid == taginfo.uid %}
+                        selected
+                        {% end %}
+                        {% end %}
+                        >{{ taginfo.name }}
+                </option>
+                {% end %}
+            </select>
+        </div>
+        {% end %}
+
+
+        <div class="pure-control-group">
+            <label for="subtn"></label>
+            <button name="subtn" id="subtn" type="submit" class="pure-button pure-button-primary">更新</button>
+        </div>
+    </form>
+</div>
+{% end %}

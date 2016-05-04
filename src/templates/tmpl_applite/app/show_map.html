@@ -1,0 +1,445 @@
+{% extends "../../theme/base_view.html" %}
+{% block head %}
+<title>{{ calc_info.title }}|在线地图|历史地图</title>
+<meta name="keywords" content="{{ calc_info.keywords }},在线地图,历史地图">
+<meta name="description" content="{{ calc_info.desc }}">
+
+<script type="text/javascript" src="{{ static_url('jslib/leaflet/leaflet.js') }}"></script>
+<link rel="stylesheet" href="{{ static_url('jslib/leaflet/leaflet.css') }}">
+
+<style type="text/css">
+    #map {
+        width: 100%;
+        height: 640px;
+    }
+</style>
+<script>
+$.get('/rel/map/{{ calc_info.uid }}');
+var map_uid = "{{ calc_info.uid }}";
+var vlon = {{ calc_info.extinfo['ext_lon'] }};
+var vlat = {{ calc_info.extinfo['ext_lat'] }};
+var vzoom_current = {{ calc_info.extinfo['ext_zoom_current'] }};
+var vzoom_max = {{ calc_info.extinfo['ext_zoom_max'] }};
+var vzoom_min = {{ calc_info.extinfo['ext_zoom_min'] }};
+var vmarker = {{ kwd['marker']}};
+var geojsonid = "{{ kwd['geojson'] }}";
+var login = {{ kwd['login'] }};
+
+      del_layout = function(layout_id) {
+    return $.ajax({
+      url: "/layout/delete/" + layout_id,
+      type: "GET",
+      cache: false,
+      data: {},
+      dataType: "html",
+      timeout: 1000,
+      error: function() {
+        return alert("删除失败！");
+      },
+      success: function(result) {
+        return alert("删除成功！暂请手动刷新页面！");
+      }
+    });
+  };
+
+  del_geojson = function(gson_id) {
+    return $.ajax({
+      url: "/geojson/delete/" + gson_id,
+      type: "GET",
+      cache: false,
+      data: {},
+      dataType: "html",
+      timeout: 1000,
+      error: function() {
+        return alert("删除失败！");
+      },
+      success: function(result) {
+        return alert("删除成功，暂请手动刷新页面！");
+      }
+    });
+  };
+
+</script>
+
+{% block headinfo %}
+{% end %}
+{% end %}
+{% block zhuti %}
+
+
+{% if 1 == 2 %}
+<div class="panel panel-warning">
+    <div class="alert alert-info">建议：<a href="/user/login">登陆</a>后会列出用户最近使用App的信息！</div>
+</div>
+{% end %}
+
+
+<div class="panel panel-black">
+
+    <div class="panel-heading">
+
+        <H1 >{{ calc_info.title }}</H1>
+
+        <div class="container" style="width: auto;">
+            <div class="row">
+
+                <div class="col-md-9" style="text-align: left">
+
+
+                        <span>分类:</span>
+                        <span class="app_tag">{% module app_tags( kwd['signature']) %}</span>
+
+                        <span>发布日期:</span>
+                        <span class="">{{ str(calc_info.date)[:-9] }}</span>
+
+
+
+                         <a class="btn btn-info btn-xs" href="/map/{{calc_info.uid}}?fullscreen=1&gson={{ kwd['geojson'] }}" target="_blank">
+
+                             <span class="glyphicon glyphicon-fullscreen"></span>
+                             全屏</a>
+
+
+                     <button id="act_collect" class="btn btn-info btn-xs">
+                         <span class="glyphicon glyphicon-heart-empty"></span>
+                            <span id="text_collect">收藏</span>
+                        </button>
+
+
+                        {% if userinfo is not None and userinfo.privilege[4] == '1' %}
+                        <a id="act_note" href="/post/m{{ kwd['signature'] }}.html"
+                            class="btn btn-info btn-xs" ><span class="glyphicon glyphicon-new-window"></span>更多</a>
+
+                        <a id="act_note" href="/map/edit/{{ kwd['signature'] }}"
+                            class="btn btn-danger btn-xs" ><span class="glyphicon glyphicon-pencil"></span>修改地图信息</a>
+
+                        {% end %}
+
+                </div>
+
+                <div class="col-md-3" style="text-align: right;">
+                    <button id="act_eval0" class="btn btn-xs btn-warning">
+                <span class="glyphicon glyphicon-thumbs-down"></span>
+                 (<span id="eval0">{{ kwd['eval_0'] }}</span>)
+            </button>
+            <button id="act_eval1" class="btn btn-xs btn-success">
+                <span class="glyphicon glyphicon-thumbs-up"></span>
+                 (<span id="eval1">{{ kwd['eval_1'] }}</span>)
+            </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div id="map" class="map" tabindex="0"></div>
+    </div>
+
+
+    <div class="panel-body">
+
+
+        <ul class="list-group">
+            <li class="list-group-item">
+
+                <a id="save_view" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-save">保存视图</span></a>
+                <a id="current_view_url" href="{{ kwd['site_url'] }}{{ kwd['url'] }}">{{ kwd['site_url'] }}{{
+                kwd['url'] }}</a>
+</li>
+    </ul>
+
+
+
+
+<ul class="list-group">
+
+     <li class="list-group-item"><h4 class="list-group-item-heading">用户视图链接</h4></li>
+     {% if userinfo %}
+            {% module app_layout(calc_info.uid, userinfo.uid) %}
+            {% end %}
+
+
+    <li class="list-group-item">
+        <h4 class="list-group-item-heading" style="display: inline-block;">用户地图数据 </h4> <span class="text-info bg-info"> 全屏后可进行数据编辑</span></li>
+     {% if userinfo %}
+          {% module app_json(calc_info.uid, userinfo.uid) %}
+          {% end %}
+</ul>
+
+  </div>
+
+
+ <div class="panel-heading">
+<h4 class="panel-title">地图说明
+</h4>
+</div>
+    <div class="panel-body">
+        <div id="wiki_cnt">
+            {% raw unescape(calc_info.cnt_html) %}
+        </div>
+    </div>
+<div class="panel-body">
+     <p style="border-bottom: 1px dashed #dddddd; margin-bottom: 20px">&nbsp;</p>
+    {% set ii = 0 %}
+
+        <form method="post" class="form-horizontal">
+
+
+            <div class="form-group">
+                <div class="col-sm-10">
+                我来评论（至少50个字符|支持MarkDown语法）
+                {% if userinfo is  None %}
+            <span class="red">登陆后可以评论！</span>
+            {% end %}
+            </div>
+            </div>
+            <div class="form-group">
+<div class="col-sm-10">
+                <textarea  rows="5" name="cnt_md" id="cnt_md"  class="form-control"></textarea>
+            </div></div>
+            <div class="form-group">
+
+                <div class="col-sm-10"><a id="btn_submit_reply" onclick="reply_it('map', '{{ calc_info.uid }}');" class="btn btn-primary btn-small">提交</a>
+            </div>
+            </div>
+
+        </form>
+
+    <Br> <Br>
+    往期评论
+
+    <p style="border-bottom: 1px dashed #dddddd; margin-bottom: 20px">&nbsp;</p>
+
+    <div id="pinglun"></div>
+
+
+    {% for reply in replys %}
+
+    <div id="del_zan_{{ ii }}" style="font-size: 14px;">
+
+
+        <p>{{ reply.reply_id.user_name }}</p>
+
+        <p>{% raw unescape(reply.reply_id.cnt_html) %}</p>
+
+        <p>编辑于{{ str(reply.reply_id.date).split('.')[0] }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;共
+            <span id="text_zan_{{ ii }}">{{ reply.reply_id.vote }}</span>
+            个人赞同 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+            {% if (userinfo is None) or ( (userinfo is not None ) and ( userinfo.uid != reply.reply_id.uid )) %}
+            <a class="btn btn-primary btn-small"
+               style="padding:3px 8px; margin-right: 5px"
+               onclick="reply_zan('map', '{{ reply.reply_id.uid }}', {{ ii }} );">
+               <span class="glyphicon glyphicon-heart-empty"></span>
+            </a>
+            {% end %}
+
+
+            {% if userinfo is not None and ( userinfo.uid == reply.reply_id.uid or userinfo.privilege[4] == '1') %}
+
+
+            <a class="btn btn-danger btn-small" style="padding:3px 8px;"
+               onclick="reply_del('map', '{{ reply.reply_id.uid }}', {{ ii }} );">
+                删除
+            </a>
+            {% end %}
+
+        </p>
+
+        <p style="border-bottom: 1px dashed #dddddd; margin-bottom: 20px">&nbsp;</p>
+
+    </div>
+    {% set ii = ii + 1 %}
+    {% end %}
+</div>
+
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-md-6">
+                <span>标签:</span>
+                <span class="post_cat">
+                    {% set iii = 1 %}
+                    {% for x in tag_info %}
+                    <a href="/map/label/{{ x.tag.uid }}" class="app_label tag{{ iii }}">{{ x.tag.name }}</a>
+                    {% set iii = iii + 1 %}
+                    {% end %}
+                </span>
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+        地图链接： <a href="{{ kwd['site_url'] }}/map/{{ calc_info.uid }}">{{ calc_info.title }}</a>
+    </div>
+
+    <div class="col-md-6 ">
+        {% if 1 == 2 %}
+        <div class="widget_baidu_share"> {% module baidu_share() %}</div>
+        {% end %}
+    </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+{% end %}
+
+{% block right %}
+
+<div class="panel panel-black">
+    <div class="panel-heading">地图叠加</div>
+    <div class="panel-body">
+         {% if userinfo is None %}
+
+        <div class="alert alert-default">
+
+            <form action="javascript:;" class="form-horizontal" role="form">
+                <fieldset>
+
+                    <div class="form-group">
+
+                        <div class="col-sm-12">
+                            <select id="over_map_1" name="over_map_1" class="form-control">
+                                {% for recent in map_hist %}
+                                <option value="{{recent}}">{{recent}}</option>
+                                {% end %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+
+                        <div class="col-sm-12">
+                            <select id="over_map_2" name="over_map_2" class="form-control">
+                                <option value=""></option>
+                                {% for recent in map_hist %}
+                                <option value="{{recent}}">{{recent}}</option>
+                                {% end %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-1 col-sm-3">
+                            <button id="btn_overlay" name="btn_overlay" class="btn btn-sm btn-info">叠加</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+
+        </div>
+
+        {% else %}
+
+            <form action="javascript:;" class="form-horizontal" role="form">
+                <fieldset>
+
+                    <div class="form-group">
+                                               <div class="col-sm-12">
+                            <select id="over_map_1" name="over_map_1" class="form-control">
+                                {% for recent in recent_apps %}
+                                <option value="{{recent.signature.uid}}">{{recent.signature.uid}} |
+                                    {{recent.signature.title}}
+                                </option>
+                                {% end %}
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+
+
+                        <div class="col-sm-12">
+                            <select id="over_map_2" name="over_map_2" class="form-control">
+                                <option value=""></option>
+                                {% for recent in recent_apps %}
+                                <option value="{{recent.signature.uid}}">{{recent.signature.uid}} |
+                                    {{recent.signature.title}}
+                                </option>
+                                {% end %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-1 col-sm-3">
+                            <button id="btn_overlay" name="btn_overlay" class="btn btn-info btn-sm">叠加</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        {% end %}
+    </div>
+</div>
+
+
+<div class="panel panel-black">
+    <div class="panel-heading"> <h3 class="panel-title">相关地图</h3> </div> 
+    <ul class="list-group" style="overflow: hidden;">
+        {% for x in relations %}
+        <li class="list-group-item" style="overflow: hidden;">
+            <a href="/map/{{ x.app_t.uid }}">
+                 <span class="glyphicon glyphicon-map-marker"></span>{{ x.app_t.title }}
+               {% if x.app_t.uid[0] == 'v' %}<span class="badge" style="color:yellow">v</span>{% end %}
+            </a>
+        </li>
+        {% end %}
+        {% for x in rand_recs %}
+        <li class="list-group-item" style="overflow: hidden;">
+            <a href="/map/{{ x.uid }}">
+                 <span class="glyphicon glyphicon-map-marker"></span>{{ x.title }}
+                {% if x.uid[0] == 'v' %}<span class="badge" style="color:yellow">v</span>{% end %}
+            </a>
+        </li>
+        {% end %}
+    </ul>
+</div>
+
+<div class="panel panel-black">
+    <div class="panel-heading"> <h3 class="panel-title"> 相关文档 </h3> </div>
+    {%  module rel_app2post(calc_info.uid, 4) %}
+</div>
+
+
+<div class="panel panel-black">
+    <div class="panel-heading"> <h3 class="panel-title"> 最近浏览的地图 </h3> </div>
+
+    <ul class="list-group">
+        {% if userinfo is None %}
+        {% module app_recent_used(5) %}
+        {% else %}
+        {% module app_user_recent(userinfo.user_name, 5) %}
+        {% end %}
+    </ul>
+
+</div>
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            浏览最多的地图
+        </h3>
+    </div>
+
+    <ul class="list-group">
+        {% if userinfo is None %}
+        {% module app_most_used(5) %}
+        {% else %}
+        {% module app_user_most(userinfo.user_name, 5) %}
+        {% end %}
+    </ul>
+</div>
+
+<script src="{{ static_url('jslib/maplet/mapshowm.js') }}"></script>
+
+{% end %}

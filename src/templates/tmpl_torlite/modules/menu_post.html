@@ -1,0 +1,11 @@
+
+    {% for x in kwd['cats'] %}
+    <li  class="pure-menu-item">
+        <a href="{% module site_url() %}/category/{{ x.slug }}" class="pure-menu-link">
+
+        {{ x.name }}
+        {% if kwd['with_count'] %}
+        [{{ x.post_count}}]
+        {% end %}
+    </a></li>
+    {% end %}

@@ -1,0 +1,75 @@
+{% extends "../../theme/base.html" %}
+
+{% block head %}
+<title>我的收藏 | Maplet | 在线地图</title>
+<meta name="keywords" content="在线地图,历史地图">
+<meta name="description" content="在线地图,历史地图">
+{% end %}
+
+
+{% block zhuti %}
+
+<!--
+<div class="panel panel-info">
+    <div class="panel-heading">
+        所在位置： <a href="/">Maplet</a> > 用户 > 我的收藏
+    </div>
+</div>
+-->
+<div class="panel panel-black">
+    <div class="panel-heading">
+        我收藏的地图
+    </div>
+
+    <ul class="list-group">
+        {% for rec in recs_collect %}
+        <li class="list-group-item">
+            <a href="/map/{{ rec.app.uid }}">
+                {{ rec.app.title }}
+            </a>
+
+            <span class="app_tag">{% module app_tags(rec.app.uid) %}</span>
+            {% if 1== 2 %}
+                  <span style="font-size: small; color: #5e5e5e">
+                        ({{ rec.app.view_count }})
+                        </span>
+            {% end %}
+        </li>
+        {% end %}
+    </ul>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-md-6">
+                本文链接： <a href="http://www.maplet.org/collect/list">我收藏的地图</a>
+            </div>
+
+
+            <div class="col-md-6" style="text-align: right;">
+                <div class="widget_baidu_share">{% module baidu_share() %}</div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+{% end %}
+
+
+{% block right %}
+
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            应用分类
+        </h3>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+            {% module app_menu(40) %}
+        </ul>
+    </div>
+</div>
+
+{% end %}

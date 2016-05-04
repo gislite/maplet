@@ -1,0 +1,11 @@
+{% for x in recs %}
+<li class="list-group-item">
+    <a href="/post/{{ x.uid }}.html" title="{{x.title}}"><span class="glyphicon glyphicon-list-alt"></span> {{x.title}}</a>
+    {% if kwd['with_catalog'] %}
+    <span class="post_cat">{% module post_catalogs(x.uid) %}</span>
+    {% end %}
+    {% if kwd['with_date'] %}
+    <em class="date">{{ str(x.date).split(' ')[0] }}</em>
+    {% end %}
+</li>
+{% end %}

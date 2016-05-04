@@ -1,0 +1,100 @@
+{% extends "../theme/base_zhu.html" %}
+{% block head %}
+
+<title>在线地图 历史地图 专题地图 在线历史地图 中国历史地图 云GIS WebGIS 地图画板 Maplet</title>
+<meta name="keywords" content="地图画板,Maplet,云GIS,WebGIS,在线地图,历史地图,专题地图,在线历史地图,中国历史地图,在线地图查询,历史地图在线,在线专题地图,专题地图在线">
+<meta name="description" content="地图画板,线地图网站,以云GIS技术为基础,实现了以地图查看为中心的应用模式，实现了地图在线浏览、叠加操作。收集、处理了大量的历史地图,专题地图,尤其是中国历史地图资料.">
+
+<script type="text/javascript" src="{{ static_url('jslib/leaflet/leaflet.js') }}"></script>
+<link rel="stylesheet" href="{{ static_url('jslib/leaflet/leaflet.css') }}">
+
+{% block headinfo %}
+{% end %}
+{% end %}
+
+{% block base_top_header %}
+
+
+<header class="jumbotron subhead" id="overview">
+    <div class="container">
+        <p class="lead"> 云GIS应用与地图资源云　在线历史地图与专题地图 　OSGeo中国中心　中科院东北地理所　 长春</p>
+    </div>
+</header>
+
+
+<div class="container" >
+    <div class="row">
+        <div class="col-md-9">
+
+    <div class="row">
+
+        <div class="col-sm-4">
+
+         <div class="panel panel-black"> {% module  app_catalog_of('09') %} </div>
+
+ <div class="panel panel-black"> {% module  app_catalog_of('13') %} </div>
+        </div>
+        <div class="col-sm-4">
+           <div class="panel panel-black"> {% module  app_catalog_of('03') %} </div>
+         <div class="panel panel-black"> {% module  app_catalog_of('05') %} </div>
+
+        </div>
+        <div class="col-sm-4">
+
+           <div class="panel panel-black"> {% module  app_catalog_of('01') %} </div>
+         <div class="panel panel-black"> {% module  app_catalog_of('07') %} </div>
+ <div class="panel panel-black"> {% module  app_catalog_of('11') %} </div>
+
+        </div>
+
+    </div>
+
+    </div>
+
+<div class="col-md-3">
+
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            最近使用
+        </h3>
+    </div>
+
+    <ul class="list-group">
+        {% if userinfo is None %}
+        {% module app_recent_used(10) %}
+        {% else %}
+        {% module app_user_recent(userinfo.user_name,6) %}
+        {% end %}
+    </ul>
+
+</div>
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            使用最多
+        </h3>
+    </div>
+
+    <ul class="list-group">
+        {% if userinfo is None %}
+        {% module app_most_used(10) %}
+        {% else %}
+        {% module app_user_most(userinfo.user_name, 6) %}
+        {% end %}
+    </ul>
+
+</div>
+</div>
+</div>
+</div>
+        {% end %}
+ {% block link_list %}
+
+<div class="col-sm-12">
+    友情链接：{% module link_list(12 ) %}
+</div>
+<br><br>
+{% end %}

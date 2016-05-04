@@ -1,0 +1,189 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+
+    <script type="text/javascript" src="{{ static_url('jslib/jquery-2.2.2.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ static_url('csslib/bootstrap/css/bootstrap.min.css') }}">
+    <script src="{{ static_url('csslib/bootstrap/js/bootstrap.min.js') }}"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="{{ static_url('tass/css/style.css') }}">
+    <script type="text/javascript" src="{{ static_url('jslib/validate/jquery.validate.min.js') }}"></script>
+    <script type="text/javascript" src="{{ static_url('jslib/validate/message_cn.js') }}"></script>
+    <script type="text/javascript">
+        $().ready(function () {
+            $("#searchForm").validate({
+                rules: {
+                    searchheader: "required"
+                },
+                messages: {
+                    searchheader: "<span class='red'>请输入关键词</span>"
+
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript" src="{{ static_url('jslib/jquery.SuperSlide.2.1.1.js') }}"></script>
+
+
+    <script type="text/javascript">
+        $().ready(function () {
+            $("#searchForm").validate();
+        });
+    </script>
+
+    {% block headinfo %}
+
+    {% end %}
+
+    {% block head %}
+
+    {% end %}
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+
+    <div>
+        <ul class="nav navbar-nav">
+        </ul>
+    </div>
+    <div>
+        <form class="navbar-form navbar-left" role="search" method="post" id="find_calc" action="/search/">
+            <div class="form-group">
+                <input id="keyword" name="keyword" type="text" class="form-control" placeholder="输入关键词">
+            </div>
+            <button type="submit" id="search_app_submit" name="search_app_submit" class="btn btn-sm btn-primary"> 查找
+            </button>
+        </form>
+    </div>
+
+
+</nav>
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="/"><img src="{{ static_url('images/logo.png') }}"></a>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="nav nav-tabs">
+                <li><a href="/">首页</a></li>
+                <li><a href="/list/0100">遥感数据</a></li>
+                <li><a href="/list/0200">GIS数据</a></li>
+                <li><a href="/list/0300">文档资料</a></li>
+                <li><a href="/list/0400">多媒体数据</a></li>
+                <li><a href="/list/0500">格式化数据</a></li>
+                <li><a href="/post/recent">文档</a></li>
+
+                <li><a href="/page/apply_data.html">数据申请</a></li>
+                <li><a href="/page/data_service.html" style="color:red">专题数据共享<span class="badge" style="color:yellow">hot!</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <br>
+    {% block typebody %}{% end %}
+
+    <br><br>
+
+
+</div>
+<div class="panel-footer">
+    <div class="row">
+        <div class="col-sm-3">
+            <h2 class="title">联系我们</h2>
+
+            <div class="action">
+                <p class="home">吉林省长春市高新北区盛北大街4888号</p>
+
+                <p class="telephone">+86 431 85542316</p>
+
+                <p class="mobile"></p>
+
+                <p class="email">bukun#iga.ac.cn</p>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <h2 class="title">相关文档</h2>
+            <ul class="link_list">
+                <li><a href="/page/intro.html">介绍</a></li>
+                <li><a href="/page/scope.html">平台服务</a></li>
+                <li><a href="/page/team.html">专家成员</a></li>
+                <li><a href="/page/contact.html">联系我们</a></li>
+                <li><a href="/page/terms.html">数据信息使用说明</a></li>
+                <li><a href="/page/management.html">数据管理办法</a></li>
+
+            </ul>
+        </div>
+
+        <div class="col-sm-4">
+            <h2 class="title">科学数据库子系统</h2>
+
+            <ul class="link_list">
+                <li><a href="http://cmi.wetland.ac.cn/" title="中国沼泽湿地调查数据录入与管理信息系统">中国沼泽湿地调查数据录入与管理信息系统</a></li>
+                <li><a href="http://wetland.ac.cn/wetland/" title="中国沼泽湿地数据库查询与管理信息系统">中国沼泽湿地数据库查询与管理信息系统</a></li>
+                <li><a href="http://wetland.ac.cn/veglib/" title="中国湿地植物标本馆数据库">中国湿地植物标本馆数据库</a></li>
+            </ul>
+
+            <h2 class="title">友情链接</h2>
+
+            <ul class="link_list">
+                {% if 1==2 %}
+                {% module link_recent(12 ) %}
+                {% end %}
+            </ul>
+
+        </div>
+
+
+        <div class="col-sm-3">
+
+            <h2 class="title">致谢!</h2>
+
+            <ul class="link_list">
+                <li>本网站基于<a href="http://torcms.yunsuan.org" target="_blank">TorCMS</a>(MIT协议)开发</li>
+            </ul>
+
+            <h2>本网站的运行,得到下列单位与机构的支持:</h2>
+            <ul>
+                <li><a href="http://www.igsnrr.ac.cn" target="_blank">中国科学院地理科学与资源研究所</a></li>
+                <li><a href="http://www.iga.ac.cn" target="_blank">中国科学院东北地理与农业生态研究所</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="panel-footer" style="text-align: center;background: #333333; color: #f0f0f0">
+
+
+        &copy; 2015 中国科学院东北地理与农业生态研究所<br>
+        吉ICP备14004848号
+
+
+    </div>
+</div>
+
+
+<div class="row">
+
+    {% block footinfo %}{% end %}
+
+</div>
+</body>
+</html>

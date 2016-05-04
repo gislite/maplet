@@ -1,0 +1,79 @@
+{% extends "../../theme/map_calcubic_full.html" %}
+{% block head %}
+<title>地图画板,在线绘制地理数据</title>
+<meta name="keywords" content="在线地图,地图画板">
+<script type="text/javascript" src="{{ static_url('jslib/leaflet/leaflet.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('jslib/leaflet/Leaflet.Editable.js') }}"></script>
+
+<link rel="stylesheet" href="{{ static_url('jslib/leaflet/leaflet.css') }}" >
+
+<style type="text/css">
+    body {
+        padding: 0;
+        margin: 0;
+    }
+    html, body, #map {
+        height: 100%;
+        width: 100%;
+    }
+</style>
+<script>
+    window.ondragstart = function() { return false; }
+var vlon = 105;
+var vlat = 38;
+var vzoom_current = 5;
+var vzoom_max = 12;
+var vzoom_min = 3;
+var geojsonid = "{{ kwd['geojson'] }}";
+    var login = {{ kwd['login'] }};
+</script>
+
+{% block headinfo %}
+{% end %}
+{% end %}
+{% block zhuti %}
+
+<span id="pycode"></span>
+<div id="map" class="map" tabindex="0"></div>
+<div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+   <div>
+      <ul class="nav navbar-nav">
+         <li><a class="navbar-brand" href="/geojson/"><span class="glyphicon glyphicon-globe"></span> 地图画板</a></li>
+
+          <li></li>
+          {% if  kwd['geojson'] != '' %}
+         <li><a href="/geojson/download/maplet_geojson_{{ kwd['geojson'] }}.json">下载数据</a></li>
+          {% end %}
+      </ul>
+       <ul class="nav navbar-nav navbar-right">
+           <li>{% if kwd['login'] != 1 %}<a style="color:#ff0">登录后可保存数据！</a>{% end %}</li>
+           <li><a id="infor"></a></li>
+           <li>
+               <form class="navbar-form navbar-left">
+                   <div class="form-group">
+
+
+                                      <select id="maplet_id" name="maplet_id" class="form-control">
+                                {% for recent in recent_apps %}
+                                <option value="{{recent.signature.uid}}">{{recent.signature.uid}} |
+                                    {{recent.signature.title}}
+                                </option>
+                                {% end %}
+                            </select>
+                        <input type='button' value=' 添加Maplet' id='btn_add_maplet' class="btn btn-primary btn-inverse">
+
+                       <input type="text" class="form-control" placeholder="粘贴GeoJson数据" id="hdata">
+                        <input type='button' value=' 添加GeoJson' id='load_geojson' class="btn btn-primary btn-inverse">
+                   </div>
+
+               </form>
+           </li>
+       </ul>
+   </div>
+</div>
+
+<script src="{{ static_url('jslib/maplet/fullscreendrawm.js') }}"></script>
+
+{% end %}
+
+
