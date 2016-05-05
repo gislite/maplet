@@ -6,7 +6,7 @@ import torcms.model.app2catalog_model
 from torcms.model.mappcatalog import MAppCatalog
 from torcms.model import usage_model
 from torcms.model.app_rel_model import *
-from config import app_url_name
+# from config import app_url_name
 
 from torcms.model.app_model import MApp
 from torcms.model.mpost import MPost

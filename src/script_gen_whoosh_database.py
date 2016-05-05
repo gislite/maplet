@@ -14,8 +14,8 @@ from jieba.analyse import ChineseAnalyzer
 
 # sys.path.append('/opt/torlite/yunsuan')
 
-from torcms.torlite.model.mpost import MPost
-from torcms.applite.model.app_model import MApp
+from torcms.model.mpost import MPost
+from torcms.model.app_model import MApp
 # from applite.model.chart_model import MChart
 # from ext_model import MApp
 # from tormap.model.app_model import MMapApp

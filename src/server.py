@@ -5,7 +5,7 @@ import sys
 import tornado.locale
 from torcms.modules.modef import core_modules
 from maplet.modules.map_modules import *
-
+from config import cfg
 from urls import urls
 
 cur_modues = {'app_layout': app_layout,
@@ -17,7 +17,7 @@ modules = dict(core_modules, **cur_modues)
 SETTINGS = {
     "template_path": os.path.join(os.path.dirname(__file__), "templates"),
     "static_path": os.path.join(os.path.dirname(__file__), "static"),
-    'debug': True,
+    'debug': cfg['DEBUG'],
     "cookie_secret": config.cookie_secret,
     "login_url": "/user/login",
     'ui_modules': modules,
