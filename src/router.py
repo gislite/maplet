@@ -1,26 +1,31 @@
 # -*- coding:utf-8 -*-
 
-# from torcms.claslite.handlers.index_handler import PycateIndexHandler
-# from torcms.claslite.handlers.label_handler import InfoLabelHandler
-# from torcms.claslite.handlers.maintain_handler import MaintainPycateCategoryHandler
-# 
-# import torcms.claslite.handlers.widget_handler
-# import torcms.claslite.handlers.info_handler
-# import torcms.claslite.handlers.edit_handler
-# import torcms.claslite.handlers.delete_handler
-# import torcms.claslite.handlers.add_handler
-# import torcms.claslite.handlers.list_handler
-# import torcms.claslite.handlers.publish_handler
+
+# from torcms.handlers.info_handler import InfoHandler as AppHandler
+
+from torcms.handlers.index import IndexHandler as  AppIndexHandler
+from torcms.handlers.user_info_list_handler import UserListHandler
+from torcms.handlers.tag_hanlder import TagHandler
+# from torcms.handlers.label_hander import AppLabelHandler
+# from torcms.handlers.labellist_hander import AppLabellistHandler
+from torcms.handlers.collect_handler import CollectHandler
+from torcms.handlers.evaluation_handler import EvaluationHandler
+from torcms.handlers.post_info_relation_handler import RelHandler
+from torcms.handlers.app2reply_handler import App2ReplyHandler
+from torcms.handlers.redirect_handler import RedirectHandler
+from maplet.handlers.overlay_handler import MapOverlayHandler
+
+from maplet.handlers.map_handler import MapHandler
+from maplet.handlers.geojson import GeoJsonHandler
+from maplet.handlers.layout_handler import LayoutHandler
 
 urls = [
-    # ("/info/(.*)", torcms.claslite.handlers.info_handler.InfoHandler, dict(hinfo={})),
-    # ("/edit/(.*)", torcms.claslite.handlers.edit_handler.EditHandler, dict(hinfo={})),
-    # ("/delete/(.*)", torcms.claslite.handlers.delete_handler.DeleteHandler, dict(hinfo={})),
-    # ("/maintain/claslitecategory/(.*)", MaintainPycateCategoryHandler, dict()),
-    # ("/add/(.*)", torcms.claslite.handlers.add_handler.AddHandler, dict(hinfo={})),
-    # ("/list/(.*)", torcms.claslite.handlers.list_handler.ListHandler, dict(hinfo={})),
-    # ("/widget/(.*)", torcms.claslite.handlers.widget_handler.WidgetHandler, dict(hinfo={})),
-    # ("/publish/(.*)", torcms.claslite.handlers.publish_handler.PublishHandler, dict(hinfo={})),
-    # ('/info_tag/(.*)', InfoLabelHandler, dict(hinfo={})),
-    # ("/", PycateIndexHandler, dict()),
+    ('/map/overlay/(.*)', MapOverlayHandler, dict()),
+    ('/map/', AppIndexHandler, dict()),
+
+    ('/map/toreply/(.*)', App2ReplyHandler, dict()),
+    ('/map/(.*)', MapHandler, dict()),
+    ('/geojson/(.*)', GeoJsonHandler, dict()),
+    ('/layout/(.*)', LayoutHandler, dict()),
+
 ]
