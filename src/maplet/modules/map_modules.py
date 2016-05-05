@@ -1,16 +1,16 @@
 import random
 
 import tornado.web
-from torcms.applite.model.mappcatalog import MAppCatalog
-import torcms.applite.model.app_model
-import torcms.applite.model.app2catalog_model
-from torcms.applite.model import usage_model
-from torcms.applite.model.app_rel_model import *
+import torcms.model.app_model
+import torcms.model.app2catalog_model
+from torcms.model.mappcatalog import MAppCatalog
+from torcms.model import usage_model
+from torcms.model.app_rel_model import *
 from config import app_url_name
 
-from torcms.applite.model.app_model import MApp
-from torcms.torlite.model.mpost import MPost
-from torcms.applite.model.app2label_model import MApp2Label
+from torcms.model.app_model import MApp
+from torcms.model.mpost import MPost
+from torcms.model.app2label_model import MApp2Label
 from maplet.model.json_model import MJson
 from maplet.model.layout_model import MLayout
 import config

@@ -4,7 +4,7 @@ import sys
 
 
 
-from torcms.applite.model.app_model import MApp
+from torcms.model.app_model import MApp
 
 mequ = MApp()
 
@@ -15,11 +15,12 @@ def javascript2database():
 
     for rec in all_recs:
         print(rec.uid)
-        dic = {'ext_lon': rec.lon,
-               'ext_lat': rec.lat,
-               'ext_zoom_current': rec.zoom_current,
-               'ext_zoom_max': rec.zoom_max,
-               'ext_zoom_min': rec.zoom_min,}
+        dic = {'def_cat_uid': '0103',
+               'ext_lon': rec.extinfo['ext_lon'],
+               'ext_lat': rec.extinfo['ext_lat'],
+               'ext_zoom_current': rec.extinfo['ext_zoom_current'],
+               'ext_zoom_max': rec.extinfo['ext_zoom_max'],
+               'ext_zoom_min': rec.extinfo['ext_zoom_min'],}
         mequ.update_jsonb(rec.uid, dic)
 
 

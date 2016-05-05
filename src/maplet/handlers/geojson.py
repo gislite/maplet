@@ -1,9 +1,11 @@
+# -*- coding:utf-8 -*-
+
 import json
 
 import tornado.web
 
 from torcms.core.base_handler import BaseHandler
-from torcms.applite.model.usage_model import MUsage
+from torcms.model.usage_model import MUsage
 from torcms.core import tools
 from maplet.model.json_model import MJson
 

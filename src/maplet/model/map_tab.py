@@ -1,9 +1,9 @@
 import peewee
 from playhouse.postgres_ext import JSONField
 
-from torcms.applite.model.ext_tab import TabApp
+from torcms.model.ext_tab import TabApp
 from torcms.core.base_model import BaseModel
-from torcms.torlite.model.core_tab import CabMember
+from torcms.model.core_tab import CabMember
 
 
 class TabJson(BaseModel):

@@ -5,7 +5,7 @@ import tornado.web
 
 import config
 from torcms.core.base_handler import BaseHandler
-from torcms.applite.model.app_model import MApp
+from torcms.model.app_model import MApp
 
 
 def average(num_arr):

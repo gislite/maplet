@@ -67,8 +67,10 @@ config.py
 *.sqlite
 *.pkl
 
+src/torcms
 src/database/*
 src/database/whoosh*
 src/database/whoosh
 src/static/upload/
 src/static/tass/.sass-cache/
+src/templates/autogen/

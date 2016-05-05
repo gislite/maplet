@@ -3,7 +3,7 @@
 import tornado.web
 
 from maplet.model.layout_model import MLayout
-from torcms.applite.model.app_model import MApp
+from torcms.model.app_model import MApp
 from torcms.core.base_handler import BaseHandler
 
 
