@@ -306,7 +306,7 @@ var login = {{ kwd['login'] }};
 
                         <div class="col-sm-12">
                             <select id="over_map_1" name="over_map_1" class="form-control">
-                                {% for recent in map_hist %}
+                                {% for recent in kwd['map_hist_arr'] %}
                                 <option value="{{recent}}">{{recent}}</option>
                                 {% end %}
                             </select>
@@ -319,7 +319,7 @@ var login = {{ kwd['login'] }};
                         <div class="col-sm-12">
                             <select id="over_map_2" name="over_map_2" class="form-control">
                                 <option value=""></option>
-                                {% for recent in map_hist %}
+                                {% for recent in kwd['map_hist_arr'] %}
                                 <option value="{{recent}}">{{recent}}</option>
                                 {% end %}
                             </select>

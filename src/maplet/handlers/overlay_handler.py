@@ -48,11 +48,11 @@ class MapOverlayHandler(BaseHandler):
         for app_rr in app_arr:
             c_ap = self.mapplication.get_by_uid(app_rr)
             app_info_arr.append(c_ap)
-            lon_arr.append(c_ap.lon)
-            lat_arr.append(c_ap.lat)
-            zoom_max_arr.append(c_ap.zoom_max)
-            zoom_min_arr.append(c_ap.zoom_min)
-            zoom_current_zrr.append(c_ap.zoom_current)
+            lon_arr.append(c_ap.extinfo['ext_lon'])
+            lat_arr.append(c_ap.extinfo['ext_lat'])
+            zoom_max_arr.append(c_ap.extinfo['ext_zoom_max'])
+            zoom_min_arr.append(c_ap.extinfo['ext_zoom_min'])
+            zoom_current_zrr.append(c_ap.extinfo['ext_zoom_current'])
 
         kwd = {'url': 1,
                "cookie_str": '',

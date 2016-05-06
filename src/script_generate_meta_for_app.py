@@ -1,9 +1,8 @@
 # -*- coding:utf-8 -*-
-__author__ = 'bukun'
 
 import os
 import sys
-from torcms.applite.model.app_model import MApp
+from torcms.model.app_model import MApp
 
 if __name__ == '__main__':
     inws = 'templates/jshtml'
