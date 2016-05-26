@@ -13,6 +13,7 @@ page_num = 2
 site_name = 'TorCMS网站'
 site_url = 'http://127.0.0.1:8088'
 
+wcs_svr = ''
 # 使用DataBase的不同形式，以应对Peewe针对数据库的不同语法
 # 1 for SQLite
 # 2 for MySQL
@@ -31,18 +32,21 @@ smtp_cfg = {
 
 # Used in HTML render files.
 cfg = {
+    'app_url_name' : 'map',
+'DEBUG': True,
 }
+
 
 Email_site_name = '云算笔记'
 PORT = 8088
 
 dbconnect = PostgresqlExtDatabase(
-    'torcms',
-    user='torcms',
-    password='123456',
+    'maplet',
+    user='maplet',
+    password='131322',
     host='127.0.0.1',
     autocommit=True,
     autorollback=True
 )
 
-app_url_name = 'map'
+
