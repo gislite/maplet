@@ -82,7 +82,7 @@ class GeoJsonHandler(BaseHandler):
         if self.get_secure_cookie('map_hist'):
             for xx in range(0, len(self.get_secure_cookie('map_hist').decode('utf-8')), 4):
                 map_hist.append(self.get_secure_cookie('map_hist').decode('utf-8')[xx: xx + 4])
-        self.render('tmpl_applite/app/full_screen_draw.html',
+        self.render('infor/app/full_screen_draw.html',
                     kwd=kwd,
                     userinfo=self.userinfo,
                     unescape=tornado.escape.xhtml_unescape,
@@ -91,7 +91,7 @@ class GeoJsonHandler(BaseHandler):
                     )
 
     def index(self):
-        self.render('tmpl_applite/geojson/index.html',
+        self.render('infor/geojson/index.html',
                     kwd={},
                     userinfo=self.userinfo,
                     unescape=tornado.escape.xhtml_unescape,
@@ -102,7 +102,7 @@ class GeoJsonHandler(BaseHandler):
     def list(self):
 
         kwd = {}
-        self.render('tmpl_applite/geojson/gson_recent.html',
+        self.render('infor/geojson/gson_recent.html',
                     kwd=kwd,
                     userinfo=self.userinfo,
                     unescape=tornado.escape.xhtml_unescape,

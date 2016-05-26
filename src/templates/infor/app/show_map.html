@@ -2,7 +2,7 @@
 {% block head %}
 <title>{{ calc_info.title }}|在线地图|历史地图</title>
 <meta name="keywords" content="{{ calc_info.keywords }},在线地图,历史地图">
-<meta name="description" content="{{ calc_info.desc }}">
+<meta name="description" content="">
 
 <script type="text/javascript" src="{{ static_url('jslib/leaflet/leaflet.js') }}"></script>
 <link rel="stylesheet" href="{{ static_url('jslib/leaflet/leaflet.css') }}">
@@ -261,7 +261,7 @@ var login = {{ kwd['login'] }};
                 <span class="post_cat">
                     {% set iii = 1 %}
                     {% for x in tag_info %}
-                    <a href="/map/label/{{ x.tag.uid }}" class="app_label tag{{ iii }}">{{ x.tag.name }}</a>
+                    <a href="/list_label/{{ x.tag.uid }}" class="app_label tag{{ iii }}">{{ x.tag.name }}</a>
                     {% set iii = iii + 1 %}
                     {% end %}
                 </span>

@@ -48,11 +48,11 @@ class MapOverlayHandler(BaseHandler):
         for app_rr in app_arr:
             c_ap = self.mapplication.get_by_uid(app_rr)
             app_info_arr.append(c_ap)
-            lon_arr.append(c_ap.extinfo['ext_lon'])
-            lat_arr.append(c_ap.extinfo['ext_lat'])
-            zoom_max_arr.append(c_ap.extinfo['ext_zoom_max'])
-            zoom_min_arr.append(c_ap.extinfo['ext_zoom_min'])
-            zoom_current_zrr.append(c_ap.extinfo['ext_zoom_current'])
+            lon_arr.append(float(c_ap.extinfo['ext_lon']))
+            lat_arr.append(float(c_ap.extinfo['ext_lat']))
+            zoom_max_arr.append(int(c_ap.extinfo['ext_zoom_max']))
+            zoom_min_arr.append(int(c_ap.extinfo['ext_zoom_min']))
+            zoom_current_zrr.append(int(c_ap.extinfo['ext_zoom_current']))
 
         kwd = {'url': 1,
                "cookie_str": '',
@@ -63,9 +63,9 @@ class MapOverlayHandler(BaseHandler):
                'zoom_current': int(average(zoom_current_zrr)),
                }
         if 'fullscreen' in self.request.arguments:
-            tmpl = 'tmpl_applite/overlay/overlay_full.html'
+            tmpl = 'infor/overlay/overlay_full.html'
         else:
-            tmpl = 'tmpl_applite/overlay/overlay.html'
+            tmpl = 'infor/overlay/overlay.html'
         self.render(tmpl,
                     topmenu='',
                     kwd=kwd,

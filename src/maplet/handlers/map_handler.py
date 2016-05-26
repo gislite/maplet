@@ -38,8 +38,8 @@ class MapHandler(InfoHandler):
 
     def get_tmpl_name(self, rec):
         if 'fullscreen' in self.request.arguments:
-            tmpl = 'tmpl_applite/app/full_screen.html'
+            tmpl = 'infor/app/full_screen.html'
         else:
 
-            tmpl = 'tmpl_applite/app/show_map.html'
+            tmpl = 'infor/app/show_map.html'
         return tmpl
