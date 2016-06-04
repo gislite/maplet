@@ -3,7 +3,7 @@ import random
 import tornado.web
 import torcms.model.app_model
 import torcms.model.app2catalog_model
-from torcms.model.mappcatalog import MAppCatalog
+from torcms.model.minforcatalog import MInforCatalog
 from torcms.model import usage_model
 from torcms.model.app_rel_model import *
 # from config import app_url_name
