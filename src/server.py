@@ -22,7 +22,7 @@ SETTINGS = {
     'ui_modules': modules,
 }
 
-PORT = '8246'
+PORT = cfg['PORT']
 
 if __name__ == "__main__":
     tornado.locale.set_default_locale('zh_CN')

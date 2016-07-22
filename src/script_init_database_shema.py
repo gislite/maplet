@@ -1,7 +1,31 @@
-__author__ = 'bukun'
-from torcms.torlite.model.core_tab import *
+# -*- coding: utf-8
 
-from torcms.applite.model.ext_tab import *
+__author__ = 'bukun'
+import sys
+
+from torcms.model.core_tab import *
+from torcms.model.ext_tab import *
+# from tormap.model.ext_tab import *
+
+try:
+    CabReply.create_table()
+except:
+    pass
+
+try:
+    CabPost2Reply.create_table()
+except:
+    pass
+
+try:
+    TabCatalog.create_table()
+except:
+    pass
+
+try:
+    TabApp2Reply.create_table()
+except:
+    pass
 
 
 try:
@@ -13,17 +37,6 @@ try:
     CabMember.create_table()
 except:
     pass
-try:
-    CabLabel.create_table()
-except:
-    pass
-
-try:
-    CabLink.create_table()
-except:
-    pass
-
-
 
 try:
     CabPage.create_table()
@@ -64,16 +77,14 @@ except:
     pass
 
 try:
-    TabLabel.create_table()
-except:
-    pass
-
-
-try:
     TabCollect.create_table()
 except:
     pass
 
+try:
+    TabApp2Catalog.create_table()
+except:
+    pass
 
 try:
     TabAppRelation.create_table()
@@ -87,54 +98,6 @@ except:
 
 try:
     TabUsage.create_table()
-except:
-    pass
-
-try:
-    CabReply.create_table()
-except:
-    pass
-
-try:
-    CabPost2Reply.create_table()
-except:
-    pass
-
-try:
-    TabCatalog.create_table()
-except:
-    pass
-
-try:
-    CabPost2Label.create_table()
-except:
-    pass
-
-try:
-    CabRelation.create_table()
-except:
-    pass
-
-try:
-    CabVoter2Reply.create_table()
-except:
-    pass
-try:
-    RabPost2App.create_table()
-except:
-    pass
-
-try:
-    RabApp2Post.create_table()
-except:
-    pass
-try:
-    TabApp2Catalog.create_table()
-except:
-    pass
-
-try:
-    TabApp2Label.create_table()
 except:
     pass
 
