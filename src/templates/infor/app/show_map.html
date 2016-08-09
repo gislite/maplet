@@ -2,7 +2,7 @@
 {% block head %}
 <title>{{ calc_info.title }}|在线地图|历史地图</title>
 <meta name="keywords" content="{{ calc_info.keywords }},在线地图,历史地图">
-<meta name="description" content="">
+<meta name="description" content="{% module generate_description(calc_info.cnt_html) %}">
 
 <script type="text/javascript" src="{{ static_url('jslib/leaflet/leaflet.js') }}"></script>
 <link rel="stylesheet" href="{{ static_url('jslib/leaflet/leaflet.css') }}">

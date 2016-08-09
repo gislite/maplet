@@ -31,7 +31,7 @@
       layers: [lyrs]
     });
     baseMaps = {
-      osm: osm
+      MapBox: osm
     };
     overlayMaps = {};
     ii = 0;
