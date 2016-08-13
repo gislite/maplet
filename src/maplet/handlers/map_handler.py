@@ -17,11 +17,20 @@ class MapHandler(InfoHandler):
         for key in self.request.arguments:
             post_data[key] = self.get_arguments(key)
 
-        return {
+        out_dic =  {
             'marker': 1 if 'marker' in post_data else 0,
             'geojson': post_data['gson'][0] if 'gson' in post_data else '',
-            'map_hist_arr': self.extra_view(info_rec.uid)
+            'map_hist_arr': self.extra_view(info_rec.uid),
+
         }
+        if 'zoom' in post_data :
+            out_dic['vzoom'] = post_data['zoom'][0]
+        if 'lat' in post_data :
+            out_dic['vlat'] = post_data['lat'][0]
+        if 'lon' in post_data :
+            out_dic['vlon'] = post_data['lon'][0]
+        return out_dic
+
 
     def extra_view(self, app_id):
         qian = self.get_secure_cookie('map_hist')

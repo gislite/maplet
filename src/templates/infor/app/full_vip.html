@@ -21,9 +21,9 @@
 <script>
     window.ondragstart = function() { return false; }
 var map_uid = "{{ calc_info.uid }}";
-var vlon = {{ calc_info.extinfo['ext_lon'] }};
-var vlat = {{ calc_info.extinfo['ext_lat'] }};
-var vzoom_current = {{ calc_info.extinfo['ext_zoom_current'] }};
+var vlon = {{ kwd['vlon'] if 'vlon' in kwd else calc_info.extinfo['ext_lon'] }};
+var vlat = {{ kwd['vlat'] if 'vlat' in kwd else calc_info.extinfo['ext_lat'] }};
+var vzoom_current = {{ kwd['vzoom'] if 'vzoom' in kwd else calc_info.extinfo['ext_zoom_current'] }};
 var vzoom_max = {{ calc_info.extinfo['ext_zoom_max'] }};
 var vzoom_min = {{ calc_info.extinfo['ext_zoom_min'] }};
 var vmarker = {{ kwd['marker']}};

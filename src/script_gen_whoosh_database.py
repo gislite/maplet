@@ -26,10 +26,10 @@ def do_for_app(writer, rand = True):
     for rec in recs:
         # # sleep(0.1)
         text2 = html2text.html2text(tornado.escape.xhtml_unescape(rec.cnt_html))
-        # writer.update_document(path=u"/a",content="Replacement for the first document")  
+        # writer.update_document(path=u"/a",content="Replacement for the first document")
         writer.update_document(
             title=rec.title,
-            type= doc_type, 
+            type= doc_type,
             link='/map/{0}'.format(rec.uid),
             content=text2
         )
@@ -47,10 +47,10 @@ def do_for_post(writer, rand = True):
     for rec in recs:
         # sleep(0.1)
         text2 = html2text.html2text(tornado.escape.xhtml_unescape(rec.cnt_html))
-        # writer.update_document(path=u"/a",content="Replacement for the first document")  
+        # writer.update_document(path=u"/a",content="Replacement for the first document")
         writer.update_document(
             title=rec.title,
-            type= doc_type, 
+            type= doc_type,
             link='/post/{0}.html'.format(rec.uid),
             content=text2
         )
@@ -60,7 +60,7 @@ def gen_whoosh_database( if_rand = True):
 
     analyzer = ChineseAnalyzer()
     schema = Schema(title=TEXT(stored=True, analyzer=analyzer),
-                    type=TEXT(stored=True), 
+                    type=TEXT(stored=True),
                     link=ID(unique=True, stored=True, ),
                     content=TEXT(stored=True, analyzer=analyzer))
     whoosh_db = 'database/whoosh'
