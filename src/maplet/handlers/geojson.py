@@ -1,7 +1,5 @@
 # -*- coding:utf-8 -*-
-
 import json
-
 import tornado.web
 
 from torcms.core.base_handler import BaseHandler
