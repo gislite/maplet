@@ -120,42 +120,52 @@ var _hmt = _hmt || [];
     <div class="container">
         {% block link_list %}
         {% end %}
-
         <div class="row">
-         <ul class="nav navbar-nav">
- <li><a href="/page/about.html">关于</a></li>
-                                <li><a href="/page/terms.html">免责声明</a></li>
-                                <li><a href="/page/contact.html">联系我们</a></li>
-                                <li class="divider"></li>
-                                <li><a href="/page/how-to-use.html">如何使用</a></li>
-             </ul>
-             </div>
+            <div class="col-sm-6" >
+                <div class="container">
+
+                    <div class="row">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/page/about.html">关于</a></li>
+                            <li><a href="/page/terms.html">免责声明</a></li>
+                            <li><a href="/page/contact.html">联系我们</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/page/how-to-use.html">如何使用</a></li>
+                        </ul>
+                    </div>
 
 
-        <div class="row">
-            <div class="bg-waring text-info">本网站的开发与维护，得到下面机构的经费与技术支持,特此表示感谢:</div>
-            <div class="col-sm-12">
-                <div class="col-sm-6 col-md-4"></div>
-                <div class="col-sm-6 col-md-4">
-                    <a href="http://www.geodata.cn" target="_blank" class="thumbnail" style="text-align: center">
-                        <img src="{{ static_url('fixed/geodata.png') }}"
-                             alt="国家科技基础平台地球系统科学数据共享网">
-                    </a>
+                    <div class="row">
+                        <div class="bg-waring text-info">本网站的开发与维护，得到下面机构的经费与技术支持,特此表示感谢:</div>
+                        <div class="col-sm-12">
+                            <div class="col-sm-6 col-md-4"></div>
+                            <div class="col-sm-6 col-md-4">
+                                <a href="http://www.geodata.cn" target="_blank" class="thumbnail" style="text-align: center">
+                                    <img src="{{ static_url('fixed/geodata.png') }}"
+                                         alt="国家科技基础平台地球系统科学数据共享网">
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row" style="font-size:.9em; color:darkgray; text-align: center; ">
+                        <span>&copy; 2016 地图云集|maplet.org 版权所有</span>
+                        <p>Powered by <a href="https://github.com/bukun/TorCMS" target="_blank">TorCMS</a></p>
+                    </div>
                 </div>
+            </div>
 
+            <div class="col-sm-4" >
+                <div class="container">
+                    <div class="row">
+                    <img src="{{ static_url('fixed/maplet_qrcode.png') }} " />
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div style="font-size:.9em; color:darkgray; text-align: center; ">
-            <span>&copy; 2016 地图云集|maplet.org 版权所有</span>
-
-            <p>Powered by <a href="https://github.com/bukun/TorCMS" target="_blank">TorCMS</a></p>
-        </div>
     </div>
-
-
 </footer>
-<a id="scrollUp" href="#top" title="" style="position: fixed; z-index: 2147483647;"></a>
 
 
 </body>

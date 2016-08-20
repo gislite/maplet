@@ -25,7 +25,7 @@ def do_for_app(writer, rand = True):
     print(recs.count())
     for rec in recs:
         # # sleep(0.1)
-        text2 = html2text.html2text(tornado.escape.xhtml_unescape(rec.cnt_html))
+        text2 = rec.title +',' +  html2text.html2text(tornado.escape.xhtml_unescape(rec.cnt_html))
         # writer.update_document(path=u"/a",content="Replacement for the first document")
         writer.update_document(
             title=rec.title,
@@ -46,7 +46,7 @@ def do_for_post(writer, rand = True):
     print(recs.count())
     for rec in recs:
         # sleep(0.1)
-        text2 = html2text.html2text(tornado.escape.xhtml_unescape(rec.cnt_html))
+        text2 = rec.title +',' + html2text.html2text(tornado.escape.xhtml_unescape(rec.cnt_html))
         # writer.update_document(path=u"/a",content="Replacement for the first document")
         writer.update_document(
             title=rec.title,
