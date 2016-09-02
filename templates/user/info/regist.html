@@ -1,0 +1,134 @@
+{% extends "../../theme/base.html" %}
+
+{% block head %}
+<title>用户注册|Maplet|地图画板</title>
+<meta name="description"      content="地图画板 Maplet">
+<meta name="keywords"      content="地图画板 Maplet">
+{% end %}
+
+
+{% block zhuti %}
+
+
+<script type="text/javascript">
+    $().ready(function () {
+        $("#form_regist").validate(
+                {
+                    rules: {
+                        user_name: {
+                            required: true,
+                            rangelength: [5, 16]
+                        },
+                        user_pass: {
+                            required: true,
+                            rangelength: [6, 20]
+                        },
+                        user_pass2: {
+                            required: true,
+                            equalTo: "#user_pass"
+                        },
+                        user_email: {
+                            required: true,
+                            email: true
+                        }
+                    },
+                    messages: {
+                        user_name: {
+                            required: "<span class='red'>请输入用户名</span>",
+                            rangelength: "<span class='red'>用户名最少为5位，最长为16位</span>"
+                        },
+
+                        user_pass: {
+                            required: "<span class='red'>请输入密码</span>",
+                            rangelength: "<span class='red'>密码最少为6位，最长为20位</span>"
+                        },
+                        user_pass2: {
+                            required: "<span class='red'>请输入密码</span>",
+                            equalTo: "<span class='red'>两次输入密码不一致</span>"
+                        },
+                        user_email: {
+                            required: "<span class='red'>请输入正确电子邮箱</span>",
+                            email: "<span class='red'>请输入正确的电子邮箱</span>"
+                        }
+                    }
+                }
+        );
+    });
+</script>
+
+<div class="panel panel-black">
+    <div class="panel-heading">用户注册
+    </div>
+    <div class="panel-body">
+        <form id="form_regist" action="/user/regist" method="post" class="form-horizontal" role="form">
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="user_name">用户名： </label>
+
+                <div class="col-sm-4">
+                    <input class="form-control" id='user_name' type="text" name="user_name"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="user_pass">密码：</label>
+
+                <div class="col-sm-4">
+                    <input class="form-control" id="user_pass" type="password" name="user_pass">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="user_pass2">确认密码：</label>
+
+                <div class="col-sm-4">
+                    <input class="form-control" id="user_pass2" type="password" name="user_pass2">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="user_email">电子邮箱：</label>
+
+                <div class="col-sm-4">
+                    <input class="form-control" id="user_email" type="text" name="user_email">
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <label class="col-sm-2 control-label" for="sub1"></label>
+
+                <div class="col-sm-4">
+                    <button id="sub1" type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+
+        </form>
+
+        <div class="alert alert-warning">
+            <ol>
+            <li>请输入有效的E-mail地址，这是找回密码的<span class="text-danger">唯一凭证</span>。
+                <li>本网站不会明文记录任何密码，如果忘记密码，可以通过用户E-mail找回。
+                </ol>
+           </div>
+    </div>
+</div>
+{% end %}
+
+{% block right %}
+
+
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+           应用分类
+        </h3>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+
+            {% module app_menu(20) %}
+
+        </ul>
+    </div>
+</div>
+
+{% end %}

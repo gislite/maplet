@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /collect/
+Disallow: /evaluate/
+Disallow: /py/
+

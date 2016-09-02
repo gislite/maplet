@@ -1,0 +1,94 @@
+{% extends "../../theme/base_view.html" %}
+
+
+{% block head %}
+<title>{{ view.title }}</title>
+<meta name="description" content="">
+<meta name="keywords" content="在线地图 历史地图 专题地图 Maplet">
+{% end %}
+
+{% block zhuti %}
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h1>{{ view.title }}</h1>
+
+        <div>
+
+            发布者: <a href="/" style="color:#ffffff;">Maplet</a>&nbsp;&nbsp;
+            发布日期：
+            {{ str(view.date)[:-9] }}
+            &nbsp;&nbsp;
+            {% if 1== 2 %}
+
+            查看:
+            <em id="_viewnum">{{ view.view_count }}</em>
+            {% end %}
+            &nbsp;&nbsp;
+
+            {% if 2 == 1 %}
+
+            <a href="/page/modify/{{ view.slug }}" class="btn btn-primary btn-xs"><span
+                    class="glyphicon glyphicon-pencil"></span>修改</a>
+            {% end %}
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div id="wiki_cnt">
+            {% raw unescape(view.cnt_html ) %}
+        </div>
+    </div>
+
+
+    <div class="panel-footer">
+
+        <div class="row">
+            <div class="col-md-6">
+                本文链接： <a href="http://www.maplet.org/page/{{ view.slug }}.html">{{ view.title }}</a>
+            </div>
+
+
+            <div class="col-md-6" style="text-align: right;">
+                <div class="widget_baidu_share">{% module baidu_share() %}</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% end %}
+
+{% block right %}
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            最近地图
+        </h3>
+    </div>
+
+    <ul class="list-group">
+        {% if userinfo is None %}
+        {% module app_most_used(5) %}
+        {% else %}
+        {% module app_user_most(userinfo.user_name, 5) %}
+        {% end %}
+    </ul>
+
+</div>
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            最近文档
+        </h3>
+    </div>
+
+    <ul class="list-group">
+
+        {% module post_recent(8, with_catalog=False, with_date = False) %}
+
+    </ul>
+</div>
+
+
+{% end %}

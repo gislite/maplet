@@ -1,0 +1,107 @@
+{% extends "../../theme/base.html" %}
+
+{% block head %}
+
+
+<title>地图画板 Maplet</title>
+
+<meta name="description"
+      content="地图画板 Maplet">
+<meta name="keywords"
+      content="地图画板 Maplet">
+
+
+{% end %}
+
+
+{% block zhuti %}
+
+<script type="text/javascript">
+    $().ready(function () {
+        $("#form_login").validate(
+                {
+                    rules: {
+                        user_name: {
+                            required: true
+                        },
+                        user_pass: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        user_name: {
+                            required: "<span class='red'>请输入用户名</span>"
+                        },
+
+                        user_pass: {
+                            required: "<span class='red'>请输入密码</span>"
+                        }
+                    }
+                }
+        );
+    });
+</script>
+
+<div class="panel panel-black">
+    <div class="panel-heading">用户登录
+    </div>
+    <div class="panel-body">
+
+
+        <form id="form_login" method="post" class="form-horizontal" role="form">
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="user_name">用户名: </label>
+
+                <div class="col-sm-10">
+                    <input type="text" name="user_name" id="user_name" class="form-control" placeholder="请输入你的用户名"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="user_pass">密码: </label>
+
+                <div class="col-sm-10">
+                    <input type="password" name="user_pass" id="user_pass" class="form-control" placeholder="请输入你的密码">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">登陆</button>
+                </div>
+
+            </div>
+        </form>
+
+        <div class="alert alert-info">非本站用户？ 请 <a href="/user/regist">进行注册</a></div>
+        <div class="alert alert-warning">忘记密码，尝试<a href="/user/reset-password">密码重置</a></div>
+
+    </div>
+</div>
+{% end %}
+
+
+{% block right %}
+
+
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+           应用分类
+        </h3>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+
+            {% module app_menu(20) %}
+
+        </ul>
+    </div>
+</div>
+
+{% end %}

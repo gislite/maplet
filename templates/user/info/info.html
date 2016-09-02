@@ -1,0 +1,121 @@
+{% extends "../../theme/base.html" %}
+
+{% block head %}
+
+
+<title>用户信息 | 地图画板 | Maplet 云计算 在线计算 科学计算 工程计算</title>
+
+<meta name="description"
+      content="由科学家与工程师维护的，专注在线计算、云计算应用的网站，提供科学计算与工程计算应用,包括环境影响评价计算,地理学计算,数学计算,物理计算,化学计算">
+<meta name="keywords"
+      content="计算,在线计算器,云计算,在线计算,常用数据,常规数据,科学计算,工程计算,环评计算,地理计算,数学计算,物理计算,化学计算,数学公式,物理公式,建筑计算">
+
+
+<script type="text/javascript" src="{{ static_url('jslib/colorbox-master/jquery.colorbox-min.js') }}"></script>
+
+
+<script type="text/javascript">
+
+</script>
+
+
+{% end %}
+
+
+{% block zhuti %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-black">
+                <div class="panel-heading">
+                    用户信息
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户名：</label>
+
+                            <div class="col-sm-10">
+                                {{ userinfo.user_name }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">E-mail：</label>
+
+                            <div class="col-sm-10">{{ userinfo.user_email }}</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+
+                            <div class="col-sm-10">
+                                <!--<a href="#inline_password" target=""
+                                    style="margin-bottom: 5px;color: #fff"
+                                    class="btn btn-primary" id="Button1">
+                                    修改密码
+                                    </a>-->
+                                    <a href="/user/changepass" class="btn btn-primary btn-small">修改密码</a>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+
+                            <div class="col-sm-10">
+                                <a href="/user/logout" class="btn btn-primary btn-small">注销</a>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+<div class="col-md-6">
+            <div class="panel panel-black">
+                <div class="panel-heading">
+                    最近用地图 
+                </div>
+                <ul class="list-group">
+                    {% module app_user_recent( user_name=userinfo.user_name , num = 8) %}
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-black">
+                <div class="panel-heading">
+                    最常用地图 
+                </div>
+                <ul class="list-group">
+                    {% module app_user_most( user_name=userinfo.user_name , num = 8) %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+{% end %}
+
+{% block right %}
+
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            应用分类
+        </h3>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+
+            {% module app_menu(40) %}
+
+        </ul>
+    </div>
+</div>
+
+{% end %}

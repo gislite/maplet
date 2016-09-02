@@ -1,0 +1,64 @@
+{% extends "../../theme/base.html" %}
+
+{% block head %}
+<title>地图画板 Maplet 用户使用最多</title>
+<meta name="description" content="地图画板 Maplet">
+<meta name="keywords" content="地图画板 Maplet">
+{% end %}
+
+
+{% block zhuti %}
+<!--
+<div class="panel panel-default">
+    <div class="panel-heading">
+        所在位置： <a href="http://maplet.osgeo.cn/">Maplet</a> >
+        <a href="/list/user_recent">最近使用</a>
+    </div>
+</div>
+-->
+<div class="panel panel-black">
+
+    <div class="panel-heading">
+
+        我最近浏览的地图
+    </div>
+
+
+    <ul class="list-group">
+        {% module app_user_recent(user_name, 20) %}
+    </ul>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-md-6">
+                本文链接： <a href="http://www.maplet.org/list/user_recent">我最近浏览的地图</a>
+            </div>
+
+
+            <div class="col-md-6" style="text-align: right;">
+                <div class="widget_baidu_share">{% module baidu_share() %}</div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+{% end %}
+
+{% block right %}
+
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            应用分类
+        </h3>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+            {% module app_menu(40) %}
+        </ul>
+    </div>
+</div>
+
+{% end %}dd

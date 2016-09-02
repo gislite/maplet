@@ -1,0 +1,21 @@
+{% extends "tpl_ibook.html" %}
+{% block content %}
+
+<table  id="box" border="0" cellpadding="0" cellspacing="0"><tr>
+
+{% set ind = 0 %}
+{% for x in recs%}
+{% set ind = ind + 1 %}
+
+<td><img src="/static/ibook/img/none.gif"   data-img="{{ static_url('ishow/') + kwd['b_url'] + '/' + x.curt }}" width="300"/></td>
+
+    {% if (ind % 2) == 0 %}
+</tr><tr>
+{% end %}
+
+
+    {% end %}
+</tr></table>
+
+{% end %}
+

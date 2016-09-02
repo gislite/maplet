@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+<title>Maplet 云计算 在线计算 科学计算 工程计算</title>
+
+<script src="{{ static_url('jslib/codemirror-5.6/lib/codemirror.js') }}"></script>
+    <script src="{{ static_url('jslib/codemirror-5.6/addon/edit/continuelist.js') }}"></script>
+    <script src="{{ static_url('jslib/codemirror-5.6/mode/xml/xml.js') }}"></script>
+    <script src="{{ static_url('jslib/codemirror-5.6/mode/markdown/markdown.js') }}"></script>
+    <link rel="stylesheet" href="{{ static_url('jslib/codemirror-5.6/lib/codemirror.css') }}">
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var editor = CodeMirror.fromTextArea(document.getElementById("cnt_md"), {
+                 lineWrapping: true,
+                mode: 'markdown',
+                lineNumbers: true,
+                theme: "default",
+                extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
+            });
+        });
+    </script>
+
+
+    <style type="text/css">
+       .CodeMirror {
+           border-top: 1px solid #666; border-bottom: 1px solid #666;}
+      .cm-s-default .cm-trailing-space-a:before,
+      .cm-s-default .cm-trailing-space-b:before {position: absolute; content: "\00B7"; color: #777;}
+      .cm-s-default .cm-trailing-space-new-line:before {position: absolute; content: "\21B5"; color: #777;}
+    </style>
+
+<script type="text/javascript">
+    $().ready(function () {
+        // jquery.validate.js 验证
+        $("#form_post").validate(
+                {
+                    rules: {
+                        title: {
+                            required: true
+                        },
+                        cnt_md: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        title: {
+                            required: "<span class='red'>请输入标题</span>"
+
+                        },
+                        cnt_md: {
+                            required: "<span class='red'>请输入内容</span>"
+                        }
+                    }
+                }
+        );
+    });
+</script>
+
+{% end %}
+{% block base_body %}
+
+<div class="row">
+    <div class="col-md-9">
+        {% block zhuti %}{% end %}
+    </div>
+    <div class="col-md-3">
+        {% block right %} {% end %}
+    </div>
+</div>
+{% end %}
+
+

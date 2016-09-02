@@ -1,0 +1,15 @@
+<div class="pure-menu pure-menu-open pure-menu-horizontal topmenu">
+    <ul>
+        <li><a href="/">首页</a></li>
+
+        {% for list in kwd['parentlist'] %}
+        {% if kwd['parentid'] == list['catid'] %}
+        <li class="uuuu">
+            {% else %}
+        <li>
+            {% end %}
+            <a href="/list/{{ list['catid'] }}">{{ list['catname'] }}</a></li>
+        {% end %}
+
+    </ul>
+</div>

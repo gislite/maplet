@@ -1,0 +1,35 @@
+<div id="userInfo">
+
+<span class="red">
+{% raw userinfo.user_name %}
+</span>
+
+
+<span>
+{% if userinfo.is_credit == 1 %}
+已认证
+{% else %}
+未认证
+{% end %}
+</span>
+    <span>
+{% if userinfo.is_vip == 1 %}
+VIP用户
+{% else %}
+普通用户
+{% end %}
+    </span>
+
+
+    <span>发布次数:</span>
+    <span class="red">{{ uservip.publish_num }}</span>
+
+    <span>刷新次数:</span>
+    <span class="red">{{ uservip.refresh_num }}</span>
+
+    <span>推广次数:</span>
+    <span class="red">{{ uservip.tuiguang_num }}</span>
+    <span>预约次数:</span>
+    <span class="red">{{ uservip.yuyue_num }}</span>
+
+</div>

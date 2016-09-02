@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <meta name="keywords" content="">
+    <meta name="description" content="TorCMS后台管理">
+
+    <title>TorCMS后台管理</title>
+    <link rel="stylesheet" href="{{ static_url('css/pure-release-0.6.0/pure-min.css') }}">
+
+
+    <link rel="stylesheet" href="{{ static_url('tass/css/admin.css') }}">
+
+
+    <script type="text/javascript" src="{{ static_url('jslib/jquery-2.1.4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ static_url('jslib/validate/jquery.validate.min.js') }}"></script>
+    <script src="{{ static_url('jslib/jquery-ui/jquery-ui.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ static_url('jslib/jquery-ui/jquery-ui.min.css') }}">
+    {% block head %}
+    {% end %}
+</head>
+
+<body>
+
+<div style=" width:90%;margin: 0 auto;">
+    <div class="pure-g">
+        <div class="pure-u-1">
+            <h2>TorCMS后台管理系统</h2>
+        </div>
+        <div class="pure-u-1">
+
+            {% block zhuti %}{% end %}
+
+
+            <div id="foot" style="text-align: center; width:90%;margin: 0 auto;">
+                <hr class="hr5"/>
+                <div style="text-align: center;">{% module copyright() %}</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div>
+        {% block footinfo %}{% end %}
+    </div>
+</div>
+</body>
+</html>

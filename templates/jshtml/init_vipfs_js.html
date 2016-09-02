@@ -1,0 +1,298 @@
+<SCRIPT>
+    $(document).ready(function () {
+
+        $('#load_geojson').click(function () {
+            var hdata = $('#hdata').val();
+            var gson_arr = new Array();
+            var gdata = $.parseJSON(hdata)['features'];
+            $.each(gdata, function (i, item) {
+                gson_arr[i] = item;
+                // 用户登录的时候，逐个添加
+                if (login == 1) {
+                    var myGeoJson = L.geoJson(item);
+                    myGeoJson.addTo(drawnItems);
+                }
+            });
+            if (login == 0) {
+                L.geoJson(gson_arr).addTo(drawnItems);
+            }
+
+            $('#hdata').val('');
+
+            $('#infor').css('color', '#ff0');
+            $('#infor').text('已经加载GeoJson数据！');
+            setTimeout("$('#infor').text('');", 8000);
+
+        });
+
+        function onZoomend() {
+            var currentZoom = map.getZoom();
+            var cmap_coor = map.getCenter();
+            var link_str = 'http://www.maplet.org/map/' + map_uid + '?zoom=' + currentZoom
+                    + '&lat=' + cmap_coor.lat.toFixed(4) + '&lon=' + cmap_coor.lng.toFixed(4);
+            if (geojsonid != '') {
+                link_str = link_str + '&geojson=' + geojsonid;
+            }
+            $('#current_view_url').css('color', '');
+            $('#current_view_url').html(link_str);
+            $('#current_view_url').attr("href", link_str);
+        }
+
+
+        var cities = new L.LayerGroup();
+
+        var drawnItems = new L.FeatureGroup();
+
+        var wcs = "121.42.29.253";
+        var nexrad = L.tileLayer.wms("http://" + wcs + ":8765/service?", {
+            layers: 'maplet_' + map_uid,
+            format: 'image/png',
+            transparent: true,
+            attribution: "Maplet"
+        });
+
+
+        var osm = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYnVrdW4iLCJhIjoiY2lqeWFjZmo4MXFubndka2lzcnZ1M2tzciJ9.C1dZUQkRZSIEKfg-DaFYpw', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+            '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            id: 'mapbox.streets'
+        });
+
+        nexrad.addTo(cities);
+        osm.addTo(cities);
+
+        var map = L.map('map', {
+            center: [vlat, vlon],
+            zoom: vzoom_current,
+            maxZoom: vzoom_max,
+            minZoom: vzoom_min,
+            layers: [cities],
+            editable: true,
+            // 选项为 editable的,
+            editOptions: {featuresLayer: drawnItems}
+
+        });
+        // 此处为视图可见
+        map.addLayer(drawnItems);
+
+
+        var AjaxUrl = "/geojson/" + geojsonid;
+
+        // var tt = L.geoJson.geometrytolayer;
+
+        if (geojsonid != '') {
+            $.getJSON(AjaxUrl, function (gjson) {
+                var gson_arr = new Array();
+                $.each(gjson, function (i, item) {
+                    gson_arr[i] = item;
+                    // 用户登录的时候，逐个添加
+                    if (login == 1) {
+                        // var myGeoJson = L.geoJson(item);
+
+                        var myGeoJson = L.geoJson(item,
+                                {
+                                    onEachFeature: function (feature, layer) {
+                                        var input = L.DomUtil.create('input', 'my-input');
+                                        input.value = feature.properties.name;
+                                        L.DomEvent.addListener(input, 'click', function () {
+                                            feature.properties.name = input.value;
+
+                                        });
+                                        layer.bindPopup(input);
+                                    }
+                                }
+                        );
+///////////////////////////////////////////////////////////////////////
+                        myGeoJson.addTo(drawnItems);
+                    }
+                });
+                if (login == 0) {
+                    L.geoJson(gson_arr).addTo(drawnItems);
+                }
+            });
+        }
+//                        var myGeoJson = L.geoJson(item, {
+//                                    onEachFeature: function (feature, layer) {
+//                                        layer.on('click', function (e) {
+//                                            e.target.enableEdit();
+//                                        });
+//                                    }
+//                                }
+//                        );
+
+// 下面代码可以实现编辑属性的功能，但是会导致双击失效。
+//                        var myGeoJson = L.geoJson(item,
+//                                {
+//                                    onEachFeature: function (feature, layer) {
+//                                        var input = L.DomUtil.create('input', 'my-input');
+//                                        input.value = feature.properties.name;
+//                                        L.DomEvent.addListener(input, 'change', function () {
+//                                            feature.properties.name = input.value;
+//
+//                                        });
+//                                        layer.bindPopup(input);
+//                                    }
+//                                }
+//                        );
+
+
+        L.EditControl = L.Control.extend({
+
+            options: {
+                position: 'topleft',
+                callback: null,
+                kind: '',
+                html: ''
+            },
+
+            onAdd: function (map) {
+                var container = L.DomUtil.create('div', 'leaflet-control leaflet-bar'),
+                        link = L.DomUtil.create('a', '', container);
+
+                link.href = '#';
+                link.title = this.options.kind;
+                link.innerHTML = this.options.html;
+                L.DomEvent.on(link, 'click', L.DomEvent.stop)
+                        .on(link, 'click', function () {
+                            window.LAYER = this.options.callback.call(map.editTools);
+                            map.doubleClickZoom.disable();
+                            map.dragging.disable();
+                        }, this);
+
+                return container;
+            }
+        });
+
+
+        function show_saved_info() {
+            $('#infor').css('color', '#ff0');
+            $('#infor').text('用户数据已经成功保存！');
+            setTimeout("$('#infor').text('');", 8000);
+        }
+
+        function save_data() {
+            var shape = drawnItems.toGeoJSON();
+            map.doubleClickZoom.enable();
+            $.ajax({
+                type: 'POST',
+                url: '/geojson/' + map_uid + '/' + geojsonid,
+                data: {geojson: JSON.stringify(shape)},
+                dataType: 'html',
+                timeout: 400,
+                error: function () {
+
+                    alert('请登陆后进行数据编辑，或检查是否拥有数据权限！');
+                },
+                success: function (result) {
+                    var geo = $.parseJSON(result);
+
+                    if (geo['status'] == 0) {
+                        alert('请检查是否拥有数据权限！');
+                    }
+                    else {
+                        show_saved_info();
+                        if (geo['sig'] != '') {
+
+                            location.href = '/map/' + map_uid + '?gson=' + geo['sig'] + '&fullscreen=1'
+                        }
+                    }
+                }
+            });
+
+
+        }
+
+        L.EditSaveControl = L.EditControl.extend({
+
+            options: {
+                position: 'topleft',
+                callback: save_data,
+                kind: '保存编辑',
+                html: '<span class="glyphicon glyphicon-save"></span>'
+            }
+
+        });
+
+
+        L.NewLineControl = L.EditControl.extend({
+
+            options: {
+                position: 'topleft',
+                callback: map.editTools.startPolyline,
+                kind: '线',
+                html: '\\/\\'
+            }
+
+        });
+
+        L.NewPolygonControl = L.EditControl.extend({
+
+            options: {
+                position: 'topleft',
+                callback: map.editTools.startPolygon,
+                kind: '多边形',
+                html: '▰'
+            }
+
+        });
+
+        L.NewMarkerControl = L.EditControl.extend({
+
+            options: {
+                position: 'topleft',
+                callback: map.editTools.startMarker,
+                kind: '点标注',
+                html: '<span class="glyphicon glyphicon-map-marker"></span>'
+            }
+
+        });
+
+        L.NewRectangleControl = L.EditControl.extend({
+
+            options: {
+                position: 'topleft',
+                callback: map.editTools.startRectangle,
+                kind: '矩形',
+                html: '⬛'
+            }
+
+        });
+
+        L.NewCircleControl = L.EditControl.extend({
+
+            options: {
+                position: 'topleft',
+                callback: map.editTools.startCircle,
+                kind: 'circle',
+                html: '⬤'
+            }
+
+        });
+
+
+        map.addControl(new L.EditSaveControl());
+//        map.addControl(new L.NewMarkerControl());
+//        map.addControl(new L.NewLineControl());
+//        map.addControl(new L.NewPolygonControl());
+//        map.addControl(new L.NewRectangleControl());
+//        // map.addControl(new L.NewCircleControl());
+
+
+        map.on('zoomend', onZoomend);
+        map.on('moveend', onZoomend);
+
+
+
+        var baseMaps = {
+            "osm": osm,
+        };
+        var overlayMaps = {
+            "专题地图": nexrad
+        };
+        L.control.layers(baseMaps, overlayMaps).addTo(map);
+    })
+</script>
+
+

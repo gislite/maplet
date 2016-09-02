@@ -1,0 +1,205 @@
+{% extends "../../theme/base.html" %}
+
+{% block head %}
+
+
+<title>用户信息 | 地图画板 | Maplet 云计算 在线计算 科学计算 工程计算</title>
+
+<meta name="description"
+      content="由科学家与工程师维护的，专注在线计算、云计算应用的网站，提供科学计算与工程计算应用,包括环境影响评价计算,地理学计算,数学计算,物理计算,化学计算">
+<meta name="keywords"
+      content="计算,在线计算器,云计算,在线计算,常用数据,常规数据,科学计算,工程计算,环评计算,地理计算,数学计算,物理计算,化学计算,数学公式,物理公式,建筑计算">
+
+
+<script type="text/javascript" src="{{ static_url('jslib/colorbox-master/jquery.colorbox-min.js') }}"></script>
+
+
+<script type="text/javascript">
+
+
+    // 提交修改密码的动作
+    function js_update_pass() {
+        // 模拟Form提交
+        $.ajax({
+            type: "POST",
+            url: "/user/changepass",
+            data: "rawpass=" + $("#rawpass").val()
+                    + "&user_pass=" + $("#user_pass").val(),
+
+            success: function (msg) {
+                alert('已经成功修改了密码！请重新登陆！');
+                location.href = '/user/info';
+            },
+            error: function () {
+                alert('更新密码失败！');
+            }
+        })
+    }
+
+
+    $(document).ready(function () {
+        // jquery.validate.js 验证
+        $("#pwdform").validate(
+                {
+                    rules: {
+                        rawpass: "required",
+                        user_pass: {
+                            required: true,
+                            rangelength: [6, 20]
+                        },
+                        user_pass2: {
+                            required: true,
+                            equalTo: "#user_pass"
+                        }
+
+                    },
+                    messages: {
+                        rawpass: "<span class='red'>请输入用户名</span>",
+                        user_pass: {
+                            required: "<span class='red'>请输入密码</span>",
+                            rangelength: "<span class='red'>密码最少为6位，最长为20位</span>"
+                        },
+                        user_pass2: {
+                            required: "<span class='red'>请输入密码</span>",
+                            equalTo: "<span class='red'>两次输入密码不一致</span>"
+                        }
+
+                    }
+                }
+        );
+
+
+        $('#login_submit').click(function () {
+            if ($("#pwdform").valid()) {
+                // do some stuff
+                js_update_pass();
+            }
+            else {
+                // just show validation errors, dont post
+            }
+        });
+        $(".inline").colorbox({inline: true, width: "50%"});
+    });
+</script>
+<script type="text/javascript">
+    $().ready(function () {
+        $("#form_changepass").validate(
+                {
+                    rules: {
+                        user_name: {
+                            required: true
+
+                        },
+                        user_pass: {
+                            required: true,
+                            rangelength: [6, 20]
+                        },
+                        user_pass2: {
+                            required: true,
+                            equalTo: "#user_pass"
+                        }
+
+                    },
+                    messages: {
+                        user_name: {
+                            required: "<span class='red'>请输入用户名</span>"
+
+                        },
+
+                        user_pass: {
+                            required: "<span class='red'>请输入密码</span>",
+                            rangelength: "<span class='red'>密码最少为6位，最长为20位</span>"
+                        },
+                        user_pass2: {
+                            required: "<span class='red'>请输入密码确认密码</span>",
+                            equalTo: "<span class='red'>两次输入密码不一致</span>"
+                        }
+
+                    }
+                }
+        );
+    });
+</script>
+
+{% end %}
+
+
+{% block zhuti %}
+<!--
+<div class="panel panel-info">
+    <div class="panel-heading">
+
+    </div>
+</div>
+-->
+
+
+<div class="panel panel-black">
+   <div class="panel-heading">
+    <h1>修改密码</h1>
+    </div>
+    <div class="panel-body">
+    <form class="form-horizontal" action="/user/changepass" method="post" id="form_changepass">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="user_name">用户名</label>
+
+            <div class="col-sm-4">
+                <input type="text" name="user_name" id="user_name" class="form-control" value="{{ user_info.user_name }}" readonly>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="rawpass">原密码</label>
+
+            <div class="col-sm-4">
+                <input type="password" name="rawpass" id="rawpass" class="form-control" placeholder="请输入原密码">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="user_pass">新密码</label>
+
+            <div class="col-sm-4">
+                <input type="password" name="user_pass" id="user_pass" class="form-control" placeholder="请输入新密码">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="user_pass2">确认密码</label>
+
+            <div class="col-sm-4">
+                <input type="password" name="user_pass2" id="user_pass2" class="form-control" placeholder="请输入确认密码">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary">修改</button>
+                <a href="/user/logout" class="btn btn-primary">注销</a>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+
+
+{% end %}
+
+{% block right %}
+
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+           应用分类
+        </h3>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+            {% module app_menu(40) %}
+        </ul>
+    </div>
+</div>
+
+{% end %}

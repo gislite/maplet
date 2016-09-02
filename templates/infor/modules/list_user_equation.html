@@ -1,0 +1,15 @@
+
+{% for rec in recs %}
+<li  class="list-group-item">
+    <a href="/map/{{ rec.signature.uid }}">
+        <span class="glyphicon glyphicon-map-marker"></span>
+        {{ rec.signature.title }}
+        {% if rec.signature.uid[0] == 'v' %}<span class="badge" style="color:yellow">v</span>{% end %}
+
+    </a>
+    <span style="font-size: small; color: #5e5e5e"> ({{ rec.count }})</span>
+    {% if kwd['with_tag'] == True %}
+    <span class="app_tag"> {% module app_tags(rec.signature.uid) %}</span>
+    {% end %}
+</li>
+{% end %}

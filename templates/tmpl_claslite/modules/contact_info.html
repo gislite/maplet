@@ -1,0 +1,35 @@
+<div class="panel-body" style="line-height: 32px">
+    <div class="row">
+        <div class="col-sm-12">
+
+            {% raw post_info.extinfo['ext_contributor'][0] %}
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-3">
+            关键词
+        </div>
+        <div class="col-sm-9">
+            {% raw post_info.keywords %}
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col-sm-3">
+            信息来源
+        </div>
+        <div class="col-sm-9">
+            {{ kwd['maskip'] }}
+            <!--
+            <span style="margin-left:10px; font-size:12px; color:green">吉林省长春市电信
+            -->
+
+        </div>
+    </div>
+
+</div>

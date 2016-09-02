@@ -1,0 +1,173 @@
+{% extends "tpl_basic.html" %}
+
+{% block headinfo %}
+
+<script type="text/javascript">
+    var obj = {};
+    function change(span) {
+        $('span[name="' + $(span).attr('name') + '"]').each(function () {
+            if (this.checked && this != span) {
+                this.className = "label label-default";
+                this.checked = false;
+            }
+        });
+        obj[$(span).attr('name')] = $(span).attr('value');
+        span.className = "label label-primary";
+        span.checked = true;
+
+        tt = span.value;
+        select();
+    }
+    function select() {
+
+        // 选择之后，将条件放到 url 中，
+        var html_condition = window.location.href + '/con';
+        var html_pagination = window.location.href + '/num';
+        for (var ii in obj) {
+            if (obj[ii] != '') {
+                html_condition += '/' + ii + '/' + obj[ii];
+                html_pagination += '/' + ii + '/' + obj[ii];
+            }
+        }
+
+        $('#resultSpan').load(html_condition);
+        $('#resultFenye').load(html_pagination);
+    }
+
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        select();
+    });
+</script>
+
+<script type="text/javascript">
+    function keyword_del(key_name, id_num) {
+
+        id_num = id_num.toString();
+
+        var AjaxUrl = "/info_tag/remove/" + key_name;
+
+        $.getJSON(AjaxUrl, function (Json) {
+
+            $("#del_key_" + id_num).html('');
+
+            select();
+        });
+    }
+</script>
+
+
+{% end %}
+
+{% block typebody %}
+
+<div class="row">
+
+
+    <div class="col-sm-8">
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-5">
+                        {% module BreadCrumb(kwd['daohangstr']) %}
+                    </div>
+                    <div class="col-sm-4">此分类共有 ( <span class="red">{{ widget_info['rec_num'] }}</span> ) 条记录</div>
+
+
+                    <div class="col-sm-3">
+                        <a href="/publish/{{ widget_info['parentid'] }}" class="btn btn-primary btn-small"
+                           role="button">发布{{ widget_info['catname'] }}数据</a></div>
+                </div>
+
+            </div>
+
+
+            <div class="panel-body">
+
+
+                <div class="clearfix"></div>
+                {% block infonav %} {% end %}
+                <div class="clearfix"></div>
+
+                <div id="ad_interlistad_top"></div>
+
+                {% block infolist %} {% end %}
+
+                <div id="ad_interlistad_bottom"></div>
+
+                <div class="clear"></div>
+
+                <div class="iga_pagination">
+
+
+                    <span id="resultFenye"></span>
+                </div>
+                <div class="clear"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="panel panel-info">
+
+            <div class="panel-heading">
+                检索
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">
+
+
+                    <div class="alert alert-warning">关键词过滤：
+                        {% set ii = 0 %}
+
+                        {% for x in condition_arr %}
+                        <span id="del_key_{{ ii }}">
+                            <a href="/info_tag/{{ x }}">{{ x }}</a>
+                            <a onclick="keyword_del('{{ x }}', {{ ii }} );">
+                                <span class="glyphicon glyphicon-remove" style="color: red;"></span></a>
+                        </span>
+                        {% set ii = ii + 1 %}
+                        {% end %}
+                    </div>
+
+
+                </li>
+                {% block infoselect %} {% end %}
+            </ul>
+        </div>
+        <div class="panel panel-info">
+
+            <div class="panel-heading">
+                数据类型
+            </div>
+
+            <ul class="list-group">
+                <li class="list-group-item"><a href="/list/0100">遥感</a></li>
+                <li class="list-group-item"><a href="/list/0200">GIS</a></li>
+                <li class="list-group-item"><a href="/list/0300">文档数据</a></li>
+                <li class="list-group-item"><a href="/list/0400">多媒体</a></li>
+                <li class="list-group-item"><a href="/list/0500">格式化数据</a></li>
+            </ul>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                最近文档
+            </div>
+            <ul class="list-group">
+                {% module post_recent(8) %}
+            </ul>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% end %}

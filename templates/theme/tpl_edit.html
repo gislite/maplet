@@ -1,0 +1,254 @@
+{% extends "tpl_basic.html" %}
+
+{% block headinfo %}
+
+
+<script type="text/javascript">
+
+    jQuery.validator.addMethod("isMobile", function (value, element) {
+        var length = value.length;
+        var mobile = /^(((13[0-9]{1})|(15[0-9]{1}))+\d{8})$/;
+        return this.optional(element) || (length == 11 && mobile.test(value));
+    }, "请正确填写您的手机号码");
+
+    jQuery.validator.addMethod("isphone", function (value, element) {
+        var length = value.length;
+        var phone = /(^(\d{3,4}-)?\d{6,8}$)|(^(\d{3,4}-)?\d{6,8}(-\d{1,5})?$)|(\d{11})/;
+        return this.optional(element) || (phone.test(value));
+    }, "请填写正确的电话号码");
+
+    $().ready(function () {
+        $("#form_add_info").validate();
+    });
+
+    function chuli_kw() {
+        $.ajaxSetup({cache: false});
+        var myVAriable = $("#keywords")[0].value;
+        var stringArray = myVAriable.split(",");
+        var out_str = '<span class="btn btn-warning btn-xs">';
+        out_str += stringArray.join('</span> <span class="btn btn-warning btn-xs">');
+        out_str += '</span';
+        $('#kwlist').html(out_str);
+
+    }
+
+</script>
+
+
+{% end %}
+
+
+{% block typebody %}
+
+<div id="main">
+
+
+<div class="clearfix"></div>
+
+
+<div>
+
+
+<div class="row">
+<div class="col-sm-9">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {% module BreadcrumbPublish(2) %}
+    </div>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2>修改-{{ post_info.infor['title'][0] }}</h2>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" role="form" id="form_add_info" name="form_add_info" method="post"
+              enctype="multipart/form-data">
+
+
+            <input type='hidden' name="catid" value="{% raw kwd['catid'] %}"/>
+
+            <input type='hidden' name="parentid" value="{% raw kwd['parentid'] %}"/>
+            <input type="hidden" name="userip" value="{{ post_info.infor['userip'][0] }}"/>
+
+            <input name="action" value="dopost" type="hidden">
+            <input name="ismember" value="0" type="hidden">
+
+            <input name="id" value="" type="hidden">
+            <input name="mixcode" value="4c9734774f6b40682d35c0ccee0b0845" type="hidden">
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">基本数据</label>
+
+                <div class="col-sm-10">
+                    {{ kwd['parentname'] }} > {{ kwd['catname'] }}
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="title"><font color=red>*</font>数据标题：</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="title" id="title"
+                           value="{{ post_info.infor['title'][0] }}"/>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="title2"><font
+                        color=red>*</font>数据内容(请详细说明)：</label>
+
+                <div class="col-sm-10" id="title2">
+
+
+                    <textarea id="contentx" class="form-control" name="content">
+                        {{ post_info.infor['content'][0] }}
+                    </textarea>
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="keywords">
+                    <span class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></span>
+                    关键词(英文分号分割)：</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="keywords" id="keywords"
+                           onkeyup="chuli_kw();" value="{{ ','.join(post_info.infor['keywords']) }}"/>
+                </div>
+
+                        <label class="col-sm-2 control-label" for="keywords">
+                        </label>
+
+                        <div class="col-sm-10">
+                            <span id="kwlist"></span>
+                        </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="statement">
+                    <span class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></span>
+                    数据引用方式及声明：</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="statement" id="statement"
+                           value="{{ post_info.infor['statement'][0] }}">
+                </div>
+            </div>
+
+            <hr/>
+
+            {% block extrainfo %}{% end %}
+
+            <hr/>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    <span class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"
+                          for="mymps_img"></span>
+                    图片</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="mymps_img" name="mymps_img"
+                           value="{{ post_info.infor['mymps_img'][0] }}">
+                    <input type="text" class="form-control" id="mymps_img" name="mymps_img"
+                           value="{{ post_info.infor['mymps_img'][1] }}">
+                    <input type="text" class="form-control" id="mymps_img" name="mymps_img"
+                           value="{{ post_info.infor['mymps_img'][2] }}">
+                    <input type="text" class="form-control" id="mymps_img" name="mymps_img"
+                           value="{{ post_info.infor['mymps_img'][3] }}">
+                </div>
+
+                <div class="col-sm-2">
+
+                </div>
+                <div class="col-sm-4">
+                    <a href="/entry/add" target="_blank" class="btn btn-primary" role="button">上传图片</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="baidumap1">
+                    <span class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></span>
+                    地图位置(点击图标，获取位置)
+                </label>
+
+                <div class="col-sm-10" id="baidumap1">
+                    <textarea id="baidumap" name="baidumap" class="form-control" readonly="readonly">
+                    </textarea>
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="title">
+                    <span class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></span>
+                    贡献者：
+                </label>
+
+                <div class="col-sm-10">
+                    <textarea class="form-control" name="contributor" id="contributor" rows="4">
+                        {{ post_info.infor['contributor'][0] }}
+                    </textarea>
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="contact_who">
+                                    <span class="glyphicon glyphicon-star"
+                                          style="color: red;font-size: xx-small;"></span>
+                    联系人：</label>
+
+                <div class="col-sm-10">
+                    <textarea class="form-control" name="contact_who" id="contact_who" rows="6">
+                        {{ post_info.infor['contact_who'][0] }}
+                    </textarea>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="Button1"></label>
+
+                <div class="col-sm-10">
+                    <input type="submit" name="post_submit" value="提交更改" id="Button1"
+                           class="btn btn-primary"/>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+    <div class="panel-footer">
+        带<span class="red">*</span>为必填项
+    </div>
+</div>
+</div>
+<div class="col-sm-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+           发布信息注意事项
+        </div>
+        <div class="panel-body">
+            您的IP是：<span style="color:red">{{ post_info.infor['userip'][0] }}</span>，请不要发布虚假信息、重复信息
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
+
+
+</div>
+
+{% end %}

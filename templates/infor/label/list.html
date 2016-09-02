@@ -1,0 +1,68 @@
+{% extends "../../theme/base.html" %}
+
+{% block head %}
+<title>在线地图按标签列出</title>
+<meta name="keywords" content="在线地图,历史地图">
+<meta name="description" content="在线地图,历史地图,按标签列出的在线地图">
+{% end %}
+
+{% block zhuti %}
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h1>查找结果</h1>
+    </div>
+    <ul class="list-group">
+        {% for rec in infos %}
+        <li class="list-group-item"><a href="/map/{{ rec.uid }}">{{ rec.title }}</a>
+            <span class="app_tag">        {% module app_tags(rec.uid) %}</span>
+        </li>
+        {% end %}
+    </ul>
+    <div class="panel-footer">
+        <div class="pure-menu pure-menu-open pure-menu-horizontal">
+            <ul class="pager_nav">
+                {% raw pager %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% end %}
+
+{% block right %}
+
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            最近使用
+        </h3>
+    </div>
+
+    <ul class="list-group">
+        {% if userinfo is None %}
+        {% module app_recent_used(6) %}
+        {% else %}
+        {% module app_user_recent(userinfo.user_name, 6) %}
+        {% end %}
+    </ul>
+</div>
+
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            使用最多
+        </h3>
+    </div>
+
+    <ul class="list-group">
+        {% if userinfo is None %}
+        {% module app_most_used(6) %}
+        {% else %}
+        {% module app_user_most(userinfo.user_name, 6) %}
+        {% end %}
+    </ul>
+</div>
+{% end %}

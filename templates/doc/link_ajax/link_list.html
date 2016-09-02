@@ -1,0 +1,181 @@
+<script type="text/javascript">
+    $().ready(function () {
+        $("#form_add").validate(
+                {
+                    rules: {
+                        name: {
+                            required: true,
+                            rangelength: [2, 16]
+                        },
+
+                        link: {
+                            required: true,
+                            rangelength: [2, 100]
+                        },
+
+                        order: {
+                            required: true,
+                            number: true
+                        }
+
+                    },
+                    messages: {
+                        name: {
+
+                            required: "<span class='red'>请输入名称</span>",
+                            rangelength: "<span class='red'>名称最少2位，最长16位</span>"
+
+
+                        },
+
+                        link: {
+                            required: "<span class='red'>请输入链接地址</span>",
+                            rangelength: "<span class='red'>链接地址最少2位，最长100位</span>"
+                        },
+                        order: {
+                            required: "<span class='red'>请输入排序</span>",
+                            number: "<span class='red'>排序必须为数字</span>"
+                        }
+                    }
+                }
+        );
+    });
+</script>
+
+<script>
+    function add_info() {
+
+        var name = $("#name").val();
+        var link = $("#link").val();
+        var order = $("#order").val();
+
+
+        $.post("/link/p/add_link", {name: name, link: link, order: order}, function (result) {
+
+        });
+
+        $("#addinfo").html("添加成功");
+    }
+
+
+    function link_del(reply_id, id_num) {
+
+        id_num = id_num.toString();
+
+
+        var AjaxUrl = "/link/p/delete/" + reply_id;
+
+
+        $.getJSON(AjaxUrl, function (Json) {
+
+            $("#del_link_" + id_num).html('');
+
+
+        });
+
+    }
+    function update_link(update_id, id_num) {
+        id_num = id_num.toString();
+
+        var name1 = $("#name_" + id_num).val();
+        var link1 = $("#link_" + id_num).val();
+        var order1 = $("#order_" + id_num).val();
+
+
+        $.post("/link/p/modify/" + update_id, {
+            name: name1,
+            link: link1,
+            order: order1
+        }, function (result) {
+            alert("更新成功");
+            $("#del_link").html('');
+
+        });
+
+
+    }
+</script>
+<div class="main">
+    <div class="title">
+        <span>友情链接</span>
+    </div>
+
+    <div class="content" id="addinfo">
+
+
+        <form class="pure-form pure-form-stacked" id="form_add">
+
+
+            <table class="pure-table pure-table-horizontal">
+
+                <thead>
+                <tr>
+
+                    <td>名称</td>
+                    <td>链接地址</td>
+                    <td>排序</td>
+                    <td>操作</td>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr >
+                    <td><input id="name" type="text" name="name"></td>
+
+                    <td><input id="link" name="link" type="text"></td>
+
+                    <td><input id="order" name="order" type="text"/></td>
+
+
+                    <td>
+                        <button onclick="add_info();" class="pure-button pure-button-primary">添加</button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </form>
+        <br>
+        {% set ii = 0 %}
+        <table class="pure-table pure-table-horizontal">
+            <thead>
+            <tr>
+
+                <td>uid</td>
+                <td>名称</td>
+                <td>链接地址</td>
+                <td>排序</td>
+                <td>操作</td>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for x in view %}
+            <tr id="del_link_{{ ii }}">
+                <form method="post" action="/link/modify/{{x.uid}}" class="pure-form pure-form-stacked" id="form_post">
+
+
+                    <td>{{ x.uid }}</td>
+                    <td><input id="name_{{ ii }}" type="text" name="name" value="{{ x.name }}"></td>
+                    <td><input id="link_{{ ii }}" type="text" name="link" value="{{ x.link }}"></td>
+                    <td><input id="order_{{ ii }}" type="text" name="order" value="{{ x.order }}"></td>
+                    <td>
+                        <button onclick="update_link('{{ x.uid }}', {{ ii }} );"
+                                class="pure-button pure-button-primary">更新
+                        </button>
+                        <a onclick="link_del('{{ x.uid }}', {{ ii }} );"
+                           class="pure-button pure-button-primary">删除</a></td>
+                </form>
+            </tr>
+            {% set ii = ii + 1 %}
+            {% end %}
+
+
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+

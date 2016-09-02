@@ -1,0 +1,84 @@
+{% extends "../theme/admin.html" %}
+{% block head %}
+<script type="text/javascript">
+    function js_show_page(url_str) {
+        $('#showCnt').load(url_str);
+
+
+    }
+
+    jQuery().ready(function () {
+        $("#user_navigation").accordion();
+        js_show_page('/user/p/info');
+    });
+</script>
+
+
+{% end %}
+
+{% block zhuti %}
+
+
+<div class="pure-g">
+
+    <div class="pure-u-1-6">
+
+        <div id="user_navigation">
+            <h3>用户信息</h3>
+            <ul>
+                <li><a onclick="js_show_page('/user/p/info')">会员状态</a></li>
+
+                <li><a onclick="js_show_page('/user/p/changepass')">修改密码</a></li>
+                <li><a onclick="js_show_page('/user/p/changeinfo')">修改个人信息</a></li>
+                {% if user_info is not None and user_info.privilege[4] == '1' %}
+                <li><a onclick="js_show_page('/user/p/find')">查看所有用户</a></li>
+                {% end %}
+
+                <li><a href="/user/p/logout">注销</a></li>
+
+            </ul>
+            <h3><a class="head">分类管理</a></h3>
+            <ul>
+
+                <li><a onclick="js_show_page('/maintain/p/category/list')">所有分类</a></li>
+
+            </ul>
+
+            <h3><a class="head">信息管理</a></h3>
+            <ul>
+                <li><a onclick="js_show_page('/post/p/add_document')">添加信息</a></li>
+                <li><a onclick="js_show_page('/post/p/recent')">所有信息</a></li>
+
+            </ul>
+
+
+            <h3><a class="head">链接管理</a></h3>
+            <ul>
+                <li><a onclick="js_show_page('/link/p/list')">所有管理</a></li>
+
+            </ul>
+            <!--
+                       <h3><a class="head">客服中心</a></h3>
+                       <ul>
+                          <li><a onclick="select('/link/add')" >添加图片广告</a></li>
+                           <li><a onclick="js_show_page('/user/p_rengong')">联系人工服务</a></li>
+                           <li><a onclick="js_show_page('/user/p_tousu')">投诉中心</a></li>
+                           <li><a onclick="js_show_page('/user/p_help')">帮助中心</a></li>
+                           <li><a onclick="js_show_page('/user/p_coupon')">我发布的优惠</a></li>
+                       </ul>
+           -->
+        </div>
+
+    </div>
+
+    <div class="pure-u-5-6">
+
+
+        <span id="showCnt"></span>
+
+
+    </div>
+
+</div>
+
+{% end %}

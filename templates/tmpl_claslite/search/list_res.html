@@ -1,0 +1,111 @@
+{% extends "../../theme/tpl_basic.html" %}
+{% block header %}
+<h1>{{ header_text }}</h1>
+{% end %}
+
+
+{% block typebody %}
+
+
+<div class="infoselect">
+    <div class="bd bgnone">
+        <div class="bd1">
+            <div class="schpart">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-7">
+        <span class="catname">{{ kwd['catname'] }}</span>
+        <span class="totalnum">分类下共有信息{{ kwd['rec_num'] }}条。</span>
+        <span class="incollect">亲，信息置顶可使信息效果更好哟</span>
+    </div>
+    <div class="col-sm-5">
+        <span class="postinfo"><a href="/publish/{{ kwd['parentid'] }}" target="_blank" class="btn btn-primary" role="button">免费发布</a></span>
+        <span class="postinfo"><a href="" target="_blank"  class="btn btn-primary" role="button">循环推广</a></span>
+        <span class="postinfo"><a href="" target="_blank"  class="btn btn-primary" role="button">置顶信息</a></span>
+    </div>
+</div>
+
+
+<div class="pure-g">
+
+
+    <div class="pure-u-19-24" style="font-size: 16px">
+
+        <div class="list_house">
+            <ul>
+
+
+                {% for post_info in info_list %}
+                <div class="iga_hover">
+                    <div class="pure-g">
+                        <div class="pure-u-1-4">
+
+                            <div class="left">
+                                <a href="/view/{{ post_info['def_uid'] }}">
+                                    <img src="{{ static_url(kwd['imgname'] ) }}" align="absmiddle"
+                                         style="width: 150px;height:100px;overflow: hidden;"/></a>
+                            </div>
+                        </div>
+                        <div class="pure-u-1-2">
+                            <div class="mid">
+                                <div class="listinfo_title">
+                                    <a href="/info/{{ post_info['def_uid'] }}">
+                                        {{ post_info['title'][0] }}
+                                    </a>
+                                </div>
+
+                                <div class="listinfo_content">
+                                    <a href="/info/{{ post_info['def_uid'] }}">
+                                        <nobr> {% raw post_info['content'][0] %}</nobr>
+                                    </a>
+                                </div>
+                                <div class="listinfo_time">
+                                    发布时间: {{ post_info['def_update_time_str'] }}
+                                </div>
+                                <div class="listinfo_extra">
+                            <span> <span
+                                    class="iga_pd_val">    {% if post_info['extra_zuoxiang'][0] == "1" %} 南向 {% end %}{% if post_info['extra_zuoxiang'][0] == "2" %} 北向 {% end %}{% if post_info['extra_zuoxiang'][0] == "3" %} 西向 {% end %}{% if post_info['extra_zuoxiang'][0] == "4" %} 东向 {% end %}{% if post_info['extra_zuoxiang'][0] == "5" %} 东南向 {% end %}{% if post_info['extra_zuoxiang'][0] == "6" %} 南北向 {% end %}</span><span
+                                    class="iga_pd_val">     {% if post_info["extra_jushi"][0] == "1" %} 独居室 {% end %}  {% if post_info["extra_jushi"][0] == "2" %} 两室一厅 {% end %}  {% if post_info["extra_jushi"][0] == "3" %} 三室一厅 {% end %}  {% if post_info["extra_jushi"][0] == "4" %} 三室二厅 {% end %}  {% if post_info["extra_jushi"][0] == "5" %} 四室二厅 {% end %}  {% if post_info["extra_jushi"][0] == "6" %} 别墅 {% end %} </span><span
+                                    class="iga_pd_val">     {% if post_info["extra_louceng"][0] == "1" %} 一层 {% end %}  {% if post_info["extra_louceng"][0] == "2" %} 二层 {% end %}  {% if post_info["extra_louceng"][0] == "3" %} 三层 {% end %}  {% if post_info["extra_louceng"][0] == "4" %} 三层-7层 {% end %}  {% if post_info["extra_louceng"][0] == "5" %} 七层以上 {% end %}  {% if post_info["extra_louceng"][0] == "6" %} 其他 {% end %} </span><span
+                                    class="iga_pd_val">     {% if post_info["extra_fangling"][0] == "1" %} 3年以下 {% end %}  {% if post_info["extra_fangling"][0] == "2" %} 3-6年 {% end %}  {% if post_info["extra_fangling"][0] == "3" %} 6-10年 {% end %}  {% if post_info["extra_fangling"][0] == "4" %} 10年以上 {% end %} </span><span
+                                    class="iga_pd_val">     {% if post_info["extra_fangwuleixing"][0] == "1" %} 写字楼 {% end %}  {% if post_info["extra_fangwuleixing"][0] == "2" %} 公寓 {% end %}  {% if post_info["extra_fangwuleixing"][0] == "3" %} 小区 {% end %}  {% if post_info["extra_fangwuleixing"][0] == "4" %} 平房 {% end %}  {% if post_info["extra_fangwuleixing"][0] == "5" %} 别墅 {% end %}  {% if post_info["extra_fangwuleixing"][0] == "6" %} 地下室 {% end %} </span></span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="pure-u-1-4">
+                            <div class="right">
+
+                            </div>
+                            <div class="right">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% end %}
+
+            </ul>
+
+            <div>{% raw kwd['pager'] %}</div>
+        </div>
+    </div>
+    <div class="pure-u-5-24">
+
+        <div style="margin:2px 2px 2px 2px;">
+            {% raw kwd['linkstr'] %}
+        </div>
+    </div>
+</div>
+
+{% end %}
+{% block footer %}
+<p>{{ footer_text }}</p>
+{% end %}

@@ -1,0 +1,170 @@
+{% extends "tpl_basic.html" %}
+{% block headinfo %}
+<script type="text/javascript" src="{{ static_url('lunbo/js/jquery.js') }}"></script>
+
+<!-- CSS STYLE -->
+<link rel="stylesheet" type="text/css" href="{{ static_url('lunbo/css/style.css') }}" media="screen"/>
+
+<!-- jQuery Paradigm Slider  -->
+
+<script type="text/javascript" src="{{ static_url('lunbo/js/jquery.cssAnimate.mini.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('lunbo/js/jquery.waitforimages.js') }}"></script>
+
+<script type="text/javascript" src="{{ static_url('lunbo/js/jquery.themepunch.paradigm.js') }}"></script>
+
+<link rel="stylesheet" type="text/css" href="{{ static_url('lunbo/css/settings.css') }}" media="screen"/>
+
+
+{% end %}
+
+{% block typebody %}
+
+
+<div class="row">
+
+
+    <div class="col-sm-9">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {% module BreadCrumb(kwd['daohangstr']) %}
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading" style="text-align: center">
+
+
+                <p style="font-size:28px; line-height: 38px; padding-bottom: 10px">
+                    {{ post_info.title }}
+                </p>
+
+                <p>
+                    该信息 浏览： {% raw post_info.view_count %} 次
+                    <span><a onclick="js_show_page('/user/shoucang/{{ post_info.uid }}')">收藏</a></span>
+                    &nbsp;&nbsp;
+                    <a href="/edit/{% raw post_info.uid %}" class="btn btn-sm btn-primary">修改</a>
+                    <a href="/delete/{% raw post_info.uid %}" class="btn btn-sm btn-primary">删除</a>
+                </p>
+
+                <p>{% for x in post_info.keywords %}
+                    <a href="/info_tag/{{ x }}" class="btn btn-primary btn-xs">{{ x }}</a>
+                    {% end %}
+                </p>
+
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <!-- 根据有没有图，分成两部分显示 -->
+                    <!-- 下面代码有重复部分，但为清晰起见，都保留。 -->
+                    {% if kwd['has_image'] == 1 %}
+                    <div class="col-sm-5">
+                        {% module ImgSlide(post_info) %}
+
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="{% if post_info.extinfo['def_zhiding'] == 1 %}
+                            zhiding
+                            {% end %}
+                            {% if post_info.extinfo['def_tuiguang'] == 1 %}
+                            tuijian
+                            {% end %}">
+                            {% block extrainfo %} {% end %}
+                            {% module ContactInfo(post_info) %}
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="col-sm-6">
+
+                        {% block extrainfo %} {% end %}
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div >
+                            {% module ContactInfo(post_info) %}
+                        </div>
+                    </div>
+                    {% end %}
+
+                </div>
+
+                <Br><br>
+
+                <div class="panel-default">
+                    <div class="panel-heading">
+                        数据详情
+                    </div>
+
+                    <div class="panel-body" style="line-height: 32px">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                {% raw post_info.extinfo['ext_contact'][0] %}
+                            </div>
+                        </div>
+                        {{ post_info.cnt_html }}
+                    </div>
+                </div>
+                <div class="panel-default">
+                    <div class="panel-heading">
+                        图片资料
+                    </div>
+                    <div class="panel-body">
+                        <div class="iga_infoaddiv" style="text-align: left;width:98%;margin:1px auto;">
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="panel-default">
+                    <div class="panel-heading">
+                        地图位置
+                    </div>
+                    <div class="panel-body">
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="panel-footer">
+                <span id="showCnt"></span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-sm-3">
+        <div class="panel panel-info">
+
+            <div class="panel-heading">
+                数据类型
+            </div>
+
+            <ul class="list-group">
+                <li class="list-group-item"><a href="/list/0100">遥感</a></li>
+                <li class="list-group-item"><a href="/list/0200">GIS</a></li>
+                <li class="list-group-item"><a href="/list/0300">文档数据</a></li>
+                <li class="list-group-item"><a href="/list/0400">多媒体</a></li>
+                <li class="list-group-item"><a href="/list/0500">格式化数据</a></li>
+            </ul>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                最近文档
+            </div>
+            <ul class="list-group">
+                {% module post_recent(8) %}
+            </ul>
+
+
+        </div>
+
+    </div>
+</div>
+
+{% end %}
+
+

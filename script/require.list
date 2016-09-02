@@ -1,0 +1,9 @@
+beautifulsoup4
+docutils
+markdown2
+peewee
+Pillow
+PyMySQL3
+tornado
+WTForms
+wtforms-tornado

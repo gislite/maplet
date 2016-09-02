@@ -1,0 +1,90 @@
+<script type="text/javascript">
+    $().ready(function () {
+        $("#form_changepass").validate(
+                {
+                    rules: {
+                        user_name: {
+                            required: true
+
+                        },
+                        user_pass: {
+                            required: true,
+                            rangelength: [6, 20]
+                        },
+                        user_pass2: {
+                            required: true,
+                            equalTo: "#user_pass"
+                        }
+
+                    },
+                    messages: {
+
+
+                        user_pass: {
+                            required: "<span class='red'>请输入密码</span>",
+                            rangelength: "<span class='red'>密码最少为6位，最长为20位</span>"
+                        },
+                        user_pass2: {
+                            required: "<span class='red'>请输入密码确认密码</span>",
+                            equalTo: "<span class='red'>两次输入密码不一致</span>"
+                        }
+
+                    }
+                }
+        );
+    });
+</script>
+<script>
+    function change_pass() {
+
+        var user_pass = $("#user_pass").val();
+        var rawpass = $("#rawpass").val();
+
+
+        $.post("/user/p/changepass", {rawpass: rawpass, user_pass: user_pass}, function (result) {
+
+        });
+        $("#changepass").html("修改成功");
+    }
+
+
+</script>
+<div class="main">
+    <div class="title">
+        <span>修改密码</span>
+    </div>
+    <div class="content" id="changepass">
+
+
+        <!--<form class="pure-form pure-form-aligned" action="/user/p/changepass"  method="post" id="form_changepass">-->
+        <form class="pure-form pure-form-aligned" id="form_changepass">
+            <div class="pure-control-group">
+                <label for="user_name">用户名</label>
+                <input type="text" name="user_name" id="user_name" class="form-control" value="{{user_info.user_name}}"
+                       readonly/>
+            </div>
+
+
+            <div class="pure-control-group">
+                <label for="rawpass">原密码</label>
+                <input type="password" name="rawpass" id="rawpass" class="form-control" placeholder="请输入原密码"/>
+            </div>
+
+            <div class="pure-control-group">
+                <label for="user_pass">新密码</label>
+                <input type="password" name="user_pass" id="user_pass" class="form-control" placeholder="请输入新密码"/>
+            </div>
+            <div class="pure-control-group">
+                <label for="user_pass2">确认密码</label>
+                <input type="password" name="user_pass2" id="user_pass2" class="form-control" placeholder="请输入确认密码"/>
+            </div>
+
+
+            <div class="pure-control-group">
+                <label></label>
+                <button onclick="change_pass();" class="pure-button pure-button-primary">修改</button>
+                <a href="/user/logout" class="pure-button pure-button-primary">注销</a>
+            </div>
+        </form>
+    </div>
+</div>

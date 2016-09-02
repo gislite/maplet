@@ -1,0 +1,16 @@
+{% extends "../../theme/picture.html" %}
+{% block content %}
+
+<div class="panel panel-black">
+    <div class="panel-heading">查看图片
+    </div>
+    <div class="panel-body">
+        <img src="/static/upload/{{filename}}" border="1" width="140" height="98"/>
+<BR><BR>
+        <input type="text" value="/static/upload/{{filename}}" width="400" size="100"/>
+
+
+    </div>
+</div>
+{% end %}
+
