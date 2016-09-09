@@ -29,8 +29,7 @@
             <em id="_viewnum">{{ view.view_count }}</em>
             {% end %}
 
-
-            {% if userinfo is not None and userinfo.privilege[2] == '1' %}
+            {% if userinfo and userinfo.privilege[2] >= '1' %}
             <span class="split">|</span>
             <a href="/wiki/edit/{{ view.uid }}" class="btn btn-primary btn-xs">修改</a>
             {% end %}

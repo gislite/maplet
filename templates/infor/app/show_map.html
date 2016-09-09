@@ -68,14 +68,16 @@ var login = {{ kwd['login'] }};
 
 
 {% if 1 == 2 %}
-<div class="panel panel-warning">
-    <div class="alert alert-info">建议：<a href="/user/login">登陆</a>后会列出用户最近使用App的信息！</div>
-</div>
+<div class="alert alert-info">建议：<a href="/user/login">登陆</a>后会列出用户最近使用App的信息！</div>
 {% end %}
 
-
 <div class="panel panel-black">
-
+    {% if userinfo %}
+    {% else %}
+<div class="alert alert-warning">
+    <a class="close" data-dismiss="alert" href="#" aria-hidden="true"> &times; </a>
+    基于WebGIS技术，地图可以在线浏览、放大、缩小，也可对不同的地图进行叠加操作。</div>
+{% end %}
     <div class="panel-heading">
 
         <H1 >{{ calc_info.title }}</H1>

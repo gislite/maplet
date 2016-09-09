@@ -14,13 +14,9 @@
         <div class="container" style="width: auto;">
             <div class="row">
                 <div class="col-md-10">
-
-
                     {% for x in app_arr %}
-                    <a class="btn btn-info btn-xs" href="/map/{{ x.uid }}">{{ x.title[:12] }}</a>
+                    <a class="btn btn-info btn-xs" href="/map/{{ x.uid }}"><span class="badge">{{x.uid}}</span>{{x.title[:12] }}</a>
                     {% end %}
-
-
                 </div>
                 <div class="col-md-2" style="text-align: right;">
                     <a class="btn btn-info btn-xs" href="/map/overlay/{{ app_str }}?fullscreen=1" target="_blank">
