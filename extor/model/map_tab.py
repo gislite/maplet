@@ -1,7 +1,7 @@
 import peewee
 from playhouse.postgres_ext import JSONField
 
-from torcms.model.ext_tab import TabApp
+from torcms.model.core_tab import TabApp
 from torcms.core.base_model import BaseModel
 from torcms.model.core_tab import CabMember
 

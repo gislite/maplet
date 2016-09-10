@@ -2,10 +2,10 @@
 
 # Todo: shouldn't be here.
 from torcms.handlers.info2reply_handler import  Info2ReplyHandler as App2ReplyHandler
-from maplet.handlers.overlay_handler import MapOverlayHandler
-from maplet.handlers.map_handler import MapHandler
-from maplet.handlers.geojson import GeoJsonHandler
-from maplet.handlers.layout_handler import LayoutHandler
+from extor.handlers.overlay_handler import MapOverlayHandler
+from extor.handlers.map_handler import MapHandler
+from extor.handlers.geojson import GeoJsonHandler
+from extor.handlers.layout_handler import LayoutHandler
 
 
 urls = [
