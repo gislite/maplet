@@ -39,7 +39,7 @@
             <span class="post_cat">{% module post_catalogs(view.uid ) %}</span>
 
 
-            {% if userinfo is not None and userinfo.privilege[2] == '1' %}
+            {% if userinfo and userinfo.privilege[2] > '1' %}
 
             <a href="/post/modify/{{ view.uid }}"
                class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span>
