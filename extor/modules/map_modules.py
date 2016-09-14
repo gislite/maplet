@@ -1,18 +1,18 @@
 import random
 
 import tornado.web
-import torcms.model.app_model
-import torcms.model.app2catalog_model
-from torcms.model.minforcatalog import MInforCatalog
+import torcms.model.infor_model
+import torcms.model.infor2catalog_model
+from torcms.model.inforcatalog_model import MInforCatalog
 from torcms.model import usage_model
-from torcms.model.app_rel_model import *
+from torcms.model.info_relation_model import   *
 # from config import app_url_name
 
-from torcms.model.app_model import MApp
-from torcms.model.mpost import MPost
-from torcms.model.app2label_model import MApp2Label
-from maplet.model.json_model import MJson
-from maplet.model.layout_model import MLayout
+from torcms.model.infor_model import MInfor as MApp
+from torcms.model.post_model import MPost
+from torcms.model.infor2label_model import MInfor2Label as MApp2Label
+from extor.model.json_model import MJson
+from extor.model.layout_model import MLayout
 import config
 
 class app_json(tornado.web.UIModule):

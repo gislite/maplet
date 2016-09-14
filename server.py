@@ -3,7 +3,7 @@
 import os
 import sys
 from torcms.modules.modef import core_modules
-from maplet.modules.map_modules import *
+from extor.modules.map_modules import *
 from config import cfg
 from urls import urls
 

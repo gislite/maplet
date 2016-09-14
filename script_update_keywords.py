@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 __author__ = 'bukun'
 
-from torcms.torlite.model.mpost import MPost
+from torcms.model.post_model import MPost
 
 
 def get_dic():

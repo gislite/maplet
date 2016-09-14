@@ -2,8 +2,8 @@
 
 import tornado.web
 
-from maplet.model.layout_model import MLayout
-from torcms.model.app_model import MApp
+from extor.model.layout_model import MLayout
+from torcms.model.infor_model import  MInfor as MApp
 from torcms.core.base_handler import BaseHandler
 
 

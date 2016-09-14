@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 
-from maplet.model.map_tab import *
+from extor.model.map_tab import *
 from torcms.core import tools
 
 
