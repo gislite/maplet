@@ -44,6 +44,8 @@
 
     {% block head %}{% end %}
 
+    {% if userinfo and userinfo.privilege[2] >= '1' %}
+    {% else %}
     <script type="text/javascript">
               var _paq = _paq || [];
                 _paq.push(["setDomains", ["*.www.maplet.org"]]);
@@ -57,7 +59,7 @@
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>
-
+{% end %}
 
 </head>
 <body>
