@@ -97,7 +97,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="lat" class="col-sm-2 control-label">lat</label>
+                    <label for="ext_lat" class="col-sm-2 control-label">lat</label>
 
                     <div class="col-sm-10">
                         <input type="text" id="ext_lat" name="ext_lat" class="form-control" value="{{app_info.extinfo['ext_lat']}}">
@@ -106,7 +106,7 @@
 
 
                 <div class="form-group">
-                    <label for="lon" class="col-sm-2 control-label">lon</label>
+                    <label for="ext_lon" class="col-sm-2 control-label">lon</label>
 
                     <div class="col-sm-10">
                         <input type="text" id="ext_lon" name="ext_lon" class="form-control" value="{{app_info.extinfo['ext_lon']}}">
@@ -114,7 +114,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="zoom_max" class="col-sm-2 control-label">zoom_max</label>
+                    <label for="ext_zoom_max" class="col-sm-2 control-label">zoom_max</label>
 
                     <div class="col-sm-10">
                         <input type="text" id="ext_zoom_max" name="ext_zoom_max" class="form-control"
@@ -124,7 +124,7 @@
 
 
                 <div class="form-group">
-                    <label for="zoom_min" class="col-sm-2 control-label">zoom_min</label>
+                    <label for="ext_zoom_min" class="col-sm-2 control-label">zoom_min</label>
 
                     <div class="col-sm-10">
                         <input type="text" id="ext_zoom_min" name="ext_zoom_min" class="form-control"
@@ -134,7 +134,7 @@
 
 
                 <div class="form-group">
-                    <label for="zoom_current" class="col-sm-2 control-label">zoom_current</label>
+                    <label for="ext_zoom_current" class="col-sm-2 control-label">zoom_current</label>
 
                     <div class="col-sm-10">
                         <input type="text" id="ext_zoom_current" name="ext_zoom_current" class="form-control"
@@ -144,32 +144,94 @@
 
 
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">分类</label>
+                <!--<div class="form-group">-->
+                    <!--<label class="col-sm-2 control-label">分类</label>-->
 
-                    <div class="col-sm-10">
-                        {% for ii in range(1,6) %}
-                        <select name="cat_{{ ii }}" id="cat_{{ ii }}" class="form-control">
+                    <!--<div class="col-sm-10">-->
+                        <!--{% for ii in range(0,4) %}-->
+                        <!--<select name="gcat{{ ii }}" id="gcat{{ ii }}" class="form-control">-->
+                            <!--<option value="">请选择</option>-->
+                            <!--{% for taginfo in tag_infos %}-->
+                            <!--{% if taginfo.uid[2:] == '00' %}-->
+                            <!--{% else %}-->
+                            <!--<option value="{{ taginfo.uid }}"-->
+                                    <!--{% for tt in app2tag_info %} {% if tt.order== (ii- 1) and tt.catalog.uid== taginfo.uid %}-->
+                                    <!--selected {% end %} {% end %}>  {{taginfo.uid}} {{ taginfo.name }}-->
+                            <!--</option>-->
+                            <!--{% end %}-->
+                            <!--{% end %}-->
+                        <!--</select>-->
+                        <!--{% end %}-->
+                    <!--</div>-->
+
+                <!--</div>-->
+
+
+                {% for ii in range(0,5) %}
+                <div class="form-group">
+                    {% if ii == 0 %}
+                    <label for="pcat0" class="col-sm-2 control-label">标签</label>
+                    {% else %}
+                    <label class="col-sm-2 control-label"></label>
+                    {% end %}
+                    <div class="col-sm-3">
+                        <select name="pcat{{ii}}" id="pcat{{ii}}" class="form-control" onchange="g_load_infocat({{ii}})">
                             <option value="">请选择</option>
                             {% for taginfo in tag_infos %}
-                            {% if taginfo.uid[2:] == '00' %}
-                            {% else %}
+                            {% if taginfo.uid.endswith('00') %}
                             <option value="{{ taginfo.uid }}"
-                                    {% for tt in app2tag_info %} {% if tt.order== (ii- 1) and tt.catalog.uid== taginfo.uid %}
-                                    selected {% end %} {% end %}>  {{taginfo.uid}} {{ taginfo.name }}
+                                    {% for tt in app2tag_info %}
+                                    {% if tt.order== ii and tt.catalog.uid.startswith(taginfo.uid[:2]) %}
+                                    selected
+                                    {% end %}
+                                    {% end %} >{{ taginfo.name }}
                             </option>
+                            {% else %}
+
                             {% end %}
                             {% end %}
                         </select>
-                        {% end %}
+                    </div>
+
+                    <div class="col-sm-4">
+                        <select name="gcat{{ii}}" id="gcat{{ii}}" class="form-control" >
+                            <option value="0">请选择</option>
+                            {# 设置父类ID，用在下面子类是否显示看 #}
+                            {% set pcatid = 'xx' %}
+                            {% for taginfo in tag_infos %}
+                                {% for tt in app2tag_info %}
+                                    {% if tt.order== ii and tt.catalog.uid== taginfo.uid %}
+                                        {% set pcatid = tt.catalog.uid[:2] %}
+                                    {% end %}
+                                {% end %}
+                            {% end %}
+
+                            {% for taginfo in tag_infos %}
+                            {% if taginfo.uid.startswith(pcatid) %}
+                            {% if not taginfo.uid.endswith('00') %}
+                            <option value="{{ taginfo.uid }}"
+                                    {% for tt in app2tag_info %}
+                                    {% if tt.order== ii and tt.catalog.uid== taginfo.uid %}
+                                    selected
+                                    {% end %}
+                                    {% end %}  >{{ taginfo.name }}
+                            </option>
+                            {% else %}
+                            {% end %}
+                            {% end %}
+                            {% end %}
+
+                        </select>
                     </div>
 
                 </div>
+                {% end %}
+
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="valid">是否可用</label>
                     <div class="col-sm-10">
-                        <select name="valid" id="valide" class="form-control">
+                        <select name="valid" id="valid" class="form-control">
                             <option value="1">是</option>
                             <option value="0">否</option>
                         </select>

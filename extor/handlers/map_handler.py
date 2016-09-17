@@ -6,8 +6,13 @@ import tornado.web
 from torcms.core import tools
 
 import config
+from torcms.core.base_handler import BaseHandler
 from torcms.handlers.info_handler import InfoHandler
 
+
+class InforRedirectHandler(BaseHandler):
+    def get(self, url_str):
+        self.redirect('/map/{0}'.format(url_str))
 
 class MapHandler(InfoHandler):
 

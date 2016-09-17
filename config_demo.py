@@ -32,13 +32,12 @@ smtp_cfg = {
 
 # Used in HTML render files.
 cfg = {
-    'app_url_name' : 'map',
-'DEBUG': True,
+    'app_url_name': 'map',
+    'DEBUG': True,
+    'PORT': '8088',
+    'site_type': 2,
 }
 
-
-Email_site_name = '云算笔记'
-PORT = 8088
 
 dbconnect = PostgresqlExtDatabase(
     'maplet',
@@ -48,5 +47,3 @@ dbconnect = PostgresqlExtDatabase(
     autocommit=True,
     autorollback=True
 )
-
-
