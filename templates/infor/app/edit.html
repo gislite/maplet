@@ -176,7 +176,7 @@
                     {% end %}
                     <div class="col-sm-3">
                         <select name="pcat{{ii}}" id="pcat{{ii}}" class="form-control" onchange="g_load_infocat({{ii}})">
-                            <option value="">请选择</option>
+                            <option>请选择</option>
                             {% for taginfo in tag_infos %}
                             {% if taginfo.uid.endswith('00') %}
                             <option value="{{ taginfo.uid }}"
@@ -195,7 +195,7 @@
 
                     <div class="col-sm-4">
                         <select name="gcat{{ii}}" id="gcat{{ii}}" class="form-control" >
-                            <option value="0">请选择</option>
+                            <option>请选择</option>
                             {# 设置父类ID，用在下面子类是否显示看 #}
                             {% set pcatid = 'xx' %}
                             {% for taginfo in tag_infos %}
