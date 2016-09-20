@@ -3,16 +3,7 @@
 
 {% block zhuti %}
 
-<!--
-<div class="panel panel-default">
 
-
-    <div class="panel-heading">
-        所在位置： <a href="/">Maplet</a> > 文档 > {{ dbrec.title }}－修改
-
-    </div>
-</div>
--->
 <div class="panel panel-black">
     <div class="panel-heading">
         {{ dbrec.title }}－修改
@@ -52,32 +43,6 @@
                 </div>
 
 
-
-                <!--<div class="form-group">-->
-                    <!--<label class="col-sm-2 control-label" for="">分类</label>-->
-
-                    <!--<div class="col-sm-10">-->
-                        <!--{% for ii in range(0,4) %}-->
-                        <!--<div class="col-sm-2">-->
-                            <!--<select name="gcat{{ ii }}" id="tag1" class="form-control">-->
-                                <!--<option value="">请选择</option>-->
-                                <!--{% for taginfo in tag_infos %}-->
-                                <!--<option value="{{ taginfo.uid }}"-->
-                                <!--{% for tt in app2tag_info %}-->
-                                <!--{% if tt.order== ii and tt.catalog.uid== taginfo.uid %}-->
-                                <!--selected-->
-                                <!--{% end %}-->
-                                <!--{% end %}-->
-                                <!--&gt;{{ taginfo.name }}-->
-                                <!--</option>-->
-                                <!--{% end %}-->
-                            <!--</select>-->
-                        <!--</div>-->
-                        <!--{% end %}-->
-                    <!--</div>-->
-                <!--</div>-->
-
-
                 {% for ii in range(0,5) %}
                 <div class="form-group">
                     {% if ii == 0 %}
@@ -85,7 +50,6 @@
                     {% else %}
                     <label class="col-sm-2 control-label"></label>
                     {% end %}
-
 
                     <div class="col-sm-4">
                         <select name="gcat{{ii}}" id="gcat{{ii}}" class="form-control" >
