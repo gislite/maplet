@@ -13,7 +13,7 @@ from whoosh.qparser import QueryParser
 from jieba.analyse import ChineseAnalyzer
 
 from torcms.model.post_model import MPost
-from torcms.model.infor_model import MInfor as MApp
+from torcms.model.info_model import MInfor as MApp
 
 def do_for_app(writer, rand = True):
     mpost = MApp()

@@ -3,7 +3,7 @@
 import tornado.web
 
 from extor.model.layout_model import MLayout
-from torcms.model.infor_model import  MInfor as MApp
+from torcms.model.info_model import  MInfor as MApp
 from torcms.core.base_handler import BaseHandler
 
 

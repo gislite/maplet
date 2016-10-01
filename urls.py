@@ -5,9 +5,7 @@ from torcms.handlers.redirect_handler import RedirectHandler
 
 from router import urls as info_urls
 
-urls = info_urls + router.urls +  [
-
-
+urls = info_urls + router.urls + [
 
     ("/(.*)", RedirectHandler, dict()),
 ]
