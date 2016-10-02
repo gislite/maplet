@@ -83,13 +83,13 @@
         查看:
         <em id="_viewnum">{{ view.view_count }}</em>
 
-        {% if userinfo is not None and userinfo.privilege[2] == '1' %}
+        {% if userinfo is not None and userinfo.role[2] == '1' %}
         <span class="split">|</span>
         <a href="/post/modify/{{ view.uid }}">修改</a>
         <a href="/post/delete/{{ view.uid }}">删除</a>
         {% end %}
 
-        <!--{% if userinfo is not None and userinfo.privilege[4] == '1' %}-->
+        <!--{% if userinfo is not None and userinfo.role[4] == '1' %}-->
         <!--<a href="/post/edit_catalog/{{ view.uid }}">修改分类</a>-->
         <!--{% end %}-->
     </p>
@@ -192,7 +192,7 @@
             {% end %}
 
 
-            {% if userinfo is not None and ( userinfo.uid == reply.reply_id.uid or userinfo.privilege[4] == '1') %}
+            {% if userinfo is not None and ( userinfo.uid == reply.reply_id.uid or userinfo.role[4] == '1') %}
 
 
             <a class="pure-button pure-button-primary" style="padding:3px 8px;"

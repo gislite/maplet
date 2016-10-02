@@ -30,7 +30,7 @@
 
                 <li><a onclick="js_show_page('/user/p/changepass')">修改密码</a></li>
                 <li><a onclick="js_show_page('/user/p/changeinfo')">修改个人信息</a></li>
-                {% if user_info is not None and user_info.privilege[4] == '1' %}
+                {% if user_info is not None and user_info.role[4] == '1' %}
                 <li><a onclick="js_show_page('/user/p/find')">查看所有用户</a></li>
                 {% end %}
 

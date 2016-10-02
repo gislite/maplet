@@ -108,7 +108,7 @@ var login = {{ kwd['login'] }};
                         </button>
 
 
-                        {% if userinfo  and userinfo.privilege[2] >= '7' %}
+                        {% if userinfo  and userinfo.role[2] >= '7' %}
                         <a id="act_note" href="/post/m{{ kwd['signature'] }}.html"
                             class="btn btn-info btn-xs" ><span class="glyphicon glyphicon-new-window"></span>更多</a>
 
@@ -238,7 +238,7 @@ var login = {{ kwd['login'] }};
             {% end %}
 
 
-            {% if userinfo is not None and ( userinfo.uid == reply.reply_id.uid or userinfo.privilege[4] == '1') %}
+            {% if userinfo is not None and ( userinfo.uid == reply.reply_id.uid or userinfo.role[4] == '1') %}
 
 
             <a class="btn btn-danger btn-small" style="padding:3px 8px;"
@@ -348,8 +348,8 @@ var login = {{ kwd['login'] }};
                                                <div class="col-sm-12">
                             <select id="over_map_1" name="over_map_1" class="form-control">
                                 {% for recent in recent_apps %}
-                                <option value="{{recent.signature.uid}}">{{recent.signature.uid}} |
-                                    {{recent.signature.title}}
+                                <option value="{{recent.tag}}">{{recent.tag}} |
+                                    {{recent.tag.title}}
                                 </option>
                                 {% end %}
                             </select>
@@ -365,8 +365,8 @@ var login = {{ kwd['login'] }};
                             <select id="over_map_2" name="over_map_2" class="form-control">
                                 <option value=""></option>
                                 {% for recent in recent_apps %}
-                                <option value="{{recent.signature.uid}}">{{recent.signature.uid}} |
-                                    {{recent.signature.title}}
+                                <option value="{{recent.tag}}">{{recent.tag}} |
+                                    {{recent.tag.title}}
                                 </option>
                                 {% end %}
                             </select>

@@ -55,8 +55,8 @@ var geojsonid = "{{ kwd['geojson'] }}";
 
                                       <select id="maplet_id" name="maplet_id" class="form-control">
                                 {% for recent in recent_apps %}
-                                <option value="{{recent.signature.uid}}">{{recent.signature.uid}} |
-                                    {{recent.signature.title}}
+                                <option value="{{recent.tag.uid}}">{{recent.tag.uid}} |
+                                    {{recent.tag.title}}
                                 </option>
                                 {% end %}
                             </select>

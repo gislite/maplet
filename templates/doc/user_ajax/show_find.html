@@ -3,7 +3,7 @@
 
     <form class="pure-form pure-form-aligned">
         用户名：{{x.user_name}}&nbsp;&nbsp;&nbsp;&nbsp;
-        当前权限：<input value="{{ x.privilege }}" type="text" id="privilege{{ ii }}" name="privilege">
+        当前权限：<input value="{{ x.role }}" type="text" id="role{{ ii }}" name="role">
 
 
         <a class="pure-button pure-button-primary" onclick="update_category('{{x.user_name}}', {{ ii }} );"

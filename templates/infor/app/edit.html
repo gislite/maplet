@@ -80,15 +80,13 @@
                     <label for="keywords" class="col-sm-2 control-label">Logo</label>
 
                     <div class="col-sm-10">
-                        <input type="text" id="logo" name="logo" value="{{ app_info.logo }}"
-                               class="form-control">
+                        <input type="text" id="logo" name="logo" value="{{ app_info.logo }}" class="form-control">
                     </div>
                 </div>
 
 
                 <div class="form-group">
                     <label for="tags" class="col-sm-2 control-label">标签</label>
-
                     <div class="col-sm-10">
                         <input type="text" id="tags" name="tags" class="form-control" value="{% for x in app2label_info %}
                 {{ x.tag.name}},
@@ -146,18 +144,18 @@
                 {% for ii in range(0,5) %}
                 <div class="form-group">
                     {% if ii == 0 %}
-                    <label for="pcat0" class="col-sm-2 control-label">标签</label>
+                    <label for="pcat0" class="col-sm-2 control-label">分类</label>
                     {% else %}
                     <label class="col-sm-2 control-label"></label>
                     {% end %}
                     <div class="col-sm-3">
                         <select name="pcat{{ii}}" id="pcat{{ii}}" class="form-control" onchange="g_load_infocat({{ii}})">
-                            <option>请选择</option>
+                            <option value="">请选择</option>
                             {% for taginfo in tag_infos %}
                             {% if taginfo.uid.endswith('00') %}
                             <option value="{{ taginfo.uid }}"
                                     {% for tt in app2tag_info %}
-                                    {% if tt.order== ii and tt.catalog.uid.startswith(taginfo.uid[:2]) %}
+                                    {% if tt.order== ii and tt.tag.uid.startswith(taginfo.uid[:2]) %}
                                     selected
                                     {% end %}
                                     {% end %} >{{ taginfo.name }}
@@ -171,23 +169,25 @@
 
                     <div class="col-sm-4">
                         <select name="gcat{{ii}}" id="gcat{{ii}}" class="form-control" >
-                            <option>请选择</option>
+                            <option value="">请选择</option>
                             {# 设置父类ID，用在下面子类是否显示看 #}
                             {% set pcatid = 'xx' %}
                             {% for taginfo in tag_infos %}
                                 {% for tt in app2tag_info %}
-                                    {% if tt.order== ii and tt.catalog.uid== taginfo.uid %}
-                                        {% set pcatid = tt.catalog.uid[:2] %}
+                                    {% if tt.order== ii and tt.tag.uid == taginfo.uid %}
+                                        {% set pcatid = tt.tag.uid[:2] %}
                                     {% end %}
                                 {% end %}
                             {% end %}
 
-                            {% for taginfo in tag_infos %}
+
+
+                            {% for taginfo in tag_infos2 %}
                             {% if taginfo.uid.startswith(pcatid) %}
                             {% if not taginfo.uid.endswith('00') %}
                             <option value="{{ taginfo.uid }}"
                                     {% for tt in app2tag_info %}
-                                    {% if tt.order== ii and tt.catalog.uid== taginfo.uid %}
+                                    {% if tt.order== ii and tt.tag.uid== taginfo.uid %}
                                     selected
                                     {% end %}
                                     {% end %}  >{{ taginfo.name }}

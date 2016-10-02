@@ -59,7 +59,7 @@
                             {% for taginfo in tag_infos %}
                             <option value="{{ taginfo.uid }}"
                                     {% for tt in app2tag_info %}
-                                    {% if tt.order== ii and tt.catalog.uid== taginfo.uid %}
+                                    {% if tt.order== ii and tt.tag.uid== taginfo.uid %}
                                     selected
                                     {% end %}
                                     {% end %}  >{{ taginfo.name }}

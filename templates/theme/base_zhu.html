@@ -44,7 +44,7 @@
 
     {% block head %}{% end %}
 
-    {% if userinfo and userinfo.privilege[2] >= '1' %}
+    {% if userinfo and userinfo.role[2] >= '1' %}
     {% else %}
     <script type="text/javascript">
               var _paq = _paq || [];

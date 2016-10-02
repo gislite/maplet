@@ -39,7 +39,7 @@
             <span class="post_cat">{% module post_catalogs(view.uid ) %}</span>
 
 
-            {% if userinfo and userinfo.privilege[2] > '1' %}
+            {% if userinfo and userinfo.role[2] > '1' %}
 
             <a href="/post/modify/{{ view.uid }}"
                class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span>
@@ -126,7 +126,7 @@
                 {% end %}
 
 
-                {% if userinfo is not None and ( userinfo.uid == reply.reply_id.uid or userinfo.privilege[4] == '1') %}
+                {% if userinfo is not None and ( userinfo.uid == reply.reply_id.uid or userinfo.role[4] == '1') %}
 
 
                 <a class="btn btn-danger btn-small" style="padding:3px 8px;"
@@ -187,7 +187,7 @@
 
 {% block right %}
 
-{% if userinfo is not None and userinfo.privilege[2] == '1' %}
+{% if userinfo is not None and userinfo.role[2] == '1' %}
 <div class="panel panel-black">
     <div class="panel-heading">
         <h3 class="panel-title">
@@ -221,8 +221,8 @@
     <ul class="list-group">
         {% for s in relations %}
         <li class="list-group-item">
-            <a href="/post/{{ s.app_t.uid }}.html">
-                <span class="glyphicon glyphicon-list-alt"></span> {{ s.app_t.title }}
+            <a href="/post/{{ s.post_t.uid }}.html">
+                <span class="glyphicon glyphicon-list-alt"></span> {{ s.post_t.title }}
             </a>
         </li>
         {% end %}
