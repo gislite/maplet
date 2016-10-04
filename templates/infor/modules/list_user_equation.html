@@ -1,14 +1,14 @@
 
 {% for rec in recs %}
 <li  class="list-group-item">
-    <a href="/map/{{ rec.tag }}">
+    <a href="/map/{{ rec.post.uid }}">
         <span class="glyphicon glyphicon-map-marker"></span>
-        {{ rec.info.title }}
-        {% if rec.tag[0] == 'v' %}<span class="badge" style="color:yellow">v</span>{% end %}
+        {{ rec.post.title }}
+        {% if rec.post.uid[0] == 'v' %}<span class="badge" style="color:yellow">v</span>{% end %}
     </a>
     <span style="font-size: small; color: #5e5e5e"> ({{ rec.count }})</span>
     {% if kwd['with_tag'] == True %}
-    <span class="app_tag"> {% module app_tags(rec.tag) %}</span>
+    <span class="app_tag"> {% module app_tags(rec.post.uid) %}</span>
     {% end %}
 </li>
 {% end %}
