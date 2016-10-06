@@ -348,8 +348,8 @@ var login = {{ kwd['login'] }};
                                                <div class="col-sm-12">
                             <select id="over_map_1" name="over_map_1" class="form-control">
                                 {% for recent in recent_apps %}
-                                <option value="{{recent.tag}}">{{recent.tag}} |
-                                    {{recent.tag.title}}
+                                <option value="{{recent.post.uid}}">{{recent.post.uid}} |
+                                    {{recent.post.title}}
                                 </option>
                                 {% end %}
                             </select>
@@ -365,8 +365,8 @@ var login = {{ kwd['login'] }};
                             <select id="over_map_2" name="over_map_2" class="form-control">
                                 <option value=""></option>
                                 {% for recent in recent_apps %}
-                                <option value="{{recent.tag}}">{{recent.tag}} |
-                                    {{recent.tag.title}}
+                                <option value="{{recent.post.uid}}">{{recent.post.uid}} |
+                                    {{recent.post.title}}
                                 </option>
                                 {% end %}
                             </select>
@@ -390,9 +390,9 @@ var login = {{ kwd['login'] }};
     <ul class="list-group" style="overflow: hidden;">
         {% for x in relations %}
         <li class="list-group-item" style="overflow: hidden;">
-            <a href="/map/{{ x.app_t.uid }}">
-                 <span class="glyphicon glyphicon-map-marker"></span>{{ x.app_t.title }}
-               {% if x.app_t.uid[0] == 'v' %}<span class="badge" style="color:yellow">v</span>{% end %}
+            <a href="/map/{{ x.post_t.uid }}">
+                 <span class="glyphicon glyphicon-map-marker"></span>{{ x.post_t.title }}
+               {% if x.post_t.uid[0] == 'v' %}<span class="badge" style="color:yellow">v</span>{% end %}
             </a>
         </li>
         {% end %}

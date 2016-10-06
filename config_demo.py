@@ -1,6 +1,16 @@
 # -*- coding:utf-8 -*-
 
 from playhouse.postgres_ext import PostgresqlExtDatabase
+foo_dic = {
+        '01': '21',
+        '03': '23',
+        '05': '25',
+        '07': '27',
+        '09': '29',
+        '11': '31',
+        '13': '33',
+
+        }
 
 menu_arr = [['首页', '/'],
             ['文档', '/category/geography'],

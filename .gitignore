@@ -75,4 +75,5 @@ static/upload/
 static/tass/.sass-cache/
 templates/autogen/
 
-
+model_ent
+torcms_helper
