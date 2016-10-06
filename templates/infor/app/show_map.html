@@ -390,9 +390,9 @@ var login = {{ kwd['login'] }};
     <ul class="list-group" style="overflow: hidden;">
         {% for x in relations %}
         <li class="list-group-item" style="overflow: hidden;">
-            <a href="/map/{{ x.post_t.uid }}">
-                 <span class="glyphicon glyphicon-map-marker"></span>{{ x.post_t.title }}
-               {% if x.post_t.uid[0] == 'v' %}<span class="badge" style="color:yellow">v</span>{% end %}
+            <a href="/map/{{ x.post.uid }}">
+                 <span class="glyphicon glyphicon-map-marker"></span>{{ x.post.title }}
+               {% if x.post.uid[0] == 'v' %}<span class="badge" style="color:yellow">v</span>{% end %}
             </a>
         </li>
         {% end %}
