@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 
-
+post_emails = ['bukun@osgeo.cn', '118171@qq.com', '1245861612@qq.com', '1107587677@qq.com']
 
 email_cfg = {
     'title': '好久没登录了',

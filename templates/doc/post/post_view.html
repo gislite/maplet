@@ -221,8 +221,8 @@
     <ul class="list-group">
         {% for s in relations %}
         <li class="list-group-item">
-            <a href="/post/{{ s.post_t.uid }}.html">
-                <span class="glyphicon glyphicon-list-alt"></span> {{ s.post_t.title }}
+            <a href="/post/{{ s.post.uid }}.html">
+                <span class="glyphicon glyphicon-list-alt"></span> {{ s.post.title }}
             </a>
         </li>
         {% end %}
