@@ -17,7 +17,7 @@
 
             发布者: <a href="/" style="color:#ffffff;">Maplet</a>&nbsp;&nbsp;
             发布日期：
-            {{ str(view.date)[:-9] }}
+            {{ str(view.date).split()[0] }}
             &nbsp;&nbsp;
             {% if 1== 2 %}
 
@@ -28,7 +28,7 @@
 
             {% if 2 == 1 %}
 
-            <a href="/page/modify/{{ view.slug }}" class="btn btn-primary btn-xs"><span
+            <a href="/page/modify/{{ view.uid }}" class="btn btn-primary btn-xs"><span
                     class="glyphicon glyphicon-pencil"></span>修改</a>
             {% end %}
         </div>
@@ -45,7 +45,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                本文链接： <a href="http://www.maplet.org/page/{{ view.slug }}.html">{{ view.title }}</a>
+                本文链接： <a href="http://www.maplet.org/page/{{ view.uid }}.html">{{ view.title }}</a>
             </div>
 
 
