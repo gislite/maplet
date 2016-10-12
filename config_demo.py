@@ -57,3 +57,8 @@ dbconnect = PostgresqlExtDatabase(
     autocommit=True,
     autorollback=True
 )
+
+router_post = {'1': 'post',
+        '2': 'info',
+        }
+
