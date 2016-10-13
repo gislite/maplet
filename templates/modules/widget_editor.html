@@ -1,10 +1,16 @@
 {% if userinfo %}
-{% if userinfo.role[2] >= '1' %}
+
+{% if userinfo.role[2] >= '4' %}
 <span class="cmts"><a href="/{{kwd['router']}}/edit/{{ kwd['uid']  }}" class="btn btn-xs btn-primary">Edit</a></span>
-{% else %}
-<span class="cmts"><a href="/{{kwd['router']}}_man/edit/{{kwd['uid'] }}" class="btn btn-xs btn-primary">Edit</a></span>
+
+{% elif userinfo.role[0] >= '2' %}
+<span class="cmts"><a href="/{{kwd['router']}}_man/edit/{{kwd['uid'] }}"
+                      class="btn btn-xs btn-primary">EditInfo</a></span>
 {% end %}
-{% if userinfo.role[2] >= '9' %}
-<span class="cmts"><a href="/{{kwd['router']}}_man/view/{{kwd['uid']}}" class="btn btn-xs btn-primary"> Manage</a></span>
+
+{% if userinfo.role[2] >= 'c' %}
+<span class="cmts"><a href="/{{kwd['router']}}_man/view/{{ kwd['uid']  }}"
+                      class="btn btn-xs btn-primary"> Manage</a></span>
 {% end %}
+
 {% end %}
