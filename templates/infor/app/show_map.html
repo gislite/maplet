@@ -67,9 +67,9 @@ var login = {{ kwd['login'] }};
 {% block zhuti %}
 
 
-{% if 1 == 2 %}
+{#
 <div class="alert alert-info">建议：<a href="/user/login">登陆</a>后会列出用户最近使用App的信息！</div>
-{% end %}
+#}
 
 <div class="panel panel-black">
     {% if userinfo %}
@@ -108,14 +108,7 @@ var login = {{ kwd['login'] }};
                         </button>
 
 
-                        {% if userinfo  and userinfo.role[2] >= '7' %}
-                        <a id="act_note" href="/post/m{{ kwd['signature'] }}.html"
-                            class="btn btn-info btn-xs" ><span class="glyphicon glyphicon-new-window"></span>更多</a>
-
-                        <a id="act_note" href="/meta/edit/{{ kwd['signature'] }}"
-                            class="btn btn-danger btn-xs" ><span class="glyphicon glyphicon-pencil"></span>修改地图信息</a>
-
-                        {% end %}
+                         {% module widget_editor('meta', postinfo.uid, userinfo) %}
 
                 </div>
 

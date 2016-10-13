@@ -29,10 +29,8 @@
             <em id="_viewnum">{{ view.view_count }}</em>
             {% end %}
 
-            {% if userinfo and userinfo.role[2] >= '1' %}
-            <span class="split">|</span>
-            <a href="/wiki/edit/{{ view.uid }}" class="btn btn-primary btn-xs">修改</a>
-            {% end %}
+                        {% module widget_editor('wiki', postinfo.uid, userinfo) %}
+
 
         </div>
 

@@ -26,11 +26,15 @@
             {% end %}
             &nbsp;&nbsp;
 
-            {% if 2 == 1 %}
+         {% if userinfo %}
+{% if userinfo.role[2] >= '1' %}
+<span class="cmts"><a href="/page/edit/{{ postinfo.uid  }}" class="btn btn-xs btn-primary">Edit</a></span>
+{% end %}
+{% if userinfo.role[2] >= '9' %}
+<span class="cmts"><a href="/page_man/view/{{ postinfo.uid }}" class="btn btn-xs btn-primary"> Manage</a></span>
+{% end %}
+{% end %}
 
-            <a href="/page/modify/{{ view.uid }}" class="btn btn-primary btn-xs"><span
-                    class="glyphicon glyphicon-pencil"></span>修改</a>
-            {% end %}
         </div>
     </div>
 
