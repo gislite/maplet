@@ -59,7 +59,6 @@ $.ready()
 
 
     $('#sub_reset').click(function () {
-        alert('Hello');
         if ($("#form_reset").valid()) {
             // do some stuff
             js_update_pass();
