@@ -2,10 +2,11 @@
 {% block head %}
 <title>{{ calc_info.title }}|地图画板|在线地图|Maplet</title>
 <meta name="keywords" content="{{ calc_info.keywords }},在线地图,Maplet,地图画板">
-<script type="text/javascript" src="{{ static_url('jslib/leaflet/leaflet.js') }}"></script>
-<script type="text/javascript" src="{{ static_url('jslib/leaflet/Leaflet.Editable.js') }}"></script>
+<script src="{{ static_url('f2elib/leaflet_1.0.1/leaflet.js') }}"></script>
+<link rel="stylesheet" href="{{ static_url('f2elib/leaflet_1.0.1/leaflet.css') }}">
 
-<link rel="stylesheet" href="{{ static_url('jslib/leaflet/leaflet.css') }}" >
+<script type="text/javascript" src="{{ static_url('jslib/Leaflet.Editable.js') }}"></script>
+
 <meta name="description" content="">
 
 <style type="text/css">

@@ -6,40 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="bukun">
     <meta name="Copyright" content="Maplet">
+    <link rel="icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
 
-    <script type="text/javascript" src="{{ static_url('jslib/jquery-2.2.2.min.js')}}"></script>
-
-    <link rel="stylesheet" href="{{ static_url('csslib/bootstrap/css/bootstrap.min.css')}}">
-<script src="{{ static_url('csslib/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ static_url('f2elib/jquery/jquery-3.1.1.min.js') }}"></script>
+<script src="{{ static_url('f2elib/bootstrap_3.3.7/js/bootstrap.min.js') }}"></script>
+<script src="{{ static_url('f2elib/jquery-validate_1.15.0/jquery.validate.min.js') }}"></script>
+<link rel="stylesheet" href="{{ static_url('f2elib/bootstrap_3.3.7/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{ static_url('tass/css/style.css') }}">
+        <script type="text/javascript" src="{{ static_url('jslib/colorbox-master/jquery.colorbox-min.js') }}"></script>
+<script src="{{ static_url('jslib/validate/message_cn.js') }}"></script>
 
     <link rel="stylesheet" href="{{ static_url('tass/css/style.css')}}">
 
-    <link rel="icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
 
-    <link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
-    <script type="text/javascript" src="{{ static_url('jslib/validate/jquery.validate.min.js') }}"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
 
-            $("#find_calc").validate(
-                    {
-                        rules: {
-                            keyword: {
-                                required: true
-                            }
-                        },
-                        messages: {
-                            keyword: {
-                                required: "<span class='red'>请输入要查询的关键词</span>"
-                            }
-                        }
-                    }
-            );
-        });
-    </script>
-
-        <script type="text/javascript" src="{{ static_url('jslib/gscript.js') }}"></script>
 
 
     {% block head %}{% end %}
@@ -167,4 +149,6 @@
 </footer>
 
 </body>
+        <script type="text/javascript" src="{{ static_url('jslib/gscript.js') }}"></script>
+
 </html>

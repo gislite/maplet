@@ -1,5 +1,6 @@
 $.ready()
 {
+
     // 提交修改密码的动作
     function js_update_pass() {
         // 模拟Form提交
@@ -48,6 +49,36 @@ $.ready()
             // just show validation errors, dont post
         }
     });
+
+    $("#findform").validate(
+                    {
+                        rules: {
+                            keyword: {
+                                required: true
+                            }
+                        },
+                        messages: {
+                            keyword: {
+                                required: "<span class='red'>请输入要查询的关键词</span>"
+                            }
+                        }
+                    }
+            );
+
+    $("#find_calc").validate(
+                    {
+                        rules: {
+                            keyword: {
+                                required: true
+                            }
+                        },
+                        messages: {
+                            keyword: {
+                                required: "<span class='red'>请输入要查询的关键词</span>"
+                            }
+                        }
+                    }
+            );
 
     $("#searchForm").validate({
         rules: {
