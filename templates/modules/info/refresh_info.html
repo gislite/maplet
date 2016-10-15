@@ -1,0 +1,10 @@
+{% for x in yyinfos %}
+<div>
+    <label>
+        {{ x.time_str }}
+    </label>
+    <button class="btn btn-warning btn-xs"
+            onclick="js_show_page('/delappoint/{{ x.uid }}/{{ action }}/{{ parentid }}')">取消预约
+    </button>
+</div>
+{% end %}

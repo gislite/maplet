@@ -1,0 +1,25 @@
+<div class="location">
+
+    <div class="iga_bread_crumb">
+        <span>发布分类信息：</span>
+
+
+        <span
+        {% if kwd['sig'] == 1 %}
+        class="active"
+        {% end %}
+        >1 选择信息分类</span>
+
+        <span
+        {% if kwd['sig'] == 2 %}
+        class="active"
+        {% end %}>2 填写信息详情</span>
+
+        <span
+        {% if kwd['sig'] == 3 %}
+        class="active"
+        {% end %}>3 发布成功</span>
+
+    </div>
+
+</div>

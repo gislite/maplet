@@ -1,0 +1,44 @@
+<span class="red">
+{% raw userinfo.user_name %}
+</span>
+
+
+<span>
+{% if userinfo.is_credit == 1 %}
+已认证
+{% else %}
+未认证
+{% end %}
+</span>
+
+
+<span>
+{% if userinfo.is_vip == 1 %}
+VIP用户
+{% else %}
+普通用户
+{% end %}
+    </span>
+
+<span>积分:</span>
+<span class="red">
+{{ userop.def_jifen }}</span>
+
+<span>金币:</span>
+<span class="red">{{ userop.def_jinbi }}</span>
+
+<span>发布次数:</span>
+<span class="red">{{ userop.free_publish_num + userop.buy_publish_num }}</span>
+
+<span>刷新次数:</span>
+<span class="red">{{ userop.free_refresh_num  + userop.buy_refresh_num }}</span>
+
+<span>置顶次数:</span>
+<span class="red">{{ userop.buy_zhiding_num }}</span>
+
+{% if userinfo.is_vip == 1 %}
+<span class="red">具有推广业务</span>
+{% else %}
+<span class="red">联系开通推广业务</span>
+{% end %}
+

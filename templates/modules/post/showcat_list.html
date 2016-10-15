@@ -1,0 +1,10 @@
+
+{% for x in recs %}
+
+                            {% if x.uid.endswith('00') %}
+                            {% else %}
+
+<a href="/category/{{ x.slug }}" title="{{ x.name }}" class="btn btn-default" style="margin-bottom: 5px">{{ x.name }}</a>
+
+{% end %}
+{% end %}

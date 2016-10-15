@@ -1,0 +1,62 @@
+<div id="banner-example-1" class="light">
+    <ul>
+
+        {% if post_info.infor['mymps_img'][0] != "" %}
+
+        <li data-transition="fade" ><img src="{{ post_info.infor['mymps_img'][0] }}"
+                                        data-thumb="{{ post_info.infor['mymps_img'][0] }}"  data-thumb_bw="{{ post_info.infor['mymps_img'][0] }}"/>
+        </li>
+
+        {% else %}
+        <div style="width:270px; height:200px;border:1px solid #999;text-align:center;line-height:200px">暂无图片</div>
+        {% end %}
+        {% for x in post_info.infor['mymps_img'][1:] %}
+        {% if x != "" %}
+        <li data-transition="slide"><img src="{{ x }}" data-thumb="{{ x }}"  data-thumb_bw="{{ x }}"/>
+
+        </li>
+
+        {% end %}
+        {% end %}
+
+
+    </ul>
+</div>
+
+
+<script type="text/javascript">
+
+    $(function () {
+        $.noConflict();
+
+        jQuery('#banner-example-1').paradigm(
+                {
+                    width: 270,
+                    height:200,
+
+                    thumbWidth: 60,
+                    thumbHeight: 50,
+                    thumbAmount: 5,
+                    thumbSpaces: 3,
+                    thumbPadding: 2,
+                    thumbStyle: "thumb",
+                    thumbVideoIcon: "on",
+                    bulletXOffset: 0,
+                    bulletYOffset: 0,
+
+                    shadow: 'true',
+
+                    parallaxX: 500,
+                    parallaxY: 10,
+                    captionParallaxX: -40,
+                    captionParallaxY: 2,
+
+                    touchenabled: 'on',
+
+                    timer: 3
+                });
+
+
+    });
+</script>
+
