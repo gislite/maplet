@@ -175,78 +175,9 @@ var login = {{ kwd['login'] }};
     </div>
 <div class="panel-body">
      <p style="border-bottom: 1px dashed #dddddd; margin-bottom: 20px">&nbsp;</p>
-    {% set ii = 0 %}
 
-        <form method="post" class="form-horizontal">
-
-
-            <div class="form-group">
-                <div class="col-sm-10">
-                我来评论（至少50个字符|支持MarkDown语法）
-                {% if userinfo is  None %}
-            <span class="red">登陆后可以评论！</span>
-            {% end %}
-            </div>
-            </div>
-            <div class="form-group">
-<div class="col-sm-10">
-                <textarea  rows="5" name="cnt_md" id="cnt_md"  class="form-control"></textarea>
-            </div></div>
-            <div class="form-group">
-
-                <div class="col-sm-10"><a id="btn_submit_reply" onclick="reply_it('map', '{{ calc_info.uid }}');" class="btn btn-primary btn-small">提交</a>
-            </div>
-            </div>
-
-        </form>
-
-    <Br> <Br>
-    往期评论
-
-    <p style="border-bottom: 1px dashed #dddddd; margin-bottom: 20px">&nbsp;</p>
-
-    <div id="pinglun"></div>
-
-
-    {% for reply in replys %}
-
-    <div id="del_zan_{{ ii }}" style="font-size: 14px;">
-
-
-        <p>{{ reply.reply_id.user_name }}</p>
-
-        <p>{% raw unescape(reply.reply_id.cnt_html) %}</p>
-
-        <p>编辑于{{ str(reply.reply_id.date).split('.')[0] }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;共
-            <span id="text_zan_{{ ii }}">{{ reply.reply_id.vote }}</span>
-            个人赞同 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-
-            {% if (userinfo is None) or ( (userinfo is not None ) and ( userinfo.uid != reply.reply_id.uid )) %}
-            <a class="btn btn-primary btn-small"
-               style="padding:3px 8px; margin-right: 5px"
-               onclick="reply_zan('map', '{{ reply.reply_id.uid }}', {{ ii }} );">
-               <span class="glyphicon glyphicon-heart-empty"></span>
-            </a>
-            {% end %}
-
-
-            {% if userinfo is not None and ( userinfo.uid == reply.reply_id.uid or userinfo.role[4] == '1') %}
-
-
-            <a class="btn btn-danger btn-small" style="padding:3px 8px;"
-               onclick="reply_del('map', '{{ reply.reply_id.uid }}', {{ ii }} );">
-                删除
-            </a>
-            {% end %}
-
-        </p>
-
-        <p style="border-bottom: 1px dashed #dddddd; margin-bottom: 20px">&nbsp;</p>
-
-    </div>
-    {% set ii = ii + 1 %}
-    {% end %}
+    {% module reply_panel(postinfo.uid, userinfo) %}
+     
 </div>
 
     <div class="panel-footer">
