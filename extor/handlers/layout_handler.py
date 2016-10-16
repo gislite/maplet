@@ -33,9 +33,10 @@ class LayoutHandler(BaseHandler):
 
     @tornado.web.authenticated
     def save_layout(self):
-        post_data = {}
-        for key in self.request.arguments:
-            post_data[key] = self.get_arguments(key)
+        # post_data = {}
+        # for key in self.request.arguments:
+        #     post_data[key] = self.get_arguments(key)
+        post_data = self.get_post_data()
         if 'zoom' in post_data:
             pass
         else:

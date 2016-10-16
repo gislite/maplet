@@ -18,22 +18,22 @@ class MapHandler(InfoHandler):
 
     def extra_kwd(self, info_rec):
 
-        post_data = {}
-        for key in self.request.arguments:
-            post_data[key] = self.get_arguments(key)
+        post_data = self.get_post_data()
+
 
         out_dic =  {
             'marker': 1 if 'marker' in post_data else 0,
-            'geojson': post_data['gson'][0] if 'gson' in post_data else '',
+            'geojson': post_data['gson'] if 'gson' in post_data else '',
             'map_hist_arr': self.extra_view(info_rec.uid),
 
         }
         if 'zoom' in post_data :
-            out_dic['vzoom'] = post_data['zoom'][0]
+            out_dic['vzoom'] = post_data['zoom']
         if 'lat' in post_data :
-            out_dic['vlat'] = post_data['lat'][0]
+            out_dic['vlat'] = post_data['lat']
         if 'lon' in post_data :
-            out_dic['vlon'] = post_data['lon'][0]
+            out_dic['vlon'] = post_data['lon']
+
         return out_dic
 
 

@@ -52,5 +52,4 @@ class app_layout(tornado.web.UIModule):
 
         return self.render_string('map_theme/modules/app_layout.html',
                                   layout_recs = layout_recs,
-
                                   kwd=kwd)
