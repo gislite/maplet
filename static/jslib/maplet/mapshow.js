@@ -208,7 +208,7 @@
       minZoom: vzoom_min,
       layers: [cities]
     });
-    if (vmarker === "1") {
+    if (vmarker.toString() === "1") {
       L.marker([vlat, vlon]).addTo(map);
     }
     AjaxUrl = "/geojson/gson/" + geojsonid;

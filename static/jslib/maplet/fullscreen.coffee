@@ -185,7 +185,7 @@ $(document).ready ->
   map.addControl new L.NewRectangleControl()
   # map.addControl(new L.NewCircleControl());
 
-  L.marker([ vlat, vlon ]).addTo map  if vmarker is "1"
+  L.marker([ vlat, vlon ]).addTo map  if vmarker.toString() is "1"
   if login is 1
     Z = 90
     latlng = undefined

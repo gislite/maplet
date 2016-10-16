@@ -48,6 +48,8 @@ coverage.xml
 *.mo
 *.pot
 
+# Coffee script.
+*.map
 # Django stuff:
 *.log
 

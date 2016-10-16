@@ -177,7 +177,7 @@ $(document).ready ->
   )
 
   # 此处为视图可见
-  L.marker([ vlat, vlon ]).addTo map  if vmarker is "1"
+  L.marker([ vlat, vlon ]).addTo map  if vmarker.toString() is "1"
   AjaxUrl = "/geojson/gson/" + geojsonid
   unless geojsonid is ""
     $.getJSON AjaxUrl, (gjson) ->

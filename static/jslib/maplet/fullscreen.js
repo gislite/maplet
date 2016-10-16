@@ -189,7 +189,7 @@
     map.addControl(new L.NewLineControl());
     map.addControl(new L.NewPolygonControl());
     map.addControl(new L.NewRectangleControl());
-    if (vmarker === "1") {
+    if (vmarker.toString() === "1") {
       L.marker([vlat, vlon]).addTo(map);
     }
     if (login === 1) {
