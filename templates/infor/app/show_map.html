@@ -7,6 +7,10 @@
 <script src="{{ static_url('f2elib/leaflet_1.0.1/leaflet.js') }}"></script>
 <link rel="stylesheet" href="{{ static_url('f2elib/leaflet_1.0.1/leaflet.css') }}">
 
+<link rel="stylesheet" href="{{ static_url('f2elib/bootstrap-star-rating-master/css/star-rating.css')}}" type="text/css" media="all">
+<script type="text/javascript" src="{{ static_url('f2elib/bootstrap-star-rating-master/js/star-rating.js') }}"></script>
+
+
 <style type="text/css">
     #map {
         width: 100%;
@@ -85,7 +89,7 @@ var login = {{ kwd['login'] }};
         <div class="container" style="width: auto;">
             <div class="row">
 
-                <div class="col-md-9" style="text-align: left">
+                <div class="col-md-12" style="text-align: left">
 
 
                         <span>分类:</span>
@@ -112,17 +116,8 @@ var login = {{ kwd['login'] }};
 
                 </div>
 
-                <div class="col-md-3" style="text-align: right;">
-                    <button id="act_eval0" class="btn btn-xs btn-warning">
-                <span class="glyphicon glyphicon-thumbs-down"></span>
-                 (<span id="eval0">{{ kwd['eval_0'] }}</span>)
-            </button>
-            <button id="act_eval1" class="btn btn-xs btn-success">
-                <span class="glyphicon glyphicon-thumbs-up"></span>
-                 (<span id="eval1">{{ kwd['eval_1'] }}</span>)
-            </button>
                 </div>
-            </div>
+
         </div>
     </div>
 
@@ -219,6 +214,15 @@ var login = {{ kwd['login'] }};
 {% block right %}
 
 <div class="panel panel-black">
+    <div class="panel-heading">地图评价</div>
+    <div class="panel-body" style="font-size: x-small">
+                    {% module star_rating(postinfo, userinfo) %}
+
+    </div>
+</div>
+
+
+<div class="panel panel-black">
     <div class="panel-heading">地图叠加</div>
     <div class="panel-body">
          {% if userinfo is None %}
@@ -307,6 +311,8 @@ var login = {{ kwd['login'] }};
         {% end %}
     </div>
 </div>
+
+
 
 
 <div class="panel panel-black">
