@@ -39,7 +39,6 @@
 
             <fieldset>
 
-                <input type="hidden" id="uid" name="uid" value="{{ kwd['uid'] }}">
 
 
                 <div class="form-group">
@@ -49,6 +48,14 @@
                         <input type="text" id="title" name="title" value="" class="form-control">
                     </div>
                 </div>
+                 <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">ID</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" id="ext_map_uid" name="ext_map_uid" value="" class="form-control">
+                    </div>
+                </div>
+
 
                 <div class="form-group">
                     <label for="keywords" class="col-sm-2 control-label">关键词</label>
@@ -113,32 +120,44 @@
                     </div>
                 </div>
 
-
+  {% for ii in range(0,5) %}
                 <div class="form-group">
-                    <label for="desc" class="col-sm-2 control-label">描述</label>
+                    {% if ii == 0 %}
+                    <label for="pcat0" class="col-sm-2 control-label">分类</label>
+                    {% else %}
+                    <label for="pcatx" class="col-sm-2 control-label"></label>
+                    {% end %}
 
-                    <div class="col-sm-10">
-                        <textarea rows=4 id="desc" name="desc" cols="70" class="form-control"></textarea>
+                    <div class="col-sm-3">
+                        <select name="pcat{{ii}}" id="pcat{{ii}}" class="form-control"
+                                onchange="g_load_postcat({{ii}})">
+                            <option value="">请选择</option>
+                            {% for taginfo in tag_infos %}
+                            {% if taginfo.uid.endswith('00') %}
+                            <option value="{{ taginfo.uid }}">{{ taginfo.name }}
+                            </option>
+                            {% else %}
+                            {% end %}
+                            {% end %}
+                        </select>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <select name="gcat{{ii}}" id="gcat{{ii}}" class="form-control">
+
+                        </select>
                     </div>
 
                 </div>
+                {% end %}
 
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">分类</label>
+ <div class="form-group">
+                    <label class="col-sm-2 control-label"> Logo </label>
 
                     <div class="col-sm-10">
-                        {% for ii in range(1,6) %}
-                        <select name="cat_{{ ii }}" id="cat_{{ ii }}" class="form-control">
-                            <option value="">请选择</option>
-                            {% for taginfo in tag_infos %}
-                            <option value="{{ taginfo.uid }}"   >{{ taginfo.name }}
-                            </option>
-                            {% end %}
-                        </select>
-                        {% end %}
+                        <input type="text" id="logo" name="logo" class="form-control">
                     </div>
-
                 </div>
 
 
