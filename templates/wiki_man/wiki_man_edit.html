@@ -43,8 +43,6 @@
     </div>
     <div class="panel-body">
           <form action="/wiki_man/edit/{{postinfo.uid}}" method="post" class="form-horizontal" role="form" id="form_post">
-
-
             <fieldset>
 
                 <div class="form-group">
@@ -59,11 +57,13 @@
                 <div class="form-group">
                     <label for="sub1" class="col-sm-1 control-label"></label>
                     <div class="col-sm-3">
-                        <input id="sub1" type="submit" class="btn btn-primary" value="更新"/>
+                        <input id="sub1" type="submit" class="btn btn-warning" value="更新"/>
                     </div>
                 </div>
             </fieldset>
         </form>
+        <div class="bg-warning">文本编辑使用MarkDown语法。
+            <a href="http://www.maplet.org/page/markdown.html">MarkDown语法说明</a></div>
     </div>
 </div>
 
