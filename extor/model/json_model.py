@@ -7,67 +7,67 @@ from torcms.core import tools
 class MJson(object):
     def __init__(self):
         try:
-            TabJson.create_table()
+            e_Json.create_table()
         except:
             pass
         try:
-            TabApp2Json.create_table()
+            e_Post2Json.create_table()
         except:
             pass
 
     def get_by_id(self, uid):
         try:
-            return TabJson.get(TabJson.uid == uid)
+            return e_Json.get(e_Json.uid == uid)
         except:
             return False
 
     def query_recent(self, user_id, num=10):
-        return TabJson.select().where(TabJson.user == user_id).order_by(TabJson.time_update.desc()).limit(num)
+        return e_Json.select().where(e_Json.user == user_id).order_by(e_Json.time_update.desc()).limit(num)
 
     def query_by_app(self, app_id, user_id):
         # return TabMap2Json.select().join(TabJson).where ( (TabMap2Json.app.uid == app_id) & (TabJson.user == user_id) ).order_by(TabJson.time_update.desc())
-        return TabJson.select().join(TabApp2Json).where((TabApp2Json.app == app_id) & (TabJson.user == user_id)).order_by(
-            TabJson.time_update.desc())
+        return e_Json.select().join(e_Post2Json).where((e_Post2Json.post_id == app_id) & (e_Json.user_id == user_id)).order_by(
+            e_Json.time_update.desc())
 
 
     def delete_by_uid(self, uid):
-        q = TabJson.delete().where( TabJson.uid == uid)
+        q = e_Json.delete().where(e_Json.uid == uid)
         try:
             q.execute()
         except:
             return False
 
     def add_json(self, json_uid, user_id, geojson):
-        current_count = TabJson.select().where(TabJson.uid == json_uid).count()
+        current_count = e_Json.select().where(e_Json.uid == json_uid).count()
 
         if current_count > 0:
             cur_record = self.get_by_id(json_uid)
-            entry = TabJson.update(
+            entry = e_Json.update(
                 json=geojson,
                 time_update=tools.timestamp(),
-            ).where(TabJson.uid == cur_record.uid)
+            ).where(e_Json.uid == cur_record.uid)
             entry.execute()
 
         else:
-            entry = TabJson.create(
+            entry = e_Json.create(
                 uid=json_uid,
                 title='',
                 # app=app_id,
-                user=user_id,
+                user_id=user_id,
                 json=geojson,
                 time_create=tools.timestamp(),
                 time_update=tools.timestamp(),
                 public=1,
             )
     def add_or_update(self, json_uid, user_id, app_id, geojson):
-        current_count = TabJson.select().where(TabJson.uid == json_uid).count()
+        current_count = e_Json.select().where(e_Json.uid == json_uid).count()
         self.add_json(json_uid, user_id, geojson)
 
         if current_count:
             pass
         else:
-            entry = TabApp2Json.create(
+            entry = e_Post2Json.create(
                 uid = tools.get_uuid(),
-                app = app_id,
+                post_id = app_id,
                 json = json_uid,
             )

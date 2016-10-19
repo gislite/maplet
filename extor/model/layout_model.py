@@ -7,37 +7,37 @@ from torcms.core import tools
 class MLayout(object):
     def __init__(self):
         try:
-            TabLayout.create_table()
+            e_Layout.create_table()
         except:
             pass
 
     def get_by_id(self, uid):
         try:
-            return TabLayout.get(TabLayout.uid == uid)
+            return e_Layout.get(e_Layout.uid == uid)
         except:
             return False
 
     def delete_by_uid(self, uid):
-        q = TabLayout.delete().where( TabLayout.uid == uid)
+        q = e_Layout.delete().where(e_Layout.uid == uid)
         try:
             q.execute()
         except:
             return False
         
     def query_recent(self, user_id, num=10):
-        return TabLayout.select().where(TabLayout.user == user_id).order_by(TabLayout.order).limit(num)
+        return e_Layout.select().where(e_Layout.user == user_id).order_by(e_Layout.order).limit(num)
 
     def query_by_app(self, app_id, user_id):
-        return TabLayout.select().where((TabLayout.app == app_id) & (TabLayout.user == user_id)).order_by(
-            TabLayout.time_update.desc())
+        return e_Layout.select().where((e_Layout.post_id == app_id) & (e_Layout.user_id == user_id)).order_by(
+            e_Layout.time_update.desc())
 
     def add_or_update(self, post_data):
         print(post_data)
-        entry = TabLayout.create(
+        entry = e_Layout.create(
             uid=tools.get_uu8d(),
             title='',
-            app=post_data['map'],
-            user=post_data['user'],
+            post_id=post_data['map'],
+            user_id=post_data['user'],
             json=post_data['geojson'] if 'geojson' in post_data else '',
             lon=float(post_data['lon']),
             lat=float(post_data['lat']),
