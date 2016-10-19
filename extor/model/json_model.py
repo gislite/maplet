@@ -22,7 +22,7 @@ class MJson(object):
             return False
 
     def query_recent(self, user_id, num=10):
-        return e_Json.select().where(e_Json.user == user_id).order_by(e_Json.time_update.desc()).limit(num)
+        return e_Json.select().where(e_Json.user_id == user_id).order_by(e_Json.time_update.desc()).limit(num)
 
     def query_by_app(self, app_id, user_id):
         # return TabMap2Json.select().join(TabJson).where ( (TabMap2Json.app.uid == app_id) & (TabJson.user == user_id) ).order_by(TabJson.time_update.desc())
