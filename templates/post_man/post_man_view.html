@@ -1,17 +1,5 @@
 {% extends "../theme/base_zhu.html" %}
 
-{% block headinfo %}
-
-<style type="text/css">
-        table.diff {font-family:Courier; border:medium;width:99%;}
-        .diff_header {background-color:#e0e0e0}
-        td.diff_header {text-align:right}
-        .diff_next {background-color:#c0c0c0}
-        .diff_add {background-color:#aaffaa}
-        .diff_chg {background-color:#ffff77}
-        .diff_sub {background-color:#ffaaaa}
-    </style>
-{% end %}
 
 {% block base_top_header %}
 <ol class="breadcrumb">
@@ -57,10 +45,9 @@
                 {% for diff_dic in html_diff_arr %}
 
 
-
                 {% if userinfo and userinfo.role[2] >= '1' %}
-        <div class="bg-info"><a href="/post_man/restore/{{ diff_dic['hist_uid'] }}" class="btn btn-sm btn-danger">Restore</a>
-        <a href="/post_man/delete/{{ diff_dic['hist_uid'] }}" class="btn btn-sm btn-danger">Delete</a>
+        <div class="bg-info"><a href="/post_man/restore/{{ diff_dic['hist_uid'] }}" class="btn btn-xs btn-warning">Restore</a>
+        <a href="/post_man/delete/{{ diff_dic['hist_uid'] }}" class="btn btn-xs btn-danger">Delete</a>
         </div>
         {% end %}
                 {% raw (diff_dic['html_diff']) %}
@@ -71,19 +58,7 @@
             </div>
         </div>
 
-        <div class="postmeta">
-            <div class="wpyouvote"></div>
-            <div class="clear"></div>
-            <br>
-            <strong>Article link:</strong>
-            <a href="{% module site_url() %}/post/{{view.uid}}.html" class="underline"> {{ view.title }}</a>
-            <br/>
-            <strong>Copyright:</strong> Non special statement are original articles, reproduced please indicate the
-            source：
-            <a href="http://osgeo.cn" class="underline">OSGeo中国中心</a><br>
 
-
-        </div>
 
 
     </div>
