@@ -1,0 +1,49 @@
+{% extends "../../theme/base.html" %}
+
+{% block head %}
+
+
+<title>地图画板 Maplet</title>
+
+<meta name="description"
+      content="地图画板 Maplet">
+<meta name="keywords"
+      content="地图画板 Maplet">
+
+
+{% end %}
+
+
+{% block zhuti %}
+
+
+
+<div class="panel panel-black">
+    <div class="panel-heading">网站内容共同创作维护说明</div>
+    <div class="panel-body">
+        {% module show_page('wiki_editor') %}
+    </div>
+</div>
+{% end %}
+
+
+{% block right %}
+
+
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+           地图分类
+        </h3>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+
+            {% module app_menu(20) %}
+
+        </ul>
+    </div>
+</div>
+
+{% end %}
