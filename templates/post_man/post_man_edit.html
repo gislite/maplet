@@ -1,31 +1,7 @@
-{% extends "../theme/base_zhu.html" %}
+{% extends "../theme/base_edit.html" %}
 
 
-{% block head %}
-
-
-
-<script src="{{ static_url('f2elib/codemirror_5.19.0/lib/codemirror.js') }}"></script>
-<script src="{{ static_url('f2elib/codemirror_5.19.0/addon/edit/continuelist.js') }}"></script>
-<script src="{{ static_url('f2elib/codemirror_5.19.0/mode/markdown/markdown.js') }}"></script>
-<link rel="stylesheet" href="{{ static_url('f2elib/codemirror_5.19.0/lib/codemirror.css') }}">
-
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        var editor = CodeMirror.fromTextArea(document.getElementById("cnt_md"), {
-            lineWrapping: true,
-            mode: 'markdown',
-            lineNumbers: true,
-            theme: "default",
-            extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
-        });
-    });
-</script>
-
-{% end %}
-
-{% block base_top_header %}
+{% block edit %}
 <ol class="breadcrumb">
     <li>Current location: <a href="{% module site_url() %}">Home</a></li>
     <li>{% module the_category(postinfo.uid) %}</li>

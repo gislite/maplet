@@ -1,26 +1,26 @@
-{% extends "../../theme/calcubic_edit.html" %}
+{% extends "../../theme/base_edit.html" %}
 
 
 
-{% block zhuti %}
+{% block edit %}
 
 
 
 <div class="panel panel-black">
     <div class="panel-heading">
-        {{ dbrec.title }}－修改
+        {{ postinfo.title }}－修改
 
     </div>
     <div class="panel-body">
         <form action="" method="post" class="form-horizontal" id="form_post">
             <fieldset>
-                <input type="hidden" id="id_post" name="id_post" value="{{ dbrec.uid }}"/>
+                <input type="hidden" id="id_post" name="id_post" value="{{ postinfo.uid }}"/>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="title">标题</label>
 
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" id="title" name="title" value="{{ dbrec.title }}">
+                        <input class="form-control" type="text" id="title" name="title" value="{{ postinfo.title }}">
                     </div>
                 </div>
 
@@ -36,7 +36,7 @@
                     <label class="col-sm-2 control-label" for="cnt_md">内容</label>
                     <div class="col-sm-10">
                         <textarea class="form-control" rows=26 id="cnt_md" name="cnt_md" cols="100">
-                            {% raw unescape(dbrec.cnt_md) %}
+                            {% raw unescape(postinfo.cnt_md) %}
                         </textarea>
                     </div>
                 </div>

@@ -1,10 +1,22 @@
-{% extends "../../theme/base.html" %}
+{% extends "../../theme/base_edit.html" %}
 
-{% block zhuti %}
+{% block head %}
 
+<script src="{{ static_url('f2elib/codemirror_5.19.0/lib/codemirror.js') }}"></script>
+<script src="{{ static_url('f2elib/codemirror_5.19.0/addon/edit/continuelist.js') }}"></script>
+<script src="{{ static_url('f2elib/codemirror_5.19.0/mode/markdown/markdown.js') }}"></script>
+<link rel="stylesheet" href="{{ static_url('f2elib/codemirror_5.19.0/lib/codemirror.css') }}">
 
 <script type="text/javascript">
-    $().ready(function () {
+    $(document).ready(function () {
+        var editor = CodeMirror.fromTextArea(document.getElementById("cnt_md"), {
+            lineWrapping: true,
+            mode: 'markdown',
+            lineNumbers: true,
+            theme: "default",
+            extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
+        });
+
         $("#form_post").validate(
                 {
                     rules: {
@@ -28,6 +40,10 @@
         );
     });
 </script>
+{% end %}
+
+
+{% block edit %}
 
 <!--
 <div class="panel panel-default">
@@ -37,7 +53,6 @@
     </div>
 </div>
 -->
-
 <div class="panel panel-black">
     <div class="panel-heading">输入地图相关信息</div>
 
@@ -247,6 +262,8 @@
         </form>
     </div>
 </div>
+
+
 {% end %}
 
 
