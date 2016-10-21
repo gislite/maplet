@@ -194,7 +194,7 @@ class GeoJsonHandler(BaseHandler):
 
             cur_info = self.mjson.get_by_id(uid)
 
-            if cur_info.user.uid ==  self.userinfo.uid:
+            if cur_info.user_id ==  self.userinfo.uid:
                 pass
             else:
                 return_dic['status'] = 0
@@ -250,7 +250,7 @@ class GeoJsonHandler(BaseHandler):
 
             cur_info = self.mjson.get_by_id(uid)
 
-            if cur_info.user.uid ==  self.userinfo.uid:
+            if cur_info.user_id ==  self.userinfo.uid:
                 pass
             else:
                 return_dic['status'] = 0
