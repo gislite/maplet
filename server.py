@@ -1,11 +1,9 @@
 # coding:utf-8
 
-import os
 import sys
-from torcms.modules.modef import core_modules
-from extor.modules.map_modules import *
+import tornado.locale
+import tornado.ioloop
 from config import SITE_CFG
-from urls import urls
 from application import app
 
 PORT = SITE_CFG['PORT']
