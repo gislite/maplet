@@ -41,7 +41,7 @@ $(document).ready(function () {
     currentX = 0;
     currentY = 0;
     map_uid = '';
-    alert(map_uid);
+
     $('#btn_updatemap').click(function () {
         $.ajax({
             url: '/admin_map/_update_view/m' + map_uid,
@@ -84,7 +84,7 @@ $(document).ready(function () {
             var sig_map_1, sig_map_2, url_new;
             sig_map_1 = $("#over_map_1").val();
             sig_map_2 = $("#over_map_2").val();
-            url_new = "/map/overlay/m" + map_uid + "/" + sig_map_1;
+            url_new = "/overlay/" + map_uid + "/" + sig_map_1;
             if (sig_map_2 !== "") {
                 url_new = url_new + "/" + sig_map_2;
             }
@@ -146,7 +146,7 @@ $(document).ready(function () {
         popup = L.popup();
         cities = new L.LayerGroup();
         drawnItems = new L.FeatureGroup();
-        alert("maplet_" + map_uid);
+        
         nexrad = L.tileLayer.wms("http://wcs.osgeo.cn:8088/service?", {
             layers: "maplet_" + map_uid,
             format: "image/png",

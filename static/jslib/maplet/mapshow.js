@@ -84,7 +84,7 @@
         var sig_map_1, sig_map_2, url_new;
         sig_map_1 = $("#over_map_1").val();
         sig_map_2 = $("#over_map_2").val();
-        url_new = "/map/overlay/m" + map_uid + "/" + sig_map_1;
+        url_new = "/map/overlay/" + map_uid + "/" + sig_map_1;
         if (sig_map_2 !== "") {
           url_new = url_new + "/" + sig_map_2;
         }
