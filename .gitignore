@@ -62,7 +62,7 @@ target/
 ### Configure for TorCMS/torlite
 
 xx*
-config.py
+cfg.py
 
 .DS_Store
 *.db

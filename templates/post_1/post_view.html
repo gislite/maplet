@@ -1,0 +1,177 @@
+{% extends "../theme/base_view.html" %}
+
+{% block head %}
+<title>{{ view.title }}|在线地图</title>
+<meta name="description" content="{% module generate_description(view.cnt_html) %}">
+<meta name="keywords" content="{{ view.keywords }},在线地图">
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.get('/rel/post/{{view.uid}}');
+    });
+</script>
+
+
+{% end %}
+
+{% block zhuti %}
+
+<div class="panel panel-black">
+
+    <div class="panel-heading">
+
+        <h1>{{ view.title }}</h1>
+
+        <div>
+            发布者: <a href="/" style="color:#ffffff;">Maplet</a>&nbsp;&nbsp;
+            发布日期：
+            {{ str(view.date).split()[0] }}&nbsp;&nbsp;
+
+            {#
+            查看:
+            <em id="_viewnum">{{ view.view_count }}</em>
+            #}
+            &nbsp;&nbsp;
+
+            分类：
+            <span class="post_cat">{% module post_catalogs(view.uid ) %}</span>
+
+            {% module widget_editor('post', postinfo.uid, userinfo) %}
+
+        </div>
+    </div>
+
+    <div class="panel-body">
+
+
+        <div id="wiki_cnt">
+            {% raw unescape(view.cnt_html) %}
+        </div>
+
+
+        {% if 1 == 2 %}
+        {% if len(view.uid) == 4 %}
+        <div style="margin: 10px 5px 3px 30px; color: rgb(66, 184, 221);">
+            打开 <a href="/app/{{ view.uid }}" class="pure-button button-secondary"> 在线地图 </a> 进行浏览
+        </div>
+        {% end %}
+        {% if len(view.uid) == 5 and view.uid.startswith('m') %}
+        <div style="margin: 10px 5px 3px 30px; color: rgb(66, 184, 221);">
+            查看 <a href="/map/{{ view.uid[1:] }}" class="btn btn-primary btn-small"> 地图 </a>
+        </div>
+        {% end %}
+        {% end %}
+
+        <p style="border-bottom: 1px dashed #dddddd; margin-bottom: 20px">&nbsp;</p>
+
+{% module reply_panel(postinfo.uid, userinfo) %}
+
+
+
+    </div>
+
+
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-md-6">
+                <span>标签:</span>
+                <span class="post_cat">
+                    {% set iii = 1 %}
+                    {% for x in tag_info %}
+                    <a href="/label/{{ x.tag.uid }}" class="app_label tag{{ iii }}">{{ x.tag.name }}</a>
+                    {% set iii = iii + 1 %}
+                    {% end %}
+                </span>
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="col-md-6">
+                本文链接： <a href="http://www.maplet.org/post/{{ view.uid }}.html">{{ view.title }}</a>
+            </div>
+
+
+            <div class="col-md-6" style="text-align: right;">
+                <div class="widget_baidu_share">{% module baidu_share() %}</div>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 sxan" style="float: left">{% module previous_post_link(view.uid) %}</div>
+            <div class="col-md-6 sxan" style="text-align: right;">{% module next_post_link(view.uid) %}</div>
+        </div>
+    </div>
+
+</div>
+{% end %}
+
+
+{% block right %}
+
+{% if userinfo is not None and userinfo.role[2] == '1' %}
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            用户操作
+        </h3>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item"><a href="/post/add_document" class="btn btn-small btn-primary">添加文档</a></li>
+        <li class="list-group-item"><a href="/post/refresh" class="btn btn-small btn-primary">更新文档</a></li>
+    </ul>
+</div>
+{% end %}
+
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            相关地图
+        </h3>
+    </div>
+    {% module rel_post2app(view.uid, 4) %}
+</div>
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            相关文档
+        </h3>
+    </div>
+
+    <ul class="list-group">
+        {% for s in relations %}
+        <li class="list-group-item">
+            <a href="/post/{{ s.post.uid }}.html">
+                <span class="glyphicon glyphicon-list-alt"></span> {{ s.post.title }}
+            </a>
+        </li>
+        {% end %}
+
+
+    </ul>
+
+</div>
+
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            最近地图
+        </h3>
+    </div>
+
+    <ul class="list-group">
+        {% module app_recent_used('m', 6, userinfo = userinfo) %}
+    </ul>
+
+</div>
+
+<script src="{{ static_url('jslib/maplet/mapletm.js') }}"></script>
+{% end %}

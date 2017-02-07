@@ -1,0 +1,68 @@
+<form id="reply_form" method="post" class="pure-form pure-form-aligned">
+
+
+        <div class="pure-control-group">
+            我来评论
+        </div>
+        <div class="pure-control-group">
+
+
+            <textarea cols="80" rows="5" name="cnt_md" id="cnt_md"></textarea>
+        </div>
+        <div class="pure-control-group">
+
+            <a id="btn_submit_reply" onclick="reply_it('{{ sig }}', '{{ uid }}');" class="pure-button pure-button-primary">提交</a>
+        </div>
+
+    </form>
+
+    <div id="pinglun"></div>
+   
+    往期评论
+
+    <p style="border-bottom: 1px dashed #dddddd; margin-bottom: 20px">&nbsp;</p>
+
+
+
+         {% set ii = 0 %}
+
+
+    {% for reply in replys %}
+
+    <div id="del_zan_{{ ii }}" style="font-size: 14px;">
+
+
+        <p><strong>{{ reply.reply_id.user_name }}</strong></p>
+
+        <p>{% raw unescape(reply.reply_id.cnt_html) %}</p>
+
+        <p>编辑于{{ str(reply.reply_id.date).split('.')[0] }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;共
+            <span id="text_zan_{{ ii }}">{{ reply.reply_id.vote }}</span>
+            个人赞同 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+            {% if (userinfo is None) or ( (userinfo is not None ) and ( userinfo.uid != reply.reply_id.uid )) %}
+            <a class="btn btn-primary"
+               style="padding:3px 8px; margin-right: 5px"
+               onclick="reply_zan('post', '{{ reply.reply_id.uid }}', {{ ii }} );">
+                赞
+            </a>
+            {% end %}
+
+
+            {% if userinfo is not None and ( userinfo.uid == reply.reply_id.uid or userinfo.role[4] == '1') %}
+
+
+            <a class="btn btn-primary" style="padding:3px 8px;"
+               onclick="reply_del('post', '{{ reply.reply_id.uid }}', {{ ii }} );">
+                删除
+            </a>
+            {% end %}
+
+        </p>
+
+        <p style="border-bottom: 1px dashed #dddddd; margin-bottom: 20px">&nbsp;</p>
+
+    </div>
+    {% set ii = ii + 1 %}
+    {% end %}

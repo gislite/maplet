@@ -18,50 +18,38 @@
 </div>
 </form>
 
-    <div id="pinglun"></div>
+<div id="pinglun"></div>
+往期评论
+<p style="border-bottom: 1px dashed #dddddd; margin-bottom: 20px">&nbsp;</p>
+     {% set ii = 0 %}
+{% for reply in replys %}
 
-    往期评论
+<div id="del_zan_{{ ii }}" style="font-size: 14px;">
+    <p><strong>{{ reply.user_name }}</strong></p>
+    <p class="listinfo_content"> {% raw unescape(reply.cnt_html) %}</p>
 
+    <p>编辑于{{ str(reply.timestamp).split('.')[0] }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;共
+        <span id="text_zan_{{ ii }}">{{ reply.vote }}</span>
+        个人赞同 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        {% if (userinfo is None) or ( (userinfo) and ( userinfo.uid != reply.user_id )) %}
+        <a class="btn btn-xs btn-primary"
+           style="padding:3px 8px; margin-right: 5px"
+           onclick="reply_zan('{{ reply.uid }}', {{ ii }} );">
+            赞
+        </a>
+        {% end %}
+
+        {% if userinfo and ( userinfo.uid == reply.user_id or userinfo.role[2] > '1') %}
+
+        <a class="btn btn-xs btn-primary" style="padding:3px 8px;"
+           onclick="reply_del('{{ reply.uid }}', {{ ii }} );">
+            删除
+        </a>
+        {% end %}
+    </p>
     <p style="border-bottom: 1px dashed #dddddd; margin-bottom: 20px">&nbsp;</p>
 
-
-
-         {% set ii = 0 %}
-
-
-    {% for reply in replys %}
-
-    <div id="del_zan_{{ ii }}" style="font-size: 14px;">
-        <p>{{ reply.user_name }}</p>
-        <p> {% raw unescape(reply.cnt_html) %}</p>
-
-        <p>编辑于{{ str(reply.timestamp).split('.')[0] }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;共
-            <span id="text_zan_{{ ii }}">{{ reply.vote }}</span>
-            个人赞同 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-
-            {% if (userinfo is None) or ( (userinfo) and ( userinfo.uid != reply.user_id )) %}
-            <a class="btn btn-primary"
-               style="padding:3px 8px; margin-right: 5px"
-               onclick="reply_zan('{{ reply.uid }}', {{ ii }} );">
-                赞
-            </a>
-            {% end %}
-
-
-            {% if userinfo and ( userinfo.uid == reply.user_id or userinfo.role[4] == '1') %}
-
-
-            <a class="btn btn-primary" style="padding:3px 8px;"
-               onclick="reply_del('{{ reply.uid }}', {{ ii }} );">
-                删除
-            </a>
-            {% end %}
-
-        </p>
-
-        <p style="border-bottom: 1px dashed #dddddd; margin-bottom: 20px">&nbsp;</p>
-
-    </div>
-    {% set ii = ii + 1 %}
-    {% end %}
+</div>
+{% set ii = ii + 1 %}
+{% end %}

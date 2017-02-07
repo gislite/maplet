@@ -1,0 +1,32 @@
+<ul class="pagination">
+
+{% if kwd['page_home'] %}
+<li>
+    <a class="{0}" href="/info_tag/{{ cat_slug }}/1">首页 </a>
+</li>
+{% end %}
+
+{% if kwd['page_pre'] %}
+<li>
+    <a class="{0}" href="/info_tag/{{ cat_slug }}/{{ page_current - 1 }}">上一页</a>
+</li>
+{% end %}
+
+{% for page_index in range(0, pager_num ) %}
+<li class="{% if page_current == page_index + 1 %}active{% end %}">
+    <a  href="/info_tag/{{ cat_slug }}/{{ page_index + 1 }}">{{ page_index + 1}}</a></li>
+{% end %}
+
+{% if kwd['page_next'] %}
+<li>
+    <a class="{0}" href="/info_tag/{{ cat_slug }}/{{ page_current +1 }}">下一页</a>
+</li>
+{% end %}
+
+
+{% if kwd['page_end'] %}
+<li>
+    <a class="{0}" href="/info_tag/{{ cat_slug }}/{{ pager_num }}">末页</a>
+</li>
+{% end %}
+</ul>

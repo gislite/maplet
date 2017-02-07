@@ -45,7 +45,7 @@
                 </div>
                 #}
                 <div class="col-md-12"><div class="well" >
-                    {% module show_page('volunteers') %}
+                    {% module show_page(page_id = 'volunteers') %}
                     </div>
                     </div>
             </div>
@@ -54,20 +54,20 @@
 
         <div class="col-sm-4">
 
-         <div class="panel panel-black"> {% module  app_catalog_of('29') %} </div>
+        {% module  app_catalog_of('2100', slug =True) %}
 
- <div class="panel panel-black"> {% module  app_catalog_of('33') %} </div>
+ {% module  app_catalog_of('3105', slug =True) %}
         </div>
         <div class="col-sm-4">
-           <div class="panel panel-black"> {% module  app_catalog_of('23') %} </div>
-         <div class="panel panel-black"> {% module  app_catalog_of('25') %} </div>
+         {% module  app_catalog_of('2309', slug =True) %}
+         {% module  app_catalog_of('2505', slug =True) %}
 
         </div>
         <div class="col-sm-4">
 
-           <div class="panel panel-black"> {% module  app_catalog_of('21') %} </div>
-         <div class="panel panel-black"> {% module  app_catalog_of('27') %} </div>
- <div class="panel panel-black"> {% module  app_catalog_of('31') %} </div>
+  {% module  app_catalog_of('2511', slug =True) %}
+  {% module  app_catalog_of('2701', slug =True) %}
+            {% module  app_catalog_of('2905', slug =True) %}
 
         </div>
 
@@ -86,11 +86,9 @@
     </div>
 
     <ul class="list-group">
-        {% if userinfo is None %}
-        {% module app_recent_used(10) %}
-        {% else %}
-        {% module app_user_recent(userinfo.user_name,6) %}
-        {% end %}
+
+        {% module app_recent_used('m', 6, userinfo = userinfo) %}
+
     </ul>
 
 </div>
@@ -103,11 +101,7 @@
     </div>
 
     <ul class="list-group">
-        {% if userinfo is None %}
-        {% module app_most_used(10) %}
-        {% else %}
-        {% module app_user_most(userinfo.user_name, 6) %}
-        {% end %}
+        {% module app_most_used('m', 6, userinfo = userinfo) %}
     </ul>
 
 </div>

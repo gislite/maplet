@@ -1,0 +1,10 @@
+
+{% for x in kwd['cats'] %}
+<li class="list-group-item">
+    <a href="{% module site_url() %}/category/{{ x.slug }}">
+    {{ x.name }}
+    {% if kwd['with_count'] %}
+    [{{ x.app_count}}]
+    {% end %}
+</a></li>
+{% end %}

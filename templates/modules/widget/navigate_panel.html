@@ -1,0 +1,83 @@
+<div class="container-fluid">
+<div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-globe"></span>OSGeo中国</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><a href="/info/">信息</a></li>
+                        <li><a href="/post/">文档</a></li>
+                        <li><a href="/map/">地图</a></li>
+
+                        <li><a href="/app/">工具</a></li>
+
+                        <li><a href="/wetland/">数据</a></li>
+
+
+                        {% if userinfo and userinfo.role[1] >= '2' %}
+                         <li>
+                            <a href="/service/" >服务</a>
+                        </li>
+                        {% end %}
+
+                        <li class="dropdown">
+                            <a href="/page/help" class="dropdown-toggle" data-toggle="dropdown">应用
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/application/geogrid/">地理空间格网</a></li>
+                                {#
+                                <li>吉林省农产地环境</li>
+                                #}
+                            </ul>
+                        </li>
+
+
+                        <li class="dropdown">
+                            <a href="/page/help" class="dropdown-toggle" data-toggle="dropdown">用户
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/user_list/user_recent">最近使用</a></li>
+                                <li><a href="/user_list/user_most">使用最多</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/collect/list">我的收藏</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/user/info">我的信息</a></li>
+
+ {% if userinfo and userinfo.role[1] >= '1' %}
+            <li >
+                <a href="/post/add_document" >添加文档</a>
+                </li>
+            {% end %}
+                                {#
+                                <li><a href="/blog/{{ userinfo.user_name }}/">我的Blog</a></li>
+                                #}
+
+
+                            </ul>
+                        </li>
+
+
+
+<li>
+                            <a href="https://github.com/bukun/TorCMS" target="_blank"><span class="badge">by TorCMS</span></a>
+                        </li>
+
+
+                    </ul>
+
+
+                                {% module widget_search() %}
+
+                </div>
+
+
+
+
+    </div>

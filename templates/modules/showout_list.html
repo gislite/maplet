@@ -1,0 +1,10 @@
+{% for x in recs %}
+<li  style="float: left; width: {{ kwd['width'] }}px; " class="list-group-item">
+    <a href="/post/{{ x.uid }}" title="{{ x.title }}">
+        <img src="{{ x.logo }}" width="{{ kwd['width'] }}"
+             height="{{ kwd['height'] }}"
+             alt="{{ x.title }}">
+        <span>{{ x.title }}</span>
+    </a>
+</li>
+{% end %}

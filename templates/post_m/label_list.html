@@ -1,0 +1,26 @@
+{% extends "../theme/main.html" %}
+
+{% block tpmain %}
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h1>查找结果</h1>
+    </div>
+
+
+    <ul class="list-group">
+        {% for rec in infos %}
+        <li class="list-group-item"><a href="/map/{{ rec.uid }}">{{ rec.title }}</a>
+        </li>
+        {% end %}
+    </ul>
+    
+    <div class="panel-footer">
+        <ul class="pagination">
+            {% raw pager %}
+        </ul>
+    </div>
+</div>
+
+
+{% end %}
