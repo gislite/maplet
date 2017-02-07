@@ -115,7 +115,7 @@ $(document).ready(function () {
             popup.setContent("坐标位置" + e.latlng.toString());
             currentZoom = map.getZoom();
             cmap_coor = e.latlng;
-            link_str = "http://www.osgeo.cn/map/m" + map_uid + "?zoom=" + currentZoom + "&lat=" + cmap_coor.lat.toFixed(4) + "&lon=" + cmap_coor.lng.toFixed(4) + "&marker=1";
+            link_str = "http://www.maplet.org/map/" + map_uid + "?zoom=" + currentZoom + "&lat=" + cmap_coor.lat.toFixed(4) + "&lon=" + cmap_coor.lng.toFixed(4) + "&marker=1";
             if (geojsonid !== "") {
                 link_str = link_str + "&geojson=" + geojsonid;
             }
@@ -132,7 +132,7 @@ $(document).ready(function () {
             cmap_coor = map.getCenter();
             currentX = cmap_coor.lng.toFixed(3).toString();
             currentY = cmap_coor.lat.toFixed(3).toString();
-            link_str = "http://www.osgeo.cn/map/m" + map_uid + "?zoom=" + currentZoom + "&lat=" + cmap_coor.lat.toFixed(4) + "&lon=" + cmap_coor.lng.toFixed(4);
+            link_str = "http://www.maplet.org/map/" + map_uid + "?zoom=" + currentZoom + "&lat=" + cmap_coor.lat.toFixed(4) + "&lon=" + cmap_coor.lng.toFixed(4);
             if (geojsonid !== "") {
                 link_str = link_str + "&geojson=" + geojsonid;
             }
@@ -151,7 +151,7 @@ $(document).ready(function () {
             layers: "maplet_" + map_uid,
             format: "image/png",
             transparent: true,
-            attribution: 'Map &copy; <a href=\"http://www.osgeo.cn/map/m' + map_uid + '\">OSGeo China</a>'
+            attribution: 'Map &copy; <a href=\"http://www.maplet.org/map/' + map_uid + '\">Maplet</a>'
         });
         osm = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYnVrdW4iLCJhIjoiY2lqeWFjZmo4MXFubndka2lzcnZ1M2tzciJ9.C1dZUQkRZSIEKfg-DaFYpw", {
             maxZoom: 18,

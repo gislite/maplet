@@ -20,7 +20,7 @@ module.exports = function (grunt) {
         uglify: {
             options: {mangle: false,},
             build: {
-                src: ['src/gscript.js', 'maplet/mapshow.js', 'maplet/message_cn.js'],
+                src: ['src/gscript.js', 'src/mapshow.js', 'maplet/message_cn.js'],
                 dest: 'dst/gscript.js'
             },
 
