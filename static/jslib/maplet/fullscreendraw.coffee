@@ -148,7 +148,16 @@ $(document).ready ->
           myGeoJson = L.geoJson(item)
           myGeoJson.addTo drawnItems
 
+          
+
       L.geoJson(gson_arr).addTo drawnItems  if login is 0
+
+  #  //Initialize the StyleEditor
+  styleEditor = L.control.styleEditor(
+        position: "topleft"
+  )
+
+  map.addControl styleEditor
 
   L.EditControl = L.Control.extend(
     options:

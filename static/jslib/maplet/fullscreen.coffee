@@ -4,7 +4,7 @@ $(document).ready ->
   onZoomend = ->
     currentZoom = map.getZoom()
     cmap_coor = map.getCenter()
-    link_str = "http://www.maplet.org/map/" + map_uid + "?zoom=" + currentZoom + "&lat=" + cmap_coor.lat.toFixed(4) + "&lon=" + cmap_coor.lng.toFixed(4)
+    link_str = "http://www.osgeo.cn/map/m" + map_uid + "?zoom=" + currentZoom + "&lat=" + cmap_coor.lat.toFixed(4) + "&lon=" + cmap_coor.lng.toFixed(4)
     link_str = link_str + "&geojson=" + geojsonid  unless geojsonid is ""
     $("#current_view_url").css "color", ""
     $("#current_view_url").html link_str
@@ -50,7 +50,7 @@ $(document).ready ->
     map.doubleClickZoom.enable()
     $.ajax
       type: "POST"
-      url: "/geojson/" + map_uid + "/" + geojsonid
+      url: "/geojson/m" + map_uid + "/" + geojsonid
       data:
         geojson: JSON.stringify(shape)
 
@@ -65,7 +65,7 @@ $(document).ready ->
           alert "请检查是否拥有数据权限！"
         else
           show_saved_info()
-          location.href = "/map/" + map_uid + "?gson=" + geo["sig"] + "&fullscreen=1"  unless geo["sig"] is ""
+          location.href = "/map/m" + map_uid + "?gson=" + geo["sig"] + "&fullscreen=1"  unless geo["sig"] is ""
 
   $("#load_geojson").click ->
     hdata = $("#hdata").val()

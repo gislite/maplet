@@ -6,7 +6,7 @@
       var cmap_coor, currentZoom, link_str;
       currentZoom = map.getZoom();
       cmap_coor = map.getCenter();
-      link_str = "http://www.maplet.org/map/" + map_uid + "?zoom=" + currentZoom + "&lat=" + cmap_coor.lat.toFixed(4) + "&lon=" + cmap_coor.lng.toFixed(4);
+      link_str = "http://www.osgeo.cn/map/m" + map_uid + "?zoom=" + currentZoom + "&lat=" + cmap_coor.lat.toFixed(4) + "&lon=" + cmap_coor.lng.toFixed(4);
       if (geojsonid !== "") {
         link_str = link_str + "&geojson=" + geojsonid;
       }
@@ -25,7 +25,7 @@
       map.doubleClickZoom.enable();
       return $.ajax({
         type: "POST",
-        url: "/geojson/" + map_uid + "/" + geojsonid,
+        url: "/geojson/m" + map_uid + "/" + geojsonid,
         data: {
           geojson: JSON.stringify(shape)
         },
@@ -42,7 +42,7 @@
           } else {
             show_saved_info();
             if (geo["sig"] !== "") {
-              return location.href = "/map/" + map_uid + "?gson=" + geo["sig"] + "&fullscreen=1";
+              return location.href = "/map/m" + map_uid + "?gson=" + geo["sig"] + "&fullscreen=1";
             }
           }
         }

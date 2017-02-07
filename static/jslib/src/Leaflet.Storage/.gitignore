@@ -1,0 +1,15 @@
+*.pyc
+*.pyo
+*.swp
+*.lock
+*.pid
+*.DS_Store
+*.svn
+*.pdg
+*.orig
+*~
+doc/_build/*
+node_modules/*
+reqs/*
+npm-debug.log
+*.bk
