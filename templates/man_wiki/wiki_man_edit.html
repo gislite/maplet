@@ -1,0 +1,44 @@
+{% extends "../theme/base_edit.html" %}
+
+
+{% block edit %}
+
+<div class="panel panel-black">
+
+
+    <div class="panel-heading">
+
+        <h2>{{ postinfo.title }}</h2>
+        <span>{{ str(postinfo.date).split()[0] }}</span>
+        <span>Browse: {{ postinfo.view_count }} 次</span>
+        <span class="cmts"><a class="btn btn-xm btn-primary" href="/wiki/{{ postinfo.title }}">View</a></span>
+    </div>
+    <div class="panel-body">
+          <form action="/wiki_man/edit/{{postinfo.uid}}" method="post" class="form-horizontal" role="form" id="form_post">
+            <fieldset>
+
+                <div class="form-group">
+
+                    <div class="col-sm-10">
+            <textarea rows=26 id="cnt_md" name="cnt_md" cols="80" class="form-control">
+                {% raw unescape(postinfo.cnt_md) %}
+            </textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="sub1" class="col-sm-1 control-label"></label>
+                    <div class="col-sm-3">
+                        <input id="sub1" type="submit" class="btn btn-warning" value="更新"/>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <div class="bg-warning">文本编辑使用MarkDown语法。
+            <a href="/page/markdown">MarkDown语法说明</a></div>
+    </div>
+</div>
+
+{% end %}
+
+

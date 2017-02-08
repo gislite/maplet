@@ -80,7 +80,8 @@
                     最近用地图 
                 </div>
                 <ul class="list-group">
-                    {% module app_user_recent( user_name=userinfo.user_name , num = 8) %}
+
+                     {% module app_recent_used('m', 8, userinfo = userinfo) %}
                 </ul>
             </div>
 
@@ -92,7 +93,8 @@
                     最常用地图 
                 </div>
                 <ul class="list-group">
-                    {% module app_user_most( user_name=userinfo.user_name , num = 8) %}
+
+                     {% module app_most_used('m', 8, userinfo = userinfo) %}
                 </ul>
             </div>
 

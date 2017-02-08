@@ -1,15 +1,18 @@
 {#
 这个没用到，应该是单独画图用。
 #}
-{% extends "../theme_m/map_calcubic_full.html" %}
+{% extends "../theme/map_calcubic_full.html" %}
 {% block head %}
 <title>地图画板,在线绘制地理数据</title>
 <meta name="keywords" content="在线地图,地图画板">
 
 
+{#
 <script src="{{ static_url('jslib/dist/leaflet.draw.js') }}"></script>
 <link rel="stylesheet" href="{{ static_url('jslib/Leaflet.draw/dist/leaflet.draw.css') }}" />
+#}
 
+<script type="text/javascript" src="{{ static_url('jslib/dst/leafedit.js') }}"></script>
 
 
 <style type="text/css">

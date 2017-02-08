@@ -2,9 +2,9 @@ $.ready()
 {
 
     function select_sub_tag(html2) {
-$('#showCnt').load(html2);
-}
-    
+        $('#showCnt').load(html2);
+    }
+
     if (typeof(CodeMirror) == 'undefined') {
     }
 
@@ -36,8 +36,6 @@ $('#showCnt').load(html2);
             }
         })
     }
-
-
 
 
     $("#form_reset").validate(
@@ -103,30 +101,30 @@ $('#showCnt').load(html2);
 
     function g_load_kindcat() {
 
-            $.ajax({
-                url: '/category/j_kindcat/' + $('#kcat').val(),
-                type: 'GET',
-                data: {},
-                timeout: 1000,
-                error: function () {
-                    alert('重新加载');
-                },
-                success: function (result) {
-                    var data = eval("(" + result + ")");
-                    $('#pcat0').empty();
+        $.ajax({
+            url: '/category/j_kindcat/' + $('#kcat').val(),
+            type: 'GET',
+            data: {},
+            timeout: 1000,
+            error: function () {
+                alert('重新加载');
+            },
+            success: function (result) {
+                var data = eval("(" + result + ")");
+                $('#pcat0').empty();
 
+                $("<option></option>")
+                    .val("0")
+                    .text("selectd")
+                    .appendTo($('#pcat0'));
+                $.each(data, function (tagidx, tagname) {
                     $("<option></option>")
-                            .val("0")
-                            .text("selectd")
-                            .appendTo($('#pcat0'));
-                    $.each(data, function (tagidx, tagname) {
-                        $("<option></option>")
-                            .val(tagidx)
-                            .text(tagname)
-                            .appendTo($('#pcat0'));
-                    });
-                }
-            });
+                        .val(tagidx)
+                        .text(tagname)
+                        .appendTo($('#pcat0'));
+                });
+            }
+        });
 
     }
 
@@ -211,7 +209,6 @@ $('#showCnt').load(html2);
         });
     }
 
-    
 
     function reply_it(view_id) {
 

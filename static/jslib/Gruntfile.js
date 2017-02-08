@@ -33,6 +33,16 @@ module.exports = function (grunt) {
                     'dst/leafedit.js': ['src/Leaflet.Editable.js']
                 }
             },
+
+            fullscreen:{//任务二：压缩b.js，输出压缩信息
+                options: {
+                    mangle: false,
+                    report: "min"//输出压缩率，可选的值有 false(不输出信息)，gzip
+                },
+                files: {
+                    'dst/fullscreen.js': ['src/fullscreen.js']
+                }
+            },
         }
     });
 
