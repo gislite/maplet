@@ -48,11 +48,7 @@
     </div>
 
     <ul class="list-group">
-        {% if userinfo is None %}
-        {% module app_recent_used(10) %}
-        {% else %}
-        {% module app_user_recent(userinfo.user_name, 10) %}
-        {% end %}
+        {% module app_recent_used(catinfo.kind, 8, userinfo = userinfo) %}
     </ul>
 
 </div>
@@ -65,11 +61,7 @@
     </div>
 
     <ul class="list-group">
-        {% if userinfo is None %}
-        {% module app_most_used(10) %}
-        {% else %}
-        {% module app_user_most(userinfo.user_name, 10) %}
-        {% end %}
+        {% module app_most_used(catinfo.kind, 8, userinfo = userinfo) %}
     </ul>
 </div>
 
