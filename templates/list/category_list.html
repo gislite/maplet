@@ -2,8 +2,8 @@
 
 {% block head %}
 <title>在线地图按分类列出</title>
-<meta name="keywords" content="{{ taginfo.name }}地图,在线地图,历史地图,分类地图,">
-<meta name="description" content="{{ taginfo.name }}地图,在线地图,历史地图,在线地图按分类列出">
+<meta name="keywords" content="{{ catinfo.name }}地图,在线地图,历史地图,分类地图,">
+<meta name="description" content="{{ catinfo.name }}地图,在线地图,历史地图,在线地图按分类列出">
 {% end %}
 
 
@@ -11,14 +11,14 @@
 <!--
 <div class="panel panel-info">
     <div class="panel-heading">
-        所在位置： <a href="/">地图</a> > 地图 > {{ taginfo.name }}
+        所在位置： <a href="/">地图</a> > 地图 > {{ catinfo.name }}
 
     </div>
 </div>z
 -->
 <div class="panel panel-black">
     <div class="panel-heading">
-        {{ taginfo.name }}地图: 按分类列出
+        {{ catinfo.name }}地图: 按分类列出
     </div>
 
 
@@ -58,7 +58,7 @@
     </div>
 
     <ul class="list-group">
-                {% module app_recent_used(taginfo.kind, 8, userinfo = userinfo) %}
+                {% module app_recent_used(catinfo.kind, 8, userinfo = userinfo) %}
 
     </ul>
 
@@ -72,7 +72,7 @@
     </div>
 
     <ul class="list-group">
-        {% module app_recent_used(taginfo.kind, 8, userinfo = userinfo) %}
+        {% module app_recent_used(catinfo.kind, 8, userinfo = userinfo) %}
     </ul>
 
 </div>
