@@ -1,4 +1,4 @@
-{% extends "../../theme/base_view.html" %}
+{% extends "../theme/base_view.html" %}
 
 
 {% block head %}
@@ -71,11 +71,8 @@
     </div>
 
     <ul class="list-group">
-        {% if userinfo is None %}
-        {% module app_most_used(5) %}
-        {% else %}
-        {% module app_user_most(userinfo.user_name, 5) %}
-        {% end %}
+                {% module app_recent_used('m', 10, userinfo = userinfo) %}
+
     </ul>
 
 </div>

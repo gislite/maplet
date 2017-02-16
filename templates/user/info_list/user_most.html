@@ -24,7 +24,9 @@
 
 
     <ul class="list-group">
-        {% module app_user_most(user_name, 20) %}
+                                {% module app_most_used('m', 20, userinfo = userinfo) %}
+
+
     </ul>
 
     <div class="panel-footer">
