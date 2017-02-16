@@ -1,0 +1,68 @@
+{% extends "../theme/base.html" %}
+
+{% block head %}
+<title>在线地图文档分类列表</title>
+<meta name="keywords" content="在线地图,历史地图,在线地图列表">
+<meta name="description" content="在线地图,历史地图,在线地图列表">
+{% end %}
+
+
+{% block zhuti %}
+
+
+<div class="panel panel-black">
+
+    <div class="panel-heading">
+        <h1>查找结果</h1>
+    </div>
+
+
+    <ul class="list-group">
+        {% for rec in infos %}
+        <li class="list-group-item"><a href="/post/{{ rec.uid }}.html">{{ rec.title }}</a>
+            <span class="post_cat">{% module post_catalogs(rec.uid) %}</span>
+        </li>
+        {% end %}
+    </ul>
+
+
+    <div class="panel-footer">
+
+        <ul class="pagination">
+            {% raw pager %}
+        </ul>
+
+
+    </div>
+</div>
+{% end %}
+
+
+{% block right %}
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            最近使用
+        </h3>
+    </div>
+
+    <ul class="list-group">
+        {% module app_recent_used(catinfo.kind, 8, userinfo = userinfo) %}
+    </ul>
+
+</div>
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            使用最多
+        </h3>
+    </div>
+
+    <ul class="list-group">
+        {% module app_most_used(catinfo.kind, 8, userinfo = userinfo) %}
+    </ul>
+</div>
+
+{% end %}
