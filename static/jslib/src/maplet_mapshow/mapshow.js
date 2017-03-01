@@ -130,6 +130,8 @@ $(document).ready(function () {
             $("#current_view_url").attr("href", link_str);
             return popup.openOn(map);
         };
+
+        // Generate the refer link when navi.
         onZoomend = function () {
             var cmap_coor, div_str, link_str;
             currentZoom = map.getZoom();

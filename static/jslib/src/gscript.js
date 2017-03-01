@@ -1,6 +1,7 @@
+// require('./node_modules/jquery');
+// import './node_modules/jquery';
 $.ready()
 {
-
     function select_sub_tag(html2) {
         $('#showCnt').load(html2);
     }
@@ -34,7 +35,7 @@ $.ready()
             error: function () {
                 alert('密码重置失败，请确认Email是否有效，并且两次重置时间大于1分钟！');
             }
-        })
+        });
     }
 
 
