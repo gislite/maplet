@@ -1,6 +1,3 @@
-{#
-这个没用到，应该是单独画图用。
-#}
 {% extends "../theme/map_calcubic_full.html" %}
 {% block head %}
 <title>地图画板,在线绘制地理数据</title>
@@ -43,7 +40,6 @@ var geojsonid = "{{ kwd['geojson'] }}";
 {% block zhuti %}
 
 <span id="pycode"></span>
-<div classs="btn btn-primary" id="export">sadfs</div>
 <div id="map" class="map" tabindex="0"></div>
 <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
    <div>
@@ -80,9 +76,7 @@ var geojsonid = "{{ kwd['geojson'] }}";
    </div>
 </div>
 
-
-
-<script src="{{ static_url('jslib/maplet/fullscreend.js') }}"></script>
+<script src="{{ static_url('jslib/dst/gsonedit.js') }}"></script>
 
 {% end %}
 
