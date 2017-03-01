@@ -2,18 +2,18 @@
 import getopt
 import sys
 
-from torcms.model.info_model import MInfor
+from torcms.model.post_model import MPost
 
 
 def run_update_lon():
     '''
     :return:
     '''
+
     def fix_lon(lonval):
         return int(((lonval + 180) % 360 - 180) * 1000) / 1000
 
-    minfo = MInfor()
-    map_recs = minfo.query_all(limit_num=5000, kind='2')
+    map_recs = MPost.query_all(limit_num=5000, kind='2')
     for map_rec in map_recs:
         lon = float(map_rec.extinfo['ext_lon'])
         if lon > -180 and lon < 180:
@@ -24,7 +24,7 @@ def run_update_lon():
             print(lon)
             out_dic = {'ext_lon': fix_lon(lon)}
             print(out_dic)
-            minfo.update_jsonb(map_rec.uid, out_dic)
+            MPost.update_jsonb(map_rec.uid, out_dic)
 
 
 def entry(argv):
@@ -49,7 +49,7 @@ def entry(argv):
 if __name__ == '__main__':
     if len(sys.argv) == 1:
         print('run:')
-        print('    python helper.py -h ')
+        print('    python helper_extor.py -h ')
         print('for help')
     else:
         entry(sys.argv[1:])
