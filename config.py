@@ -4,6 +4,12 @@ from torcms.core.tools import get_cfg
 
 DB_CON, SMTP_CFG, SITE_CFG = get_cfg()
 
+DB_CFG = {
+        'conn': DB_CON,
+        'kind': 'p',  # 'p' for PostgresQL, 's' for SQLite.
+        }
+
+
 CMS_CFG = {
     'list_num': 10,
     'site_type': 2,
