@@ -145,7 +145,7 @@
                 <span class="post_cat">
                     {% set iii = 1 %}
                     {% for x in tag_info %}
-                    <a href="/label/{{postinfo.kind}}/{{ x.tag.uid }}" class="app_label tag{{ iii }}">{{ x.tag.name }}</a>
+                    <a href="/label/{{postinfo.kind}}/{{ x.tag_id }}" class="app_label tag{{ iii }}">{{ x.tag_name }}</a>
                     {% set iii = iii + 1 %}
                     {% end %}
                 </span>
@@ -199,8 +199,8 @@
                                                <div class="col-sm-12">
                             <select id="over_map_1" name="over_map_1" class="form-control">
                                 {% for recent in recent_apps %}
-                                <option value="{{recent.post.uid}}">{{recent.post.uid}} |
-                                    {{recent.post.title}}
+                                <option value="{{recent.post_id}}">{{recent.post_id}} |
+                                    {{recent.post_title}}
                                 </option>
                                 {% end %}
                             </select>
@@ -216,8 +216,8 @@
                             <select id="over_map_2" name="over_map_2" class="form-control">
                                 <option value=""></option>
                                 {% for recent in recent_apps %}
-                                <option value="{{recent.post.uid}}">{{recent.post.uid}} |
-                                    {{recent.post.title}}
+                                <option value="{{recent.post_id}}">{{recent.post_id}} |
+                                    {{recent.post_title}}
                                 </option>
                                 {% end %}
                             </select>
@@ -245,9 +245,9 @@
     <ul class="list-group" style="overflow: hidden;">
         {% for x in relations %}
         <li class="list-group-item" style="overflow: hidden;">
-            <a href="/map/{{ x.post.uid }}">
-                 <span class="glyphicon glyphicon-map-marker"></span>{{ x.post.title }}
-               {% if x.post.uid[0] == 'v' %}<span class="badge" style="color:yellow">v</span>{% end %}
+            <a href="/map/{{ x.post_id }}">
+                 <span class="glyphicon glyphicon-map-marker"></span>{{ x.post_title }}
+               {% if x.post_id[0] == 'v' %}<span class="badge" style="color:yellow">v</span>{% end %}
             </a>
         </li>
         {% end %}

@@ -31,13 +31,13 @@
 </script>
 <div class="main">
     <div class="title" >
-        <span>更新文档{{ dbrec.post.uid }}</span>
+        <span>更新文档{{ dbrec.post_id }}</span>
     </div>
 
     <div class="content" id="addinfo">
         <form action="" method="post" class="pure-form pure-form-stacked" id="form_post">
             <fieldset>
-                <input type="hidden" id="uid" name="uid" value="{{ dbrec.post.uid }}"/>
+                <input type="hidden" id="uid" name="uid" value="{{ dbrec.post_id }}"/>
 
                 <div class="pure-g">
                     <div class="pure-u-3-5">
@@ -53,7 +53,7 @@
                         <div class="pure-control-group">
                             <label for="tags">标签</label>
                             <input id="tags" name="tags" type="text" value="{% for x in app2label_info %}
-                {{ x.tag.name}},
+                {{ x.tag_name}},
                 {% end  %}">
                         </div>
 
@@ -117,7 +117,7 @@
 
                 <div class="pure-control-group">
                     <label></label>
-                    <input onclick="update_info('{{ dbrec.post.uid }}')" value="更新数据"
+                    <input onclick="update_info('{{ dbrec.post_id }}')" value="更新数据"
                            class="pure-button pure-button-primary">
                 </div>
             </fieldset>

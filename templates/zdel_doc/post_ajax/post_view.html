@@ -114,7 +114,7 @@
                 <span class="post_cat">
                     {% set iii = 1 %}
                     {% for x in tag_info %}
-                    <a href="/label/{{ x.tag.uid }}" class="app_label tag{{ iii }}">{{ x.tag.name }}</a>
+                    <a href="/label/{{ x.tag_id }}" class="app_label tag{{ iii }}">{{ x.tag_name }}</a>
                     {% set iii = iii + 1 %}
                     {% end %}
                 </span>

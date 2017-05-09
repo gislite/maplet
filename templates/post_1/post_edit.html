@@ -28,7 +28,7 @@
 
                     <div class="col-sm-10">
                         <input type="text" id="tags" name="tags" class="form-control" value="{% for x in app2label_info %}
-                {{ x.tag.name}},
+                {{ x.tag_name}},
                 {% end  %}">
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                             {% for taginfo in tag_infos %}
                             <option value="{{ taginfo.uid }}"
                                     {% for tt in app2tag_info %}
-                                    {% if tt.order== ii and tt.tag.uid== taginfo.uid %}
+                                    {% if tt.order== ii and tt.tag_id== taginfo.uid %}
                                     selected
                                     {% end %}
                                     {% end %}  >{{ taginfo.name }}

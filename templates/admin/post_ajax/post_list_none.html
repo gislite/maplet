@@ -41,8 +41,8 @@
                     <ul>
 
                     {% for x in view_all %}
-                            {% module post_link_lang_none(x.post.uid, 'en_US') %}
-                            {% module post_link_lang_none(x.post.uid, 'zh_CN') %}
+                            {% module post_link_lang_none(x.post_id, 'en_US') %}
+                            {% module post_link_lang_none(x.post_id, 'zh_CN') %}
                     {% end %}
 
                         </ul>
