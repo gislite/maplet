@@ -80,7 +80,6 @@ static/tass/.sass-cache/
 templates/autogen/
 templates/modules
 
-model_ent
 torcms_helper
-torcms_maplet
+
 static/jslib/node_modules
