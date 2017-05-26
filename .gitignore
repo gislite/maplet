@@ -82,4 +82,5 @@ templates/modules
 
 model_ent
 torcms_helper
+torcms_maplet
 static/jslib/node_modules
