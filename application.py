@@ -8,6 +8,11 @@ from torcms.modules.modef import core_modules
 from config import SITE_CFG
 from urls import urls
 
+from torcms_maplet.modules.map_modules import MapJson,MapLayout
+
+core_modules['app_layout'] = MapLayout
+core_modules['app_json'] = MapJson
+
 # cur_modues = {'app_layout': app_layout,
 #               'app_json': app_json,
 #               }
