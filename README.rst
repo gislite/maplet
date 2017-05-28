@@ -11,6 +11,17 @@ It has the basic map showing, map overlaying, GIS data editing funtion now.
 And, the CMS could used to publish different kind the information,
 such as basic HTML page, JavaScript app, maps, multimedias.
 
+
+Building the environment
+
+
+::
+
+    ~/usr/python36/bin/python3 -m venv ~/vpy_huatu
+    source ~/vpy_huatu/bin/activate
+    pip3 install -r doc/requirements.txt
+    git clone https://github.com/bukun/torcms_modules_bootstrap.git templates/modules
+
 Setup
 -----------------------
 ## Database
