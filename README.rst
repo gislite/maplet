@@ -13,12 +13,12 @@ such as basic HTML page, JavaScript app, maps, multimedias.
 
 
 Building the environment
-
+---------------------------------
 
 ::
 
     ~/usr/python36/bin/python3 -m venv ~/vpy_maplet
-    source ~/vpy_huatu/maplet/activate
+    source ~/vpy_maplet/bin/activate
     pip3 install -r doc/requirements.txt
     git clone https://github.com/bukun/torcms_modules_bootstrap.git templates/modules
 
