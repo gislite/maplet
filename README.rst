@@ -28,6 +28,7 @@ Setup
 Database
 
 ::
+
     \set dbname maplet
     CREATE USER :dbname WITH PASSWORD '131322' ;
     CREATE DATABASE :dbname OWNER :dbname ;
