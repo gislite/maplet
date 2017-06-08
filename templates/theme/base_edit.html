@@ -10,49 +10,6 @@
 <script src="{{ static_url('f2elib/codemirror_5.19.0/mode/markdown/markdown.js') }}"></script>
 <link rel="stylesheet" href="{{ static_url('f2elib/codemirror_5.19.0/lib/codemirror.css') }}">
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var editor = CodeMirror.fromTextArea(document.getElementById("cnt_md"), {
-                 lineWrapping: true,
-                mode: 'markdown',
-                lineNumbers: true,
-                theme: "default",
-                extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
-            });
-        });
-
-
-    </script>
-
-
-
-<script type="text/javascript">
-    $().ready(function () {
-        // jquery.validate.js 验证
-        $("#form_post").validate(
-                {
-                    rules: {
-                        title: {
-                            required: true
-                        },
-                        cnt_md: {
-                            required: true
-                        }
-                    },
-                    messages: {
-                        title: {
-                            required: "<span class='red'>请输入标题</span>"
-
-                        },
-                        cnt_md: {
-                            required: "<span class='red'>请输入内容</span>"
-                        }
-                    }
-                }
-        );
-    });
-</script>
-
 {% end %}
 {% block base_top_header %}
 
