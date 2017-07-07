@@ -63,34 +63,34 @@
         <form id="form_regist" action="/user/regist" method="post" class="form-horizontal" role="form">
 
 
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="user_name">用户名： </label>
+           <div class="form-group">
+                    <label class="col-sm-2 control-label" for="user_name">用户名： </label>
 
-                <div class="col-sm-4">
-                    <input class="form-control" id='user_name' type="text" name="user_name"></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="user_pass">密码：</label>
-
-                <div class="col-sm-4">
-                    <input class="form-control" id="user_pass" type="password" name="user_pass">
+                    <div class="col-sm-10">
+                         <input class="form-control"id='user_name' type="text" name="user_name" placeholder="用户名必须为 字母 或者 字母数字组合（字母开头）。">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="user_pass2">确认密码：</label>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="user_pass">密码：</label>
 
-                <div class="col-sm-4">
-                    <input class="form-control" id="user_pass2" type="password" name="user_pass2">
+                    <div class="col-sm-10">
+                         <input class="form-control"id="user_pass" type="password" name="user_pass"  placeholder="密码最少6位，最长20位。 ">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="user_email">电子邮箱：</label>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="user_pass2">确认密码：</label>
 
-                <div class="col-sm-4">
-                    <input class="form-control" id="user_email" type="text" name="user_email">
+                    <div class="col-sm-10">
+                         <input class="form-control"id="user_pass2" type="password" name="user_pass2" placeholder="请确认和密码输入一致。">
+                    </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="user_email">电子邮箱：</label>
 
+                    <div class="col-sm-10">
+                         <input class="form-control"id="user_email" type="text" name="user_email" placeholder="请输入正确电子邮箱。">
+                    </div>
+                </div>
             <div class="form-group">
 
                 <label class="col-sm-2 control-label" for="sub1"></label>

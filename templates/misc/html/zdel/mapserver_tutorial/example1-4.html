@@ -1,0 +1,339 @@
+{% extends "../../../../theme/content.html" %}
+
+{% block content %}
+
+<div class="content">
+
+
+    <div class="single">
+
+<h3 align="center"><!--Example 1.4: Labeling the Map-->例1.4 地图中的标签</h3>
+<p align="left"><!--We can also add labels to our map...-->我们还可以在我们的地图中添加标签...</p>
+<div align="center">
+    <img border="1"
+         src="http://159.226.123.26/cgi-bin/mapserv?map=/mstu/htdocs/example1-4.map&layer=states_poly&layer=states_line&mode=map"/>
+</div>
+<!--MapServer has a very flexible labeling engine.  It
+  supports native bitmap as well as truetype fonts.  Font scaling is
+  supported with truetype. The labeling angles and placements can be
+  customized...  If you take the time to learn the many parameters
+  involved in creating good labels, you will be rewarded with
+  informative and aesthetically pleasing maps.-->
+<div> 地图服务器有一个非常灵活的标注引擎。它支持本地的位图和TrueType字体。字体缩放使用TrueType支持。标签的角度和放置可以被定制...如果你花时间去学习参与创造好的标签的许多参数，你会得到知识性和美观的地图的回报。
+</div>
+
+<hr>
+
+<p align="left"><!--This is what the map file looks like (Example1-4.map):-->
+    下面是地图文件（Example1-4.map）：
+    <br>
+<pre class="brush:py">
+    # The annotated map file (sort of)
+    # Created by Pericles S. Nacionales for the MapServer tutorial
+    # 20050408
+    #
+    # MapServer map file uses the pound sign (#) to denote the start of a line
+    # comment--each line that needs to be commented has to be prepended with a "#".
+    #
+    # Map files begin with MAP keyword to signify the start of the map object.
+    # Well, the entire map file is THE map object. Enclosed between MAP and END
+    # at the very bottom of this map file, are keyword/value pairs and other
+    # objects.
+    # 注释的地图文件（排序）
+    # 由伯里克利S. NACIONALES创建的MapServer的教程
+    # 20050408
+    #
+    # MapServer的地图文件使用井号（# ）开头的行表示
+    # 评论 - 每一行，需要加以评价，必须在前面加上一个“# ”。
+    #
+    # 地图文件与MAP关键字开始，意味着开始地图对象。
+    # 好了，整个地图文件是地图对象。 MAP和END之间封闭
+    # 在这个地图文件的最底部，关键字/值对和其他
+    # 对象。
+    MAP
+    IMAGETYPE PNG
+    EXTENT -97.238976 41.619778 -82.122902 49.385620
+    SIZE 400 300
+    SHAPEPATH "../data"
+    IMAGECOLOR 255 255 255
+    FONTSET "../fonts/fonts.list"
+
+    # Layer objects are defined beneath the map object. You need at least one
+    # layer defined in your map file before you can display a map... You can
+    # define as many layers as you'd like although a limit is typically hard-coded
+    # in map.h in the MapServer source. The default limit is set at 100. You'd
+    # have to have a very specialized application to need more than 100 layers in
+    # your application.
+    # 层对象在地图下方的对象定义。你至少需要一个
+    # 层中定义的地图文件，然后才可以显示在地图...您可以
+    # 定义为多层次，只要你愿意，虽然一个限制通常是硬编码
+    # 在MapServer的map.h。默认的限额设定为100。你最好
+    # 必须有一个非常特殊的应用需要超过100层
+    # 您的应用中。
+
+    # Start of LAYER DEFINITIONS ---------------------------------------------
+    # 层定义开始---------------------------------------------
+    LAYER # States polygon layer begins here
+    # 国家多边形层从这里开始
+    NAME states_poly
+    DATA states_ugl
+    STATUS OFF
+    TYPE POLYGON
+
+    # CLASSITEM defines the non-spatial attribute that you will be using to
+    # separate a layer into classes. This attribute will be in the DBF file
+    # of your shapefile (it will be different for each data format). In this
+    # example the shapefile states_ugl has an associated database
+    # (states_ugl.dbf) that contains an attribute called "CLASS". You will be
+    # using two values in the CLASS attribute to separate the classes (also
+    # called themes) used in this layer--land and water. CLASSITEM is used in
+    # association with the EXPRESSION parameter in the CLASS object. See below.
+    CLASSITEM "CLASS"
+
+    # Just like CLASSITEM, LABELITEM defines the database attribute that you
+    # will be using to draw labels. In this case, the values of the attribute
+    # "STATE" will be used to label the states polygons.
+    LABELITEM "STATE"
+
+    # The class object is defined within the layer object. You can define as
+    # many classes as you need (well, there are limits as with layers, but it's
+    # senseless to define more than ten on a "normal" layer. There are
+    # situations, however, where you might have to do it.)
+    # CLASSITEM定义你将使用
+    # 的层分离的类的非空间属性。此属性将在你的shape文件中的
+    # DBF文件中（每个数据格式会有所不同）。在这种
+    # 例如shape文件states_ugl的有一个相关的数据库
+    # （ states_ugl.dbf ） ，其中包含一个被称为“类”的属性。您将
+    # 使用两个值中的CLASS属性在这一层分离类（也
+    # 称为主题） - 土地和水。 CLASSITEM中使用
+    # 与表达参数类对象。见下文。
+    CLASSITEM "CLASS"
+
+    # 就像CLASSITEM的， LABELITEM定义您的数据库属性
+    # 将被用来绘制标签。在这种情况下，该属性的值
+    # "STATE"将被用于标记国家多边形。
+    LABELITEM 'STATE'
+
+    # 类对象在层对象内定义。您可以定义
+    # 你需要的类（尽管在层中限制，但这是
+    # 没有意义的在一个“正常”层定义十多个。
+    # 有这样的情况，然而，你可能不得不这样做。）
+    CLASS
+    NAME 'States'
+    EXPRESSION 'land'
+
+    # There are styles in a class, just like there are classes in a layer,
+    # just like there are layers in a map. You can define multiple styles in
+    # a class just as you can define multiple classes in a layer and multiple
+    # layers in a map.
+    # 一个类有不同的风格，就像有一层中有不同的类，
+    # 就像在一个地图中有多个层。您可以在一个类中定义多个样式
+    # ，就像你在一层，可以定义多个类,在一个地图可以定义多个
+    # 层。
+    STYLE
+    COLOR 232 232 232
+    END
+
+    # There can be labels in a class, just like there are classes in a layer,
+    # just like there are layers in a map. You can define multiple labels in
+    # a class just as you can define multiple classes in a layer and multiple
+    # layers in a map.
+    # MapServer has a very flexible labeling system. With that flexibility
+    # comes complexity, specially when using truetype fonts. Please read
+    # through the LABEL section of the MapServer map file documentation at
+    # http://www.mapserver.org/mapfile for more information.
+    # 可以在一个类中有多个标签，就像有一层中有多个类，
+    # 就像在一个地图中有多个层。您可以在一类中定义多个标签
+    # ，就像你在一层，可以定义多个类，在一个地图中定义多个
+    # 层。
+    # MapServer的有一个非常灵活的标签制度。灵活性
+    # 自变得复杂，特别是当使用TrueType字体时。请
+    # 通过MapServer地图文件文档的LABEL段
+    # 在http://www.mapserver.org/mapfile阅读更多信息。
+    LABEL
+    COLOR 132 31 31
+    SHADOWCOLOR 218 218 218
+    SHADOWSIZE 2 2
+    TYPE TRUETYPE
+    FONT arial-bold
+    SIZE 12
+    ANTIALIAS TRUE
+    POSITION CL
+    PARTIALS FALSE
+    MINDISTANCE 300
+    BUFFER 4
+    END # end of label
+    # 标签结束
+    END
+
+    CLASS
+    NAME 'Water'
+    EXPRESSION 'water'
+
+    STYLE
+    COLOR 198 198 255
+    END
+    END
+    END # States polygon layer ends here
+    # 国家多边形层到此为止
+
+
+    LAYER # States line layer begins here
+    # 国家线层从这里开始
+    NAME states_line
+    DATA states_ugl
+    STATUS OFF
+    TYPE LINE
+
+    CLASSITEM "CLASS"
+    CLASS
+    NAME 'State Boundary'
+    EXPRESSION 'land'
+    STYLE
+    COLOR 64 64 64
+    END
+    END
+    END # States line layer ends here
+    # 国线层到此为止
+    # End of LAYER DEFINITIONS -------------------------------
+    # 结束层定义-------------------------------
+
+    END # All map files must come to an end just as all other things must come to...
+    # 所有的地图文件必须结束，就像所有其他的事情，一定要来...
+
+</pre>
+</p>
+<hr align="center" width="300">
+<p><!--The map file structure, by objects, looks like this:-->映射文件结构，通过对象，看起来像这样：</p>
+
+<pre>
+                                  MAP
+      (states_poly) LAYER----------|---------LAYER (states_line)
+     (land) CLASS-----|-CLASS (water)        |-CLASS
+        STYLE-|-LABEL   |-STYLE                |-STYLE</pre>
+
+<hr align="center" width="300">
+<p><!--Here we introduce a few more parameters along with the LABEL
+            object:-->
+    在这里，我们介绍几个参数与标签对象：
+</p>
+<p>FONTSET<br>
+    <!--Here we specify the full path to our truetype fonts list (or font
+    set) file. This file lists each of the available fonts. See the file
+    itself and the
+    <a href="http://www.mapserver.org/mapfile/fontset.html">mapfile reference</a>
+    for more info. FONTSET is a parameter of the MAP object.-->
+    在这里，我们指定的TrueType字体列表（或字体的完整路径集）的文件。该文件列出了每个可用字体。
+    请参阅文件本身和<a href="http://www.mapserver.org/mapfile/fontset.html">映射文件参考</a>获取更多信息。
+    FONTSET的MAP对象是一个参数。
+</p>
+<p>LABELITEM<br>
+    <!--This specifies which data attribute to use for labeling, in this
+    case &quot;STATE&quot;. LABELITEM is a parameter of the LAYER
+    object.-->
+    在&quot;STATE&quot情况下，指定数据属性用于标签。 LABELITEM是该层对象的一个参数，。
+</p>
+<p>LABEL<br>
+    <!--Marks the beginning of the LABEL object. The label object can be
+    used under other objects (i.e. the SCALEBAR object).-->
+    标志着LABEL对象。标签对象可用于其他对象（即比例尺对象）
+</p>
+<p> COLOR<br>
+    <!--Within the LABEL object, COLOR specifies the color of the label
+    text.-->
+    标签内的对象，颜色指定标签文本的颜色。
+</p>
+<p>SHADOWCOLOR<br>
+    <!--This specifies the shadow color of the label text.-->
+    这指定的标签文字的阴影颜色。
+</p>
+<p>SHADOWSIZE<br>
+    <!--Specifies the shadow size. The value corresponds to the X and the Y
+    shifts in pixels. So, &quot;2 2&quot; means two pixels wide by two
+    pixels high.-->
+    指定阴影的大小。该值对应于在X和Y的像素的转变。因此，“2”是指由两个两个像素宽像素高。
+</p>
+<p>TYPE<br>
+    <!--Within the LABEL object, TYPE specifies what type of font to use. We
+    have the choice of TRUETYPE or BITMAP (the built-in fonts). We
+    choose TRUETYPE.-->
+    在LABEL对象，类型指定使用什么类型的字体。我们有选择的TrueType或位图（内置字体）。我们选择TRUETYPE。
+</p>
+<p>FONT<br>
+    <!--If you specify TYPE as TRUETYPE, you need to specify what font to
+    use. The value here is the &quot;alias&quot; in the font list file.-->
+    如果指定为TrueType类型，你需要指定使用什么字体。这里所说的值是&quot;alias&quot；在字体列表文件中的“别名”。
+</p>
+<p>SIZE<br>
+    <!--If using truetype fonts, the value is size in pixels. If bitmap, you
+    can say something like &quot;small&quot; or &quot;large&quot;.-->
+    如果使用TrueType字体，该值的像素是尺寸大小。如果是位图，可以说像“小”或“大”的东西。
+</p>
+<p>ANTIALIAS<br>
+    <!--This turns truetype antialiasing on or off. Remember the value isn't
+    on or off but TRUE or FALSE.-->
+    这将truetype的抗锯齿开启或关闭。请记住值不是开或关闭，而是TRUE或FALSE。
+</p>
+<p>POSITION<br>
+    <!--Where to position the label text in relation to the label points.
+    The value is a combination of vertical and horizontal positions. You
+    have the following choices for vertical alignment: C for center, U
+    for upper, and L for lower. For horizontal alignment you have the
+    following choices: C for center, L for left, and R for right. So, to
+    align the label text to the center of label ID you'd use the value
+    &quot;CC&quot; (center-center). Or if you'd like it to be on the
+    lower left of the ID, you'd use LL. Another way is to let MapServer
+    decide the best position for your labels. For this you would use
+    the value &quot;AUTO&quot;.-->
+    定位标签文本的标签点。该值是一个组合的垂直和水平位置。你有以下几种选择：C为中心垂直对齐，U上，和L为低。对于水平对齐你有以下选择：C为中心，L为左，右为R。因此，要标签文本对齐的标签ID的中心，你使用值“CC”（中心 -
+    中心）。或者，如果你想它是在左下方的ID，你会使用LL。另一种方法是让MapServer的决定标签的最佳位置。对于这一点，你可以使用“AUTO”的值。
+</p>
+<p>PARTIALS<br>
+    <!--Tells MapServer whether to generate incomplete label texts or not.
+    The default here is not to generate fragments of a label text. The
+    value is either TRUE or FALSE.-->
+    告诉MapServer是否生成不全的标签文本。这里的默认值是不产生标签文本的碎片。该值是TRUE或FALSE。
+</p>
+<p>MINDISTANCE<br>
+    <!--This is the minimum distance in pixels between duplicate labels. See
+    what happens if you increase or decrease this value.-->
+    这是重复的标签之间的最小距离，以像素。如果你增加或减小该值，看会发生什么。
+</p>
+<p>BUFFER<br>
+    <!--The padding (in pixels) for each label. This is used to enhance
+    readability. A BUFFER of 4 pixels mean that no label will be drawn
+    within four pixels of each other. Again, change to see how it works.-->
+    填充（像素）的标签。这是用来提高可读性。缓冲区4个像素的意思是没有标签将被绘制于彼此的四个象素。再次，改变，来看看它是如何工作的。
+
+</p>
+<hr align="center" width="300">
+<p><!--You can also create labels separate from a POLYGON layer. You do
+            this with the ANNOTATION data type. Have a look at the next
+            example's  map file to see how you'd implement this kind of
+            labeling.  You will notice that the CLASS object within the
+            &quot;label&quot; layer has a COLOR parameter value of
+            &quot;-1 -1 -1&quot;. The negative number tells MapServer to give
+            this CLASS a transparent color (the label IDs don't show up). Once
+            again, play with the values to understand how it affects the map.-->
+    您还可以创建标签来分离一个多边形层。你与注释的数据类型一起做。看下面的例子的地图文件，看你如何实现这种标签。你会发现，类对象内“标签”层具有色彩参数值-1 -1
+    -1“。负数告诉MapServer的给这个类透明色（标签标识不显示）。再来一次，与值一起玩以了解它是如何影响地图的。
+</p>
+<hr>
+<p class="Small" align="center">
+    <a href="example1-3.html">
+        Back to Example 1.3
+    </a> |
+    <a href="section1.html">
+        Back to the Section 1
+    </a> |
+    <a href="sections.html">
+        Back to the Sections Page
+    </a> |
+    <a href="example1-5.html">
+        Proceed to Example 1.5
+    </a>
+</p>
+
+</div>
+    </div>
+{% end %}

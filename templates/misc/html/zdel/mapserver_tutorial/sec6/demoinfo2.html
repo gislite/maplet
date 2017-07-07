@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+        <!--
+        OpenLayers-Vector图层Feature选择工具
+
+        -->
+<HTML>
+<HEAD>
+    <TITLE> OpenLayer : Feature Select </TITLE>
+    <link rel="stylesheet" href="./OpenLayers/theme/default/style.css" type="text/css" />
+    <link rel="stylesheet" href="./style.css" type="text/css" />
+    <script src="./OpenLayers/lib/OpenLayers.js"></script>
+    <script  type="text/javascript">
+
+        var map = null;
+        var wms_url = "http://localhost/cgi-bin/bkwms?";
+        var wms_version = "1.3.0";
+        var layer_name = 'BOUNT_poly';
+
+        var wms_layer = null;
+        var vector_layer = null;
+        var select_control = null;    // SelectFeature Control
+
+        var wkt_reader = null;
+        var point   = "POINT(-10 -10)";
+        var line    = "LINESTRING(-180 90, 0 0)";
+        var polygon = "POLYGON(0 0,0 90,180 90,180 0,0 0)";
+
+        function init()
+        {
+            //创建map对象，
+            map = new OpenLayers.Map("map");
+            wms_layer = new OpenLayers.Layer.WMS("OpenLayers WMS",
+                    wms_url,
+                    {layers: layer_name, version: wms_version},
+                    {singleTile: true});
+
+            vector_layer = new OpenLayers.Layer.Vector("Vector");
+
+            // 添加图层
+            map.addLayers([wms_layer, vector_layer]);
+            map.addControl( new OpenLayers.Control.LayerSwitcher() );
+
+            // 在Vector图层上添加图元element
+            addFeature(point  , vector_layer);
+            addFeature(line   , vector_layer);
+            addFeature(polygon, vector_layer);
+
+            addSelectControl(map, vector_layer);
+
+            // 放大到全屏
+            map.zoomToMaxExtent();
+        }
+
+        function addSelectControl(map, vector_layer)
+        {
+            if(select_control!=null)
+            {
+                return ;
+            }
+            alert("addSelectControl");
+            select_control =
+                    new OpenLayers.Control.SelectFeature(vector_layer,
+                            {
+                                hover: false,
+                                onSelect: onFeatureSelect,
+                                onUnselect: onFeatureUnselect
+                            });
+            map.addControl(select_control);
+            select_control.activate();
+        }
+
+        function addFeature(wkt, layer)
+        {
+            var geometry = toGeometryFromWkt(wkt);
+            if(wkt!=null)
+            {
+                layer.addFeatures(geometry);
+            }
+        }
+
+        function toGeometryFromWkt(wkt)
+        {
+            var geometry = null;
+            if(wkt_reader==null)
+            {
+                wkt_reader = new OpenLayers.Format.WKT();
+            }
+            geometry = wkt_reader.read(wkt);
+            return geometry;
+        }
+
+        // Feature 选中事件响应
+        function onFeatureSelect(feature)
+        {
+            selectedFeature = feature;
+            popup = new OpenLayers.Popup.FramedCloud("chicken",
+                    feature.geometry.getBounds().getCenterLonLat(),
+                    null,
+                    "<div style='font-size:.8em'>Feature: " + feature.id +"<br />Area: " + feature.geometry.getArea()+"</div>",
+                    null, true, onPopupClose);
+            feature.popup = popup;
+            map.addPopup(popup);
+
+        }
+
+        // Feature取消选中事件响应
+        function onFeatureUnselect(feature)
+        {
+            map.removePopup(feature.popup);
+            feature.popup.destroy();
+            feature.popup = null;
+        }
+
+        function onPopupClose(evt) {
+            select_control.unselect(selectedFeature);
+        }
+
+
+    </script>
+
+</HEAD>
+<BODY onload="init()">
+<div>
+    <div id="map" class="smallmap"></div>
+</div>
+</BODY>
+</HTML>

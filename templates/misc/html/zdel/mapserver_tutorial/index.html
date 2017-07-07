@@ -1,0 +1,244 @@
+{% extends "../../../../theme/content.html" %}
+
+
+{% block headinfo %}
+<title>MapServer 6.x 在线教程：目录</title>
+<meta name="keywords" content="MapServer,WebGIS,教程">
+<meta name="description" content="本教程的目的是给新用户一个快速的（相对而言）介绍MapServer的概念。 它被配置成四个部分，每个部分具有一个或多个例子，并且复杂性不断增加。 用户可以随时跳转到任何部分，建议零基础初学者前三节顺序学习。">
+{% end %}
+
+
+{% block content %}
+
+<div class="content">
+    <div class="single">
+
+        <h1 align="center">MapServer 6.x 在线教程</h1>
+
+        <div class="entry">
+            <h3>中文版说明</h3>
+            <ul>
+                <li/>
+                此教程中文版本由OSGeo中国中心——开放地理空间实验室翻译，并进行了一些改写
+
+                <li/>
+                中文版使用了一些本地化的配置，有些地方与原教程有一定的出入
+                <li/>
+                因为安装配置的难度，使用了单独的MapServer服务器
+                <li/>
+                MapServer服务器由中国科学院东北地理与农业生态研究所信息中心、开放地理空间实验室共同维护
+                <!--
+                <li />教程的开发、发布以及MapServer服务是分布在不同的机器上，增加了高度的复杂性，不可避免会有一些问题
+                -->
+                <li/>
+                任何问题与建议请发送至邮件 bukun (at) osgeo.cn ，会及时进行修正。
+
+
+            </ul>
+
+            <h3>版本更新</h3>
+            <ul>
+                <li/>
+                发布时间：2015-2-20：基于 Python + Tornado 进行发布
+                <li/>
+                发布时间：2014-2-15：中文版使用了PHP语言进行一些改写
+
+            </ul>
+
+
+            <h3>致谢!</h3>
+
+            <ul>
+                <li>原英文版本教程由Pericles S. Nacionales创建
+                <li>由Jeff McKenna, Gateway Geomatics 维护
+                <li>更新日期: 2010-04-07
+                <li>原英文版本教程被收录到 MapServer官方网站
+
+
+            </ul>
+
+
+            <h1>目录</h1>
+            <ul>
+              <li> <a href="#intro">介绍</a> </li>
+              <li> <a href="#timeframe">教程时间安排</a> </li>
+              <li> <a href="#data">教程使用的数据</a> </li>
+              <li> <a href="#prereq">开始教程之前</a> </li>
+              <li> <a href="#issues">操作系统/平台问题</a> </li>
+              <li> <a href="#resources">其它资源</a> </li>
+              <li> <a href="install.html">MapServer安装</a> </li>
+              <li> <a href="sections.html">开始教程</a> </li>
+            </ul>
+
+            <h3><a name="intro">介绍</a></h3>
+            <!--
+              This tutorial was designed to give new users a quick (relatively speaking)
+              introduction to the concepts behind MapServer. It is arranged into four sections with each section having
+              one or more examples and increasing in complexity. Users can jump to any
+              section at any time although it is recommended that absolute beginners
+              work on the first three sections sequentially.
+              -->
+
+            <p>
+            本教程的目的是给新用户一个快速的（相对而言）介绍MapServer的概念。
+            它被配置成四个部分，每个部分具有一个或多个例子，并且复杂性不断增加。
+            用户可以随时跳转到任何部分，建议零基础初学者前三节顺序学习。</p>
+            <p><!--Section one focuses on basic MapServer configuration concepts such as
+        layer and class ordering, using vector and raster data, projections and
+        labeling. Section two provides examples on how to use HTML templates to
+        create a simple interface for an interactive web mapping application.
+        Section three introduces the use of HTML templates to provide a &quot;query&quot;
+        interface. Finally, section four introduces some advanced user interface
+        concepts.<br>-->
+
+                第一部分着重于MapServer的配置基本概念，如层和类别排序，使用矢量和栅格数据，预测和标签。
+                第二部分提供了有关如何使用HTML模板来创建一个简单互动式的网络映射应用的界面.
+                第三部分介绍了使用HTML模板提供了“查询”界面的例子。
+                最后，第四部分介绍了一些先进的用户界面的概念。
+
+            <h3><a name="timeframe">教程时间安排</a></h3>
+            <!--While some users can go through this tutorial in one day, those who work
+            on each example in detail can probably expect to finish in one week.<br />-->
+            <p>
+            有些用户可以在一天之内学习本教程，
+            每个例子都详细练习的有望在一个星期内完成。</p>
+
+            <h3><a name="data">教程使用的数据</a></h3>
+            <!--The dataset used in this tutorial was taken from the U.S. Department of
+            the Interior's National Atlas of the United States. You can visit their
+            web site at http://www.nationalatlas.gov. The dataset was clipped to the
+            upper great lakes region (Minnesota, Michigan, and Wisconsin) to reduce
+            storage size. Additional raster images were added courtesy of the TerraSIP
+            project at the University of Minnesota. When using this tutorial, you
+            are encouraged to use your own dataset.</p>-->
+            <p>
+            本教程使用的数据是从美国内政部国家地图集得到的。
+            您可以访问他们的网站http://www.nationalatlas.gov。
+            他的数据集被剪辑到五大湖上游地区（明尼苏达州，密歇根州和威斯康星州），以减少存储容量。
+            额外的光栅图像添加于明尼苏达大学的TerraSIP项目。
+            当使用本教程中，我们鼓励您使用自己的数据集。
+            </p>
+
+           <!--Like MapServer itself, this tutorial is open and customizable to anyone.
+        This was done in the hope that someone (or some folks) will help design
+        and develop it further.<br />-->
+              <p>   与MapServer的本身一样，本教程是对任何人开放的。这样做是希望某人（或某些人）将帮助设计和开发，使其进一步发展。</p>
+
+            <h3><a name="prereq">开始教程之前</a></h3>
+            <!--
+             There are some prerequisites to using this tutorial:-->
+
+            <div> 在使用本教程之前，有一些条件。</div>
+            <p><!--Users will need to have a web server installed and running on your computer.
+        This web server has to have support for common gateway interface (CGI)
+        programs.</p>-->
+                用户需要在您的电脑上安装和运行一个网络服务器上.这个网络服务器必须具有支持通用网关接口（CGI）程序。
+            </p>
+            <!--Users should have a basic understanding of web servers and internet
+              security. A poorly configured web server can easily be attacked by malicious
+              people. At the very least your software installation will be corrupted
+              and you'll lose hours of productivity, at worst your computer can be used
+              to attack other computers on the internet. </p>-->
+            <div>用户应该对于网络服务器和互联网安全有一个基本的了解
+                。配置不好的网络服务器可以很容易被恶意攻击者的攻击。
+                最起码，你的软件安装将被损坏，并且你会失去几个小时的生产力，在最坏的情况下，你的电脑可以用来攻击互联网上其他计算机。
+            </div>
+
+            <p><!--It is recommended that users of this tutorial read the &quot;<a href="http://www.mapserver.org/introduction.html">
+      Introduction to MapServer</a>&quot; before proceeding with this
+        tutorial.</p>-->
+                建议本教程的用户，在继续本教程之前阅读<a href="http://www.mapserver.org/introduction.html" target="_blank">“MapServer入门介绍（英文）”</a>
+            </p>
+
+            <!--To use this tutorial, users will need to have a web server and a MapServer
+                CGI program (mapserv or mapserv.exe) installed in their systems. MapServer
+                source code is available for download at <a href="http://www.mapserver.org/download.html">http://www.mapserver.org/download.html</a>.
+                Documentations exist on how to compile and install MapServer--for UNIX
+                users, please read the &quot;<a href="http://www.mapserver.org/installation/unix.html">MapServer
+                UNIX Compilation and Installation HOWTO</a>&quot;. Windows users can read
+                the &quot;<a href="http://www.mapserver.org/installation/win32.html">MapServer
+                Win32 Compilation and Installation HOWTO</a>&quot;. In addition, Windows
+                users can also download precompiled binaries from <a href="http://www.mapserver.org/download.html#binaries">http://www.mapserver.org/download.html#binaries</a>.<br />
+                &lt;<a href="#toc">top</a>&gt;</p>-->
+
+            <div>要使用本教程，用户将需要有一个网络服务器，并在他们的系统中安装一个MapServer的CGI的程序（mapserv或mapserv.exe）。
+                MapServer的源代码在<a href="http://www.mapserver.org/download.html" target="_blank">
+                    http://www.mapserver.org/download.html</a>下载。
+                单证上有编译和安装MapServer的方法， UNIX用户，请仔细阅读<a href="http://www.mapserver.org/installation/unix.html"
+                                                      target="_blank">说明</a>
+                进行MapServer的UNIX编译和安装HOWTO。Windows用户可以阅读<a href="http://www.mapserver.org/installation/win32.html"
+                                                           target="_blank">说明</a>
+                进行MapServer的Win32汇编和安装HOWTO。
+                此外，Windows用户也可以在<a href="http://www.mapserver.org/download.html#binaries" target="_blank">http://www.mapserver.org/download.html#binaries</a>.下载预编译的二进制
+            </div>
+
+            <h3><a name="issues">Windows, UNIX/Linux Issues</a></h3>
+            <!--This tutorial was created in Linux/UNIX but should work with minimal changes
+            on Windows platform. The main differences are the paths in the map files.
+            Windows users need to specify the drive letter of the hard disk where
+            their tutorial files reside. Here's an example:<br />
+            A UNIX map file might include a parameter like this--SHAPEPATH &quot;/data/projects/tutorial/data&quot;.
+            In Windows, the same parameters might look like this--SHAPEPATH &quot;C:/data/projects/tutorial/data&quot;
+            or this--SHAPEPATH &quot;C:\data\projects\tutorial\data&quot;. </p>-->
+
+            <div> 本教程是创建在Linux/ UNIX基础上，但应在Windows平台上做以小小改变。
+                主要的区别是需要指定地图文件路径.Windows用户在他们的教程文件存在的硬盘驱动器的盘符。
+                下面是一个例子：一个UNIX地图文件可能包括这样的参数 - /数据/项目/教程/数据”，
+                在Windows中，相同的参数可能看起来像这样 C：/数据/项目/教程/数据“或C：\ 数据 \项目\教程\数据“。
+            </div>
+
+            <!--Notice that either<a href="http://www.wsu.edu:8080/%7Ebrians/errors/backslash.html">
+               slash or backslash</a> works in Windows. The usual backslash may work
+               well for you if you want to make a distinction between virtual (as in
+               URLs or web addresses) and local paths in your map file. However, if you
+               plan to move your application to UNIX at some point, you'll have the tedious
+               task of switching all backslashes to slashes.</p>-->
+
+            <div> 请注意，<a href="http://www.wsu.edu:8080/%7Ebrians/errors/backslash.html">斜杠或反斜杠</a>都适用于Windows。
+                通常反斜杠适用于区分虚拟（网址或网址），以及地图文件的本地路径。但是，如果有时候你打算将你的应用程序移到UNIX，切换所有的反斜线斜线将很麻烦。
+            </div>
+            <!--While we're on the subject of paths, keep in mind that paths in mapfiles
+              are typically relative to the system's root directory--the slash (&quot;/&quot;)
+              in UNIX or some drive letter (&quot;C:&quot;) in Windows. This is true
+              except when specifically asked to enter a URL or when referencing a URL.
+              When working with HTML template files, paths are relative to the web server's
+              root directory--i.e., &quot;/projects/tutorial35/&quot; is relative to
+              &quot;http://terrasip.gis.umn.edu/&quot;. Please read <a href="http://www.alistapart.com/articles/slashforward/">http://www.alistapart.com/articles/slashforward/</a>
+              for a few insights on URLs.</p>-->
+            <div>我们对路径的主题，牢记映射文件的路径在WindowsUNIX或一些驱动器盘符（“C：”）中通常是相对于系统的根目录 - 斜线（“/”）。
+                这是对的，除非特别要求输入URL或当引用URL.当工作在HTML模板文件时，
+                路径是相对于Web服务器的根目录 - 即“/ projects/tutorial35/”是相对于“http://terrasip.gis.umn.edu/“。
+                请仔细阅读 <a href="http://www.alistapart.com/articles/slashforward/">http://www.alistapart.com/articles/slashforward/</a>见解网址。
+            </div>
+            <!--Another issue is that UNIX executable files don't require a .EXE or .COM
+              extensions. They do in Windows. If you are using Windows, append .exe
+              to all instances of &quot;/cgi-bin/mapserv&quot; or &quot;/cgi-bin/mapserv50&quot;
+              to make it &quot;/cgi-bin/mapserv.exe&quot; or &quot;/cgi-bin/mapserv50.exe&quot;.<br />
+              &lt;<a href="#toc">top</a>&gt;</p>-->
+
+            <div>另一个问题是，UNIX的可执行文件在Windows中不需要EXE或COM扩展。
+                如果您使用的是Windows，在所有实例“/ cgi-bin/mapserv”或“/ cgi-bin/mapserv50”中追加exe文件，
+                使它成为“/ cgi-bin/mapserv.exe的”或“/cgi-bin/mapserv50.exe“。
+            </div>
+
+            <h3><a name="resources">其他资源</a></h3>
+            <!--Other documentations exist to give you better understanding of the many
+            customizations MapServer offer. Please visit the MapServer documentation
+            page at <a href="http://www.mapserver.org/documentation.html">http://www.mapserver.org/documentation.html</a>.
+            There you will find several HOWTO documents--from getting started to using
+            MapScript, a scripting interface for MapServer. &lt;<a href="#toc">top</a>&gt;</p>-->
+            <div>其他资料给你更好地理解许多自定义MapServer的开放。
+                请访问MapServer的文档页面<a href="http://www.mapserver.org/documentation.html" target="_blank">http://www.mapserver.org/documentation.html</a>.
+                你会发现几个的HOWTO文件 - 从入门到使用MapScript，MapServer的脚本接口。
+            </div>
+
+            <p align="center">
+                <a href="http://lab.osgeo.cn/mapserver_tutorial/install.html">安装说明</a> |
+                <a href="http://lab.osgeo.cn/mapserver_tutorial/sections.html">开始教程</a> |
+                <a href="http://lab.osgeo.cn/mapserver_tutorial/download.html">下载教程</a></p>
+
+            <hr size="1">
+        </div>
+    </div>
+</div>
+{% end %}

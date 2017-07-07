@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+
+<!-- dist.xml -->
+<project name="MapServer jBox" default="compile">
+
+  <property name="src.dir" value="."/>
+
+  <!-- imported class locations required to compile jBox -->
+  <property name="netscape.classes" value="lib"/>
+  <property name="sixlegs.classes" value="lib"/>
+
+  <!-- temporary build directories -->
+  <property name="dist.dir" value="dist"/>
+  <property name="dist.classes" value="${dist.dir}/classes"/>
+  <property name="dist.lib" value="${dist.dir}/lib"/>
+  <property name="dist.src" value="${dist.dir}/src"/>
+
+  <!-- target virtual machine version number -->
+  <property name="vm.version" value="1.1"/>
+
+  <!--
+    extra files to be included in distribution e.g. sixlegs
+    sixlegs is required to run jBoxPNG
+    could also add netscape, which is required to build jBox
+  -->
+  <property name="dist_extras" value="lib/dist_extras"/>
+
+  <!-- working jBox jar directory, see copy copy target below -->
+  <property name="web.dir" value="/Inetpub/wwwroot/mapserver/mapplet"/>
+
+  <!--
+    should not need to edit below here
+  -->
+
+  <path id="project.class.path">
+    <pathelement location="${netscape.classes}"/>
+    <pathelement location="${sixlegs.classes}"/>
+  </path>
+
+  <!-- create the build directories -->
+  <target name="prepare">
+    <mkdir dir="${dist.classes}"/>
+    <mkdir dir="${dist.lib}"/>
+    <mkdir dir="${dist.src}"/>
+  </target>
+
+  <target name="clean" description="Remove all generated files.">
+    <delete dir="${dist.dir}"/>
+  </target>
+
+  <target name="compile" depends="prepare"
+          description="Compiles all source code.">
+    <javac srcdir="${src.dir}" destdir="${dist.classes}" target="${vm.version}">
+      <classpath refid="project.class.path"/>
+    </javac>
+  </target>
+
+  <target name="jar" depends="compile"
+          description="Generates jBox.jar and jBoxPNG.jar in the 'lib' directory.">
+    <jar jarfile="${dist.lib}/jBox.jar"
+         basedir="${dist.classes}"
+         includes="jBox.class,evalThread.class"/>
+    <jar jarfile="${dist.lib}/jBoxPNG.jar"
+         basedir="${dist.classes}"
+         includes="jBoxPNG.class,evalThread.class"/>
+  </target>
+
+  <target name="zip" depends="prepare,jar"
+          description="Generates a distribution zip file">
+    <copy todir="${dist.src}">
+    	<fileset dir="${src.dir}" includes="*.java"/>
+    </copy>
+    <zip zipfile="${dist.dir}/jBox.zip">
+       <fileset dir="." excludes="*.java" includes="*.*"/>
+       <fileset dir="${dist.dir}" includes="**/*.*"/>
+       <zipfileset src="${dist_extras}/png-sixlegs-1.2.3.zip"/>
+    </zip>
+  </target>
+
+  <!-- Copy is handy for development. It is not used for building the distribution -->
+  <target name="copy" depends="jar" description="copies jar's to working directory">
+    <copy todir="${web.dir}">
+    	<fileset dir="${dist.lib}" includes="*.jar"/>
+    </copy>
+  </target>
+
+  <target name="all" depends="clean,jar,zip"
+          description="Cleans, compiles, then builds the JAR file."/>
+
+</project>

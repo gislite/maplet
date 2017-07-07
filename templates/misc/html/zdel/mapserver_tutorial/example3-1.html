@@ -1,0 +1,199 @@
+{% extends "../../../../theme/content.html" %}
+
+{% block content %}
+
+<div class="mainbody">
+
+    <h3 align="center">示例 3.1: Class-level 查询模板 </h3>
+
+    <!-- START OF MAPSERVER FORM -->
+    <form name="mapserv" method="GET" action="/cgi-bin/mapserv">
+
+        <table width="680" border="0" align="center">
+            <tr>
+                <td>
+                    <table width="600" border="1" align="center">
+                        <tr>
+                            <td colspan="4">Select Layers:
+                                <!-- SPECIFY VECTOR LAYERS -->
+                                <input type="checkbox" name="layer" value="states" >State Boundaries&nbsp;
+                                <input type="checkbox" name="layer" value="counties" >County Boundaries&nbsp;
+                                <input type="checkbox" name="layer" value="cities" >Cities&nbsp;
+                                <input type="checkbox" name="layer" value="fedlands" >Federal/Indian Lands&nbsp;
+                                <input type="checkbox" name="layer" value="hydro" >Water Features&nbsp;
+                                <input type="checkbox" name="layer" value="roads" >Roads<br>
+
+                                <!-- SPECIFY RASTER LAYERS -->
+                                Select Background:
+                                <select name="layer">
+                                    <option value=" " >No Background</option>
+                                    <option value="landsat">
+                                    Landsat 7 ETM+</option>
+                                    <option value="modis" >
+                                    MODIS Surface Reflectance</option>
+                                    <option value="relief">
+                                    Shaded Relief</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+
+                                <!-- SPECIFY MAP MODE -->
+                                <div align="center">Map Mode:<br>
+                                    <select name="mode">
+                                        <option value="browse">
+                                        Browse </option>
+                                        <option value="query">
+                                        Query Single Layer</option>
+                                        <option value="nquery">
+                                        Query Multiple Layers</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <!-- FORM SUBMIT BUTTON -->
+                                <div align="center">
+                                    <input type="submit" name="submit" value="Refresh">
+                                </div>
+                            </td>
+                            <td>
+                                <!-- ZOOM/PAN CONTROLS -->
+                                <div align="center">Map Control: <br>
+                                    <select name="zoom">
+                                        <option value="4">Zoom In 4x</option>
+                                        <option value="3">Zoom In 3x</option>
+                                        <option value="2">Zoom In 2x</option>
+                                        <option value="0">Recenter</option>
+                                        <option value="-2">Zoom Out 2x</option>
+                                        <option value="-3">Zoom Out 3x</option>
+                                        <option value="-4">Zoom Out 4x</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <!-- REFERENCE AND LEGEND COLUMN -->
+                            <td rowspan="2" valign="top">
+                                <p>Reference:<br>
+                                    <img name="ref" src="http://159.226.123.26/ms_tmp/EX3_ref142251523911233.png"></p>
+                                <p>Legend:<br>
+                                    <img src="http://159.226.123.26/ms_tmp/EX3_leg142251523911233.png"> </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- DISPLAY THE MAPSERVER-CREATED MAP IMAGE -->
+                            <td colspan="3" align="center" valign="top">
+                                <input type="image" name="img" src="http://159.226.123.26/ms_tmp/EX3_142251523911233.png" width="400"
+                                       height="300" border="0" alt="This is the map">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <hr>
+                    <p>
+                        勾选“Cities”的图层，然后单击“刷新”按钮。该地图将刷新,城市图层现在应该显示出来。改变地图模式到“查询单图层”或“查询多图层”，然后点击其中一个城市。
+                    </p>
+                    <p>bk: 注意上面的查询。查询使用的 HTML 模板文件为 mapfile 中指定的文件。 </p>
+                    <p><!--You've just performed a non-spatial query.  The result might not make
+        any sense but there is a result.  We will format the query results in
+        the next two exercises but for now we'll look at the changes we added to
+        the mapfile and the HTML template.-->
+                        您刚刚执行了非空间查询。结果可能没有任何意义，但会有一个结果。我们在接下来的两个练习将格式化查询结果，但现在我们将看看添加 mapfile 和HTML模板的变化。
+                    <p>
+                    <p><!--Here's what the cities layer looks like (with some comments removed):-->这里是这些城市图层如下（删除一些注释）：
+        <pre>
+        LAYER # Urban areas polygon layer begins here
+          NAME cities_poly
+          GROUP cities
+          TYPE Polygon
+          STATUS on
+          DATA urban_ugl
+
+          # The keyword TOLERANCE provides a measure of sensitivity for point-based
+          # queries.  In this example, a mouse-click will have a radius of 3 pixels.
+          # TOLERANCE has and associated keyword, TOLERANCEUNITS.  When TOLERANCEUNITS
+          # isn't defined, MapServer assumes the units to be pixels.
+          #关键字TOLERANCE提供了一个以点为基础查询的灵敏度测量。在这个例子中，点击鼠标，将有一个半径为3像素的圆.TOLERANCE有一个关联的关键字，TOLERANCEUNITS。当TOLERANCEUNITS没有定义，假定MapServer单位是像素。
+          TOLERANCE 3
+
+          CLASS
+            NAME 'Urban Areas'
+
+            # The TEMPLATE keyword within a CLASS object is used to define the
+            # HTML query template to use in displaying database records when the
+            # query or nquery mode in MapServer is invoked.
+            #在CLASS中TEMPLATE关键字是用来定义HTML查询模板，以用作显示数据库记录，当在MapServer中调用来查询或多次查询模式时
+            TEMPLATE '../templates/cities_query.html'
+
+            STYLE
+              COLOR 255 240 115
+            END
+          END  # CLASS
+
+          PROJECTION
+            "init=epsg:4326"
+          END
+        END  # Urban areas polygon layer ends here
+        </pre>
+                    <!--As you can see, we only added two parameters on the mapfile--TOLERANCE,
+                    within the cities_poly layer, and TEMPLATE, within the CLASS object of
+                    the cities_poly layer.-->
+                    正如你所看到的，我们只对映射文件添加了两个参数：(1) TOLERANCE，在cities_poly layer中；(2) TEMPLATE在cities_poly layer的CLASS对象中。
+                    </p>
+                    <p>
+                        这里就是Query TEMPLATE, cities_query.html：</p>
+        <pre>
+        &lt;tr&gt;
+          &lt;td&gt;[lrn]&lt;/td&gt;
+          &lt;td&gt;[NAME]&lt;/td&gt;
+          &lt;td&gt;[STATE]&lt;/td&gt;
+        &lt;/tr&gt;
+        </pre>
+                    <p>
+                        <!--Note that it looks just like a fragment of an HTML table.  The "[NAME]"
+                        and "[STATE]" MapServer tags are actually attributes from urban_ugl.dbf
+                        which is the non-spatial database associated with out shapefile.  When
+                        defining shapefile attributes in MapServer, we always capitalize the
+                        names (this is true on shapefile but isn't true in all cases).  We've
+                        also used this before when we defined CLASSITEM and LABELITEM in section
+                        1.  The other tag, "[lrn]", is another internal MapServer variable that
+                        displays the result count within a layer.-->
+                        请注意，它看起来就像HTML表中的一个片段。MapServer“[NAME]”和“[STATE]”的标签实际上是和urban_ugl.dbf的属性，
+                        这是与输出shape文件相关的非空间数据库。MapServer定义shape文件属性时，
+                        我们始终把握名称（对于shape文件，这是真实的，但在所有的情况下，是不正确的）。
+                        此之前我们在章节1中所定义CLASSITEM和LABELITEM时我们也使用这个。
+                        对于其它的标签，“【LRN]”，是另一个MapServer内变量，将在图层内显示结果计数。
+                    </p>
+                    <p><!--If you used the "Query Multiple Layers", the MapServer CGI program will
+        apply this query template to each record.-->
+                        如果你使用了 "Query Multiple Layers查询多图层"，MapServer CGI程序将对每个记录应用这个查询模板
+                    </p>
+                    <p align="center"><a href="example3.map">View the MapFile</a> |
+                        <a href="example3-1_template.html">View the HTML Template</a>
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <!-- HIDDEN MAPSERVER CGI VARIABLES -->
+         <input type="hidden" name="imgxy" value="200.0 150.0">
+        <input type="hidden" name="imgext" value="165660.954849 -371954.000000 1506409.045151 632767.000000">
+        <input type="hidden" name="map" value="/mstu/htdocs/example3.map">
+        <input type="hidden" name="root" value="/mstuto">
+        <input type="hidden" name="program" value="/cgi-bin/mapserv">
+        <input type="hidden" name="map_web" value="template example3-1.html">
+        <input type="hidden" name="map_web_template" value="[map_web_template]">
+        <!--  要注意下面这一行：如果没有的话，点击查询结果的第二个图不会被打开 -->
+        <input type="hidden" name="savequery" value="true">
+    </form>
+
+    <hr>
+
+    <p class="Small" align="center">
+        <a href="section2.html">Back to Section 2</a> |
+        <a href="sections.html">Back to the Sections Page</a> |
+        <a href="example3-2.html">
+            Proceed to Example 3.2</a></p>
+</div>
+{% end %}

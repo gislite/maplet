@@ -1,0 +1,137 @@
+{% extends "../../../../theme/content.html" %}
+
+{% block content %}
+<table width="600" align="center">
+<tr>
+<td> <h3 align="left">Example 4.4 HTML Template</h3>
+<hr>
+<xmp><!-- MapServer Template -->
+<html>
+<head>
+<title>MapServer 5.x Tutorial</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" rel="stylesheet" href="[root]/ms35.css" />
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<table align="center" border="0" width="680"><tr>
+    <td> <h3 align="center">Example 4.4: MapServer Modes, Revisited</h3>
+
+<!-- START OF MAPSERVER FORM -->
+<form name="mapserv" method="GET" action="http://159.226.123.26/cgi-bin/mapserv">
+
+<!-- HIDDEN MAPSERVER CGI VARIABLES -->
+  <input type="hidden" name="map" value="/mstu/htdocs/example4.map">
+  <input type="hidden" name="imgext" value="165660.954849 -371954.000000 1506409.045151 632767.000000">
+  <input type="hidden" name="imgxy" value="200.0 150.0">
+  <input type="hidden" name="root" value="/mstuto">
+  <input type="hidden" name="graphicsroot" value="/mstuto/graphics">
+  <input type="hidden" name="program" value="http://159.226.123.26/cgi-bin/mapserv">
+  <input type="hidden" name="map_web" value="template example4-4_modes.html">
+
+<table width="600" border="0" align="center">
+  <tr>
+    <td>
+	<table width="400" border="1" align="center">
+	  <tr>
+	    <td colspan="4">Select Layers:
+<!-- SPECIFY VECTOR LAYERS -->
+	       <input type="checkbox" name="layer" value="states" checked="checked">
+              State Boundaries&nbsp;
+              <input type="checkbox" name="layer" value="hydro" >
+	      Water Features&nbsp;
+	      <input type="checkbox" name="layer" value="roads" >
+	      Roads<br>
+
+<!-- SPECIFY RASTER LAYERS -->
+	      Select Background:
+	      <select name="layer">
+		<option value=" " >No Background</option>
+		<option value="modis_jpl" >
+		Daily MODIS Image</option>
+		<option value="modis" >
+		MODIS Surface Reflectance</option>
+	      </select>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td>
+
+<!-- SPECIFY MAP MODE -->
+	      <div align="center">Map Mode:<br>
+		<select name="mode">
+		  <option value="browse" >Browse</option>
+		</select>
+	      </div>
+	    </td>
+	    <td>
+<!-- FORM SUBMIT BUTTON -->
+	      <div align="center">
+		<input type="submit" name="submit" value="Refresh">
+	      </div>
+	    </td>
+	    <td>
+<!-- ZOOM/PAN CONTROLS -->
+	      <div align="center">Map Control: <br>
+		<select name="zoom">
+		  <option value="4" >Zoom In 4x</option>
+		  <option value="3" >Zoom In 3x</option>
+		  <option value="2" >Zoom In 2x</option>
+		  <option value="0" selected="selected">Recenter</option>
+		  <option value="-2" >Zoom Out 2x</option>
+		  <option value="-3" >Zoom Out 3x</option>
+		  <option value="-4" >Zoom Out 4x</option>
+		</select>
+	      </div>
+	    </td>
+<!-- REFERENCE AND LEGEND COLUMN -->
+	    <td rowspan="2" valign="top">
+	      <p>Reference:<br>
+	        <!-- alternative to the "ref" image -->
+		<input type="image" name="ref" src="http://159.226.123.26/cgi-bin/mapserv?map=/mstu/htdocs/example4.map&mapext=165660.954849+-371954.000000+1506409.045151+632767.000000&mode=reference" width="155" height="105">
+              </p>
+	      <p>Scalebar:<br>
+		<!-- Alternative to the "scalebar" image -->
+                <img src="http://159.226.123.26/cgi-bin/mapserv?map=/mstu/htdocs/example4.map&mapext=165660.954849+-371954.000000+1506409.045151+632767.000000&mode=scalebar">
+              </p>
+	      <p>Legend:<br>
+		<!-- Alternative to the "legend" image -->
+		<!-- <img src="/ms_tmp/EX2.5_leg142251781113156.png"> -->
+                <img src="http://159.226.123.26/cgi-bin/mapserv?map=/mstu/htdocs/example4.map&layers=states&mapext=165660.954849+-371954.000000+1506409.045151+632767.000000&mode=legend">
+              </p>
+	  </td>
+	  </tr>
+	  <tr>
+<!-- DISPLAY THE MAPSERVER-CREATED MAP IMAGE -->
+	    <td colspan="3" align="center" valign="top">
+             <!-- Alternative to the main map image  -->
+	     <input type="image" name="img" src="http://159.226.123.26/cgi-bin/mapserv?map=/mstu/htdocs/example4.map&mapext=165660.954849+-371954.000000+1506409.045151+632767.000000&layers=states&mode=map"
+             width="400" height="300">
+	    </td>
+	  </tr>
+	</table>
+    </td>
+  </tr>
+</table>
+</form>
+      <hr>
+      <p>Here's the mapfile:<br>
+      <iframe width="100%" src="example4.map"></iframe></p>
+      <p>You can view the <a href="example4-4_modes_template.html">HTML Template source code here</a>.</p>
+<hr>
+      <p class="Small" align="center"><a href="example4.map">View the MapFile</a>
+  | <a href="example4-4_template.html">View the HTML Template</a></p>
+      </p>
+      <hr>
+<p class="Small" align="center"><a href="section3.html">Back to
+  the Section 3</a> | <a href="http://www.mapserver.org/tutorial/">Tutorial home</a> |
+  <a href="section4.html">Back to Section 4</a></p> </td>
+  </tr></table>
+</body>
+</html>
+<p></p>
+<hr>
+</td>
+</tr>
+</table>
+{% end %}

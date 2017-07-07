@@ -1,0 +1,125 @@
+{% extends "../../../../theme/content.html" %}
+
+{% block headinfo %}
+<title>MapServer 6.x 在线教程教程：只有一个图层的地图</title>
+{% end %}
+
+{% block content %}
+
+<div class="content">
+
+    <div class="single">
+
+        <h1> 教程 1.1: 只有一个图层的地图</h1>
+
+        <div class="entry">
+            <p align="center">
+                <img border="1"
+                     src="http://159.226.123.26/cgi-bin/mapserv?map=/mstu/htdocs/example1-1.map&layer=states&mode=map"/>
+            </p>
+
+            <p>
+                Mapserver可以创建一个图像并转储到一个当地目录或者直接输送到要求的web浏览器，正如这个例子。Mapserver可以创建一个图像并转储到一个当地目录或者直接输送到要求的web浏览器，正如这个例子。注意上面地图，它是由WebGIS服务器在服务器端后台生成，然后传送到客户端的。在网页后面的代码是：
+
+<pre class="brush:py">
+<img alt=""
+     src="/cgi-bin/mapserv?map={{ static_url('mstu/htdocs/example1-1.map')}}&amp;layer=states&amp;mode=map"
+     border="1" >
+</pre>
+
+            <p>
+                你可以不在HTML页面浏览它，仅仅输入这个网址：
+            </p>
+
+<pre class="brush:py">
+http://<insert hostname or IP address here>?map=/mstu/htdocs/example1-1.map&layer=states&mode=map
+</pre>
+
+            <p>
+                （记住替换&quot;&lt；&gt;&quot这里输入主机名或者IP地址；还有Web服务器的名称，例如&quot;localhost&quot;,
+                or its IP address, e.g. &quot;127.0.0.1&quot;）</p>
+
+
+            <!--MapServer can create an image and dump it to a local
+                directory or send it directly to the requesting web browser, as in
+                this example. You can view it without the need for an html page,
+                just enter this URL:
+
+                (Remember to replace &quot;&lt;insert hostname or IP address here
+                &gt;&quot; with your web server's name, e.g. &quot;localhost&quot;,
+                or its IP address, e.g. &quot;127.0.0.1&quot;).-->
+
+            <!--This URL can be
+                broken into three parts: the first part, http://&lt;insert hostname
+                or IP address here&gt;/cgi-bin/mapserv.exe?, calls the MapServer CGI
+                program. If you invoke it as is you will get this familiar message:-->
+            <p>这个URL可以被分解成三个部分：</p>
+
+            <p>第一部分，<pre>http://159.226.123.26/cgi-bin/mapserv?</pre>, 调用MapServer的CGI程序。如果你直接调用它，你会得到这个熟悉的消息：
+            </p>
+<pre class="brush:py">
+    No query information to decode. QUERY_STRING is set, but empty.
+</pre>
+
+            <!--The next three parts are what make up the query
+                string. The query string contains the CGI parameters (variables and their values), with each parameter separated by
+                an ampersand (&amp;). So, looking at the query string, the first parameter "map" has a value
+                "/ms4w/apps/tutorial/htdocs/example1-1.map"--this
+                tells the MapServer CGI program (mapserv or mapserv.exe) what
+                mapfile to process/parse. The
+                next parameter &quot;layer=states&quot;, tells mapserv.exe to "turn
+                on" the states layer--recall that we named our layer object
+                "states". The last parameter, &quot;mode=map&quot;, tells
+                mapserv.exe what to do with the output from the mapfile. In this
+                case it tells mapserv.exe to dump the image directly to the web
+                browser (the client), without first creating a temporary image on
+                the server. The MapServer &quot;mode&quot; CGI variable takes
+                values other than &quot;map&quot;. For example if you use
+                &quot;mode=browse&quot;, MapServer will dump the image to a
+                temporary directory on the server. The browse mode will not work now
+                but we'll come back to it again later.-->
+            <p>接下来的三个部分是查询字符串。查询字符串包含CGI参数（变量和它们的值），与被符号（＆）分隔的每个参数。</p>
+
+            <p>现在来看看查询字符串，第一个参数“map”有一个值“ ：</p>
+<pre class="brush:py">
+/mstu/htdocs/example1-1.map
+</pre>
+            <p>这告诉MapServer的CGI的程序（ mapserv 或 mapserv.exe ）需要处理/解析的地图文件。当然这里的路径是服务器上的路径。</p>
+
+            <p>下一个参数 “layer=states”，告诉 mapserv 使用“states”图层。我们在 Mapfile 中命名为图层对象“states”。</p>
+
+           <p> 最后一个参数，“mode=map”，告诉 mapserv 做什么以输出映射文件。在这种情况下，它告诉 mapserv 转储图像直接到Web浏览器（客户端） ，无需先创建一个临时图像在服务器上。
+            MapServer的“mode”的CGI变量可以使用“map”以外的其他值。例如，如果你使用“map=browse”， MapServer的将转储影像到服务器上的临时目录。现在 browse
+            模式将无法正常工作,但我们以后会回来。
+            </p>
+            <hr>
+
+            <h3>MapServer查看的不同模式</h3>
+
+            <p>注意上面的 mode=map ，这是MapServer支持的查看的模式。除了map模式之外，还有browse模式。而在MapServer 6.x中，除了 browse与map模式之外， 还有
+                OpenLayers 模式。 </p>
+
+            <p>下面直接使用OpenLayers的缺省配置来查看地图。</p>
+<pre>
+<a href="http://159.226.123.26/cgi-bin/mapserv?map=/mstu/htdocs/example1-1.map&layer=states&mode=browse&template=openlayers"
+   target="_blank">
+    http://159.226.123.26/cgi-bin/mapserv?map=/mstu/htdocs/example1-1.map&layer=states&mode=browse&template=openlayers</a>
+</pre>
+
+            <p>上面的地图，就不仅是静态地图了，它可以进行缩放、浏览等操作。这也是英文版本的教程完成时没有实现的技术。</p>
+            <hr align="center" width="300">
+            <p><!--This ends the first example in this tutorial. You are encouraged to
+    change the values of the keywords in the mapfile. It will help you
+    understand what these keywords do.-->
+                这将结束本教程中的第一个例子。我们鼓励您改变 MapFile 中的关键字的值。它会帮助你了解这些关键字。
+            </p>
+            <hr>
+            <p class="Small" align="center">
+                <a href="section1.html"> 第1部分 </a> |
+                <a href="sections.html"> 教程目录 </a> |
+                <a href="example1-2.html"> 教程1.2 </a>
+            </p>
+        </div>
+    </div>
+</div>
+{% end %}

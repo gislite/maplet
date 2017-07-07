@@ -1,0 +1,448 @@
+{% extends "../../../../theme/content.html" %}
+
+{% block content %}
+
+<div class="content">
+
+
+    <div class="single">
+
+<h3 align="center">
+    <!--Example 1.6: Defining Projections and Extents-->
+    例1.6：定义投影和范围
+</h3>
+<div align="center">
+    <img border="1"
+         src="http://159.226.123.26/cgi-bin/mapserv?map=/mstu/htdocs/example1-6.map&layer=states&layer=states_label&layer=modis&mode=map"/>
+</div>
+<p align="left"><!--Whoa! What happened here?-->哇，这发生了什么？</p>
+<p align="left"><!--You've just experienced on-the-fly reprojection. When
+            a PROJECTION object is defined in the mapfile, MapServer passes the
+            layer and projection info to the Proj.4 library which does the
+            reprojection.  For more information about the Proj.4 library, please
+            visit-->你刚刚经历了上飞重投影。当投影对象的映射文件中，定义的MapServer层传递的PROJ.4库做重投影和投影信息。对于关于PROJ.4库的更多信息，请访问
+    <a href="http://trac.osgeo.org/proj/">
+        http://trac.osgeo.org/proj/
+    </a>.
+</p>
+<p><!--This example attempts to shed some light on the projection support
+            in MapServer.-->本示例试图摆脱一些轻MapServer的投影支持
+</p>
+<hr>
+<p align="left"><!--This is what the mapfile looks like (Example1-6.map):-->
+    下面是本例中用到的MapFile（Example1-6.map）：
+    <br>
+    <pre class="brush:py">
+# The annotated map file (sort of)
+# Created by Pericles S. Nacionales for the MapServer tutorial
+# 20050408
+#
+# MapServer map file uses the pound sign (#) to denote the start of a line
+# comment--each line that needs to be commented has to be prepended with a "#".
+#
+# Map files begin with MAP keyword to signify the start of the map object.
+# Well, the entire map file is THE map object.  Enclosed between MAP and END
+# at the very bottom of this map file, are keyword/value pairs and other
+# objects.
+# 注释的地图文件（排序）
+# 由伯里克利S. NACIONALES创建的MapServer的教程
+# 20050408
+#
+# MapServer的地图文件使用井号（# ）开头的行表示
+# 评论 - 每一行，需要加以评价，必须在前面加上一个“# ”。
+#
+# 地图文件与MAP关键字开始，意味着开始地图对象。
+# 好了，整个地图文件是地图对象。 MAP和END之间封闭
+# 在这个地图文件的最底部，关键字/值对和其他
+# 对象。
+MAP
+  IMAGETYPE      PNG24
+  # EXTENT 199949.651166 -371954.772084 1472121.6862 632767.19157
+  EXTENT       201621.496941 -294488.285333 1425518.020722 498254.511514 # LAEA
+  #EXTENT         -97.5 41.619778 -82.122902 49.38562 # Geographic
+  SIZE           400 300
+  SHAPEPATH      "../data"
+  SYMBOLSET      "../symbols/symbols35.sym"
+  FONTSET        "../fonts/fonts.list"
+
+  # The projection object is typically used within the map and the layer
+  # objects. You only define it once within the map object and this definition
+  # becomes your output projection--MapServer will render your maps in this
+  # projection.  You also use the projection object within the layer object to
+  # define your input projection.  Your layers can be in different
+  # projections--MapServer will reproject them into your output projection.
+  # If no projection is defined within the layer object, MapServer assumes
+  # your input projection is the same as your output projection.  This is not
+  # a required object unless you're creating a map file that supports one of
+  # the OGC interoperability web services specifications (WMS/WFS/WCS).
+  #
+  # This is the output PROJECTION definition ------
+  # 地图和层内的投影对象通常用于
+  # 对象。你只在地图对象定义一次，这个定义
+  # 成为你的输出投影 - MapServer将在这个投影中
+  # 呈现您的地图。您也可以使用投影对象层对象
+  # 定义输入投影。可以在不同的图层
+  # 投影 - MapServer将它们重新投影到你的输出投影。
+  # 如果没有定义投影层内的对象，MapServer假设
+  # 输入投影输出投影一样。这不是
+  # 所需的对象，除非你创建的地图文件，支持一个
+  # OGC互操作的Web服务规范（WMS/ WFS/ WCS）。
+  #
+  # 这是输出投影定义------
+  PROJECTION
+    # Projection parameters can be defined in two ways...
+    # This is the traditional Proj.4 definition of Lambert Azimuthal Equal-Area
+    # projection for the Continental U.S.
+    # 投影参数可以被定义在两个方面...
+    # 这是传统的PROJ.4兰勃特方位等面积的定义
+    # 美国大陆投影
+      "proj=laea"
+      "ellps=clrk66"
+      "lat_0=45"
+      "lon_0=-100"
+
+    # Alternatively, you can specify an EPSG code.
+    # This is the EPSG code for Lambert Azimuthal Equal-Area
+    # projection for the U.S.
+    # 或者，您可以指定一个EPSG代码。
+    # 这是EPSG代码兰勃特方位等面积
+    # 美国投影
+    #
+    # "init=epsg:2163"
+  END # End of the output Projection definition ---
+     # 输出投影定义结束---
+  # Layer objects are defined beneath the map object.  You need at least one
+  # layer defined in your map file before you can display a map...  You can
+  # define as many layers as you'd like although a limit is typically hard-coded
+  # in map.h in the MapServer source.  The default limit is set at 100.  You'd
+  # have to have a very specialized application to need more than 100 layers in
+  # your application.
+  # 层对象在地图下方的对象定义。你至少需要一个
+  # 层中定义的地图文件，然后才可以显示在地图...您可以
+  # 定义为多层次，只要你愿意，虽然一个限制通常是硬编码
+  # 在MapServer的map.h。默认的限额设定为100。你最好
+  # 必须有一个非常特殊的应用需要超过100层
+  # 您的应用中。
+  #
+  # Start of LAYER DEFINITIONS ---------------------------------------------
+  # 层定义开始---------------------------------------------
+  LAYER # States polygon layer begins here
+    NAME         states
+    DATA         states_ugl
+    STATUS       OFF
+    TYPE         POLYGON
+
+    # Here's an example of the input projection definition.
+    # EPSG:4326 is code for geographic (latlong) projection
+    # using the WGS84 datum.
+    #
+    # PROJECTION objects within the LAYER object define the input
+    # projection--this is the native projection of your data.
+    # 这里是一个输入投影定义的例子。
+    # EPSG：4326代码地理（的LatLong）投影
+    # 用WGS84数据。
+    #
+    # 投影对象层对象定义输入
+    # 投影 - 这是您的数据的本地投影。
+    PROJECTION
+      "init=epsg:4326"
+    END
+
+    # CLASSITEM defines the non-spatial attribute that you will be using to
+    # separate a layer into classes.  This attribute will be in the DBF file
+    # of your shapefile (it will be different for each data format).  In this
+    # example the shapefile states_ugl has an associated database
+    # (states_ugl.dbf) that contains an attribute called "CLASS".  You will be
+    # using two values in the CLASS attribute to separate the classes (also
+    # called themes) used in this layer--land and water.  CLASSITEM is used in
+    # association with the EXPRESSION parameter in the CLASS object.  See below.
+   # CLASSITEM定义你将使用
+    # 的层分离的类的非空间属性。此属性将在你的shape文件中的
+    # DBF文件中（每个数据格式会有所不同）。在这种
+    # 例如shape文件states_ugl的有一个相关的数据库
+    #  （ states_ugl.dbf ） ，其中包含一个被称为“类”的属性。您将
+    # 使用两个值中的CLASS属性在这一层分离类（也
+    # 称为主题） - 土地和水。 CLASSITEM中使用
+    # 与表达参数类对象。见下文。
+    CLASSITEM    "CLASS"
+
+    # The class object is defined within the layer object.  You can define as
+    # many classes as you need (well, there are limits as with layers, but it's
+    # senseless to define more than ten on a "normal" layer.  There are
+    # situations, however, where you might have to do it.)
+    # 类对象在层对象内定义。您可以定义
+    # 你需要的类（尽管在层中限制，但这是
+    # 没有意义的在一个“正常”层定义十多个。
+    # 有这样的情况，然而，你可能不得不这样做。）
+    CLASS
+      NAME 'States'
+      EXPRESSION 'land'
+
+      # There are styles in a class, just like there are classes in a layer,
+      # just like there are layers in a map.  You can define multiple styles in
+      # a class just as you can define multiple classes in a layer and multiple
+      # layers in a map.
+      # 一个类有不同的风格，就像有一层中有不同的类，
+      # 就像在一个地图中有多个层。您可以在一个类中定义多个样式
+      # ，就像你在一层，可以定义多个类,在一个地图可以定义多个
+      # 层。
+      STYLE
+        COLOR      232 232 232
+      END
+    END
+  END # States polygon layer ends here
+
+  # In addition to vector data (shapefiles are vector data), MapServer supports
+  # a host of raster formats.  In GIS world, one of the most common raster
+  # formats is GeoTIFF, a TIFF image with geospatial headers.  MapServer also
+  # supports JPEG, PNG, GIF, and other common formats.  Other raster formats
+  # supported by MapServer include ESRI Arc/Info grid, HDF and HDF-EOS, NetCDF,
+  # Generic raster binaries, OGC Web Map Service (WMS) layers, etc.  Pretty much
+  # any raster format you can think of is probably supported, thanks to the
+  # impressive Geospatial Data Abstraction Library (GDAL, pronounced "GOODALL"
+  # or GOODLE?).  More information on GDAL is available at http://www.gdal.org.
+  #
+  # MapServer 4.x can read and display bitmapped (like GIFs), RGB/A (true
+  # color), and multispectral (images with more than 3 bands, like raw LandSat
+  # images) rasters.
+  # 除了矢量数据（shapefile是矢量数据），MapServer的支持
+  # 主机的光栅格式。在GIS中世界，一个最常见的栅格
+  # 格式为GeoTIFF，TIFF影像，有一个地理的开头。 MapServer的也
+  # 支持JPEG，PNG，GIF等常见格式。
+  # MapServer支持的其他光栅格式包括ESRI弧/信息网，HDF和HDF-EOS，NetCDF的，
+  # 通用光栅二进制文件，OGC Web地图服务（WMS）层等几乎
+  # 你能想到的任何可能是支持的光栅格式，这要归功于
+  # 令人印象深刻的地理空间数据抽象库（GDAL，发音为“GOODALL”
+  # 或Goodle的）。更多信息GDAL在http://www.gdal.org。
+  #
+  # MapServer4.x版可以读取并显示位图（如GIF格式），RGB/ A（真
+  # 色）和多光谱（超过3个波段的图像，像原材料的LandSat
+  # 图像）栅格。
+  LAYER # MODIS raster layer begins here
+    NAME         modis
+    DATA         "raster/mod09a12003161_ugl_ll_8bit.tif"
+    STATUS       OFF
+    TYPE         RASTER
+    PROCESSING   "BANDS=1,2,3"
+    OFFSITE      71 74 65
+
+    PROJECTION
+      "init=epsg:4326"
+    END
+  END # MODIS raster layer ends here
+
+  LAYER # States line layer begins here
+    NAME         states
+    DATA         states_ugl
+    STATUS       OFF
+    TYPE         LINE
+
+    PROJECTION
+      "init=epsg:4326"
+    END
+
+    CLASSITEM    "CLASS"
+    CLASS
+      NAME       'State Boundary'
+      EXPRESSION 'land'
+      STYLE
+        SYMBOL     'line5'
+        COLOR      64 64 64
+        SIZE       1
+      END
+    END
+  END # States line layer ends here
+
+  LAYER # States label layer begins here
+    NAME         states_label
+    DATA         states_ugl
+    STATUS       OFF
+    TYPE         ANNOTATION
+
+    PROJECTION
+      "init=epsg:4326"
+    END
+
+    CLASSITEM    "CLASS"
+
+    # Just like CLASSITEM, LABELITEM defines the database attribute that you
+    # will be using to draw labels.  In this case, the values of the attribute
+    # "STATE" will be used to label the states polygons.
+    # 就像CLASSITEM，LABELITEM定义您被用来绘制标签的数据库属性。
+    # 在这种情况下，“STATE”属性的值
+    # 将被用于标记国家多边形。
+    LABELITEM    "STATE"
+    CLASS
+      EXPRESSION 'land'
+      STYLE
+        COLOR      -1 -1 -1
+      END
+
+      # There can be labels in a class, just like there are classes in a layer,
+      # just like there are layers in a map.  You can define multiple labels in
+      # a class just as you can define multiple classes in a layer and multiple
+      # layers in a map.
+      # MapServer has a very flexible labeling system.  With that flexibility
+      # comes complexity, specially when using truetype fonts.  Please read
+      # through the LABEL section of the MapServer map file documentation at
+      # http://www.mapserver.org/mapfile for more information.
+      # 可以在一个类中有多个标签，就像有一层中有多个类，
+      # 就像在一个地图中有多个层。您可以在一类中定义多个标签
+      # ，就像你在一层，可以定义多个类，在一个地图中定义多个
+      # 层。
+      # MapServer的有一个非常灵活的标签制度。灵活性
+      # 自变得复杂，特别是当使用TrueType字体时。请
+      # 通过MapServer地图文件文档的LABEL段
+      # 在http://www.mapserver.org/mapfile阅读更多信息。
+      LABEL
+        COLOR 132 31 31
+        SHADOWCOLOR 218 218 218
+        SHADOWSIZE 2 2
+        TYPE TRUETYPE
+        FONT arial-bold
+        SIZE 12
+        ANTIALIAS TRUE
+        POSITION CL
+        PARTIALS FALSE
+        MINDISTANCE 300
+        BUFFER 4
+      END # end of label
+      # 标签结束
+    END # end of class
+    # 类结束
+  END # States label layer ends here
+  # 国家标签到此结束
+  # End of LAYER DEFINITIONS -------------------------------
+  # 层定义结束
+
+END # All map files must come to an end just as all other things must come to...
+# 所有的地图文件必须结束，就像所有其他的事情，一定要来...
+    </pre>
+</p>
+<hr align="center" width="300">
+<p><!--The first thing you might have noticed with our mapfile is the
+            original EXTENT has been commented out and the new EXTENT values
+            don't look anything like latitude and longitude values. Also, we
+            have added a PROJECTION object near the top and within each of our
+            layers.-->第一件事，你可能已经注意到，我们的映射文件是原来的程度上已被注释掉，新的范围值，不看任何类似纬度和经度值。此外，我们增加了一个投影对象的顶部附近，并在我们的每一个层。
+</p>
+<p><!--Let's have a look at the new object and parameter:-->
+    让我们看看新的对象和参数：</p>
+<p>EXTENT 201621.496941 -294488.285333 1425518.020722
+    498254.511514<br>
+    <!--The extent we provide to MapServer needs to be in the same
+    units as the output projection.  Since Lambert Azimuthal
+    Equal-Area's units are in meters, we have to give the new extent in
+    meters.  We can calculate the new extent using ArcView or some
+    other GIS package, or you can use Proj.4's cs2cs utility.  The
+    command below is what can be used to reproject the original extent
+    values:-->
+    他的程度，我们提供的MapServer需要在输出投影相同的单位。由于兰勃特方位等地区的单位为米，我们有米给新程度。我们可以计算出新的程度使用ArcView或其他一些GIS软件包，或者您可以使用PROJ.4
+    cs2cs实用。下面的命令是可以用来重新投影的原始范围值：
+</p>
+<pre>
+cs2cs +proj=latlong +datum=WGS84 +to +proj=laea +ellps=clrk66 +lat_0=45 +lon_0=-100
+</pre>
+<p><!--After typing the command, enter the southwestern coordinate pair
+            (the lower left coordinates), separated by a space:
+            &nbsp;-97.5 41.619778-->键入命令后，进入西南部坐标对（左下坐标），用空格隔开：-97.541.619778<br>
+    <!--to which the "cs2cs" utility gives the values:-->
+    其中的“cs2cs”实用程序给出的值：</p>
+<pre>
+            208398.01       -372335.44 0.000
+          </pre>
+<p><!--I then type the northeastern coordinate pair (upper right corner
+            coordinates), again separated by space: &nbsp;-82.122902 49.38562
+            and the following values are returned:-->接着，我键入东北坐标对（右上角坐标），再次用空格隔开：-82.12290249.38562返回以下值：
+<pre>
+            1285308.08      632638.93 0.000
+          </pre>
+<p><!--You will notice that "cs2cs" returns a set of three values.  You
+            can ignore the third value, 0.000, as it means to represent altitute
+            (which we're not using).  Anyway, we can not present the EXTENT as:-->
+    你会发现，“cs2cs”返回一组三个值。您可以忽略第三个值0.000，这意味着代表海拔高度（我们不使用）。无论如何，我们不能出示范围为：
+</p>
+<pre>
+            范围 208398.01 -372335.44 1285308.08 632638.93
+          </pre>
+<p><!--But it doesn't match up the extent above, you say.  Well, that's
+            what usually happens when you reproject--the map doesn't
+            necessarily get centered as you'd expect.  You can fudge around it,
+            taking a few thousand meters off to the left and adding a few to
+            the right.  Or, you can use a graphical GIS package to give you the
+            extent.-->
+    但它不匹配的程度，你说。嗯，这是通常会发生什么，当你重投影 - 地图未必会围绕你所期望的。
+    您可以软糖它周围，以几千米的左侧和添加几右侧。
+    或者，你可以使用一个图形化的GIS软件包给你的程度。
+    <a href="/tutorial/arcview_extent.html" target="_blank">
+        <!--Here are the instructions-->
+        下面是说明
+    </a>
+    <!--for getting EXTENT using ArcView.-->
+    使用ArcView的获得程度
+<p>
+    <!--MapServer can take projection definitions in two ways. The first
+            is shown in the mapfile's output PROJECTION object (the first
+            PROJECTION block). This is the traditional way of passing
+            parameters to the Proj.4 library. The other way is to use the EPSG
+            codes. These codes are standard projection codes (or spatial
+            reference identifiers) as defined by the European Petroleum Survey
+            Group (EPSG). In the case of our Lambert Azimuthal Equal-Area
+            projection, it has a code of &quot;2163&quot;. If you comment out
+            the four lines after PROJECTION and uncomment the line
+            &quot;init=epsg:2163&quot;, this will provide the same information
+            to Proj.4. If you want to learn more about EPSG codes, have a look
+            at &quot;/usr/local/share/proj/epsg&quot; or
+            &quot;C:/proj/nad/epsg&quot; (&quot;/ms4w/proj/nad&quot; in MS4W).
+            Also, check out the EPSG web site at-->
+
+    MapServer的投影定义两种方式。首先是中所示的映射文件的输出投影对象（第一投射块）。这是传统的方式参数传递给的PROJ.4库的。另一种方法是使用EPSG代码。这些代码是欧洲石油调查组织（EPSG）所定义的标准投影代码（或空间参考标识符）。兰勃特方位等面积投影的情况下，它有一个“2163”的代码。如果你注释掉四大行后，投影，并取消林“的init=
+    EPSG：2163”，这将提供相同的信息到PROJ.4。如果您想了解更多关于EPSG代码，看看“的/ usr/本地/共享/ PROJ/ EPSG”或“C :/ PROJ/ NAD / EPSG”（“/
+    ms4w/proj/nad”MS4W）。此外，检查出的EPSG网站
+    <a href="http://www.epsg.org">
+        http://www.epsg.org
+    </a>.
+</p>
+<hr align="center" width="300">
+<p><!--If you need to learn more about projections, please look through
+            some of the links below:-->如果您需要了解更多关于预测，请看看下面的一些链接：
+</p>
+<p>
+    <a href="http://www.colorado.edu/geography/gcraft/notes/mapproj/mapproj_f.html">
+        http://www.colorado.edu/geography/gcraft/notes/mapproj/mapproj_f.html
+    </a><br>
+    <a href="http://www.geography.hunter.cuny.edu/mp/">
+        http://www.geography.hunter.cuny.edu/mp/
+    </a><br>
+    <a href="http://www.nationalatlas.gov/articles/mapping/a_projections.html">
+        http://www.nationalatlas.gov/articles/mapping/a_projections.html
+    </a><br>
+    <a href="http://en.wikipedia.org/wiki/Map_projection">
+        http://en.wikipedia.org/wiki/Map_projection
+    </a><br>
+    <a href="http://erg.usgs.gov/isb/pubs/MapProjections/projections.html">
+        http://erg.usgs.gov/isb/pubs/MapProjections/projections.html
+    </a>
+</p>
+<p><!--You can find more by searching the web for
+            &quot;map projection&quot;.-->你可以找到更多的在网上搜索“地图投影”
+</p>
+<hr>
+<p class="Small" align="center">
+    <a href="example1-5.html">
+        Back to Example 1.6
+    </a> |
+    <a href="section1.html">
+        Back to the Section 1
+    </a> |
+    <a href="sections.html">
+        Back to the Sections Page
+    </a> |
+    <a href="example1-7.html">
+        Proceed to Example 1.7
+    </a>
+</p>
+</div>
+    </div>
+
+        {% end %}

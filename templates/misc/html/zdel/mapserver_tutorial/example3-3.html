@@ -1,0 +1,129 @@
+{% extends "../../../../theme/content.html" %}
+
+{% block content %}
+<h3 align="center">Example 3.3: Map-wide Header and Footer Templates</h3>
+
+<!-- START OF MAPSERVER FORM -->
+<form name="mapserv" method="GET" action="/cgi-bin/mapserv">
+
+    <table width="680" border="0" align="center">
+        <tr>
+            <td>
+                <table width="600" border="1" align="center">
+                    <tr>
+                        <td colspan="4">Select Layers:<br>
+                            <!-- SPECIFY VECTOR LAYERS -->
+                            <input type="checkbox" name="layer" value="states">
+                            State Boundaries&nbsp;
+                            <input type="checkbox" name="layer" value="counties">
+                            County Boundaries&nbsp;
+                            <input type="checkbox" name="layer" value="cities">
+                            Cities&nbsp;
+                            <input type="checkbox" name="layer" value="fedlands">
+                            Federal/Indian Lands&nbsp;
+                            <input type="checkbox" name="layer" value="hydro">
+                            Water Features&nbsp;
+                            <input type="checkbox" name="layer" value="roads">
+                            Roads<br>
+
+                            <!-- SPECIFY RASTER LAYERS -->
+                            Select Background:<br>
+                            <select name="layer">
+                                <option value=" ">No Background</option>
+                                <option value="landsat">Landsat 7 ETM+</option>
+                                <option value="modis">MODIS Surface Reflectance</option>
+                                <option value="relief">Shaded Relief</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+
+                            <!-- SPECIFY MAP MODE -->
+                            <div align="center">Map Mode:<br>
+                                <select name="mode">
+                                    <option value="browse">Browse</option>
+                                    <option value="query">Query Single Layer</option>
+                                    <option value="nquery">Query Multiple Layers</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <!-- FORM SUBMIT BUTTON -->
+                            <div align="center">
+                                <input type="submit" name="submit" value="Refresh">
+                            </div>
+                        </td>
+                        <td>
+                            <!-- ZOOM/PAN CONTROLS -->
+                            <div align="center">Map Control: <br>
+                                <select name="zoom">
+                                    <option value="4">Zoom In 4x</option>
+                                    <option value="3">Zoom In 3x</option>
+                                    <option value="2">Zoom In 2x</option>
+                                    <option value="0">Recenter</option>
+                                    <option value="-2">Zoom Out 2x</option>
+                                    <option value="-3">Zoom Out 3x</option>
+                                    <option value="-4">Zoom Out 4x</option>
+                                </select>
+                            </div>
+                        </td>
+                        <!-- REFERENCE AND LEGEND COLUMN -->
+                        <td rowspan="2" valign="top">
+                            <p>Reference:<br>
+                                <img name="ref" src="http://159.226.123.26/ms_tmp/EX3_ref142251611911876.png"></p>
+
+                            <p>Legend:<br>
+                                <img src="http://159.226.123.26/ms_tmp/EX3_leg142251611911876.png"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <!-- DISPLAY THE MAPSERVER-CREATED MAP IMAGE -->
+                        <td colspan="3" align="center" valign="top">
+                            <input type="image" name="img" src="http://159.226.123.26/ms_tmp/EX3_142251611911876.png"
+                                   width="400" height="300" border="0" alt="This is the map">
+                        </td>
+                    </tr>
+                </table>
+                <hr>
+                <p><!--To make this example work, uncomment the HEADER and FOOTER keywords
+	  in the WEB object:-->为了使这个例子运行，在WEB中取消页眉页脚的关键字。
+          <pre>
+          WEB
+            HEADER    '../templates/header.html'
+            FOOTER    '../templates/footer.html'
+            ...
+          END # Every object in MapServer must have an END.;)
+          </pre>
+
+                <!-- Select the "Cities" layer and click on the "Refresh" button.  Select
+                 "Query Single Layer" or Query Multiple Layers" from the "Map Mode"
+                 select box and click on one of the cities on the map.-->
+                检查“城市”的图层，然后单击“刷新”按钮。从“地图模式”中选择“查询单层“或者”查询多层“，选择盒子，然后在地图上点击其中的一个城市。
+                </p>
+                <p class="Small" align="center">
+                    <a href="example3.map">View the MapFile</a> |
+                    <a href="example3-3_template.html">View the HTML Template</a>
+                </p>
+            </td>
+        </tr>
+    </table>
+    <!-- HIDDEN MAPSERVER CGI VARIABLES -->
+    <input type="hidden" name="imgxy" value="200.0 150.0">
+    <input type="hidden" name="imgext" value="165660.954849 -371954.000000 1506409.045151 632767.000000">
+    <input type="hidden" name="map" value="/mstu/htdocs/example3.map">
+    <input type="hidden" name="root" value="/mstuto">
+    <input type="hidden" name="program" value="/cgi-bin/mapserv">
+    <input type="hidden" name="map_web" value="template example3-3.html">
+    <input type="hidden" name="savequery" value="true">
+
+</form>
+<hr>
+<p class="Small" align="center">
+    <a href="example3-2.html">
+        Back to Example 3.2</a> |
+    <a href="section3.html">Back to the Section 3</a> |
+    <a href="sections.html">Back to the Sections Page</a> |
+    <a href="example3-4.html">
+        Proceed to Example 3.4</a></p>
+{% end %}

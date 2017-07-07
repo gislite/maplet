@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <title>MapServer 5.x Tutorial</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link type="text/css" rel="stylesheet" href="ms35.css" />
+  </head>
+  <body bgcolor="#FFFFFF" text="#000000">
+    <div align="center">
+      <h1>Getting EXTENT values in ArcView</h1>
+    </div>
+    <table align="center" width="680" border="0">
+      <tr>
+        <td>
+          <p>1. Add data to ArcView project.<br>
+            <img src="graphics/arcview_extent1.jpg">
+          </p>
+          <p>2. Click on "View" menu and then on "Properties...".<br>
+            <img src="graphics/arcview_extent2.jpg">
+          </p>
+          <p>3. The Properties window will come up. Click on "Projection..."<br>
+            <img src="graphics/arcview_extent3.jpg">
+          </p>
+          <p>4. The Projection window will come up. Click on the "Custom" radio
+            button and then find and select "Lambert Equal-Area Azimuthal" on
+            the "Projection" drop box.  Finally change the "Central Meridian"
+            value to "-100" and the "Reference Latitude" value to "45". Click
+            "OK" when done.<br><br>
+            This example is for setting Lambert Azimuthal Equal-Area projection
+            for the contiguous United States. If you are using a
+            different projection, change the "Projection" drop box
+            appropriately.  You will also have to change the Projection
+            parameters.<br>
+            <img src="graphics/arcview_extent4.jpg">
+          </p>
+          <p>5. You will now go back to the Properties window.  Change the
+            "Distance Units" to meters and click OK.<br>
+            <img src="graphics/arcview_extent5.jpg">
+          </p>
+          <p>6. Your View should now look like the one below.<br>
+            <img src="graphics/arcview_extent6.jpg">
+          </p>
+          <p>7. Feel free to recenter your map.  Click on the View menu again
+            when you're satisfied.<br>
+            <img src="graphics/arcview_extent7.jpg">
+          </p>
+          <p>8. On the Properties windows, click on "Area of Interest..."<br>
+            <img src="graphics/arcview_extent8.jpg">
+          </p>
+          <p>9. The Area of Interest window will come up.<br>
+            <img src="graphics/arcview_extent9.jpg">
+          </p>
+          <p>10. Change "Set AOI to" drop box to "View".  The extent will be
+            displayed.  Copy this extent to your map file.<br>
+          <img src="graphics/arcview_extent10.jpg">
+          </p>
+          <p>If you're clueless as to how you'd use the extent (AOI) in
+            MapServer, here's a clue: EXTENT X1 Y1 X2 Y2
+          </p>
+          <p>If you still don't know...<br>
+            EXTENT 199949.651166 -371954.772084 1472121.6862 632767.19157
+          </p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

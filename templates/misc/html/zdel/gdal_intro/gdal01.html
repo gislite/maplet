@@ -1,0 +1,313 @@
+{% extends "../../../../theme/content.html" %}
+
+{% block headinfo %}
+
+
+<title>GDAL数据模型</title>
+
+{% end %}
+
+{% block content %}
+
+<div class="content">
+
+    <div class="single">
+
+        <h1>GDAL数据模型</h1>
+
+        <div class="entry">
+
+
+            <em> <b>翻译：</b>柴树杉(<a href="mailto:chaishushan@gmail.com">chaishushan@gmail.com</a>) <br>
+                <b>原文：</b><a href="http://www.gdal.org/gdal_datamodel.html">http://www.gdal.org/gdal_datamodel.html</a>
+                <br>
+            </em>
+
+            <p>
+                该文档简要描述了GDAL的数据模型，该模型可以容纳其他各种信息。</p>
+
+            <h2><a class="anchor" name="gdal_datamodel_dataset">
+                数据集（Dataset）</a></h2>
+            一个dataset（对应GDALDataset类）是一个光栅数据以及和它有关系的信息的集合。 特别地dataset包含了光栅数据的大小（像素、线等）。dataset同时也为对应的
+            光栅数据指定了坐标系统。dataset本身还可以包含元数据，它们以一种键/值对 的方式来组织。<p>
+            GDAL的数据集是基于OpenGIS Grid Coverages的格式定义的。</p>
+
+            <h3><a class="anchor" name="gdal_datamodel_dataset_cs">
+                坐标系统</a></h3>
+            Dataset的坐标系统由OpenGIS WKT字符串定义，它包含了：<p>
+        </p>
+            <ul>
+                <li>
+                    一个全局的坐标系名称。
+                </li>
+                <li>
+                    一个地理坐标系名称。
+                </li>
+                <li>
+                    一个基准标识符。
+                </li>
+                <li>
+                    椭球体的名字。长半轴(semi-major axis)和反扁率(inverse flattening)。
+                </li>
+                <li>
+                    初子午线(prime meridian)名和其与格林威治子午线的偏移值。
+                </li>
+                <li>
+                    投影方法类型（如横轴莫卡托）。
+                </li>
+                <li>
+                    投影参数列表（如中央经线等）。
+                </li>
+                <li>
+                    一个单位的名称和其到米和弧度单位的转换参数。
+                </li>
+                <li>
+                    轴线的名称和顺序。
+                </li>
+                <li>
+                    在预定义的权威坐标系中的编码（如EPSG）。
+                </li>
+            </ul>
+            <p>
+                更多信息请参考OpenGIS WKT坐标系统定义，以及osr教程文档和 OGRSpatialReference类的描述文档。</p>
+
+            <p>
+                在GDAL中，返回坐标系统的函数是<code>GDALDataset::GetProjectionRef()</code>。
+                它返回的坐标系统描述了地理参考坐标，暗含着仿射地理参考转换，这地理参考转换是由<code>GDALDataset::GetGeoTransform()</code>来返回。由GCPs地理参考坐标描述的坐标系统是由
+                <code>GDALDataset::GetGCPProjection()</code>返回的。</p>
+
+            <p>
+                注意，返回的坐标系统字符串“”表示未知的地理参考坐标系统。</p>
+
+            <h3><a class="anchor" name="gdal_datamodel_dataset_gtm">
+                仿射地理变换</a></h3>
+            GDAL数据集有两种方式描述栅格位置（用点/线坐标系）以及地理参考坐标系之间的关系。 第一种也是比较常用的是使用仿射转换，另一种则是GCPs。<p>
+            仿射变换由6个参数构成，它们由<code>GDALDataset::GetGeoTransform()</code>返回它们把点/线坐标， 用下面的关系转将点/线影射到地理坐标：</p>
+
+            <p>
+            </p><pre class="brush:py">    Xgeo = GT(0) + Xpixel*GT(1) + Yline*GT(2)
+    Ygeo = GT(3) + Xpixel*GT(4) + Yline*GT(5)
+</pre>
+            <p>
+                假设影像上面为北方，GT2和GT4参数为0，而GT1是象元宽，GT5是象元高， （GT0，GT3）点位置是影像的左上角。</p>
+
+            <p>
+                注意，上面所说的点/线坐标系是从左上角(0,0)点到右下角，也就是坐标轴从 左到右增长，从上到下增长的坐标系（即影象的行列从左下角开始计算）。 点/线位置中心是(0.5,0.5)。</p>
+
+            <h3><a class="anchor" name="gdal_datamodel_dataset_gcp">
+                GCPs</a></h3>
+            数据集可以由一系列控制点来定义空间参考坐标系。所有的GCPs共用一个地理参考坐标系， 由<code>GDALDataset::GetGCPProjection()</code>返回。每个GCP（对应GDAL_GCP类）包含下面内容：
+            <p>
+            </p><pre class="brush:py">typedef struct
+{
+    char	*pszId; 
+    char	*pszInfo;
+    double 	dfGCPPixel;
+    double	dfGCPLine;
+    double	dfGCPX;
+    double	dfGCPY;
+    double	dfGCPZ;
+} GDAL_GCP;
+</pre>
+            <p>
+                字符串pszid是本GCP在数据集中一系列GCP点中惟一的标示字符串（通常是数字）。 字符串pszInfo通常为空，但是也可以包含用户针对GCP定义的一些文本信息。甚至还
+                可能是GCP状态中包含机器可分析信息，虽然现在还支持。</p>
+
+            <p>
+                坐标（dfGCPPixel,dfGCPLine）是栅格中的GCP位置。坐标（dfGCPX，dfGCPY，dfGCPZ）是 联合的地理参考位置（dfGCPZ通常是0）。</p>
+
+            <p>
+                GDAL数据模型没有实现由GCPs产生坐标系的变化的机制，而是把具体的操作留给用户实现。 通常1到5阶多项式是常用的方法。</p>
+
+            <p>
+                通常一个数据集会包含仿射地理变换，或GCPS中的一个，或者两个都没有。两个都有很少见， 而且无法用权威坐标系定义。</p>
+
+            <h3><a class="anchor" name="gdal_datamodel_dataset_metadata">
+                元数据（Metadata）</a></h3>
+            GDAL元数据是一种辅助的数据格式，并且以键/值对序列的方式呈现。一般键的 名称有严格的定义（没有空白、或某些特殊字符等）。键所对应的值 可以是任意的长度，
+            包含任意的内容（NULL字符除外）。元数据处理系统一般不能处理很大的数据，例如一 个大于100K的数据很可能导致处理的终止。<p>
+            虽然某些键现在可能没有，但是以后也可能会被定义。 一些格式的数据可以支持一些基本的元数据（可以由用户自己定义）， 可以使用驱动程序访问这些键/值。例如，如果数据含有date/time标志，
+            TIFF格式的驱动程序可能只是简单地返回基本的信息：</p>
+
+            <p>
+            </p><pre class="brush:py">TIFFTAG_DATETIME=1999:05:11 11:29:56
+</pre>
+            <p>
+                元数据的键/值对还可以被组织到某些域中，默认的域是没有名字的。当然， 为了保存某些特殊的信息可能需要定义特殊的域。目前虽然不能列举出一个对象所需要
+                的所有域，但是程序可以测试任何我们已经知道确切含义的域。</p><h4><a class="anchor" name="gdal_datamodel_subdatasets">
+            SUBDATASETS 域</a></h4>
+            SUBDATASETS域保存了一个子datasets列表。这个列表通常是对应一个复合影象中每个 子影象的位置（像HDF或NITF）。例如一个由4个影象组成的NITF可能含有类似下面的 子datasets列表：<p>
+        </p><pre class="brush:py">  SUBDATASET_1_NAME=NITF_IM:0:multi_1b.ntf
+  SUBDATASET_1_DESC=Image 1 of multi_1b.ntf
+  SUBDATASET_2_NAME=NITF_IM:1:multi_1b.ntf
+  SUBDATASET_2_DESC=Image 2 of multi_1b.ntf
+  SUBDATASET_3_NAME=NITF_IM:2:multi_1b.ntf
+  SUBDATASET_3_DESC=Image 3 of multi_1b.ntf
+  SUBDATASET_4_NAME=NITF_IM:3:multi_1b.ntf
+  SUBDATASET_4_DESC=Image 4 of multi_1b.ntf
+  SUBDATASET_5_NAME=NITF_IM:4:multi_1b.ntf
+  SUBDATASET_5_DESC=Image 5 of multi_1b.ntf
+</pre>
+            <p>
+                以_NAME为后缀的键所对应的值可以传递给GDALOpen()用于访问文件。以_DESC为 后缀的键所对应的值可以以一种友好的方式显示给用户。</p><h4><a class="anchor"
+                                                                                                  name="gdal_datamodel_image_structure">
+            IMAGE_STRUCTURE 域</a></h4>
+            默认域中的元数据一般和影象有关，但是和影象的具体格式无关。换言之， 与影象格式无关的信息在复制dataset的时候一般也会被复制。为了处理那些与
+            影象格式相关的数据，一般将相关的键/值对放到IMAGE_STRUCTURE域中，并且在复制 dataset的时候可以不被复制。<p>
+            IMAGE_STRUCTURE域中的一个项是数据的压缩方式，对应的键名为COMPRESSION， 对应的值说明的压缩的方式。</p><h4><a class="anchor"
+                                                                                     name="gdal_datamodel_xml">
+            xml: 域</a></h4>
+            任何以<code>"xml:"</code>为前缀名的域都不是一个普通的键/值对方式的元数据。它是一个 单一的XML文档，以一个大的字符串方式保存<h2><a class="anchor"
+                                                                                            name="gdal_datamodel_rasterband">
+            Raster Band</a></h2>
+            一个波段的光栅数据对应GDAL中的 GDALRasterBand类。它描述了单个波段的 band/channel/layer。它并不是一次描述整个影象。例如，一个24bit的RGB影象
+            在一个dataset中一般被描述为三个波段，分别对应red/green/blue三中颜色。<p>
+            一个波段的光栅数据具有以下性质：</p>
+
+            <p>
+            </p>
+            <ul>
+                <li>
+                    行列数。如果没有抽样的话，该值和dataset定义的相同。<p>
+                </p></li>
+                <li>
+                    数据类型 (GDALDataType)。可以是Byte、UInt16、Int16、UInt32、Int32、Float32、Float64，或者是复合类型CInt16、CInt32、CFloat32或
+                    CFloat64。<p>
+                </p></li>
+                <li>
+                    块的大小。这是建议的缓冲块的大小。对于块式存储的影象来说，可能是一个块的大小。对于以扫描线方式的影象，可能是一个扫描线的大小。<p>
+                </p></li>
+                <li>
+                    元数据中的name/value列表，和dataset中相同，但是可能更侧重当前波段的特征。<p>
+                </p></li>
+                <li>
+                    可选择的参数（字符串）。<p>
+                </p></li>
+                <li>
+                    An optional list of category names (effectively class names in a thematic image).<p>
+                </p></li>
+                <li>
+                    An optional minimum and maximum value.<p>
+                </p></li>
+                <li>
+                    An optional offset and scale for transforming raster values into meaning full values (ie translate
+                    height to meters)<p>
+                </p></li>
+                <li>
+                    可选的光栅名称。这个特性可以用来指定一些比较重要的数据。<p>
+                </p></li>
+                <li>
+                    每个波段解释，具体为：<p>
+                </p>
+                    <ul>
+                        <li>
+                            GCI_Undefined: 默认，未知信息。
+                        </li>
+                        <li>
+                            GCI_GrayIndex: 为一个独立的灰度影象。
+                        </li>
+                        <li>
+                            GCI_PaletteIndex: this raster acts as an index into a color table
+                        </li>
+                        <li>
+                            GCI_RedBand: RGB或RGBA影象的红色波段。
+                        </li>
+                        <li>
+                            GCI_GreenBand: RGB或RGBA影象的绿色波段。
+                        </li>
+                        <li>
+                            GCI_BlueBand: RGB或RGBA影象的蓝色波段。
+                        </li>
+                        <li>
+                            GCI_AlphaBand: RGBA影象的alpha通道。
+                        </li>
+                        <li>
+                            GCI_HueBand: HLS影象的色调。
+                        </li>
+                        <li>
+                            GCI_SaturationBand: HLS影象的饱和度。
+                        </li>
+                        <li>
+                            GCI_LightnessBand: HLS影象的光强。
+                        </li>
+                        <li>
+                            GCI_CyanBand: CMY或CMYK影象的cyan波段。
+                        </li>
+                        <li>
+                            GCI_MagentaBand: CMY或CMYK影象的magenta波段。
+                        </li>
+                        <li>
+                            GCI_YellowBand: CMY或CMYK影象的yellow波段。
+                        </li>
+                        <li>
+                            GCI_BlackBand: CMYK影象的black波段。
+                        </li>
+                    </ul>
+                    <p>
+                    </p></li>
+                <li>
+                    颜色表，描述光栅数据的更多的细节。<p>
+                </p></li>
+                <li>
+                    Knowledge of reduced resolution overviews (pyramids) if available.
+                </li>
+            </ul>
+            <h2><a class="anchor" name="gdal_datamodel_rasterband_ct">
+                颜色表</a></h2>
+            一个颜色表包含0个或多个颜色结构。结构体定义如下：<p>
+        </p><pre class="brush:py">typedef struct
+{
+    /- gray, red, cyan or hue -/
+    short      c1;</pre>
+            <p>
+            </p><pre class="brush:py">    /- green, magenta, or lightness -/
+    short      c2;</pre>
+            <p>
+            </p><pre class="brush:py">    /- blue, yellow, or saturation -/
+    short      c3;</pre>
+            <p>
+            </p><pre class="brush:py">    /- alpha or blackband -/
+    short      c4;      
+} GDALColorEntry;
+</pre>
+            <p>
+                颜色表同时还对应一个调色板（GDALPaletteInterp），GDALColorEntry中的c1/c2/c3/c4的 值可以作为调色板索引得到真正的颜色值。</p>
+
+            <p>
+            </p>
+            <ul>
+                <li>
+                    GPI_Gray: c1作为灰度值。
+                </li>
+                <li>
+                    GPI_RGB: c1/c2/c3依次为Red/Green/Blue，c4对应alpha通道。
+                </li>
+                <li>
+                    GPI_CMYK: c1为cyan，c2为magenta，c3为yellow，c4为black。
+                </li>
+                <li>
+                    GPI_HLS: c1为hue，c2为lightness，c3为saturation。
+                </li>
+            </ul>
+            <p>
+                用颜色表表示时，每个像素保存的只是像素颜色在颜色表的位置。每个颜色的索引从 0开始递增。这里并没有提供针对颜色表的缩放机制。</p>
+
+            <h2><a class="anchor" name="gdal_datamodel_rasterband_overviews">
+                总结</a></h2>
+            A band may have zero or more overviews. Each overview is represented as a "free standing" GDALRasterBand.
+            The size (in pixels and lines) of the overview will be different than the underlying raster, but the
+            geographic region covered by overviews is the same as the full resolution band.<p>
+            The overviews are used to display reduced resolution overviews more quickly than could be done by reading
+            all the full resolution data and downsampling.</p>
+
+            <p>
+                Bands also have a HasArbitraryOverviews property which is TRUE if the raster can be read at any
+                resolution efficiently but with no distinct overview levels. This applies to some FFT encoded images, or
+                images pulled through gateways (like OGDI) where downsampling can be done efficiently at the remote
+                point. </p>
+
+
+        </div>
+    </div>
+</div>
+{% end %}

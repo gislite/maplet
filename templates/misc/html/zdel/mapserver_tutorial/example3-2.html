@@ -1,0 +1,176 @@
+<!-- MapServer Template -->
+<html>
+<head>
+<title>MapServer 5.x Tutorial</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" rel="stylesheet" href="[root]/ms35.css" />
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<h3 align="center">Example 3.2: Layer-specific Header and Footer Templates</h3>
+
+<!-- START OF MAPSERVER FORM -->
+<form name="mapserv" method="GET" action="/cgi-bin/mapserv">
+
+<table width="680" border="0" align="center">
+  <tr>
+    <td>
+      <table width="600" border="1" align="center">
+	<tr>
+	  <td colspan="4">Select Layers:<br>
+<!-- SPECIFY VECTOR LAYERS -->
+	   <input type="checkbox" name="layer" value="states" checked="checked">
+	      State Boundaries&nbsp;
+	    <input type="checkbox" name="layer" value="counties" >
+	      County Boundaries&nbsp;
+	    <input type="checkbox" name="layer" value="cities" >
+	      Cities&nbsp;
+	    <input type="checkbox" name="layer" value="fedlands" >
+	      Federal/Indian Lands&nbsp;
+	    <input type="checkbox" name="layer" value="hydro" >
+	      Water Features&nbsp;
+	    <input type="checkbox" name="layer" value="roads" >
+	      Roads<br>
+
+<!-- SPECIFY RASTER LAYERS -->
+	    Select Background:<br>
+	    <select name="layer">
+	      <option value=" ">No Background</option>
+              <option value="landsat" >Landsat 7 ETM+</option>
+	      <option value="modis" >MODIS Surface Reflectance</option>
+	      <option value="relief" >Shaded Relief</option>
+	    </select>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+
+<!-- SPECIFY MAP MODE -->
+	    <div align="center">Map Mode:<br>
+	    <select name="mode">
+	      <option value="browse">Browse </option>
+	      <option value="query">Query Single Layer</option>
+	      <option value="nquery">Query Multiple Layers</option>
+            </select>
+	    </div>
+	  </td>
+	  <td>
+<!-- FORM SUBMIT BUTTON -->
+	    <div align="center">
+	      <input type="submit" name="submit" value="Refresh">
+	    </div>
+	  </td>
+	  <td>
+<!-- ZOOM/PAN CONTROLS -->
+	    <div align="center">Map Control: <br>
+              	<select name="zoom">
+		  <option value="4">Zoom In 4x</option>
+		  <option value="3">Zoom In 3x</option>
+		  <option value="2">Zoom In 2x</option>
+		  <option value="1">Recenter</option>
+		  <option value="-2">Zoom Out 2x</option>
+		  <option value="-3">Zoom Out 3x</option>
+		  <option value="-4">Zoom Out 4x</option>
+		</select>
+	    </div>
+	  </td>
+<!-- REFERENCE AND LEGEND COLUMN -->
+	  <td rowspan="2" valign="top">
+	    <p>Reference:<br>
+	      <img name="ref" src="http://159.226.123.26/ms_tmp/EX3_ref142251551911444.png">
+            </p>
+	    <p>Legend:<br>
+	      <img src="http://159.226.123.26/ms_tmp/EX3_ref142251551911444.png">
+            </p>
+          </td>
+	</tr>
+	<tr>
+<!-- DISPLAY THE MAPSERVER-CREATED MAP IMAGE -->
+	  <td colspan="3" align="center" valign="top">
+	    <input type="image" name="img" src="http://159.226.123.26/ms_tmp/EX3_142251551911444.png" width="400"
+                   height="300" border="0" alt="This is the map">
+	  </td>
+	</tr>
+      </table>
+      <hr>
+      <p><!--To see this example in action, open example3.map and uncomment the
+        HEADER and FOOTER lines in the cities_poly layer.  Save the mapfile when
+        you finish.-->看一下这个例子在执行，打开例三中的地图并取消在城市区图层的页眉和页脚。当完成时保存映射文件。
+        
+
+        <pre>
+        # The HEADER and FOOTER keywords within a layer object is used to define
+        # the header and footer templates for the TEMPLATE keyword used in the
+        # CLASS object.  Uncomment the two lines below and look at the template
+        # files themselves to see how they work.
+        # 图层内的页眉和页脚对象关键字是用来定义用在页眉和页脚模板的模板关键字。下面两行取消注释，看看模板
+        文件本身，看他们如何工作。
+        HEADER '../templates/cities_header.html'
+        FOOTER '../templates/cities_footer.html'
+        </pre>
+
+        <!--Check the "Cities" layer in the application and click on the "Refresh"
+        button.  Now select "Query Single Layer" or "Query Multiple Layers" on
+        the "Map Mode" select box, and click on one of the cities.-->检查“城市”的图层，然后单击“刷新”按钮。该地图将刷新,城市图层现在应该显示出来。改变地图模式到“查询单层”或“查询多图层”，然后点击其中一个城市。
+      </p>
+      <p><!--The result should now have a heading and should be presented in
+        tabular form.-->现在结果应该有一个标题，并且应该以表格的形式呈现。
+      </p>
+      <p><!--Here's what the cities_header.html looks like:-->这就是城市页眉的样子
+        <pre>
+            <b>Layer: cities</b>
+          <p>
+          <table cellpadding=5 cellspacing=2 border=0>
+            <tr bgcolor=#CCCCCC>
+              <td bgcolor=#ffffff>&nbsp;</td>
+              <th>NAME</th>
+              <th>STATE</th>
+            </tr>
+        </pre>
+
+        <!--Here again is the content of cities_query.html file:-->这里是查询城市文件
+        <pre>
+            <tr>
+              <td>[lrn]</td>
+              <td>[NAME]</td>
+              <td>[STATE]</td>
+            </tr>
+        </pre>
+
+        <!--And finally, here's what the cities_footer.html looks like:-->最后，这是城市页脚的样子
+
+          </table>
+          <p>
+
+
+       <!-- When MapServer processes the query for a particular layer, it first
+        looks for a header template for that layer.  It will then process the
+        records that it gets back from the database, applying the query template
+        for each record.  When the template has been applied to all records, it
+        will again look for the footer template for the layer.  View the source
+        of the query result page to see how this works.-->当MapServer的一个特定层处理查询时，尋找那层最上面的模板。然后，它将处理从数据库中得到的记录。令查询模板的记录应用到 每个记录。当模板已被应用到所有的记录，它将再次寻找模板层的页脚。查看源代码查询结果页面看到这是如何工作的。
+      </p>
+      <p align="center"><a href="example3.map">View
+        the MapFile</a> | <a href="example3-2_template.html">View the
+        HTML Template</a>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- HIDDEN MAPSERVER CGI VARIABLES -->
+<input type="hidden" name="imgxy" value="200.0 150.0">
+<input type="hidden" name="imgext" value="165660.954849 -371954.000000 1506409.045151 632767.000000">
+<input type="hidden" name="map" value="/mstu/htdocs/example3.map">
+<input type="hidden" name="root" value="/mstuto">
+<input type="hidden" name="program" value="/cgi-bin/mapserv">
+<input type="hidden" name="map_web" value="template example3-2.html">
+    <input type="hidden" name="savequery" value="true"></form>
+<hr>
+<p class="Small" align="center"><a href="example3-1.html">
+  Back to Example 3.1</a> | <a href="section3.html">Back to
+  Section 3</a> | <a href="sections.html">Back to the Sections
+  Page</a> | <a href="/cgi-bin/mapserv.exe?map=/ms4w/apps/tutorial/htdocs/example3.map&layer=states&mode=browse&zoom=0&root=/tutorial&program=/cgi-bin/mapserv.exe&map_web=template+example3-3.html+header+../templates/example3_header.html+footer+../templates/example3_footer.html">
+  Proceed to Example 3.3</a>
+</p>
+</body>
+</html>

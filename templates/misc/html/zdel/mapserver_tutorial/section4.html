@@ -1,0 +1,43 @@
+{% extends "../../../../theme/content.html" %}
+
+{% block content %}
+
+    <h1 align="center">MapServer 6.x 教程</h1>
+
+    <h3 align="center">Section 4: 高级用户接口</h3>
+
+    <hr>在本节中要继续，你将需要熟悉JavaScript。请从下拉框中选择一个例子。
+    <p><!-- To proceed in this section, you will need to have familiarity
+            with JavaScript.  Please select an example from the drop-down box.-->
+    </p>
+    <form name="sect4" method="GET" action="http://159.226.123.26/cgi-bin/mapserv">
+        <input type="hidden" name="map"
+               value="/mstu/htdocs/example4.map">
+        <input type="hidden" name="layer" value="states">
+        <input type="hidden" name="zoom" value="0">
+
+        <input type="hidden" name="program" value="/cgi-bin/mapserv">
+        <input type="hidden" name="root" value="/mstuto">
+        <input type="hidden" name="graphicsroot" value="/mstuto/graphics">
+        <select name="map_web" size="1">
+            <option value="template example4-1.html">
+                教程 4.1: 浏览控制
+            </option>
+            <option value="template example4-2.html">
+                Example 4.2: A Second Scalebar
+            </option>
+            <option value="template example4-3.html">
+                Example 4.3: Java-based Rubber-band Box
+            </option>
+            <option value="template example4-4_modes.html">
+                Example 4.4: Modes, Revisited
+            </option>
+        </select>
+        <input type="submit" value="Initialize"></center>
+    </form>
+    <hr size="1">
+    <p class="Small" align="center"><a href="section3.html">Back to Section
+            3</a> | <a href="sections.html">Back to Sections Page</a>
+    </p>
+
+{% end %}

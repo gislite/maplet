@@ -1,0 +1,15 @@
+{% extends "../../theme/base.html" %}
+
+{% block mainbody %}
+
+<div class="content">
+    <div class="single">
+    <h1>{% raw kwd['info'] if 'info' in kwd else '' %}</h1>
+
+     {% if 'link' in kwd %}
+        <p> <a href="{{ kwd['link'] }}" class="btn btn-info btn-xs">返回上一步操作。</a> </p>
+
+        {% end %}
+</div>
+  </div>
+{% end %}

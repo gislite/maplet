@@ -1,0 +1,148 @@
+{% extends "../../../../theme/content.html" %}
+
+{% block content %}
+
+      <h3 align="center">示例 2.1: 缩放与浏览控制</h3>
+
+      <!-- START OF MAPSERVER FORM -->
+      <form name="mapserv" method="GET" action="/cgi-bin/mapserv">
+
+        <!-- HIDDEN MAPSERVER CGI VARIABLES -->
+        <input type="hidden" name="root" value="/mstuto"/>
+        <input type="hidden" name="program" value="/cgi-bin/mapserv"/>
+        <input type="hidden" name="map_web" value="template example2-1.html"/>
+        <input type="hidden" name="map" value="/mstu/htdocs/example2.map"/>
+        <input type="hidden" name="imgext" value="165660.954849 -371954.000000 1506409.045151 632767.000000"/>
+        <input type="hidden" name="imgxy" value="200.0 150.0"/>
+        <input type="hidden" name="layers" value="states"/>
+        <input type="hidden" name="zoom" value="[zoom]"/>
+        <table width="400" border="0" align="center">
+          <tr>
+            <td>
+              <table width="400" border="1">
+                <tr>
+                  <td>
+
+                    <!-- SPECIFY MAP MODE -->
+                    <div align="center">地图模式:<br>
+                      <select name="mode">
+                        <option value="browse">Browse</option>
+                        <option value="map">Map</option>
+                      </select>
+                    </div>
+                  </td>
+                  <td>
+                    <!-- FORM SUBMIT BUTTON -->
+                    <div align="center">
+                      <input type="submit" name="submit" value="刷新">
+                    </div>
+                  </td>
+                  <td>
+                    <!-- ZOOM/PAN CONTROLS -->
+                    <div align="center">地图控制：<br>
+                      <select name="zoom">
+                        <option value="4" >放大4倍</option>
+                        <option value="3" >放大3倍</option>
+                        <option value="2" >放大2倍</option>
+                        <option value="0" >置中</option>
+                        <option value="-2" >缩小2倍</option>
+                        <option value="-3" >缩小3倍</option>
+                        <option value="-4" >缩小4倍</option>
+                      </select>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <!-- DISPLAY THE MAPSERVER-CREATED MAP IMAGE -->
+                  <td colspan="3" align="center" valign="top">
+                    <input type="image" name="img" src="http://159.226.123.26/ms_tmp/EX2_14225131759400.png"
+                           width="400" height="300" border="0"/>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </form>
+      <hr>
+      <p>Have a look at the mapfile: <br>
+        <iframe width="100%" src="example2.map"></iframe>
+      </p>
+
+      <p>As with the maps in section 1, we initialize our application by calling
+        MapServ (&quot;/cgi-bin/mapserv.exe?) and passing our mapfile path and
+        other parameters (&quot;map=/ms4w/apps/tutorial/htdocs/example2-1.map
+        &amp;mode=browse&quot;) to it. So this page has a link from the section
+        2 page that looks like this:
+      </p>
+
+          <pre>&lt;a href=&quot;/cgi-bin/mapserv.exe?
+            map=/ms4w/apps/tutorial/htdocs/example2-1.map
+            &amp;mode=browse&amp;root=/tutorial&amp;program=/cgi-bin/mapserv.exe
+            &amp;map_web=template+example2-1.html&quot;&gt;
+      Proceed to Example 2.1&lt;/a&gt;</pre>
+
+      <p>This time we use the &quot;browse&quot; mode instead of
+        &quot;map&quot;. Browse mode tells MapServ to create a map (an image)
+        on our &quot;/tmp/&quot; directory. The image path and name is
+        referenced by MapServ with the name &quot;img&quot;. So, when MapServ
+        parses our HTML template it will replace the &quot;&#091;img&#093;&quot;
+        tag with the correct path to the image: [img].
+      </p>
+
+      <p>There are a few things you can do with this map. First, you can click
+        on any part of the image and the map will refresh and have the point you
+        clicked centered. This is panning. If you click on the
+        &quot;Map Control&quot; drop box, you can select either &quot;zoom
+        in&quot; or &quot;zoom out&quot; values. If you set it on, say
+        &quot;Zoom In 2x&quot;, and click on any part of the map, the map will
+        then be refreshed, zoomed in, with the point you clicked centered. The
+        opposite will happen if you zoom out. When either a &quot;zoom in&quot;
+        or a &quot;zoom out&quot; value is selected and the &quot;Refresh&quot;
+        button is clicked, the map will refresh and zoom in or zoom out from
+        the center of the previous map. You can use the refresh button at any
+        time to refresh the map.
+      </p>
+
+      <p>The zoom/pan controls use internal MapServer CGI variables. This
+        example shows how to use the "zoom" variable. The value of zoom
+        determines how far to zoom in or out. If the value is "0", then
+        MapServer recenters the image based on the user's mouse click. If the
+        value is greater than "0", then the CGI program zooms in (the current
+        scale of the map is multiplied by the zoom value). If it's a negative
+        number, then the CGI program zooms out (divides the current scale by the
+        zoom value). Other variables that can be used to control zoom and pan
+        are "zoomdir" and "zoomsize". These two variables pretty much do the
+        same thing that "zoom" does--"zoomdir" controls the zoom direction and
+        "zoomsize" controls how far to zoom in or out. Please have a look at
+        other examples in the
+        <a href="http://gallery.osgeo.org/">OSGeo
+          Gallery</a> or on the <a href="http://trac.osgeo.org/mapserver/wiki/MapServerSites">
+          MapServer wiki</a> for other zoom/pan control alternatives.
+
+      <p>Try changing the &quot;Map Mode&quot; from &quot;Browse&quot; to
+        &quot;Map&quot;. What happens when you click refresh? Remember that when
+        we use &quot;mode=map&quot;, MapServer returns a static map... It
+        ignores the HTML template and just streams the map image directly to the
+        browser.
+      </p>
+
+      <p>It is still similar to the mapfiles in section one although more data
+        layers have been added. I don'/mstuto have anything new to explain about this
+        mapfile but if you are curious about some new keywords, please consult
+        the <a href="http://www.mapserver.org/mapfile/">mapfile reference page</a>.</p>
+
+      <p>Now, have a look at the <a href="example2-1_template.html">HTML template file</a>. You'll notice that is
+        is essentially an HTML form that calls the MapServer CGI program. Because it is a form, you can use radio
+        buttons and check boxes along with drop down boxes to implement your interface. Don'/mstuto feel limited by this
+        example--it's good to be creative. ;) Please have a look at the <a
+            href="http://www.mapserver.org/mapfile/template.html">HTML template reference page</a> for more information.
+      </p>
+
+      <p class="Small" align="center"><a href="section2.html">Back to Section 2</a> | <a
+          href="sections.html">Back to the Sections Page</a> | <a
+          href="example2-2.html">
+        Proceed to Example 2.2</a></p>
+
+</div>
+{% end %}
