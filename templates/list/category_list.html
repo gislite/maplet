@@ -36,9 +36,10 @@
 
         <div class="widget_baidu_share">{% module baidu_share() %}</div>
 
-        <ul class="pagination">
-            {% raw pager %}
-        </ul>
+        <div>
+    {% module catalog_pager( kwd['cat_slug'], kwd['current_page'] ) %}
+
+</div>
 
 
     </div>

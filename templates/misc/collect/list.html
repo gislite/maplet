@@ -22,37 +22,33 @@
     </div>
 
     <ul class="list-group">
+
         {% for rec in recs_collect %}
         <li class="list-group-item">
-            <a href="/map/{{ rec.app.uid }}">
-                {{ rec.app.title }}
+            <a href="/info/{{ rec.post_id }}">
+                {{ rec.post_title }}
             </a>
 
-            <span class="app_tag">{% module app_tags(rec.app.uid) %}</span>
+            <span class="post_cat">{% module app_tags(rec.post_id) %}</span>
             {% if 1== 2 %}
                   <span style="font-size: small; color: #5e5e5e">
-                        ({{ rec.app.view_count }})
+                        ({{ rec.post.view_count }})
                         </span>
             {% end %}
         </li>
         {% end %}
+
+
     </ul>
-    <div class="panel-footer">
-        <div class="row">
-            <div class="col-md-6">
-                本文链接： <a href="http://www.maplet.org/collect/list">我收藏的地图</a>
-            </div>
 
-
-            <div class="col-md-6" style="text-align: right;">
-                <div class="widget_baidu_share">{% module baidu_share() %}</div>
-            </div>
-
-
-        </div>
-    </div>
 </div>
+ <div class="col-sm-12">
+ <div class="row">
 
+        {% module collect_pager( userinfo.uid, kwd['current_page'] ) %}
+
+</div>
+</div>
 {% end %}
 
 
@@ -62,14 +58,14 @@
 <div class="panel panel-black">
     <div class="panel-heading">
         <h3 class="panel-title">
-            应用分类
+            地图分类
         </h3>
     </div>
-    <div class="panel-body">
-        <ul class="list-group">
-            {% module app_menu(40) %}
+
+        <ul class="list-group list-font">
+            {% module category_menu('m') %}
         </ul>
-    </div>
+
 </div>
 
 {% end %}

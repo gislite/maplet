@@ -21,10 +21,12 @@
         </li>
         {% end %}
     </ul>
-    <div class="panel-footer">
-        <ul class="pagination">
-        {% raw pager %}
-        </ul>
+
+</div>
+<div class="row">
+    <div class="col-sm-12">
+
+        {% module search_pager(kwd['catid'],kwd['keyword'], kwd['current_page'] ) %}
     </div>
 </div>
 {% end %}

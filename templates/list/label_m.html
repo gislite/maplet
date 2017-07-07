@@ -15,11 +15,13 @@
         {% end %}
     </ul>
     
-    <div class="panel-footer">
-        <ul class="pagination">
-            {% raw pager %}
-        </ul>
+
+        <div class="row">
+    <div class="col-sm-12">
+        {% module label_pager('m', kwd['tag_slug'], kwd['current_page'] ) %}
     </div>
+</div>
+
 </div>
 
 

@@ -27,10 +27,10 @@
             &nbsp;&nbsp;
 
          {% if userinfo %}
-{% if userinfo.role[2] >= '1' %}
+{% if userinfo and userinfo.role[1] >= '2' %}
 <span class="cmts"><a href="/page/edit/{{ postinfo.uid  }}" class="btn btn-xs btn-primary">Edit</a></span>
 {% end %}
-{% if userinfo.role[2] >= '9' %}
+{% if userinfo.role[2] >= '3' %}
 <span class="cmts"><a href="/page_man/view/{{ postinfo.uid }}" class="btn btn-xs btn-primary"> Manage</a></span>
 {% end %}
 {% end %}
