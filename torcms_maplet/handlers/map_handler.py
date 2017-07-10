@@ -88,7 +88,7 @@ class MapPostHandler(PostHandler):
         elif len(url_arr) == 1 and len(url_str) in [4]:
             self.redirect('/map/m' + url_str)
         elif len(url_arr) == 1 and len(url_str) in [5]:
-            self.view_or_add(url_str)
+            self._view_or_add(url_str)
         else:
             kwd = {
                 'title': '',
