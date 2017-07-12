@@ -26,14 +26,12 @@
             {% end %}
             &nbsp;&nbsp;
 
-         {% if userinfo %}
-{% if userinfo and userinfo.role[1] >= '2' %}
-<span class="cmts"><a href="/page/edit/{{ postinfo.uid  }}" class="btn btn-xs btn-primary">Edit</a></span>
-{% end %}
-{% if userinfo.role[2] >= '3' %}
-<span class="cmts"><a href="/page_man/view/{{ postinfo.uid }}" class="btn btn-xs btn-primary"> Manage</a></span>
-{% end %}
-{% end %}
+        {% if userinfo and userinfo.role[1] >= '2' %}
+        <span class="split">|</span>
+        <a href="/page/edit/{{ view.uid }}" class="btn btn-warning btn-xs">{{ _('Edit') }}</a>
+        <span class="cmts"><a href="/wiki_man/view/{{ postinfo.uid  }}"
+                      class="btn btn-xs btn-danger"> {{ _('Review') }}</a></span>
+        {% end %}
 
         </div>
     </div>

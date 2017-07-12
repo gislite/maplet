@@ -2,18 +2,30 @@
 
 {% block zhuti %}
 
-
-
-
-<div class="panel panel-black">
-    <div class="panel-heading">
-        {{ kwd['title'] }}
-    </div>
-        <ul class="list-group">
-            {% module post_recent(20) %}
-        </ul>
+<div class="mtop">
+    <ul class="breadcrumb">
+        <li><a href="/">首页</a></li>
+        <li class="active">Wiki {{ _('List') }}</li>
+    </ul>
 </div>
 
+
+<div class="panel panel-default">
+    <div class="panel-heading"><b>Wiki {{ _('List') }} </b></div>
+
+        <ul class="list-group">
+            {% for x in view %}
+            <li class="list-group-item">
+                <a href="/wiki/{{x.title}}" title="{{x.title}}">
+                    {{ x.title }}
+                </a>
+                <span>{{ datetime.datetime.fromtimestamp(x.time_update).strftime('%Y-%m-%d')  }}</span>
+            </li>
+            {% end %}
+        </ul>
+
+
+</div>
 
 
 {% end %}

@@ -1,0 +1,34 @@
+{% extends "../theme/bage.html" %}
+
+
+{% block mainbody %}
+<div class="mtop">
+    <ul class="breadcrumb">
+        <li><a href="/">{{ _('Home') }}</a></li>
+        <li class="active">Page {{ _('List') }}</li>
+    </ul>
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading"><b>Page {{ _('List') }} </b></div>
+
+
+
+        <ul class="list-group">
+            {% for x in view %}
+            <li class="list-group-item">
+                <a href="/page/{{x.title}}" title="{{x.title}}">
+                    {{ x.title }}
+                </a>
+                <span>{{ datetime.datetime.fromtimestamp(x.time_update).strftime('%Y-%m-%d')  }}</span>
+            </li>
+            {% end %}
+        </ul>
+
+
+</div>
+
+
+{% end %}
+
