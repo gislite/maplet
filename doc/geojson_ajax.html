@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="bukun">
+    <meta name="Copyright" content="maplet.org">
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <script>
+
+        $.ready()
+        {
+            function foo() {
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://192.168.4.111:7766/geojson_j/_add',
+                    crossDomain: true,
+
+                    data: {
+                        "name": "John",
+                        "geojson": '{"name": "John", "geojsonsadf": "2pm"}',
+                    },
+                    // dataType: 'JSONP',
+                    success: function (tdata) {                                   //date是返回的值
+                        var gson = JSON.parse( tdata );
+                        alert(gson.geojson);
+                    },
+
+                    error: function (xhr, status) {
+                        alert("error");
+                    },
+                });
+
+
+            }
+        }
+
+    </script>
+</head>
+<body>
+
+
+<button id="btn_a" onclick="foo();">asfdsadf</button>
+
+
+</body>
+</html>

@@ -3,6 +3,14 @@ import getopt
 import sys
 
 from torcms.model.post_model import MPost
+from torcms.script.script_init_tabels import create_table
+
+from torcms_maplet.model.map_tab import MabGson, MabPost2Gson, MabLayout
+
+def run_init():
+    create_table(MabGson)
+    create_table(MabLayout)
+    create_table(MabPost2Gson)
 
 
 def run_update_lon():

@@ -13,7 +13,8 @@ class GeoJsonHandler(BaseHandler):
     def initialize(self):
         super(GeoJsonHandler, self).initialize()
 
-    def get(self, url_str=''):
+    def get(self, *args, **kwargs):
+        url_str = args[0]
         url_arr = self.parse_url(url_str)
 
         if len(url_arr) == 0:
@@ -117,7 +118,8 @@ class GeoJsonHandler(BaseHandler):
         if rec:
             return json.dump(out_dic, self)
 
-    def post(self, url_str=''):
+    def post(self, *args, **kwargs):
+        url_str = args[0]
 
         url_arr = self.parse_url(url_str)
 
@@ -139,6 +141,7 @@ class GeoJsonHandler(BaseHandler):
         :param geojson_str: 
         :return: 
         '''
+
         def get_geometry(geom):
             '''
             Get geometry from GeoJson.
@@ -246,3 +249,67 @@ class GeoJsonHandler(BaseHandler):
         MJson.add_or_update(uid, self.userinfo.uid, url_arr[0], out_dic)
         return_dic['status'] = 1
         return json.dump(return_dic, self)
+
+
+class GeoJsonAjaxHandler(GeoJsonHandler):
+    def initialize(self):
+        super(GeoJsonHandler, self).initialize()
+        self.set_default_headers()
+
+    def set_default_headers(self):
+        print("setting headers!!!")
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+
+    def get(self, *args, **kwargs):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+        print(args)
+
+    def post(self, *args, **kwargs):
+
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+
+
+        url_arr = self.parse_url(args[0])
+        print(url_arr)
+
+        if len(url_arr) > 0:
+            if url_arr[0] == '_add':
+                self.j_add()
+
+    def j_add(self):
+        print('=' * 20)
+        print('Hello')
+        post_data = self.get_post_data()
+
+        print(post_data)
+
+        geojson_str = post_data['geojson']
+
+        # out_dic = self.parse_geojson(geojson_str)
+
+        uid = tools.get_uu4d()
+        while MJson.get_by_id(uid):
+            uid = tools.get_uu4d()
+        return_dic = {'sig': uid,
+                      'geojson': geojson_str}
+
+
+        # MJson.add_or_update_json(uid, self.userinfo.uid, out_dic)
+        # return_dic['status'] = 1
+        # return json.dump(return_dic, self)
+
+        try:
+            # MJson.add_or_update_json(uid, self.userinfo.uid, out_dic)
+            return_dic['status'] = 1
+            return json.dump(return_dic, self)
+        except:
+            self.set_status(400)
+            return_dic['status'] = 0
+            return json.dump(return_dic, self)
+
