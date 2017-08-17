@@ -12,14 +12,15 @@
 
     <script>
 
+        let  uid = '';
         $.ready()
         {
-            function foo() {
+            function foo_add() {
 
 
                 $.ajax({
                     type: 'POST',
-                    url: 'http://192.168.4.111:7766/geojson_j/_add',
+                    url: 'http://www.maplet.org/geojson_j/_add',
                     crossDomain: true,
 
                     data: {
@@ -29,7 +30,8 @@
                     // dataType: 'JSONP',
                     success: function (tdata) {                                   //date是返回的值
                         var gson = JSON.parse( tdata );
-                        alert(gson.geojson);
+                        uid = gson.uid;
+                        alert(gson.uid + ', ' + gson.status);
                     },
 
                     error: function (xhr, status) {
@@ -39,6 +41,56 @@
 
 
             }
+
+
+            function foo_edit() {
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://www.maplet.org/geojson_j/_edit/' + uid,
+                    crossDomain: true,
+
+                    data: {
+                        "name": "John",
+                        "geojson": '{"name": "New name", "geojson": "New VAle"}',
+                    },
+                    // dataType: 'JSONP',
+                    success: function (tdata) {                                   //date是返回的值
+                        var gson = JSON.parse( tdata );
+                        alert(gson.uid + ', ' + gson.status);
+                    },
+
+                    error: function (xhr, status) {
+                        alert("error");
+                    },
+                });
+
+
+            }
+
+            function foo_get() {
+
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://www.maplet.org/geojson_j/' + uid,
+                    crossDomain: true,
+
+                    // dataType: 'JSONP',
+                    success: function (tdata) {                                   //date是返回的值
+                        var gson = JSON.parse( tdata );
+                        alert(gson.uid + ', ' + gson.geojson);
+                    },
+
+                    error: function (xhr, status) {
+                        alert("error");
+                    },
+                });
+
+
+            }
+
         }
 
     </script>
@@ -46,7 +98,15 @@
 <body>
 
 
-<button id="btn_a" onclick="foo();">asfdsadf</button>
+    <button id="btn_a" onclick="foo_add();">Post</button>
+
+
+
+    <button id="btn_a" onclick="foo_get();">Get</button>
+
+
+
+    <button id="btn_a" onclick="foo_edit();">Update</button>
 
 
 </body>
