@@ -21,31 +21,6 @@
 
     {% block head %}{% end %}
 
-    {% if userinfo and userinfo.role[2] >= '1' %}
-    {% else %}
-
-
-
-
-    <!-- Piwik -->
-    <script type="text/javascript">
-              var _paq = _paq || [];
-                /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-                _paq.push(['trackPageView']);
-                  _paq.push(['enableLinkTracking']);
-(function() {
-    var u="//101.201.80.15/piwik/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', '2']);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
-</script>
-<!-- End Piwik Code -->
-
-
-{% end %}
-
 </head>
 <body>
 
@@ -150,5 +125,28 @@
 
 </body>
         <script type="text/javascript" src="{{ static_url('jslib/dst/gscript.js') }}"></script>
+
+        {% if userinfo and userinfo.role[2] >= '1' %}
+    {% else %}
+
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+              var _paq = _paq || [];
+                /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+                _paq.push(['trackPageView']);
+                  _paq.push(['enableLinkTracking']);
+(function() {
+    var u="//47.94.22.90/piwik/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Piwik Code -->
+{% end %}
+
+
 
 </html>
