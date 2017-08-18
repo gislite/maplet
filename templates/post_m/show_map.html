@@ -12,6 +12,8 @@
 
 <script>
     var post_uid = "{{postinfo.uid}}";
+    var wcs_svr = '';
+    var login = {{ kwd['login'] }};
 </script>
 
 {% block headinfo %}
@@ -79,7 +81,7 @@
 
 
         <div id="map" class="mapdiv" tabindex="0" data-map='{"i": "{{ postinfo.uid[1:] }}",
-        "x":{{ kwd[' vlon '] if 'vlon' in kwd else postinfo.extinfo['ext_lon'] }},
+        "x":{{ kwd['vlon'] if 'vlon' in kwd else postinfo.extinfo['ext_lon'] }},
         "y": {{ kwd['vlat'] if 'vlat' in kwd else postinfo.extinfo['ext_lat'] }},
         "v": {{ kwd['vzoom'] if 'vzoom' in kwd else postinfo.extinfo['ext_zoom_current'] }},
         "m": {{ postinfo.extinfo['ext_zoom_max'] }},
@@ -115,7 +117,7 @@
         <li class="list-group-item">
             <h4 class="list-group-item-heading" style="display: inline-block;">用户地图数据 </h4> <span
                 class="text-info bg-info"> 全屏后可进行数据编辑</span></li>
-        {% if userinfo %}
+         {% if userinfo %}
         {% module app_json(postinfo.uid, userinfo.uid) %}
         {% end %}
     </ul>

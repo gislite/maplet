@@ -9,7 +9,7 @@ DB_CFG = {
         'kind': 'p',  # 'p' for PostgresQL, 's' for SQLite.
         }
 
-wcs_src = cfg.SITE_CFG['wcs']
+wcs_svr = cfg.SITE_CFG['wcs']
 CMS_CFG = {
     'list_num': 10,
     'site_type': 2,
