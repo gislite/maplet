@@ -3,3 +3,4 @@
 wheel
 openpyxl
 torcms==0.6.15
+torcms_maplet==0.0.2
