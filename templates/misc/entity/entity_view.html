@@ -1,0 +1,39 @@
+{% extends "../../theme/base_zhu.html" %}
+{% block base_top_header %}
+<div class="container">
+     <div style="padding-top: 80px"></div>
+    <div class="row">
+        <div class="mtop">
+            <ul class="breadcrumb">
+                <li><a href="/">首页</a></li>
+                <li class="active">查看文件</li>
+                {% if userinfo and( userinfo.role[1] >= '2') %}
+                <li class="fr">
+                    <a href="/entity/" class="btn btn-primary btn-xs">查看文件列表</a>
+                </li>
+                {% end %}
+            </ul>
+        </div>
+        <div class="panel panel-black">
+            <div class="panel-heading"><b>查看文件</b></div>
+            <div class="panel-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">{{ _('src') }}：</label>
+
+                        <div class="col-sm-10">
+                            {% if kwd['kind'] == '3'%}
+                            <input type="text" value="{{filename}}" class="form-control">
+                            {% else %}
+                            <input type="text" value="{% module site_url()%}/static/upload/{{filename}}"
+                                   class="form-control">
+                            {% end %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% end %}
+

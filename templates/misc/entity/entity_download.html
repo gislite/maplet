@@ -1,0 +1,40 @@
+{% extends "../../theme/base_zhu.html" %}
+{% block base_top_header %}
+<div class="container">
+     <div style="padding-top: 80px"></div>
+    <div class="row">
+        <div class="mtop">
+            <ul class="breadcrumb">
+                <li><a href="/">首页</a></li>
+                <li class="active">文件下载列表</li>
+            </ul>
+        </div>
+        <div class="panel panel-black">
+            <div class="panel-heading"><b>文件下载列表</b></div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>序号</td>
+                        <td>文件</td>
+                        <td>用户名</td>
+                        <td>数量</td>
+                    </tr>
+                    {% set ii = 1 %}
+                    {% for x in imgs %}
+                    <tr>
+                        <td>{{ ii }}</td>
+                        <td>{{ x.entity_path }}</td>
+                        <td>{{ userinfo.user_name }}</td>
+                        <td>{{ x.count }}</td>
+                    </tr>
+                    {% set ii = ii +1 %}
+                    {% end %}
+                </table>
+                {% module entity_download( kwd['current_page'] ) %}
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+{% end %}
+

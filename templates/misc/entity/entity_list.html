@@ -1,0 +1,95 @@
+{% extends "../../theme/base_zhu.html" %}
+{% block base_top_header %}
+<div class="container">
+     <div style="padding-top: 80px"></div>
+    <div class="row">
+        <div class="mtop">
+            <ul class="breadcrumb">
+                <li><a href="/">首页</a></li>
+                <li class="active">文件列表</li>
+                {% if userinfo and( userinfo.role[1] >= '2') %}
+                <li class="fr"><a href="/entry/add" class="btn btn-primary btn-xs">上传文件</a></li>
+                {% end %}
+            </ul>
+        </div>
+        <div class="panel panel-black">
+            <div class="panel-heading"><b>文件列表</b></div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>序号</td>
+                        <td>Url</td>
+                        <td>说明</td>
+                        <td>图片</td>
+                    </tr>
+                    {% set ii = 1 %}
+                    {% for x in imgs %}
+                    <tr>
+                        <td>{{ ii }}</td>
+                        {% if x.kind == '1' %}
+
+                        {% if len(x.path) == 39 %}
+                        <td>
+                            <a href="{% module site_url() %}{{ static_url('upload/') }}{{ x.path}}_m.jpg"
+                               target="_blank">
+                                {% module site_url() %}{{ static_url('upload/') }}{{ x.path}}_m.jpg
+                            </a>
+                        </td>
+
+
+                        <td>
+                            <b>图片说明：</b>{{ x.desc }}
+                        </td>
+                        <td>
+                            <a href="{{ static_url('upload/') }}{{ x.path }}_m.jpg" target="_blank">
+                                <img src="{{ static_url('upload/') }}{{ x.path }}_m.jpg" style="width: 150px"/>
+                            </a>
+                        </td>
+                        {% else %}
+                        <td>
+                            <a href="{% module site_url() %}{{ static_url('upload/') }}{{ x.path}}"
+                               target="_blank">
+                                {% module site_url() %}{{ static_url('upload/') }}{{ x.path}}
+                            </a>
+                        </td>
+                        <td>
+                            <b>图片说明：</b>{{ x.desc }}
+                        </td>
+                        <td>
+                            <a href="{{ static_url('upload/') }}{{ x.path }}" target="_blank">
+                                <img src="{{ static_url('upload/') }}{{ x.path }}" style="width: 150px"/>
+                            </a>
+                        </td>
+                        {% end %}
+                        {% else %}
+
+
+                        {% if x.kind == '3'%}
+
+                        <td><a href="{{ x.path}}" target="_blank">{{ x.path}}</a></td>
+                        {% else %}
+                        <td>
+                            <a href="{% module site_url() %}{{ static_url('upload/') }}{{ x.path}}"
+                               target="_blank">
+                                {% module site_url() %}{{ static_url('upload/') }}{{ x.path}}
+                            </a>
+                        </td>
+                        {% end %}
+                        <td>
+                            <b>说明：</b>{{ x.desc }}
+                        </td>
+                        <td>
+                        </td>
+                        {% end %}
+                    </tr>
+                    {% set ii = ii +1 %}
+                    {% end %}
+                </table>
+                {% module entity_pager( kwd['current_page'] ) %}
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+{% end %}
+

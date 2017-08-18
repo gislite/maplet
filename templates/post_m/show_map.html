@@ -1,11 +1,12 @@
-{% extends "../theme/base_view.html" %}
+{% extends "../theme/base.html" %}
 {% block head %}
 <title>{{ postinfo.title }}|在线地图|历史地图</title>
 <meta name="keywords" content="{{ postinfo.keywords }},在线地图,历史地图">
 <meta name="description" content="{% module generate_description(postinfo.cnt_html) %}">
 
 
-<link rel="stylesheet" href="{{ static_url('f2elib/bootstrap-star-rating-master/css/star-rating.css')}}" type="text/css" media="all">
+<link rel="stylesheet" href="{{ static_url('f2elib/bootstrap-star-rating-master/css/star-rating.css')}}" type="text/css"
+      media="all">
 <script type="text/javascript" src="{{ static_url('f2elib/bootstrap-star-rating-master/js/star-rating.js') }}"></script>
 
 
@@ -26,49 +27,50 @@
 <div class="panel panel-black">
     {% if userinfo %}
     {% else %}
-<div class="alert alert-warning">
-    <a class="close" data-dismiss="alert" href="#" aria-hidden="true"> &times; </a>
-    基于WebGIS技术，地图可以在线浏览、放大、缩小，也可对不同的地图进行叠加操作。</div>
-{% end %}
+    <div class="alert alert-warning">
+        <a class="close" data-dismiss="alert" href="#" aria-hidden="true"> &times; </a>
+        基于WebGIS技术，地图可以在线浏览、放大、缩小，也可对不同的地图进行叠加操作。
+    </div>
+    {% end %}
     <div class="panel-heading">
 
-        <H1 >{{ postinfo.title }}</H1>
+        <H1>{{ postinfo.title }}</H1>
 
         <div class="container" style="width: auto;">
             <div class="row">
 
                 <div class="col-md-12" style="text-align: left">
 
-                <b>分类:</b> <span class="app_tag">{% module map_catalogs(postinfo.uid ) %}</span>
+                    <b>分类:</b> <span class="app_tag">{% module map_catalogs(postinfo.uid ) %}</span>
 
 
-                        <span>发布日期:</span>
-                        <span class="">{{ str(postinfo.date)[:10] }}</span>
+                    <span>发布日期:</span>
+                    <span class="">{{ str(postinfo.date)[:10] }}</span>
 
 
+                    <a class="btn btn-info btn-xs" href="/map/{{postinfo.uid}}?fullscreen=1&gson={{ kwd['geojson'] }}"
+                       target="_blank">
 
-                         <a class="btn btn-info btn-xs" href="/map/{{postinfo.uid}}?fullscreen=1&gson={{ kwd['geojson'] }}" target="_blank">
-
-                             <span class="glyphicon glyphicon-fullscreen"></span>
-                             全屏</a>
-
-
-                     <button id="act_collect" class="btn btn-info btn-xs">
-                         <span class="glyphicon glyphicon-heart-empty"></span>
-                            <span id="text_collect">收藏</span>
-                        </button>
+                        <span class="glyphicon glyphicon-fullscreen"></span>
+                        全屏</a>
 
 
-                         {% module widget_editor('map', postinfo.uid, userinfo) %}
+                    <button id="act_collect" class="btn btn-info btn-xs">
+                        <span class="glyphicon glyphicon-heart-empty"></span>
+                        <span id="text_collect">收藏</span>
+                    </button>
+
+
+                    {% module widget_editor('map', postinfo.uid, userinfo) %}
 
                     {% if userinfo and userinfo.role[1] >= '2' %}
-<span class="cmts"><a id="btn_updatemap" class="btn btn-xs btn-danger">更新缺省视图</a></span>
-{% end %}
+                    <span class="cmts"><a id="btn_updatemap" class="btn btn-xs btn-danger">更新缺省视图</a></span>
+                    {% end %}
 
 
                 </div>
 
-                </div>
+            </div>
 
         </div>
     </div>
@@ -76,9 +78,8 @@
     <div class="panel-body">
 
 
-
-        <div id="map" class="mapdiv" tabindex="0" data-map = '{"i": "{{ postinfo.uid[1:] }}",
-        "x":{{ kwd['vlon'] if 'vlon' in kwd else postinfo.extinfo['ext_lon'] }},
+        <div id="map" class="mapdiv" tabindex="0" data-map='{"i": "{{ postinfo.uid[1:] }}",
+        "x":{{ kwd[' vlon '] if 'vlon' in kwd else postinfo.extinfo['ext_lon'] }},
         "y": {{ kwd['vlat'] if 'vlat' in kwd else postinfo.extinfo['ext_lat'] }},
         "v": {{ kwd['vzoom'] if 'vzoom' in kwd else postinfo.extinfo['ext_zoom_current'] }},
         "m": {{ postinfo.extinfo['ext_zoom_max'] }},
@@ -86,86 +87,87 @@
         "k": {{ kwd['marker']}},
         "g": "{{ kwd['geojson'] }}",
         "login": {{ kwd['login'] }}
-        }'></div>
+        }'>
     </div>
+</div>
 
 
-    <div class="panel-body">
+<div class="panel-body">
 
 
-        <ul class="list-group">
-            <li class="list-group-item">
+    <ul class="list-group">
+        <li class="list-group-item">
 
-                <a id="save_view" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-save">保存视图</span></a>
-                <a id="current_view_url" href="{% module site_url() %}{{ kwd['url'] }}">{% module site_url() %}{{kwd['url'] }}</a>
-</li>
+            <a id="save_view" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-save">保存视图</span></a>
+            <a id="current_view_url" href="{% module site_url() %}{{ kwd['url'] }}">{% module site_url() %}{{kwd['url'] }}</a>
+        </li>
     </ul>
 
 
+    <ul class="list-group">
+
+        <li class="list-group-item"><h4 class="list-group-item-heading">用户视图链接</h4></li>
+        {% if userinfo %}
+        {% module app_layout(postinfo.uid, userinfo.uid) %}
+        {% end %}
 
 
-<ul class="list-group">
+        <li class="list-group-item">
+            <h4 class="list-group-item-heading" style="display: inline-block;">用户地图数据 </h4> <span
+                class="text-info bg-info"> 全屏后可进行数据编辑</span></li>
+        {% if userinfo %}
+        {% module app_json(postinfo.uid, userinfo.uid) %}
+        {% end %}
+    </ul>
 
-     <li class="list-group-item"><h4 class="list-group-item-heading">用户视图链接</h4></li>
-     {% if userinfo %}
-            {% module app_layout(postinfo.uid, userinfo.uid) %}
-            {% end %}
-
-
-    <li class="list-group-item">
-        <h4 class="list-group-item-heading" style="display: inline-block;">用户地图数据 </h4> <span class="text-info bg-info"> 全屏后可进行数据编辑</span></li>
-     {% if userinfo %}
-          {% module app_json(postinfo.uid, userinfo.uid) %}
-          {% end %}
-</ul>
-
-  </div>
-
-
- <div class="panel-heading">
-<h4 class="panel-title">地图说明
-</h4>
 </div>
-    <div class="panel-body">
-        <div id="wiki_cnt">
-            {% raw unescape(postinfo.cnt_html) %}
-        </div>
-    </div>
+
+
+<div class="panel-heading">
+    <h4 class="panel-title">地图说明
+    </h4>
+</div>
 <div class="panel-body">
-     <p style="border-bottom: 1px dashed #dddddd; margin-bottom: 20px">&nbsp;</p>
+    <div id="wiki_cnt">
+        {% raw unescape(postinfo.cnt_html) %}
+    </div>
+</div>
+<div class="panel-body">
+    <p style="border-bottom: 1px dashed #dddddd; margin-bottom: 20px">&nbsp;</p>
 
     {% module reply_panel(postinfo.uid, userinfo) %}
-     
+
 </div>
 
-    <div class="panel-footer">
-        <div class="row">
-            <div class="col-md-6">
-                <span>标签:</span>
+<div class="panel-footer">
+    <div class="row">
+        <div class="col-md-6">
+            <span>标签:</span>
                 <span class="post_cat">
                     {% set iii = 1 %}
                     {% for x in tag_info %}
-                    <a href="/label/{{postinfo.kind}}/{{ x.tag_id }}" class="app_label tag{{ iii }}">{{ x.tag_name }}</a>
+                    <a href="/label/{{postinfo.kind}}/{{ x.tag_id }}" class="app_label tag{{ iii }}">{{ x.tag_name
+                        }}</a>
                     {% set iii = iii + 1 %}
                     {% end %}
                 </span>
-            </div>
-            <div class="col-md-6"></div>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6" id="bwlj">
+            地图链接： <a href="{% module site_url() %}/map/{{ postinfo.uid }}">{{ postinfo.title }}</a>
         </div>
 
-        <div class="row">
-
-            <div class="col-md-6" id="bwlj">
-        地图链接： <a href="{% module site_url() %}/map/{{ postinfo.uid }}">{{ postinfo.title }}</a>
-    </div>
-
-    <div class="col-md-6 ">
-        {% if 1 == 2 %}
-        <div class="widget_baidu_share"> {% module baidu_share() %}</div>
-        {% end %}
-    </div>
+        <div class="col-md-6 ">
+            {% if 1 == 2 %}
+            <div class="widget_baidu_share"> {% module baidu_share() %}</div>
+            {% end %}
         </div>
     </div>
+</div>
 </div>
 
 
@@ -176,7 +178,7 @@
 <div class="panel panel-black">
     <div class="panel-heading">地图评价</div>
     <div class="panel-body" style="font-size: x-small">
-                    {% module star_rating(postinfo, userinfo) %}
+        {% module star_rating(postinfo, userinfo) %}
     </div>
 
     <div class="panel-heading">地图引用</div>
@@ -191,70 +193,67 @@
 <div class="panel panel-black">
     <div class="panel-heading">地图叠加</div>
     <div class="panel-body">
-         {% if userinfo  %}
-            <form action="javascript:;" class="form-horizontal" role="form">
-                <fieldset>
+        {% if userinfo %}
+        <form action="javascript:;" class="form-horizontal" role="form">
+            <fieldset>
 
-                    <div class="form-group">
-                                               <div class="col-sm-12">
-                            <select id="over_map_1" name="over_map_1" class="form-control">
-                                {% for recent in recent_apps %}
-                                <option value="{{recent.post_id}}">{{recent.post_id}} |
-                                    {{recent.post_title}}
-                                </option>
-                                {% end %}
-                            </select>
-                        </div>
-
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <select id="over_map_1" name="over_map_1" class="form-control">
+                            {% for recent in recent_apps %}
+                            <option value="{{recent.post_id}}">{{recent.post_id}} |
+                                {{recent.post_title}}
+                            </option>
+                            {% end %}
+                        </select>
                     </div>
 
-                    <div class="form-group">
+                </div>
+
+                <div class="form-group">
 
 
-
-                        <div class="col-sm-12">
-                            <select id="over_map_2" name="over_map_2" class="form-control">
-                                <option value=""></option>
-                                {% for recent in recent_apps %}
-                                <option value="{{recent.post_id}}">{{recent.post_id}} |
-                                    {{recent.post_title}}
-                                </option>
-                                {% end %}
-                            </select>
-                        </div>
+                    <div class="col-sm-12">
+                        <select id="over_map_2" name="over_map_2" class="form-control">
+                            <option value=""></option>
+                            {% for recent in recent_apps %}
+                            <option value="{{recent.post_id}}">{{recent.post_id}} |
+                                {{recent.post_title}}
+                            </option>
+                            {% end %}
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-1 col-sm-3">
-                            <button id="btn_overlay" name="btn_overlay" class="btn btn-info btn-sm">叠加</button>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-3">
+                        <button id="btn_overlay" name="btn_overlay" class="btn btn-info btn-sm">叠加</button>
                     </div>
+                </div>
 
-                </fieldset>
-            </form>
+            </fieldset>
+        </form>
         {% else %}
-        <div> <a  class="btn btn-sm btn-warning" href="/user/login">登录</a> 后，可进行在线叠加操作。</div>
+        <div><a class="btn btn-sm btn-warning" href="/user/login">登录</a> 后，可进行在线叠加操作。</div>
         {% end %}
     </div>
 </div>
 
 
-
-
 <div class="panel panel-black">
-    <div class="panel-heading"> <h3 class="panel-title">相关地图</h3> </div> 
+    <div class="panel-heading"><h3 class="panel-title">相关地图</h3></div>
     <ul class="list-group" style="overflow: hidden;">
         {% for x in relations %}
         <li class="list-group-item" style="overflow: hidden;">
             <a href="/map/{{ x.post_id }}">
-                 <span class="glyphicon glyphicon-map-marker"></span>{{ x.post_title }}
-               {% if x.post_id[0] == 'v' %}<span class="badge" style="color:yellow">v</span>{% end %}
+                <span class="glyphicon glyphicon-map-marker"></span>{{ x.post_title }}
+                {% if x.post_id[0] == 'v' %}<span class="badge" style="color:yellow">v</span>{% end %}
             </a>
         </li>
         {% end %}
         {% for x in rand_recs %}
         <li class="list-group-item" style="overflow: hidden;">
             <a href="/map/{{ x.uid }}">
-                 <span class="glyphicon glyphicon-map-marker"></span>{{ x.title }}
+                <span class="glyphicon glyphicon-map-marker"></span>{{ x.title }}
                 {% if x.uid[0] == 'v' %}<span class="badge" style="color:yellow">v</span>{% end %}
             </a>
         </li>
@@ -263,10 +262,8 @@
 </div>
 
 
-
-
 <div class="panel panel-black">
-    <div class="panel-heading"> <h3 class="panel-title"> 最近浏览的地图 </h3> </div>
+    <div class="panel-heading"><h3 class="panel-title"> 最近浏览的地图 </h3></div>
 
     <ul class="list-group">
 

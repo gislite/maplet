@@ -9,14 +9,10 @@
     <link rel="icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
 
-{% module use_f2e('f2elib') %}
+    {% module use_f2e('f2elib') %}
 
 
     <link rel="stylesheet" href="{{ static_url('tass/css/style.css')}}">
-
-
-
-
 
 
     {% block head %}{% end %}
@@ -25,84 +21,86 @@
     {% else %}
 
 
-
-
     <!-- Piwik -->
     <script type="text/javascript">
-              var _paq = _paq || [];
-                /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-                _paq.push(['trackPageView']);
-                  _paq.push(['enableLinkTracking']);
-(function() {
-    var u="//101.201.80.15/piwik/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', '2']);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
-</script>
-<!-- End Piwik Code -->
+        var _paq = _paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "//101.201.80.15/piwik/";
+            _paq.push(['setTrackerUrl', u + 'piwik.php']);
+            _paq.push(['setSiteId', '2']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.type = 'text/javascript';
+            g.async = true;
+            g.defer = true;
+            g.src = u + 'piwik.js';
+            s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <!-- End Piwik Code -->
 
 
-{% end %}
+    {% end %}
 
 </head>
 <body>
 
 
-        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-globe"></span>地图云集</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/geojson/">画图</a></li> 
-                        <li><a href="/post/recent">文档</a></li>
-                        <li class="dropdown">
-                            <a href="/page/help.html" class="dropdown-toggle" data-toggle="dropdown">用户<b
-                                    class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                {% if 1 ==2 %}
-                                <li class="pure-menu-item">
-                                    <a class="pure-menu-link" href="/toolbox">我的工具箱</a></li>
-                                {% end %}
-
-                                <li><a href="/user_list/user_recent">最近使用</a></li>
-                                <li><a href="/user_list/user_most">使用最多</a></li>
-                                <li class="divider"></li>
-                                <li><a href="/collect/list">我的收藏</a></li>
-                                <li class="divider"></li>
-                                <li><a href="/user/info">我的信息</a></li>
-
-                            </ul>
-                        </li>
-
-                        {% if 1== 2 %}
-                        <li><a href="http://www.yunsuan.org" target="_blank" style="color:red;">
-                                <span class="badge" style="color:yellow">云算</span></a> </li>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-globe"></span>地图云集</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/geojson/">画图</a></li>
+                <li><a href="/post/recent">文档</a></li>
+                <li class="dropdown">
+                    <a href="/page/help.html" class="dropdown-toggle" data-toggle="dropdown">用户<b
+                            class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% if 1 ==2 %}
+                        <li class="pure-menu-item">
+                            <a class="pure-menu-link" href="/toolbox">我的工具箱</a></li>
                         {% end %}
 
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <div>
-                                {% module widget_search() %}
-                            </div>
-                        </li>
-
+                        <li><a href="/user_list/user_recent">最近使用</a></li>
+                        <li><a href="/user_list/user_most">使用最多</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/collect/list">我的收藏</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/user/info">我的信息</a></li>
 
                     </ul>
-                </div>
-               </div>
+                </li>
+
+                {% if 1== 2 %}
+                <li><a href="http://www.yunsuan.org" target="_blank" style="color:red;">
+                    <span class="badge" style="color:yellow">云算</span></a></li>
+                {% end %}
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <div>
+                        {% module widget_search() %}
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
     </div>
+</div>
 
 
 {% block base_top_header %}
@@ -114,7 +112,7 @@
         {% block link_list %}
         {% end %}
         <div class="row">
-            <div class="col-sm-6" >
+            <div class="col-sm-6">
 
                 <div class="row">
                     <ul class="nav navbar-nav">
@@ -130,18 +128,19 @@
 
                 <div class="row">
                     <div class="bg-waring text-info"></div>
-                    <div class="col-sm-8 col-md-offset-2" >
-                            
+                    <div class="col-sm-8 col-md-offset-2">
+
                     </div>
                 </div>
 
                 <div class="row" style="font-size:.9em; color:darkgray; text-align: center; ">
                     <span>&copy; 2017 地图云集|maplet.org 版权所有</span>
+
                     <p>Powered by <a href="https://github.com/bukun/TorCMS" target="_blank">TorCMS</a></p>
                 </div>
             </div>
-            <div class="col-sm-4" >
-                <img src="{{ static_url('fixed/maplet_qrcode.png') }} " width="200px" /> 
+            <div class="col-sm-4">
+                <img src="{{ static_url('fixed/maplet_qrcode.png') }} " width="200px"/>
             </div>
 
         </div>
@@ -149,6 +148,6 @@
 </footer>
 
 </body>
-        <script type="text/javascript" src="{{ static_url('jslib/dst/gscript.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('jslib/dst/gscript.js') }}"></script>
 
 </html>

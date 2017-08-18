@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-
+import cfg
 from torcms.core.tools import get_cfg
 
 DB_CON, SMTP_CFG, SITE_CFG = get_cfg()
@@ -9,7 +9,7 @@ DB_CFG = {
         'kind': 'p',  # 'p' for PostgresQL, 's' for SQLite.
         }
 
-
+wcs_src = cfg.SITE_CFG['wcs']
 CMS_CFG = {
     'list_num': 10,
     'site_type': 2,

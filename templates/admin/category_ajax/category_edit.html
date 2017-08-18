@@ -1,8 +1,5 @@
-{% extends "../../theme/bage_edit.html" %}
-
-{% block zhuti %}
-
-
+{% extends "../../theme/base_edit.html" %}
+{% block edit %}
 <div class="content">
     <form action="" method="post" class="pure-form pure-form-stacked" id="form_post">
         <fieldset>
@@ -12,7 +9,6 @@
                 <label for="name">分类名</label>
                 <input id="name" type="text" name="name" value="{{ dbrec.name }}">
             </div>
-
             <div class="pure-control-group">
                 <label for="slug">slug</label>
                 <input id="slug" name="slug" type="text" value="{{ dbrec.slug }}">
@@ -21,8 +17,6 @@
                 <label for="order">排序</label>
                 <input id="order" name="order" type="text" value="{{ dbrec.order }}">
             </div>
-
-
             <div class="pure-control-group">
                 <label for="sub1"></label>
                 <input id="sub1" type="submit" value="更新数据" class="pure-button pure-button-primary">
@@ -30,7 +24,6 @@
         </fieldset>
     </form>
 </div>
-
 {% end %}
 
 
