@@ -13,7 +13,8 @@ class GeoJsonHandler(BaseHandler):
     def initialize(self):
         super(GeoJsonHandler, self).initialize()
 
-    def get(self, url_str=''):
+    def get(self, *args, **kwargs):
+        url_str = args[0]
         url_arr = self.parse_url(url_str)
 
         if len(url_arr) == 0:
@@ -93,12 +94,16 @@ class GeoJsonHandler(BaseHandler):
     def delete(self, uid):
         MJson.delete_by_uid(uid)
 
+    def put(self, *args, **kwargs):
+        print('Got `put`')
+
+
     @tornado.web.authenticated
     def download(self, pa_str):
         '''
         Download the GeoJson to file.
-        :param pa_str: 
-        :return: 
+        :param pa_str:
+        :return:
         '''
         uid = pa_str.split('_')[-1].split('.')[0]
 
@@ -117,7 +122,9 @@ class GeoJsonHandler(BaseHandler):
         if rec:
             return json.dump(out_dic, self)
 
-    def post(self, url_str=''):
+    def post(self, *args, **kwargs):
+        print('Got `post`')
+        url_str = args[0]
 
         url_arr = self.parse_url(url_str)
 
@@ -136,14 +143,15 @@ class GeoJsonHandler(BaseHandler):
     def parse_geojson(self, geojson_str):
         '''
         Parse the GeoJson from string.
-        :param geojson_str: 
-        :return: 
+        :param geojson_str:
+        :return:
         '''
+
         def get_geometry(geom):
             '''
             Get geometry from GeoJson.
-            :param geom: 
-            :return: 
+            :param geom:
+            :return:
             '''
             bcbc = geom['geometry']
             if 'features' in bcbc:
@@ -246,3 +254,93 @@ class GeoJsonHandler(BaseHandler):
         MJson.add_or_update(uid, self.userinfo.uid, url_arr[0], out_dic)
         return_dic['status'] = 1
         return json.dump(return_dic, self)
+
+
+class GeoJsonAjaxHandler(GeoJsonHandler):
+    def initialize(self, **kwargs):
+        print('init...')
+        super(GeoJsonHandler, self).initialize()
+        self.set_default_headers()
+
+    def set_default_headers(self):
+        print("setting headers!!!")
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+
+    def get(self, *args, **kwargs):
+        print('Get')
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+        print(args)
+        uid = args[0]
+        gson  = MJson.get_by_uid(uid)
+
+        if gson:
+            out_dic = {
+                    'uid': uid,
+                    'geojson': gson.json,
+                    }
+        else:
+            out_dic = {
+                    'uid': 0
+                    }
+        return json.dump(out_dic, self)
+
+
+    def put(self, *args, **kwargs):
+        print('Put')
+
+    def post(self, *args, **kwargs):
+        print('Post')
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+
+
+        url_arr = self.parse_url(args[0])
+        print(url_arr)
+
+        if len(url_arr) > 0:
+            if url_arr[0] == '_add':
+                self.j_add()
+            elif url_arr[0] == '_edit':
+                self.j_add(url_arr[1])
+
+
+
+    def j_add(self, uid=''):
+        print('=' * 20)
+        print('Hello')
+        post_data = self.get_post_data()
+
+        print(post_data)
+
+        geojson_str = post_data['geojson']
+
+        # out_dic = self.parse_geojson(geojson_str)
+
+        if uid:
+            pass
+        else:
+            uid = 'x' + tools.get_uu4d()[1:]
+            while MJson.get_by_id(uid):
+                uid = 'x' + tools.get_uu4d()[1:]
+        return_dic = {'uid': uid}
+
+
+        # MJson.add_or_update_json(uid, self.userinfo.uid, out_dic)
+        # return_dic['status'] = 1
+        # return json.dump(return_dic, self)
+
+        try:
+
+            MJson.add_or_update_json(uid, '', geojson_str)
+            return_dic['status'] = 1
+            return json.dump(return_dic, self)
+        except:
+            self.set_status(400)
+            return_dic['status'] = 0
+            return json.dump(return_dic, self)
+

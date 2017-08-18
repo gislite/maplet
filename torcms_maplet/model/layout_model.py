@@ -16,6 +16,11 @@ class MLayout(Mabc):
     def __init__(self):
         super(MLayout, self).__init__()
 
+        try:
+            MabLayout.create()
+        except:
+            pass
+
     @staticmethod
     def get_by_uid(uid):
         '''
