@@ -45,8 +45,11 @@ class MJson(Mabc):
 
     def __init__(self):
         super(MJson, self).__init__()
-
-        MabGson.create()
+        # Todo: should be deleted.
+        try:
+            MabGson.create()
+        except:
+            pass
 
     @staticmethod
     def get_by_id(uid):

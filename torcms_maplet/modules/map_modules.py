@@ -19,6 +19,7 @@ class MapJson(tornado.web.UIModule):
     def render(self, *args, **kwargs):
         app_id = args[0]
         user_id = args[1]
+
         mjson = MJson()
 
         json_recs = mjson.query_by_app(app_id, user_id)
