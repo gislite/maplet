@@ -21,5 +21,6 @@ SMTP_CFG = {
 SITE_CFG = {
     'site_url': 'http://127.0.0.1:8777',
     'cookie_secret': 'sadfasdf',
-    'DEBUG': True
+    'DEBUG': True,
+    'wcs': 'wcs.osgeo.cn'
 }
