@@ -10,6 +10,7 @@ DB_CFG = {
         }
 
 wcs_svr = cfg.SITE_CFG['wcs']
+
 CMS_CFG = {
     'list_num': 10,
     'site_type': 2,
