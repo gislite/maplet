@@ -6,7 +6,7 @@ Handlers for Map application.
 
 import tornado.escape
 import tornado.web
-
+import config
 from torcms.core.base_handler import BaseHandler
 from torcms.core.tools import average_array
 from torcms.handlers.post_handler import PostHandler
@@ -98,8 +98,6 @@ class MapPostHandler(PostHandler):
             self.render('html/404.html', kwd=kwd,
                         userinfo=self.userinfo, )
 
-
-
     def ext_view_kwd(self, postinfo):
         post_data = self.get_post_data()
 
@@ -114,7 +112,11 @@ class MapPostHandler(PostHandler):
             out_dic['vlat'] = post_data['lat']
         if 'lon' in post_data:
             out_dic['vlon'] = post_data['lon']
-
+        try:
+            if config.wcs_svr:
+                out_dic['wcs_svr'] = config.wcs_svr
+        except:
+            out_dic['wcs_svr'] = 'http://www.osgeo.cn'
         return out_dic
 
     def __extra_view(self, app_id):
