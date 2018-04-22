@@ -1,15 +1,29 @@
 {% extends "../../theme/base.html" %}
 
-{% block mainbody %}
+{% block zhuti %}
 
-<div class="content">
-    <div class="single">
-    <h1>{% raw kwd['info'] if 'info' in kwd else '' %}</h1>
-
-     {% if 'link' in kwd %}
-        <p> <a href="{{ kwd['link'] }}" class="btn btn-info btn-xs">返回上一步操作。</a> </p>
-
-        {% end %}
+<div class="mtop">
+    <ul class="breadcrumb">
+        <li><a href="/">首页</a></li>
+        <li class="active">404 页面没找到</li>
+    </ul>
 </div>
-  </div>
+<div class="panel panel-default">
+    <div class="panel-heading"><b>404 页面没找到</b></div>
+    <div class="panel-body">
+        <p>对不起，由于未知原因，找不到您要找的页面。</p>
+        <hr/>
+        <h2>详细信息</h2>
+        <br>
+        {% if kwd %}
+        {% if 'info' in kwd %}
+        <p> {{ kwd['info'] }}</p>
+        {% end %}
+        {% if 'link' in kwd %}
+        <p><a href="{{ kwd['link'] }}" class="btn btn-info btn-xs">返回上一步操作。</a></p>
+        {% end %}
+        {% end %}
+    </div>
+</div>
+
 {% end %}

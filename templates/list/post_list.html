@@ -10,7 +10,7 @@
 -->
 <div class="panel panel-black">
     <div class="panel-heading">
-        {{ kwd['title'] }}
+        文档列表
     </div>
     <ul class="list-group">
         {% module post_recent(20) %}
@@ -34,7 +34,7 @@
 
 {% block right %}
 
-{% if userinfo is not None and userinfo.role[2] == '1' %}
+{% if userinfo is not None and userinfo.role[1] >= '1' %}
 <div class="panel panel-black">
     <div class="panel-heading">
         <h3 class="panel-title">
@@ -42,24 +42,21 @@
         </h3>
     </div>
     <ul class="list-group">
-        <li class="list-group-item"><a href="/post/add_document" class="btn btn-small btn-primary">添加文档</a></li>
-        <li class="list-group-item"><a href="/post/refresh" class="btn btn-small btn-primary">更新文档</a></li>
+        <li class="list-group-item"><a href="/post/_add" class="btn btn-small btn-primary">添加文档</a></li>
+        <li class="list-group-item"><a href="/post/_refresh" class="btn btn-small btn-primary">更新文档</a></li>
     </ul>
 </div>
 {% end %}
 
 
-<div class="panel panel-black">
-    <div class="panel-heading">
-        <h3 class="panel-title">
-            最近文档
-        </h3>
-    </div>
-    <ul class="list-group">
 
-        {% module post_recent(8, kind = '1', with_catalog=False, with_date = False) %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+       文档分类
+    </div>
+    <ul class="list-group list-font">
+        {% module category_menu() %}
     </ul>
 </div>
-
 
 {% end %}

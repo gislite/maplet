@@ -1,0 +1,68 @@
+{% extends "../theme/map_calcubic_full.html" %}
+{% block head %}
+<title>Map Sketchpad to draw geographic data online</title>
+<meta name="keywords" content="Online maps, maps, drawing board">
+
+
+<style type="text/css">
+    body {
+        padding: 0;
+        margin: 0;
+    }
+    html, body, #map {
+        height: 100%;
+        width: 100%;
+    }
+</style>
+
+
+
+<link href=http://cdn.bootcss.com/leaflet/1.2.0/leaflet.css rel=stylesheet>
+
+<link href="{{ static_url('dist_me/app.css') }}" rel="stylesheet">
+
+
+
+
+<script>
+
+    var site_url = 'http://www.maplet.org'
+</script>
+
+
+{% end %}
+{% block zhuti %}
+
+
+<div id="q-app"
+     data-map='{"i": "0000",
+            "x": 105,
+"y": 40,
+"v": 4,
+"m": 8,
+"n" : 3,
+"k": 1,
+"g": "{{ kwd['geojson'] }}",
+"e": 1,
+"login": {{ kwd['login'] }}
+}'></div>
+
+
+
+
+
+<script src="http://cdn.bootcss.com/vue/2.4.1/vue.min.js"></script>
+<script src="http://cdn.bootcss.com/vuex/2.2.1/vuex.min.js"></script>
+<script src="http://cdn.bootcss.com/leaflet/1.2.0/leaflet.js"></script>
+
+
+<script src=http://cdn.bootcss.com/paper.js/0.11.3/paper-core.min.js></script>
+
+<script type=text/javascript src="{{ static_url('dist_me/js/manifest.js') }}"></script>
+<script type=text/javascript src="{{ static_url('dist_me/js/vendor.js') }}"></script>
+<script type=text/javascript src="{{ static_url('dist_me/js/app.js') }}"></script>
+
+
+{% end %}
+
+

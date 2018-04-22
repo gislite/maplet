@@ -1,0 +1,93 @@
+{% extends "../../theme/map_calcubic_full.html" %}
+{% block head %}
+<title>地图画板 地图叠加</title>
+
+ <style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    #maps {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+    }
+    </style>
+
+    <script type="text/javascript" src="{{ static_url('jslib/dst/leaflet-side-by-side.min.js') }}"></script>
+
+<SCRIPT>
+    var vlon = {{ kwd['lon']}};
+    var vlat = {{ kwd['lat']}};
+    var vzoom_current = {{ kwd['zoom_current'] }};
+    var vzoom_max = {{ kwd['zoom_max']}};
+    var vzoom_min = {{ kwd['zoom_min']}};
+
+</script>
+
+
+{% end %}
+
+{% block zhuti %}
+
+
+<input id="app_ctrl" value="{{ app_str }}" style="display: none;">
+
+
+
+<div id='maps'></div>
+
+<script type="text/javascript">
+
+    $.ready()
+    {
+        var app_arr, app_url, baseMaps, ii, jj, lyrs, map, mycars, osm, overlayMaps;
+
+        app_url = $("#app_ctrl").val(),
+        app_arr = app_url.split("/");
+
+
+        var center = [ vlat, vlon];
+
+        var map = L.map('maps', {
+
+        center: center,
+        zoom: vzoom_current,
+        maxZoom: vzoom_max,
+        minZoom: vzoom_min,
+	});
+
+        osm = L.tileLayer.chinaProvider('Google.Normal.Map', {
+            maxZoom: 18,
+            minZoom: 1
+        });
+
+        osm.addTo(map);
+
+
+        m1 = L.tileLayer.wms("http://wcs.osgeo.cn:8088/service?", {
+            layers: "maplet_" + app_arr[0].substring(1),
+            format: "image/png",
+            transparent: !0,
+            attribution: "Maplet"
+        }).addTo(map);
+
+
+       m2 = L.tileLayer.wms("http://wcs.osgeo.cn:8088/service?", {
+            layers: "maplet_" + app_arr[1].substring(1),
+            format: "image/png",
+            transparent: !0,
+            attribution: "Maplet"
+        }).addTo(map);
+
+        baseMaps1 = {'basemap': osm};
+	overlayMaps1 = { "{{app_arr[0].title}}" : m1, "{{app_arr[1].title}}" : m2};
+
+        L.control.layers(baseMaps1, overlayMaps1).addTo(map); 
+	L.control.sideBySide(m1, m2).addTo(map);
+
+    }
+</script>
+
+{% end %}

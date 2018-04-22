@@ -24,3 +24,8 @@ SITE_CFG = {
     'DEBUG': True,
     'wcs': 'wcs.osgeo.cn'
 }
+ROLE_CFG = {
+    'add': '1000',
+    'edit': '2000',
+    'delete': '3000',
+}

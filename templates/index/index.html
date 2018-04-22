@@ -16,60 +16,58 @@
 <header class="jumbotron subhead" id="overview">
     <div class="container">
         <p class="lead">云GIS应用与地图资源云　在线历史地图与专题地图　OSGeo中国中心　中科院东北地理所　长春</p>
+
     </div>
 </header>
 
 
 <div class="container">
     <div class="row">
+                 <div class="col-md-9">
+                     <div class="panel">
+                     <div id="mapdiv"></div>
+                     </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="well">
+
+                        <img src="/static/fixed/maplet_qrcode.png" style="float:right;width:140px;" />
+
+<div>本网站是一个非赢利公益性网站，
+由开放地理空间基金会中国中心维护。作为开源WebGIS的实践，
+本网站致力于推广开源GIS技术的应用，以及地理信息科学数据共享。
+</div>
+
+                        <div>
+有志于为开源GIS与地理信息科学数据共享作贡献的人员，请加入QQ讨论群（619741）。</div>
+
+<a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=c054fc872c4aada0ae7422ccf4ecfe7fdd2ecbd4295d1c6939b098528e12f507"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="OSGeo:地图云集" title="OSGeo:地图云集"></a>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+    <div class="row">
         <div class="col-md-9">
 
             <div class="row">
-                {#
-                <div class="col-md-2">
-                    <a href="/geojson/draw" class="btn btn-lg btn-primary" style="margin-top: 30px;margin-left:20px;"
-                       target="_blank">创建地图</a>
-                </div>
-                <div class="col-md-6">
-                    <div class="well">
-                        <div>地图云集，是一个多技术手段综合支撑下的地图集信息系统（Atlas Information System, AIS），是传统专题地图集的在线版本，通过数据可视化和数据空间化等技术手段，
-                            设计建立一个集数据、软件于一体的Web专题地图集系统。
-                            <div>
-                                {% if userinfo %}
-                                <div class="bg-info text-info"> 用户已经登录，可保存创建的地图</div>
-                                {% else %}
-                                <div class="bg-warning text-warning"> 保存创建的地图，请 <a href="/user/login"
-                                                                                   class="btn btn-warning btn-sm">登录</a>
-                                    后使用。
-                                </div>
-                                {% end %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                #}
-                <div class="col-md-12">
-                    <div class="well">
-                        {% module show_page(page_id = 'volunteers') %}
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
 
                 <div class="col-sm-4">
 
-                    <div class="panel panel-black">{% module app_catalog_of('2100', slug =True) %}</div>
-                    <div class="panel panel-black">{% module app_catalog_of('2900', slug =True) %}</div>
+                    <div class="panel panel-black">{% module app_catalog_of('2100', slug =True, glyph='glyphicon glyphicon-map-marker') %}</div>
+                    <div class="panel panel-black">{% module app_catalog_of('2900', slug =True, glyph='glyphicon glyphicon-map-marker') %}</div>
                 </div>
                 <div class="col-sm-4">
-                    <div class="panel panel-black">{% module app_catalog_of('3100', slug =True) %}</div>
-                    <div class="panel panel-black">{% module app_catalog_of('3300', slug =True) %}</div>
-                    <div class="panel panel-black">{% module app_catalog_of('2700', slug =True) %}</div>
+                    <div class="panel panel-black">{% module app_catalog_of('3100', slug =True, glyph='glyphicon glyphicon-map-marker') %}</div>
+                    <div class="panel panel-black">{% module app_catalog_of('3300', slug =True, glyph='glyphicon glyphicon-map-marker') %}</div>
+                    <div class="panel panel-black">{% module app_catalog_of('2700', slug =True, glyph='glyphicon glyphicon-map-marker')%}</div>
                 </div>
                 <div class="col-sm-4">
-                    <div class="panel panel-black">{% module app_catalog_of('2300', slug =True) %}</div>
-                    <div class="panel panel-black">{% module app_catalog_of('2500', slug =True) %}</div>
+                    <div class="panel panel-black">{% module app_catalog_of('2300', slug =True, glyph='glyphicon glyphicon-map-marker') %}</div>
+                    <div class="panel panel-black">{% module app_catalog_of('2500', slug =True, glyph='glyphicon glyphicon-map-marker') %}</div>
                 </div>
 
             </div>
@@ -88,7 +86,7 @@
 
                 <ul class="list-group">
 
-                    {% module app_recent_used('m', 6, userinfo = userinfo) %}
+                    {% module app_recent_used('m', num = 6, userinfo = userinfo, glyph='glyphicon glyphicon-map-marker') %}
 
                 </ul>
 
@@ -102,7 +100,7 @@
                 </div>
 
                 <ul class="list-group">
-                    {% module app_most_used('m', 6, userinfo = userinfo) %}
+                    {% module app_most_used('m', 6, userinfo = userinfo, glyph='glyphicon glyphicon-map-marker') %}
                 </ul>
 
             </div>
@@ -116,4 +114,5 @@
     友情链接：{% module link_list(12 ) %}
 </div>
 <br><br>
+{% module map_ad() %}
 {% end %}

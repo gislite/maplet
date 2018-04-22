@@ -10,7 +10,7 @@ from setuptools import setup, find_packages
 desc = ('Maplet ')
 setup(
     name='torcms_maplet',
-    version='0.0.2',
+    version='0.0.3',
     keywords=('torcms', 'tornado'),
     description=desc,
     long_description=''.join(open('README.rst').readlines()),
@@ -22,7 +22,7 @@ setup(
 
     packages=find_packages(
         # include=('torcms',),
-        exclude=("tester", "torcms_tester", 'flasky',)),
+        exclude=("tester", "torcms_tester",)),
     include_package_data = True,
 
     platforms='any',
@@ -44,7 +44,6 @@ setup(
         'License :: OSI Approved :: MIT License',
 
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6'
     ],

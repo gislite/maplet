@@ -11,5 +11,5 @@ maplet_modules = {
     # Map
     'app_layout': map_modules.MapLayout,
     'app_json': map_modules.MapJson,
-
+    'map_ad': map_modules.MapAd,
 }

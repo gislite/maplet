@@ -43,34 +43,31 @@
                 </div>
 
 
-                {% for ii in range(0,5) %}
                 <div class="form-group">
-                    {% if ii == 0 %}
-                    <label for="pcat0" class="col-sm-2 control-label">标签</label>
-                    {% else %}
-                    <label class="col-sm-2 control-label"></label>
-                    {% end %}
-
-                    <div class="col-sm-4">
-                        <select name="gcat{{ii}}" id="gcat{{ii}}" class="form-control" >
-                            <option value="0">请选择</option>
+                    <label class="col-sm-2 control-label">分类</label>
+                    <div class="col-sm-10">
+                        {% for ii in range(0,5) %}
+                        <div class="col-sm-2">
+                            <select name="gcat{{ii}}" id="gcat{{ii}}" class="form-control">
+                                <option value="0">请选择</option>
 
 
-                            {% for taginfo in tag_infos %}
-                            <option value="{{ taginfo.uid }}"
-                                    {% for tt in app2tag_info %}
-                                    {% if tt.order== ii and tt.tag_id== taginfo.uid %}
-                                    selected
-                                    {% end %}
-                                    {% end %}  >{{ taginfo.name }}
-                            </option>
-                            {% end %}
+                                {% for taginfo in tag_infos %}
+                                <option value="{{ taginfo.uid }}"
+                                        {% for tt in app2tag_info %}
+                                        {% if tt.order== ii and tt.tag_id== taginfo.uid %}
+                                        selected
+                                        {% end %}
+                                        {% end %}>{{ taginfo.name }}
+                                </option>
+                                {% end %}
 
-                        </select>
+                            </select>
+                        </div>
+                        {% end %}
                     </div>
-
                 </div>
-                {% end %}
+
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="logo">特色图片</label>

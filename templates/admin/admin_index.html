@@ -32,7 +32,7 @@
             <li><a onclick="js_show_page('/user/p/changeinfo')"><span
                     class="glyphicon glyphicon-pencil"></span>修改个人信息</a>
             </li>
-            {% if userinfo.role[2] >= 'c' %}
+            {% if userinfo.role[1] >= '1' %}
             <li><a onclick="js_show_page('/user/p/find')"><span class="glyphicon glyphicon-info-sign"></span>查看所有用户</a>
             </li>
             {% end %}
@@ -80,9 +80,9 @@
                         class="glyphicon glyphicon-s glyphicon-plus  pull-right"></em></span>
                 </a>
                 <ul class="children collapse" id="sub-item-2">
-                    <li><a onclick="js_show_page('/post/p/add_document')"><span
-                            class="glyphicon glyphicon-share-alt"></span>添加信息</a></li>
-                    <li><a onclick="js_show_page('/post/p/recent')"><span class="glyphicon glyphicon-share-alt"></span>所有信息</a>
+                    <!--<li><a onclick="js_show_page('/post/p/add_document')"><span-->
+                            <!--class="glyphicon glyphicon-share-alt"></span>添加信息</a></li>-->
+                    <li><a onclick="js_show_page('/post/p/recent/1')"><span class="glyphicon glyphicon-share-alt"></span>所有信息</a>
                    <!-- <li><a onclick="js_show_page('/post/p/recent_none')"><span class="glyphicon glyphicon-share-alt"></span>待翻译文档</a>
                     </li>-->
 
@@ -116,7 +116,7 @@
             </li>
 
         </ul>
-        <div class="attribution">{% module copyright() %}</div>
+        <div class="attribution">{% module torcms_copyright() %}</div>
     </div>
 </div>
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">

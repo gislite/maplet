@@ -2,7 +2,7 @@
 
 
 {% block head %}
-<title>{{ view.title }}</title>
+<title>{{ postinfo.title }}</title>
 <meta name="description" content="">
 <meta name="keywords" content="在线地图 历史地图 专题地图 Maplet">
 {% end %}
@@ -11,24 +11,24 @@
 
 <div class="panel panel-black">
     <div class="panel-heading">
-        <h1>{{ view.title }}</h1>
+        <h1>{{ postinfo.title }}</h1>
 
         <div>
 
             发布者: <a href="/" style="color:#ffffff;">Maplet</a>&nbsp;&nbsp;
             发布日期：
-            {{ str(view.date).split()[0] }}
+            {{ str(postinfo.date).split()[0] }}
             &nbsp;&nbsp;
             {% if 1== 2 %}
 
             查看:
-            <em id="_viewnum">{{ view.view_count }}</em>
+            <em id="_viewnum">{{ postinfo.view_count }}</em>
             {% end %}
             &nbsp;&nbsp;
 
         {% if userinfo and userinfo.role[1] >= '2' %}
         <span class="split">|</span>
-        <a href="/page/edit/{{ view.uid }}" class="btn btn-warning btn-xs">{{ _('Edit') }}</a>
+        <a href="/page/edit/{{ postinfo.uid }}" class="btn btn-warning btn-xs">{{ _('Edit') }}</a>
         <span class="cmts"><a href="/wiki_man/view/{{ postinfo.uid  }}"
                       class="btn btn-xs btn-danger"> {{ _('Review') }}</a></span>
         {% end %}
@@ -38,7 +38,7 @@
 
     <div class="panel-body">
         <div id="wiki_cnt">
-            {% raw unescape(view.cnt_html ) %}
+            {% raw unescape(postinfo.cnt_html) %}
         </div>
     </div>
 
@@ -47,7 +47,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                本文链接： <a href="http://www.maplet.org/page/{{ view.uid }}.html">{{ view.title }}</a>
+                本文链接： <a href="http://www.maplet.org/page/{{ postinfo.uid }}.html">{{ postinfo.title }}</a>
             </div>
 
 
@@ -69,7 +69,7 @@
     </div>
 
     <ul class="list-group">
-                {% module app_recent_used('m', 10, userinfo = userinfo) %}
+                {% module app_recent_used('m', num = 10, userinfo = userinfo) %}
 
     </ul>
 

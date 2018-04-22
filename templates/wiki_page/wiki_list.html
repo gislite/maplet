@@ -11,7 +11,7 @@
 
 
 <div class="panel panel-default">
-    <div class="panel-heading"><b>Wiki {{ _('List') }} </b></div>
+    <div class="panel-heading"> Wiki {{ _('List') }} </div>
 
         <ul class="list-group">
             {% for x in view %}
@@ -42,7 +42,7 @@
     </div>
     <div class="panel-body">
         <ul class="list-group">
-            {% module app_menu(20) %}
+            {% module app_menu('m',20) %}
         </ul>
     </div>
 </div>

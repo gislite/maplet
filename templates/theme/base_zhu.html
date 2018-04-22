@@ -98,12 +98,12 @@
 
                 <div class="row">
                     <ul class="nav navbar-nav">
-                        <li><a href="/page/about.html">关于</a></li>
-                        <li><a href="/page/terms.html">免责声明</a></li>
-                        <li><a href="/page/contact.html">联系我们</a></li>
+                        <li><a href="/page/about">关于</a></li>
+                        <li><a href="/page/terms">免责声明</a></li>
+                        <li><a href="/page/contact">联系我们</a></li>
                         <li class="divider"></li>
-                        <li><a href="/page/how-to-use.html">如何使用</a></li>
-                        <li><a href="/page/volunteers.html">志愿者</a></li>
+                        <li><a href="/page/how-to-use">如何使用</a></li>
+                        <li><a href="/page/volunteers">志愿者</a></li>
                     </ul>
                 </div>
 
@@ -135,22 +135,22 @@
         {% if userinfo and userinfo.role[2] >= '1' %}
     {% else %}
 
-
-    <!-- Piwik -->
-    <script type="text/javascript">
-              var _paq = _paq || [];
-                /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-                _paq.push(['trackPageView']);
-                  _paq.push(['enableLinkTracking']);
-(function() {
-    var u="//47.94.22.90/piwik/";
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//121.42.45.218/piwik/";
     _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', '2']);
+    _paq.push(['setSiteId', '4']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>
 <!-- End Piwik Code -->
+
 {% end %}
 
 

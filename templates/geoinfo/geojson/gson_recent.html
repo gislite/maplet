@@ -14,11 +14,16 @@
         我最近的数据
     </div>
 
-    <ul class="list-group">
+    <div class="panel-body">
+    <table class="table table-bordered ">
         {% for gson in json_arr %}
-        <li class="list-group-item"><a href="/geojson/{{gson.uid}}">{{gson.uid}}</a></li>
+        <tr><td><a href="/geojson/{{gson.uid}}">{{gson.title if gson.title else gson.uid }} </a></td>
+            <td>{{gson.user_id}}</td>
+            <td>{{gson.time_update}}</td>
+            </tr>
         {% end %}
-    </ul>
+    </table>
+        </div>
 </div>
 {% end %}
 

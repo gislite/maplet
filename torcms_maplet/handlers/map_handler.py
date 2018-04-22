@@ -14,6 +14,7 @@ from torcms.model.post_model import MPost
 from torcms_maplet.model.layout_model import MLayout
 
 
+
 class MapPostHandler(PostHandler):
     '''
     For meta handler of map.
@@ -60,6 +61,7 @@ class MapPostHandler(PostHandler):
 
         url_str = args[0]
         url_arr = self.parse_url(url_str)
+        # print('from map post get')
         if len(url_arr) > 0:
             self._redirect(url_arr)
 
@@ -100,6 +102,8 @@ class MapPostHandler(PostHandler):
 
     def ext_view_kwd(self, postinfo):
         post_data = self.get_post_data()
+        # print('=|' * 40)
+        # print(post_data['extinfo)
 
         out_dic = {
             'marker': 1 if 'marker' in post_data else 0,
@@ -116,7 +120,7 @@ class MapPostHandler(PostHandler):
             if config.wcs_svr:
                 out_dic['wcs_svr'] = config.wcs_svr
         except:
-            out_dic['wcs_svr'] = 'http://www.osgeo.cn'
+            out_dic['wcs_svr'] = 'http://wcs.osgeo.cn'
         return out_dic
 
     def __extra_view(self, app_id):
@@ -135,7 +139,10 @@ class MapPostHandler(PostHandler):
 
     def ext_tmpl_view(self, rec):
         if 'fullscreen' in self.request.arguments:
-            tmpl = 'post_{0}/full_screen.html'.format(self.kind)
+            if 'version' in self.request.arguments:
+                tmpl = 'post_{0}_v2/full_screen.html'.format(self.kind)
+            else:
+                tmpl = 'post_{0}/full_screen.html'.format(self.kind)
         else:
             tmpl = 'post_{0}/show_map.html'.format(self.kind)
         return tmpl
@@ -223,51 +230,15 @@ class MapOverlayHandler(BaseHandler):
 
     def get(self, url_str=''):
         url_arr = self.parse_url(url_str)
+        self.redirect('/mapview/overlay/' + url_str)
 
-        if len(url_arr) > 1:
-            self.show_overlay(url_arr)
-        else:
-            kwd = {'title': '',
-                   'info': ''}
-            self.render('html/404.html',
-                        kwd=kwd,
-                        userinfo=self.userinfo)
+        # if len(url_arr) > 1:
+        #
+        #     self.show_overlay(url_arr)
+        # else:
+        #     kwd = {'title': '',
+        #            'info': ''}
+        #     self.render('html/404.html',
+        #                 kwd=kwd,
+        #                 userinfo=self.userinfo)
 
-    def show_overlay(self, app_arr):
-        '''
-        Open two maps on one screen.
-        '''
-        app_info_arr = []
-        lon_arr = []
-        lat_arr = []
-        zoom_max_arr = []
-        zoom_min_arr = []
-        zoom_current_zrr = []
-
-        for app_rr in app_arr:
-            c_ap = MPost.get_by_uid(app_rr)
-            app_info_arr.append(c_ap)
-            lon_arr.append(float(c_ap.extinfo['ext_lon']))
-            lat_arr.append(float(c_ap.extinfo['ext_lat']))
-            zoom_max_arr.append(int(c_ap.extinfo['ext_zoom_max']))
-            zoom_min_arr.append(int(c_ap.extinfo['ext_zoom_min']))
-            zoom_current_zrr.append(int(c_ap.extinfo['ext_zoom_current']))
-
-        kwd = {'url': 1,
-               'cookie_str': '',
-               'lon': average_array(lon_arr),
-               'lat': average_array(lat_arr),
-               'zoom_max': max(zoom_max_arr),
-               'zoom_min': min(zoom_min_arr),
-               'zoom_current': int(average_array(zoom_current_zrr))}
-        if 'fullscreen' in self.request.arguments:
-            tmpl = 'post_m/overlay/overlay_full.html'
-        else:
-            tmpl = 'post_m/overlay/overlay.html'
-        self.render(tmpl,
-                    topmenu='',
-                    kwd=kwd,
-                    userinfo=self.userinfo,
-                    unescape=tornado.escape.xhtml_unescape,
-                    app_arr=app_info_arr,
-                    app_str='/'.join(app_arr))

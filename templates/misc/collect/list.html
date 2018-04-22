@@ -26,6 +26,7 @@
         {% for rec in recs_collect %}
         <li class="list-group-item">
             <a href="/info/{{ rec.post_id }}">
+                <span class="glyphicon glyphicon-map-marker"></span>
                 {{ rec.post_title }}
             </a>
 
@@ -58,14 +59,15 @@
 <div class="panel panel-black">
     <div class="panel-heading">
         <h3 class="panel-title">
+           <span class="glyphicon glyphicon-map-marker"></span>
             地图分类
         </h3>
     </div>
-
-        <ul class="list-group list-font">
-            {% module category_menu('m') %}
+    <div class="panel-body">
+        <ul class="list-group">
+            {% module app_menu('m', 20) %}
         </ul>
-
+    </div>
 </div>
 
 {% end %}

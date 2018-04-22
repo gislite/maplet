@@ -4,20 +4,19 @@
 import os
 import tornado.web
 from torcms.modules.modef import core_modules
+import torcms.core.uifunction as uifuncs
 # from extor.modules.map_modules import *
+from torcms_maplet.modules.modef import maplet_modules
 from config import SITE_CFG
 from urls import urls
 
-from torcms_maplet.modules.map_modules import MapJson,MapLayout
-
-core_modules['app_layout'] = MapLayout
-core_modules['app_json'] = MapJson
 
 # cur_modues = {'app_layout': app_layout,
 #               'app_json': app_json,
 #               }
 
-# modules = dict(core_modules, **cur_modues)
+# Above Python 3.5.
+cmodules = {**core_modules, **maplet_modules}
 
 SETTINGS = {
     "template_path": os.path.join(os.path.dirname(__file__), "templates"),
@@ -25,7 +24,8 @@ SETTINGS = {
     'debug': SITE_CFG['DEBUG'],
     "cookie_secret": SITE_CFG['cookie_secret'],
     "login_url": "/user/login",
-    'ui_modules': core_modules,
+    'ui_modules': cmodules,
+    'ui_methods': uifuncs,
 }
 
 app = tornado.web.Application(

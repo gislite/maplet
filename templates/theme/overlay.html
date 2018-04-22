@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% block head %}
 <title>地图画板 地图叠加</title>
-<script src="https://cdn.bootcss.com/leaflet/1.2.0/leaflet.js"></script>
-<link rel="stylesheet" href="https://cdn.bootcss.com/leaflet/1.2.0/leaflet.css">
 {% block headinfo %}
 {% end %}
 {% end %}
@@ -14,17 +12,55 @@
         <H1>在线叠加地图</H1>
 
         <div class="container" style="width: auto;">
+            <!--<div class="row">-->
+            <!--<div class="col-md-10">-->
+            <!--{% for x in app_arr %}-->
+            <!--<a class="btn btn-info btn-xs" href="/map/{{ x.uid }}">
+            <span class="badge">{{x.uid}}</span>{{x.title[:12] }}</a>-->
+            <!--{% end %}-->
+            <!--</div>-->
+            <!--</div>-->
             <div class="row">
-                <div class="col-md-10">
-                    {% for x in app_arr %}
-                    <a class="btn btn-info btn-xs" href="/map/{{ x.uid }}"><span class="badge">{{x.uid}}</span>{{x.title[:12] }}</a>
-                    {% end %}
-                </div>
-                <div class="col-md-2" style="text-align: right;">
-                    <a class="btn btn-info btn-xs" href="/map/overlay/{{ app_str }}?fullscreen=1" target="_blank">
-                        <span class="glyphicon glyphicon-fullscreen"></span> 全屏</a>
+                <div class="col-md-6" style="text-align: right;">
+                    <div class="btn-toolbar">
+                        <div class="btn-group">
+                            <!--<button type="button" class="btn btn-default">-->
+                            <a type="button" class="btn btn-warning btn-xs"
+                               href="/mapview/overlay/{{ app_str }}?fullscreen=1" target="_blank">
+                                <span class="glyphicon glyphicon-fullscreen"></span> 全屏</a>
+                        </div>
+                          <div class="btn-group">
 
+                            <a type="button" class="btn btn-warning btn-xs" href="/mapview/sync/{{ app_str }}"
+                               target="_blank">
+                                <span class="glyphicon glyphicon-pause"></span> 同步查看</a>
+ </div>
+                          <div class="btn-group">
+
+
+                            <a type="button" class="btn btn-warning btn-xs" href="/mapview/split/{{ app_str }}"
+                               target="_blank">
+                                <span class="glyphicon glyphicon-adjust"></span> 滑窗视图</a>
+
+ </div>
+                          <div class="btn-group">
+
+
+                              {% if len(app_arr) > 2 %}
+                                          <a type="button" class="btn btn-warning btn-xs"
+                                  href="/mapview/overlay/{{ app_arr[2].uid }}/{{app_arr[1].uid}}/{{app_arr[0].uid}}">
+                              {% else %}
+                               <a type="button" class="btn btn-warning btn-xs"
+                                  href="/mapview/overlay/{{ app_arr[1].uid }}/{{app_arr[0].uid}}">
+                                   {% end %}
+                                <span class="glyphicon glyphicon-random"></span> 图层切换</a>
+
+                        </div>
+                    </div>
                 </div>
+
+
+
             </div>
         </div>
     </div>
@@ -51,6 +87,24 @@
 {% end %}
 
 {% block right %}
+
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">当前地图列表</h3>
+    </div>
+    <ul class="list-group">
+        {% for x in app_arr %}
+        <li class="list-group-item" style="overflow-x:hidden;margin-right:5px;" >
+            <a class="btn btn-info btn-xs" href="/map/{{ x.uid }}" style="overflow-x:hidden;" >
+                <span class="badge">{{x.uid}}</span> {{x.title }}
+            </a>
+        </li>
+        {% end %}
+    </ul>
+</div>
+
+
 <div class="panel panel-black">
     <div class="panel-heading">
         <h3 class="panel-title">
@@ -58,7 +112,7 @@
         </h3>
     </div>
     <ul class="list-group">
-        {% module app_recent_used('m', 6, userinfo = userinfo) %}
+        {% module app_recent_used('m', num = 6, userinfo = userinfo, glyph='glyphicon glyphicon-map-marker') %}
     </ul>
 
 </div>
@@ -71,7 +125,7 @@
     </div>
 
     <ul class="list-group">
-        {% module app_most_used('m', 6, userinfo = userinfo) %}
+        {% module app_most_used('m', 6, userinfo = userinfo, glyph='glyphicon glyphicon-map-marker') %}
     </ul>
 </div>
 {% end %}

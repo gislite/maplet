@@ -24,15 +24,13 @@
 
 
     <ul class="list-group">
-                                {% module app_most_used('m', 20, userinfo = userinfo) %}
-
-
+        {% module app_most_used('m', 20, userinfo = userinfo, glyph='glyphicon glyphicon-map-marker') %}
     </ul>
 
     <div class="panel-footer">
         <div class="row">
             <div class="col-md-6">
-                本文链接： <a href="http://www.maplet.org/list/user_most">我查看最多的地图</a>
+                本文链接： <a href="http://www.maplet.org/user_list/user_most">我查看最多的地图</a>
             </div>
 
 
@@ -54,12 +52,13 @@
 <div class="panel panel-black">
     <div class="panel-heading">
         <h3 class="panel-title">
-            应用分类
+            <span class="glyphicon glyphicon-map-marker"></span>
+            地图分类
         </h3>
     </div>
     <div class="panel-body">
         <ul class="list-group">
-            {% module app_menu(40) %}
+            {% module app_menu('m', 20) %}
         </ul>
     </div>
 </div>

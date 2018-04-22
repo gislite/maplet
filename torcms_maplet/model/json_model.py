@@ -63,16 +63,25 @@ class MJson(Mabc):
             return None
 
     @staticmethod
-    def query_recent(user_id, num=10):
-        return MabGson.select().where(
-            MabGson.user_id == user_id
-        ).order_by(
-            MabGson.time_update.desc()
-        ).limit(num)
+    def query_recent(user_id='', num=10):
+
+        if user_id:
+            recs = MabGson.select().where(
+                MabGson.user_id == user_id
+            ).order_by(
+                MabGson.time_update.desc()
+            ).limit(num)
+        else:
+            recs = MabGson.select().order_by(
+                MabGson.time_update.desc()
+            ).limit(num)
+        return recs
 
     @staticmethod
     def query_by_app(app_id, user_id):
-        return MabGson.select().join(MabPost2Gson, on=(MabPost2Gson.json_id == MabGson.uid)).where(
+        return MabGson.select().join(
+            MabPost2Gson, on=(MabPost2Gson.json_id == MabGson.uid)
+        ).where(
             (MabPost2Gson.post_id == app_id) &
             (MabGson.user_id == user_id)
         ).order_by(
@@ -89,7 +98,7 @@ class MJson(Mabc):
             return False
 
     @staticmethod
-    def add_or_update_json(json_uid, user_id, geojson):
+    def add_or_update_json(json_uid, user_id, geojson, post_data):
         userinfo = MUser.get_by_uid(user_id)
         if userinfo:
             pass
@@ -102,6 +111,7 @@ class MJson(Mabc):
         if current_count > 0:
             cur_record = MJson.get_by_uid(json_uid)
             entry = MabGson.update(
+                title=post_data['title'],
                 json=geojson,
                 time_update=tools.timestamp(),
             ).where(MabGson.uid == cur_record.uid)
@@ -123,7 +133,12 @@ class MJson(Mabc):
         ).count()
         MJson.add_or_update_json(json_uid, user_id, geojson)
 
-        if current_count:
+        post2gson_rec = MabPost2Gson.select().where(
+            (MabPost2Gson.post_id == app_id) &
+            (MabPost2Gson.json_id == json_uid)
+        )
+
+        if post2gson_rec.count():
             pass
         else:
             MabPost2Gson.create(uid=tools.get_uuid(),

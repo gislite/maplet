@@ -80,7 +80,7 @@
                 <span class="post_cat">
                     {% set iii = 1 %}
                     {% for x in tag_info %}
-                    <a href="/label/{{ x.tag_id }}" class="app_label tag{{ iii }}">{{ x.tag_name }}</a>
+                    <a href="/label/{{postinfo.kind}}/{{ x.tag_id }}" class="app_label tag{{ iii }}">{{ x.tag_name }}</a>
                     {% set iii = iii + 1 %}
                     {% end %}
                 </span>
@@ -122,7 +122,7 @@
         </h3>
     </div>
     <ul class="list-group">
-        <li class="list-group-item"><a href="/post/add_document" class="btn btn-small btn-primary">添加文档</a></li>
+        <li class="list-group-item"><a href="/post/_add" class="btn btn-small btn-primary">添加文档</a></li>
         <li class="list-group-item"><a href="/post/refresh" class="btn btn-small btn-primary">更新文档</a></li>
     </ul>
 </div>
@@ -135,7 +135,7 @@
             相关地图
         </h3>
     </div>
-    {% module rel_post2app(postinfo.uid, 4) %}
+    {% module rel_post2app(postinfo.uid, num=4, kind='m') %}
 </div>
 
 <div class="panel panel-black">
@@ -168,7 +168,7 @@
     </div>
 
     <ul class="list-group">
-        {% module app_recent_used('m', 6, userinfo = userinfo) %}
+        {% module app_recent_used('m', num = 6, userinfo = userinfo, glyph='glyphicon glyphicon-map-marker') %}
     </ul>
 
 </div>
