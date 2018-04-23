@@ -210,7 +210,7 @@ class GeoJsonHandler(BaseHandler):
             return
 
         try:
-            MJson.add_or_update_json(uid, self.userinfo.uid, out_dic)
+            MJson.add_or_update_json(uid, self.userinfo.uid, out_dic, version=1)
             return_dic['status'] = 1
         except:
             self.set_status(400)

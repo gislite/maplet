@@ -8,7 +8,6 @@ import peewee
 from playhouse.postgres_ext import JSONField
 from torcms.core.base_model import BaseModel
 
-
 class MabGson(BaseModel):
     '''
     For GeoJson storage.
@@ -21,6 +20,8 @@ class MabGson(BaseModel):
     time_create = peewee.IntegerField(null=False, default=0)
     time_update = peewee.IntegerField(null=False, default=0)
     public = peewee.IntegerField(null=False, default=0)
+    # 区分版本。
+    version = peewee.IntegerField(null = False,  default=1)
 
 
 class MabPost2Gson(BaseModel):

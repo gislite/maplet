@@ -98,7 +98,12 @@ class MJson(Mabc):
             return False
 
     @staticmethod
-    def add_or_update_json(json_uid, user_id, geojson, post_data):
+    def add_or_update_json(json_uid, user_id, geojson, post_data, version=0):
+        if version:
+            pass
+        else:
+            return False
+
         userinfo = MUser.get_by_uid(user_id)
         if userinfo:
             pass
@@ -124,6 +129,7 @@ class MJson(Mabc):
                            json=geojson,
                            time_create=tools.timestamp(),
                            time_update=tools.timestamp(),
+                           version  = version,
                            public=1)
 
     @staticmethod
@@ -131,7 +137,8 @@ class MJson(Mabc):
         current_count = MabGson.select().where(
             MabGson.uid == json_uid
         ).count()
-        MJson.add_or_update_json(json_uid, user_id, geojson)
+        post_data = {'title': ''}
+        MJson.add_or_update_json(json_uid, user_id, geojson, post_data)
 
         post2gson_rec = MabPost2Gson.select().where(
             (MabPost2Gson.post_id == app_id) &

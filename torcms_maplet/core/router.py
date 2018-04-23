@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 import torcms_maplet.handlers.geojson as geojson_control
 import torcms_maplet.handlers.geojson_v2 as geojson_control_v2
+import torcms_maplet.handlers.geojson_v3 as geojson_v3
 
 # from torcms_maplet.handlers.geojson import GeoJsonHandler, GeoJsonAjaxHandler
 from torcms_maplet.handlers.map_handler import MapPostHandler, MapLayoutHandler, MapOverlayHandler, \
@@ -15,11 +16,15 @@ maplet_urls = [
     ('/admin_map/(.*)', MapAdminHandler, dict()),
     ("/map/(.*)", MapPostHandler, dict(kind='m')),
 
+    # Using GeoJson.
     ('/geojson/(.*)', geojson_control.GeoJsonHandler, dict()),
     ('/geojson_j/(.*)', geojson_control.GeoJsonAjaxHandler, dict()),
+
+    # WebDog MapEditor.
     ('/geojson_v2/(.*)', geojson_control_v2.GeoJsonHandler, dict()),
     ('/geojson_j_v2/(.*)', geojson_control_v2.GeoJsonAjaxHandler, dict()),
 
+    ('/mapdraw_v3/(.*)', geojson_v3.GeoJsonHandler, dict()),
+    ('/mapdraw_j_v3/(.*)', geojson_v3.GeoJsonAjaxHandler, dict()),
     ('/layout/(.*)', MapLayoutHandler, dict()),
-
 ]
