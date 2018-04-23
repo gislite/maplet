@@ -109,7 +109,7 @@ class GeoJsonHandler(BaseHandler):
 
         self.render(
             # 'post_m/full_screen_draw.html',
-            'post_m/full_screen_draw_v2.html',
+            'post_m_v2/full_screen_draw_v2.html',
             kwd=kwd,
             userinfo=self.userinfo,
             unescape=tornado.escape.xhtml_unescape,

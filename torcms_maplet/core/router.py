@@ -17,11 +17,14 @@ maplet_urls = [
     ("/map/(.*)", MapPostHandler, dict(kind='m')),
 
     # Using GeoJson.
-    ('/geojson/(.*)', geojson_control.GeoJsonHandler, dict()),
-    ('/geojson_j/(.*)', geojson_control.GeoJsonAjaxHandler, dict()),
+    ('/geojson_v1/(.*)', geojson_control.GeoJsonHandler, dict()),
+    ('/geojson_j_v1/(.*)', geojson_control.GeoJsonAjaxHandler, dict()),
 
     # WebDog MapEditor.
+    ('/geojson/(.*)', geojson_control_v2.GeoJsonHandler, dict()),
     ('/geojson_v2/(.*)', geojson_control_v2.GeoJsonHandler, dict()),
+
+    ('/geojson_j/(.*)', geojson_control_v2.GeoJsonAjaxHandler, dict()),
     ('/geojson_j_v2/(.*)', geojson_control_v2.GeoJsonAjaxHandler, dict()),
 
     ('/mapdraw_v3/(.*)', geojson_v3.GeoJsonHandler, dict()),
