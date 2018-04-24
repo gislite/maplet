@@ -1,0 +1,48 @@
+{% extends "../theme/base.html" %}
+{% block head %}
+<title>OSGeo中国中心 | 开放地理空间实验室</title>
+<meta name="keywords" content="GIS,地理信息系统,开源GIS,OSGeo,OpenLayers,MapServer,GDAL,GIS教程,WebGIS">
+<meta name="description" content="OSGeo中国中心实验室，关注开源GIS，开放数据">
+<script type="text/javascript">
+    $().ready(function () {
+
+        $("#find_calc").validate(
+                {
+                    rules: {
+                        keyword: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        keyword: {
+                            required: "<span class='red'>请输入要查询的关键词</span>"
+                        }
+                    }
+                }
+        );
+    });
+
+</script>
+{% end %}
+{% block zhuti %}
+<ol class="breadcrumb">
+    <li>当前位置: <a href="http://www.osgeo.cn">首页</a></li>
+    <li><a href="/user/info"> 用户</a></li>
+    <li> 查找用户</li>
+</ol>
+<div class="panel panel-black">
+    <div class="panel-heading">查找用户</div>
+    <div class="panel-body">
+        <form class="pure-form pure-form-aligned" method="post" id="find_calc" action="/user/find">
+            <div class="pure-control-group">
+                <label for="keyword">输入用户名</label>
+                <input id="keyword" type="text" name="keyword" placeholder="用户名">
+            </div>
+            <div class="pure-control-group">
+                <label for="d"></label>
+                <button type="submit" id="d" name="d" class="pure-button pure-button-primary">查找</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% end %}

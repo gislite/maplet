@@ -1,0 +1,42 @@
+{% extends "../theme/base.html" %}
+{% block head %}
+<title>OSGeo中国中心 | 开放地理空间实验室</title>
+<meta name="keywords" content="GIS,地理信息系统,开源GIS,OSGeo,OpenLayers,MapServer,GDAL,GIS教程,WebGIS">
+<meta name="description" content="OSGeo中国中心实验室，关注开源GIS，开放数据">
+{% end %}
+{% block zhuti %}
+<ol class="breadcrumb">
+    <li>当前位置: <a href="http://www.osgeo.cn">首页</a></li>
+    <li><a href="/user/info"> 用户</a></li>
+    <li> 用户列表</li>
+</ol>
+<div class="panel panel-black">
+    <div class="panel-heading">
+        用户列表
+    </div>
+    <div class="panel-body">
+        <form class="pure-form pure-form-aligned" method="post" id="find_calc" action="/user/find">
+            <fieldset>
+                <div class="col-sm-8">
+                <input id="keyword" type="text" name="keyword" placeholder="用户名" class="form-control">
+                    </div>
+                <div class="col-sm-4">
+                <button type="submit" id="d"  name="d" class="btn btn-primary">
+                    查找用户
+                </button>
+                    </div>
+            </fieldset>
+        </form>
+        <br><br>
+        {% for x in view %}
+        <p>用户名：{{x.user_name}}&nbsp;&nbsp;&nbsp;&nbsp;当前权限：{{ x.role }}
+            <a class="btn btn-warning btn-sm" href="/user/changerole/{{x.user_name}}"
+               style="margin-left: 100px">修改权限</a>
+            <a class="btn btn-danger btn-sm" href="/user/delete_user/{{x.uid}}">删除用户</a>
+        </p>
+
+        <p style="border-bottom: 1px dashed #dddddd; margin-bottom: 20px">&nbsp;</p>
+        {% end %}
+    </div>
+</div>
+{% end %}
