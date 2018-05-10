@@ -1,0 +1,28 @@
+{% extends "../theme/base.html" %}
+{% block head %}
+<title>用户注册|Maplet|地图画板</title>
+<meta name="description"      content="地图画板 Maplet">
+<meta name="keywords"      content="地图画板 Maplet">
+{% end %}
+
+
+{% block zhuti %}
+<ol class="breadcrumb">
+    <li>当前位置: <a href="/">首页</a></li>
+    <li> 密码出错</li>
+</ol>
+<div class="panel panel-black">
+    <div class="panel-heading">
+        密码出错
+    </div>
+    <div class="panel-body">
+        <div class="alert alert-danger">密码验证出错!</div>
+        <Br>
+
+        <div style="text-align: center;">
+            <a href="/user/login" class="btn btn-warning " style="text-align: center;">重新登陆</a>
+        </div>
+    </div>
+</div>
+{% end %}
+

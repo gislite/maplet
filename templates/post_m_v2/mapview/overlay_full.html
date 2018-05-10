@@ -19,6 +19,8 @@
 {% end %}
 
 {% block zhuti %}
-<div id="map" class="map" tabindex="0"></div>
+<span id="pycode"></span>
+<input id="app_ctrl" value="{{ app_str }}" style="display: none;">
+<div id="map" class="map" tabindex="0" style="width: 100%; height: 100%"></div>
 <script src="{{ static_url('jslib/dst/overlay.js') }}"></script>
 {% end %}
