@@ -133,12 +133,12 @@ class MJson(Mabc):
                            public=1)
 
     @staticmethod
-    def add_or_update(json_uid, user_id, app_id, geojson):
+    def add_or_update(json_uid, user_id, app_id, geojson, version=2):
         current_count = MabGson.select().where(
             MabGson.uid == json_uid
         ).count()
         post_data = {'title': ''}
-        MJson.add_or_update_json(json_uid, user_id, geojson, post_data)
+        MJson.add_or_update_json(json_uid, user_id, geojson, post_data, version = version)
 
         post2gson_rec = MabPost2Gson.select().where(
             (MabPost2Gson.post_id == app_id) &

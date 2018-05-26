@@ -340,20 +340,26 @@ class GeoJsonAjaxHandler(GeoJsonHandler):
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 
     def get(self, *args, **kwargs):
-        print('Get')
         self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header("Access-Control-Allow-Headers", "x-requested-with")
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
-        print(args)
-        uid = args[0]
-        gson = MJson.get_by_uid(uid)
-
-        if gson:
-            out_dic = {
-                'uid': uid,
-                # 'geojson': gson.json,
-                'geojson': json.dumps(gson.json),
-            }
+        # print(args)
+        url_arr = self.parse_url(args[0])
+ 
+        
+        if url_arr[0] == '_draw':
+            uid = url_arr[1]
+            gson = MJson.get_by_uid(uid)
+            if gson:
+                out_dic = {
+                    'uid': uid,
+                    # 'geojson': gson.json,
+                    'geojson': json.dumps(gson.json),
+                }
+            else:
+                out_dic = {
+                    'uid': 0
+                }
         else:
             out_dic = {
                 'uid': 0
@@ -375,10 +381,12 @@ class GeoJsonAjaxHandler(GeoJsonHandler):
         print(url_arr)
 
         if len(url_arr) > 0:
-            if url_arr[0] == '_add':
+            if url_arr[0] in ['_draw', '_add']:
                 self.j_add()
-            elif url_arr[0] == '_edit':
-                self.j_add(url_arr[1])
+                if len(url_arr) > 1:
+                    self.j_add(url_arr[1])
+            else:
+                return False
 
     def j_add(self, uid=''):
         if self.userinfo:
@@ -390,8 +398,6 @@ class GeoJsonAjaxHandler(GeoJsonHandler):
         post_data = self.get_post_data()
 
         # print(post_data)
-        # print(post_data['geojson']['tileLayer']['high'])
-        # print(json.dumps(post_data, indent=1))
 
         geojson_str = post_data['geojson']
 
@@ -399,16 +405,8 @@ class GeoJsonAjaxHandler(GeoJsonHandler):
 
         print(json.dumps(gson, indent=1))
 
-        maplet_map_id = 'm' + gson['tileLayer']['high']['name'].split('-')[-1]
-        # print(maplet_map_id)
-
-        # webdog_to_geojson()会导致数据被改变
-        # geojson_obj = webdog_to_geojson(gson)
-        # print('=' * 100)
-        # print(geojson_obj)
-
-        # out_dic = self.parse_geojson(geojson_str)
-
+        # maplet_map_id = 'm' + gson['tileLayer']['high']['name'].split('-')[-1]
+        maplet_map_id = 'mv000'
         if uid:
             pass
         else:
@@ -417,20 +415,14 @@ class GeoJsonAjaxHandler(GeoJsonHandler):
                 uid = tools.get_uu4d()
         return_dic = {'uid': uid}
 
-        # MJson.add_or_update_json(uid, self.userinfo.uid, out_dic)
-        # return_dic['status'] = 1
-        # return json.dump(return_dic, self)
+        # MJson.add_or_update(uid, 'xxxx', maplet_map_id, gson)
 
         try:
-
             # MJson.add_or_update_json(uid, '', geojson_str)
-            # print('x' * 40)
-            # print(uid)
             # print(self.userinfo.uid, )
             # print(maplet_map_id),
             # print(geojson_str)
-            # MJson.add_or_update(uid, self.userinfo.uid, maplet_map_id, geojson_str)
-            MJson.add_or_update(uid, self.userinfo.uid, maplet_map_id, gson)
+            MJson.add_or_update(uid, 'xxxx', maplet_map_id, gson,version=3)
             return_dic['status'] = 1
             # print('Saved successfully!')
             return json.dump(return_dic, self)
