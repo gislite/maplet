@@ -37,3 +37,15 @@ Database
     \c :dbname ;
     create extension hstore;
     \q
+
+Backup the database: postgres user
+
+::
+
+    pg_dump -h localhost -U maplet maplet   > pg_maplet-`date +%F`.sql
+
+Import the database backup file: postgres user
+
+::
+
+    psql -d maplet -U maplet -f pg_maplet-xx.sql
