@@ -2,23 +2,37 @@
 {% block head %}
 <title>地图画板 地图叠加</title>
 
-    <script type="text/javascript" src="{{ static_url('jslib/dst/L.Map.Sync.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('jslib/dst/L.Map.Sync.js') }}"></script>
 
 <SCRIPT>
-    var vlon = {{ kwd['lon']}};
-    var vlat = {{ kwd['lat']}};
-    var vzoom_current = {{ kwd['zoom_current'] }};
-    var vzoom_max = {{ kwd['zoom_max']}};
-    var vzoom_min = {{ kwd['zoom_min']}};
+    var vlon = {{kwd['lon']}};
+    var vlat = {{kwd['lat']}};
+    var vzoom_current = {{kwd['zoom_current']}};
+    var vzoom_max = {{kwd['zoom_max']}};
+    var vzoom_min = {{kwd['zoom_min']}};
 
 </script>
 
- <style type="text/css">
-        html, body { width: 100%; height: 100%; margin: 0; }
-        #map1, #map2 { width: 49.9%; height: 100%; }
-        #map1 { float: left; }
-        #map2 { float: right; }
-    </style>
+<style type="text/css">
+    html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+
+    #map1, #map2 {
+        width: 49.9%;
+        height: 100%;
+    }
+
+    #map1 {
+        float: left;
+    }
+
+    #map2 {
+        float: right;
+    }
+</style>
 
 {% end %}
 
@@ -26,9 +40,8 @@
 <input id="app_ctrl" value="{{ app_str }}" style="display: none;">
 
 
-
-    <div id="map1"></div>
-    <div id="map2"></div>
+<div id="map1"></div>
+<div id="map2"></div>
 
 
 <script type="text/javascript">
@@ -46,20 +59,16 @@
         app_arr = app_url.split("/");
 
 
-
-        osm = L.tileLayer.chinaProvider('Google.satellite.Map', {
-maxZoom: 18,
-minZoom: 1
-});
-
-
+        osm = L.tileLayer.chinaProvider('Google.Normal.Map', {
+            maxZoom: 18,
+            minZoom: 1
+        });
 
 
         osm2 = L.tileLayer.chinaProvider('Google.Normal.Map', {
-maxZoom: 18,
-minZoom: 1
-});
-
+            maxZoom: 18,
+            minZoom: 1
+        });
 
 
         m1 = L.tileLayer.wms("http://wcs.osgeo.cn:8088/service?", {
@@ -106,16 +115,28 @@ minZoom: 1
         marker1 = L.marker(map1.getCenter()).addTo(map1);
         marker2 = L.marker(map2.getCenter()).addTo(map2);
 
-        map1.on("moveend", function (e) {marker1.setLatLng(map1.getCenter());});
-	map1.on("move", function (e) {marker1.setLatLng(map1.getCenter());});
-	map1.on("zoom", function (e) {marker1.setLatLng(map1.getCenter());});
+        map1.on("moveend", function (e) {
+            marker1.setLatLng(map1.getCenter());
+        });
+        map1.on("move", function (e) {
+            marker1.setLatLng(map1.getCenter());
+        });
+        map1.on("zoom", function (e) {
+            marker1.setLatLng(map1.getCenter());
+        });
 
-        map2.on("moveend", function (e) {marker2.setLatLng(map2.getCenter());});
-        map2.on("move", function (e) {marker2.setLatLng(map2.getCenter());});
-        map2.on("zoom", function (e) {marker2.setLatLng(map2.getCenter());});
+        map2.on("moveend", function (e) {
+            marker2.setLatLng(map2.getCenter());
+        });
+        map2.on("move", function (e) {
+            marker2.setLatLng(map2.getCenter());
+        });
+        map2.on("zoom", function (e) {
+            marker2.setLatLng(map2.getCenter());
+        });
 
         baseMaps1 = {'basemap': osm};
-        overlayMaps1 = {"{{app_arr[0].title}}" : m1};
+        overlayMaps1 = {"{{app_arr[0].title}}": m1};
         L.control.layers(baseMaps1, overlayMaps1).addTo(map1);
 
         baseMaps2 = {'basemap': osm2};
