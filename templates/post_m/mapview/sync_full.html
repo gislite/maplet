@@ -19,16 +19,13 @@
         height: 100%;
         margin: 0;
     }
-
     #map1, #map2 {
         width: 49.9%;
         height: 100%;
     }
-
     #map1 {
         float: left;
     }
-
     #map2 {
         float: right;
     }
@@ -59,16 +56,43 @@
         app_arr = app_url.split("/");
 
 
-        osm = L.tileLayer.chinaProvider('Google.Normal.Map', {
+        var osm_a1 = L.tileLayer.chinaProvider('TianDiTu.Normal.Annotion', {
+            maxZoom: 18,
+            minZoom: 1
+        });
+
+        var osm_a2 = L.tileLayer.chinaProvider('TianDiTu.Normal.Map', {
             maxZoom: 18,
             minZoom: 1
         });
 
 
-        osm2 = L.tileLayer.chinaProvider('Google.Normal.Map', {
+
+                var osm_b1 = L.tileLayer.chinaProvider('TianDiTu.Normal.Annotion', {
             maxZoom: 18,
             minZoom: 1
         });
+
+        var osm_b2 = L.tileLayer.chinaProvider('TianDiTu.Normal.Map', {
+            maxZoom: 18,
+            minZoom: 1
+        });
+
+
+        var osm = L.layerGroup([osm_a2, osm_a1]);
+        var osm2 = L.layerGroup([osm_b2, osm_b1]);
+
+
+        // osm = L.tileLayer.chinaProvider('Google.Normal.Map', {
+        //     maxZoom: 18,
+        //     minZoom: 1
+        // });
+        //
+        //
+        // osm2 = L.tileLayer.chinaProvider('Google.Normal.Map', {
+        //     maxZoom: 18,
+        //     minZoom: 1
+        // });
 
 
         m1 = L.tileLayer.wms("http://wcs.osgeo.cn:8088/service?", {
