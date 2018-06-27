@@ -330,7 +330,7 @@ class GeoJsonHandler(BaseHandler):
 class GeoJsonAjaxHandler(GeoJsonHandler):
     def initialize(self, **kwargs):
         print('init...')
-        super(GeoJsonHandler, self).initialize()
+        super(GeoJsonAjaxHandler, self).initialize()
         self.set_default_headers()
 
     def set_default_headers(self):

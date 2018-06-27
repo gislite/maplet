@@ -69,7 +69,7 @@ class Webdog:
 
         return style
 
-    def is_multi_path(slef, coord):
+    def is_multi_path(self, coord):
         return isinstance(coord[0][0], list) and isinstance(coord[0][0][0], list)
 
     def reverse_coord(self, coord):

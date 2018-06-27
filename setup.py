@@ -10,7 +10,7 @@ from setuptools import setup, find_packages
 desc = ('Maplet ')
 setup(
     name='torcms_maplet',
-    version='0.0.3',
+    version='0.1.0',
     keywords=('torcms', 'tornado'),
     description=desc,
     long_description=''.join(open('README.rst').readlines()),

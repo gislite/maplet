@@ -210,7 +210,7 @@ class GeoJsonHandler(BaseHandler):
             return
 
         try:
-            MJson.add_or_update_json(uid, self.userinfo.uid, out_dic, version=1)
+            MJson.add_or_update_json(uid, self.userinfo.uid, out_dic, post_data, version=1)
             return_dic['status'] = 1
         except:
             self.set_status(400)
@@ -251,7 +251,7 @@ class GeoJsonHandler(BaseHandler):
 class GeoJsonAjaxHandler(GeoJsonHandler):
     def initialize(self, **kwargs):
         print('init...')
-        super(GeoJsonHandler, self).initialize()
+        super(GeoJsonAjaxHandler, self).initialize()
         self.set_default_headers()
 
     def set_default_headers(self):
@@ -322,8 +322,7 @@ class GeoJsonAjaxHandler(GeoJsonHandler):
         # return json.dump(return_dic, self)
 
         try:
-
-            MJson.add_or_update_json(uid, '', geojson_str)
+            MJson.add_or_update_json(uid, '', geojson_str, post_data)
             return_dic['status'] = 1
             return json.dump(return_dic, self)
         except:

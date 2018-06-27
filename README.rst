@@ -1,7 +1,7 @@
 Maplet
 =======
 
-Source codes for http://www.maplet.org
+Source codes for http://www.maphub.org
 
 Introduction
 ------------------------
