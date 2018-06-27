@@ -1,4 +1,6 @@
 # -*- coding:utf-8 -*-
+
+
 import json
 
 import tornado.escape
@@ -17,7 +19,7 @@ class GeoJsonHandler(BaseHandler):
         url_str = args[0]
         url_arr = self.parse_url(url_str)
 
-        if len(url_arr) == 0:
+        if url_arr:
             self.index()
 
         elif url_str == 'draw':
@@ -52,8 +54,8 @@ class GeoJsonHandler(BaseHandler):
 
         map_hist = []
         if self.get_secure_cookie('map_hist'):
-            for xx in range(0, len(self.get_secure_cookie('map_hist').decode('utf-8')), 4):
-                map_hist.append(self.get_secure_cookie('map_hist').decode('utf-8')[xx: xx + 4])
+            for the_index in range(0, len(self.get_secure_cookie('map_hist').decode('utf-8')), 4):
+                map_hist.append(self.get_secure_cookie('map_hist').decode('utf-8')[the_index: the_index + 4])
 
         self.render(
             'post_m/full_screen_draw.html',
@@ -168,25 +170,23 @@ class GeoJsonHandler(BaseHandler):
         out_dic = {}
         index = 0
 
-        for x in json_obj['features']:
-            if x['type'] == 'Feature':
-
-                out_dic[index] = get_geometry(x)
+        for the_fea in json_obj['features']:
+            if the_fea['type'] == 'Feature':
+                out_dic[index] = get_geometry(the_fea)
                 index += 1
-            elif x['type'] == 'FeatureCollection':
-
-                for y in x['features']:
-                    out_dic[index] = get_geometry(y)
+            elif the_fea['type'] == 'FeatureCollection':
+                for fea_in_fea in the_fea['features']:
+                    out_dic[index] = get_geometry(fea_in_fea)
                     index += 1
-
         return out_dic
 
     @tornado.web.authenticated
     def add_data(self, gson_uid):
+        '''
+        Post via adding.
+        '''
         post_data = self.get_post_data()
-
         geojson_str = post_data['geojson']
-
         out_dic = self.parse_geojson(geojson_str)
 
         if gson_uid == 'draw' or gson_uid == '':
@@ -194,7 +194,6 @@ class GeoJsonHandler(BaseHandler):
             while MJson.get_by_id(uid):
                 uid = tools.get_uu4d()
             return_dic = {'uid': uid}
-
         elif len(gson_uid) == 4:
             uid = gson_uid
             return_dic = {'uid': ''}
@@ -284,7 +283,6 @@ class GeoJsonAjaxHandler(GeoJsonHandler):
         print('Put')
 
     def post(self, *args, **kwargs):
-        print('Post')
         self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header("Access-Control-Allow-Headers", "x-requested-with")
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
@@ -299,8 +297,7 @@ class GeoJsonAjaxHandler(GeoJsonHandler):
                 self.j_add(url_arr[1])
 
     def j_add(self, uid=''):
-        print('=' * 20)
-        print('Hello')
+
         post_data = self.get_post_data()
 
         print(post_data)

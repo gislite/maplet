@@ -153,8 +153,7 @@ class GeoJsonHandler(BaseHandler):
 
         self.render('geoinfo/geojson/gson_edit.html',
                     postinfo=postinfo,
-                    userinfo=self.userinfo,
-                    )
+                    userinfo=self.userinfo)
 
     @tornado.web.authenticated
     def delete(self, uid):
@@ -306,9 +305,6 @@ class GeoJsonHandler(BaseHandler):
         if len(url_arr[1]) == 4:
             uid = url_arr[1]
             return_dic = {'sig': ''}
-            print ("*" * 50)
-            print (uid)
-            print ("*" * 50)
             cur_info = MJson.get_by_id(uid)
 
             if cur_info.user_id == self.userinfo.uid:

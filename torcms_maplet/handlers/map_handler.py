@@ -199,8 +199,6 @@ class MapLayoutHandler(BaseHandler):
     def delete(self, uid):
         '''
         Delete the map layout of user.
-        :param uid:
-        :return:
         '''
         MLayout.delete(uid)
 
@@ -208,7 +206,6 @@ class MapLayoutHandler(BaseHandler):
     def save_layout(self):
         '''
         Save the map layout.
-        :return:
         '''
         post_data = self.get_post_data()
         if 'zoom' in post_data:

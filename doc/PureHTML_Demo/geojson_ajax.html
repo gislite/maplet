@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="bukun">
+    <meta name="Copyright" content="maplet.org">
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <script>
+
+        let  uid = '';
+        $.ready()
+        {
+            function foo_add() {
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://www.maplet.org/geojson_j/_add',
+                    crossDomain: true,
+
+                    data: {
+                        "name": "John",
+                        "geojson": '{"name": "John", "geojsonsadf": "2pm"}',
+                    },
+                    // dataType: 'JSONP',
+                    success: function (tdata) {                                   //date是返回的值
+                        var gson = JSON.parse( tdata );
+                        uid = gson.uid;
+                        alert(gson.uid + ', ' + gson.status);
+                    },
+
+                    error: function (xhr, status) {
+                        alert("error");
+                    },
+                });
+            }
+
+
+            function foo_edit() {
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://www.maplet.org/geojson_j/_edit/' + uid,
+                    crossDomain: true,
+
+                    data: {
+                        "name": "John",
+                        "geojson": '{"name": "New name", "geojson": "New VAle"}',
+                    },
+                    // dataType: 'JSONP',
+                    success: function (tdata) {                                   //date是返回的值
+                        var gson = JSON.parse( tdata );
+                        alert(gson.uid + ', ' + gson.status);
+                    },
+
+                    error: function (xhr, status) {
+                        alert("error");
+                    },
+                });
+
+
+            }
+
+            function foo_get() {
+
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://www.maplet.org/geojson_j/' + uid,
+                    crossDomain: true,
+
+                    // dataType: 'JSONP',
+                    success: function (tdata) {                                   //date是返回的值
+                        var gson = JSON.parse( tdata );
+                        alert(gson.uid + ', ' + gson.geojson);
+                    },
+
+                    error: function (xhr, status) {
+                        alert("error");
+                    },
+                });
+
+
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+
+
+    <button id="btn_a" onclick="foo_add();">Post</button>
+
+
+
+    <button id="btn_a" onclick="foo_get();">Get</button>
+
+
+
+    <button id="btn_a" onclick="foo_edit();">Update</button>
+
+
+</body>
+</html>

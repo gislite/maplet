@@ -153,8 +153,7 @@ class GeoJsonHandler(BaseHandler):
 
         self.render('geoinfo/geojson/gson_edit.html',
                     postinfo=postinfo,
-                    userinfo=self.userinfo,
-                    )
+                    userinfo=self.userinfo)
 
     @tornado.web.authenticated
     def delete(self, uid):
@@ -306,11 +305,7 @@ class GeoJsonHandler(BaseHandler):
         if len(url_arr[1]) == 4:
             uid = url_arr[1]
             return_dic = {'sig': ''}
-            print ("*" * 50)
-            print (uid)
-            print ("*" * 50)
             cur_info = MJson.get_by_id(uid)
-
             if cur_info.user_id == self.userinfo.uid:
                 pass
             else:
@@ -345,8 +340,7 @@ class GeoJsonAjaxHandler(GeoJsonHandler):
         self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
         # print(args)
         url_arr = self.parse_url(args[0])
- 
-        
+
         if url_arr[0] == '_draw':
             uid = url_arr[1]
             gson = MJson.get_by_uid(uid)
@@ -422,7 +416,7 @@ class GeoJsonAjaxHandler(GeoJsonHandler):
             # print(self.userinfo.uid, )
             # print(maplet_map_id),
             # print(geojson_str)
-            MJson.add_or_update(uid, 'xxxx', maplet_map_id, gson,version=3)
+            MJson.add_or_update(uid, 'xxxx', maplet_map_id, gson, version=3)
             return_dic['status'] = 1
             # print('Saved successfully!')
             return json.dump(return_dic, self)
