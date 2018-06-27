@@ -17,8 +17,8 @@ setup(
     license='MIT License',
 
     url='',
-    author='bukun',
-    author_email='bukun@osgeo.cn',
+    author='gislite',
+    author_email='gislite@osgeo.cn',
 
     packages=find_packages(
         # include=('torcms',),
