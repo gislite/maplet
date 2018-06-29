@@ -5,75 +5,38 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        //        concat: {
-        // options: {},
-        //            css: {
-        //
-        //                src: ['src/gscript.js', 'src/message_cn.js'],
-        //                dest: 'build/a.js'
-        //            }
-        //
-        //        },
-
 
         // uglify插件的配置信息
         uglify: {
-            options: {mangle: false},
+            options: {mangle: false,},
             build: {
-                src: ['src/gscript.js', 'src/maplet_mapshow/mapshow.js', 'src/message_cn.js'],
+                src: ['src/gscript.js', 'src/mapshow.js', 'maplet/message_cn.js'],
                 dest: 'dst/gscript.js'
             },
 
-            buildb: {//任务二：压缩b.js，输出压缩信息
+            //任务二：压缩单独的文件。
+            buildb: {
                 options: {
                     mangle: false,
                     report: "min"//输出压缩率，可选的值有 false(不输出信息)，gzip
                 },
                 files: {
-                    'dst/leafedit.js': ['src/Leaflet.Editable.js']
+                    // 简单编辑器
+                    'dst/leafedit.js': ['src/Leaflet.Editable.js'],
+                    // 地图中全屏然后编辑
+                    'dst/fullscreen.js': ['maplet/fullscreenm.js'],
+                    // 叠加
+                    'dst/overlay.js': ['maplet/overlaym.js'],
+                    // 创建地图使用
+                    'dst/gsonedit.js': ['maplet/geojson_edit.js'],
+                    // 同步
+                    'dst/L.Map.Sync.js': ['src/LeafletPlugin/L.Map.Sync.js'],
+                    // 滑窗
+                    'dst/leaflet-side-by-side.min.js': ['src/LeafletPlugin/leaflet-side-by-side.min.js'],
+                    // 百度 Echart中国底图
+                    'dst/gson_china.js': ['src/chart/gson_china.js'],
                 }
             },
-
-            fullscreen: {//任务二：压缩b.js，输出压缩信息
-                options: {
-                    mangle: false,
-                    report: "min"//输出压缩率，可选的值有 false(不输出信息)，gzip
-                },
-                files: {
-                    'dst/fullscreen.js': ['src/maplet_fullscreen_edit/fullscreen.js']
-                }
-            },
-
-            geojson_edit: {//任务二：压缩b.js，输出压缩信息
-                options: {
-                    mangle: false,
-                    report: "min"//输出压缩率，可选的值有 false(不输出信息)，gzip
-                },
-                files: {
-                    'dst/gsonedit.js': ['src/maplet_geojson_edit/geojson_edit.js']
-                }
-            },
-
-            map_overlay: {//任务二：压缩b.js，输出压缩信息
-                options: {
-                    mangle: false,
-                    report: "min"//输出压缩率，可选的值有 false(不输出信息)，gzip
-                },
-                files: {
-                    'dst/overlay.js': ['src/maplet_overlay/overlay.js']
-                }
-            },
-
-            gson_china_data: {//任务二：压缩b.js，输出压缩信息
-                options: {
-                    mangle: false,
-                    report: "min"//输出压缩率，可选的值有 false(不输出信息)，gzip
-                },
-                files: {
-                    'dst/gson_china.js': ['src/chart/gson_china.js']
-                }
-            }
-
         }
     });
 
