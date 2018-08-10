@@ -10,7 +10,7 @@
 {% end %}
 
 <Style>
-    #mapdiv{
+    #mapdiv {
         width: 100%;
         height: 320px;
     }
@@ -30,32 +30,36 @@
 
 <div class="container">
     <div class="row">
-                 <div class="col-md-9">
-                     <div class="panel">
-                     <div id="mapdiv"></div>
-                     </div>
+        <div class="col-md-9">
+            <div class="panel">
+                <div id="mapdiv"></div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="well">
+
+                <img src="/static/fixed/maplet_qrcode.png" style="float:right;width:140px;"/>
+
+                <div>本网站是一个非赢利公益性网站，
+                    由开放地理空间基金会中国中心维护。作为开源WebGIS的实践，
+                    本网站致力于推广开源GIS技术的应用，以及地理信息科学数据共享。
                 </div>
 
-                <div class="col-md-3">
-                    <div class="well">
-
-                        <img src="/static/fixed/maplet_qrcode.png" style="float:right;width:140px;" />
-
-<div>本网站是一个非赢利公益性网站，
-由开放地理空间基金会中国中心维护。作为开源WebGIS的实践，
-本网站致力于推广开源GIS技术的应用，以及地理信息科学数据共享。
-</div>
-
-                        <div>
-有志于为开源GIS与地理信息科学数据共享作贡献的人员，请加入QQ讨论群（619741）。</div>
-
-<a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=c054fc872c4aada0ae7422ccf4ecfe7fdd2ecbd4295d1c6939b098528e12f507"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="OSGeo:地图云集" title="OSGeo:地图云集"></a>
-
-
-                    </div>
+                <div>
+                    有志于为开源GIS与地理信息科学数据共享作贡献的人员，请加入QQ讨论群（619741）。
                 </div>
+
+                <a target="_blank"
+                   href="http://shang.qq.com/wpa/qunwpa?idkey=c054fc872c4aada0ae7422ccf4ecfe7fdd2ecbd4295d1c6939b098528e12f507"><img
+                        border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="OSGeo:地图云集"
+                        title="OSGeo:地图云集"></a>
+
 
             </div>
+        </div>
+
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -64,25 +68,46 @@
 
                 <div class="col-sm-4">
 
-                    <div class="panel panel-black">{% module app_catalog_of('2100', slug =True, glyph='glyphicon glyphicon-map-marker') %}</div>
-                    <div class="panel panel-black">{% module app_catalog_of('2900', slug =True, glyph='glyphicon glyphicon-map-marker') %}</div>
-<div class="panel panel-black">{% module app_catalog_of('me00', slug =True, glyph='glyphicon glyphicon-map-marker') %}</div>
-<div class="panel panel-black">{% module app_catalog_of('mf00', slug =True, glyph='glyphicon glyphicon-map-marker') %}</div>
-
+                    <div class="panel panel-black">
+                        {% module app_catalog_of('2100', slug =True, glyph='glyphicon glyphicon-map-marker') %}
+                    </div>
+                    <div class="panel panel-black">
+                        {% module app_catalog_of('2900', slug =True, glyph='glyphicon glyphicon-map-marker') %}
+                    </div>
+                    <div class="panel panel-black">
+                        {% module app_catalog_of('me00', slug =True, glyph='glyphicon glyphicon-map-marker') %}
+                    </div>
+                    <div class="panel panel-black">
+                        {% module app_catalog_of('mf00', slug =True, glyph='glyphicon glyphicon-map-marker') %}
+                    </div>
 
 
                 </div>
                 <div class="col-sm-4">
-                    <div class="panel panel-black">{% module app_catalog_of('3100', slug =True, glyph='glyphicon glyphicon-map-marker') %}</div>
-                    <div class="panel panel-black">{% module app_catalog_of('3300', slug =True, glyph='glyphicon glyphicon-map-marker') %}</div>
-                    <div class="panel panel-black">{% module app_catalog_of('2700', slug =True, glyph='glyphicon glyphicon-map-marker')%}</div>
-		    <hr/>
-<div class="panel panel-black">{% module app_catalog_of('2800', slug =True, glyph='glyphicon glyphicon-map-marker')%}</div>
+                    <div class="panel panel-black">
+                        {% module app_catalog_of('3100', slug =True, glyph='glyphicon glyphicon-map-marker') %}
+                    </div>
+                    <div class="panel panel-black">
+                        {% module app_catalog_of('3300', slug =True, glyph='glyphicon glyphicon-map-marker') %}
+                    </div>
+                    <div class="panel panel-black">
+                        {% module app_catalog_of('2700', slug =True, glyph='glyphicon glyphicon-map-marker')%}
+                    </div>
+                    <hr/>
+
+                    <div class="panel panel-black">
+                        {% module app_catalog_of('2800', slug =True, glyph='glyphicon glyphicon-map-marker')%}
+                    </div>
+                    
 
                 </div>
                 <div class="col-sm-4">
-                    <div class="panel panel-black">{% module app_catalog_of('2300', slug =True, glyph='glyphicon glyphicon-map-marker') %}</div>
-                    <div class="panel panel-black">{% module app_catalog_of('2500', slug =True, glyph='glyphicon glyphicon-map-marker') %}</div>
+                    <div class="panel panel-black">
+                        {% module app_catalog_of('2300', slug =True, glyph='glyphicon glyphicon-map-marker') %}
+                    </div>
+                    <div class="panel panel-black">
+                        {% module app_catalog_of('2500', slug =True, glyph='glyphicon glyphicon-map-marker') %}
+                    </div>
                 </div>
 
             </div>
@@ -92,33 +117,33 @@
         <!--<div class="col-md-3">-->
 
 
-            <!--<div class="panel panel-default">-->
-                <!--<div class="panel-heading">-->
-                    <!--<h3 class="panel-title">-->
-                        <!--最近使用-->
-                    <!--</h3>-->
-                <!--</div>-->
+        <!--<div class="panel panel-default">-->
+        <!--<div class="panel-heading">-->
+        <!--<h3 class="panel-title">-->
+        <!--最近使用-->
+        <!--</h3>-->
+        <!--</div>-->
 
-                <!--<ul class="list-group">-->
+        <!--<ul class="list-group">-->
 
-                    <!--{% module app_recent_used('m', num = 6, userinfo = userinfo, glyph='glyphicon glyphicon-map-marker') %}-->
+        <!--{% module app_recent_used('m', num = 6, userinfo = userinfo, glyph='glyphicon glyphicon-map-marker') %}-->
 
-                <!--</ul>-->
+        <!--</ul>-->
 
-            <!--</div>-->
+        <!--</div>-->
 
-            <!--<div class="panel panel-default">-->
-                <!--<div class="panel-heading">-->
-                    <!--<h3 class="panel-title">-->
-                        <!--使用最多-->
-                    <!--</h3>-->
-                <!--</div>-->
+        <!--<div class="panel panel-default">-->
+        <!--<div class="panel-heading">-->
+        <!--<h3 class="panel-title">-->
+        <!--使用最多-->
+        <!--</h3>-->
+        <!--</div>-->
 
-                <!--<ul class="list-group">-->
-                    <!--{% module app_most_used('m', 6, userinfo = userinfo, glyph='glyphicon glyphicon-map-marker') %}-->
-                <!--</ul>-->
+        <!--<ul class="list-group">-->
+        <!--{% module app_most_used('m', 6, userinfo = userinfo, glyph='glyphicon glyphicon-map-marker') %}-->
+        <!--</ul>-->
 
-            <!--</div>-->
+        <!--</div>-->
         <!--</div>-->
     </div>
 </div>

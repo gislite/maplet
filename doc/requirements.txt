@@ -2,4 +2,4 @@
 # pip install -r doc/requirements.txt
 wheel
 openpyxl
-torcms==0.6.25
+torcms==0.6.28

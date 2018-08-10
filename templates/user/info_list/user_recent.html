@@ -8,14 +8,11 @@
 
 
 {% block zhuti %}
-<!--
-<div class="panel panel-default">
-    <div class="panel-heading">
-        所在位置： <a href="http://maplet.osgeo.cn/">Maplet</a> >
-        <a href="/list/user_recent">最近使用</a>
-    </div>
-</div>
--->
+<ol class="breadcrumb">
+    <li>当前位置: <a href="http://www.osgeo.cn">首页</a></li>
+    <li><a href="/user/info"> 用户</a></li>
+    <li><a href="/user_list/user_recent"> 使用最多</a></li>
+</ol>
 <div class="panel panel-black">
 
     <div class="panel-heading">
@@ -27,7 +24,7 @@
     <ul class="list-group">
 
         {% if userinfo %}
-        {% module app_user_recent(userinfo.uid,'m',20,with_tag=True,glyph='glyphicon glyphicon-map-marker') %}
+        {% module app_recent_used(userinfo = userinfo,kind = 'm',num = 20,with_tag=True,glyph='glyphicon glyphicon-map-marker') %}
         {% end %}
 
     </ul>

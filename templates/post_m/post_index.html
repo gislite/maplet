@@ -97,7 +97,7 @@
                     {% if userinfo is None %}
                     {% module app_recent_used('m', 10) %}
                     {% else %}
-                    {% module app_user_recent(userinfo.uid, 'm', 10) %}
+                    {% module app_recent_used(userinfo = userinfo, kind = 'm', num = 10) %}
                     {% end %}
                 </ul>
 
