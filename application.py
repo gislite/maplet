@@ -9,14 +9,19 @@ import torcms.core.uifunction as uifuncs
 from torcms_maplet.modules.modef import maplet_modules
 from config import SITE_CFG
 from urls import urls
-
+from torcms.modules.modef import core_modules as cmodules
+from extor.modules.extends import Ext_category_menu,Ext_category_list
 
 # cur_modues = {'app_layout': app_layout,
 #               'app_json': app_json,
 #               }
 
+
 # Above Python 3.5.
 cmodules = {**core_modules, **maplet_modules}
+
+cmodules['ext_category_menu'] = Ext_category_menu
+cmodules['ext_category_list'] = Ext_category_list
 
 SETTINGS = {
     "template_path": os.path.join(os.path.dirname(__file__), "templates"),
