@@ -124,7 +124,7 @@
 
         <div class="panel-heading">
            用户地图数据
-            <span  class="text-info bg-info"> 全屏后可进行数据编辑</span>
+            <span  class="text-info bg-info "> 全屏后可进行数据编辑</span>
         </div>
         {% if userinfo %}
         {% module app_json(postinfo.uid, userinfo.uid) %}
@@ -289,8 +289,7 @@
 
     <ul class="list-group">
 
-        {% module app_recent_used(postinfo.kind, num = 8, userinfo = userinfo, glyph='glyphicon glyphicon-map-marker')
-        %}
+        {% module app_recent_used(postinfo.kind, num = 5, userinfo = userinfo, glyph='glyphicon glyphicon-map-marker') %}
 
 
     </ul>
@@ -305,8 +304,7 @@
     </div>
 
     <ul class="list-group">
-        {% module app_recent_used(postinfo.kind, num = 8, userinfo = userinfo, glyph='glyphicon glyphicon-map-marker')
-        %}
+        {% module app_recent_used(postinfo.kind, num = 5, userinfo = userinfo, glyph='glyphicon glyphicon-map-marker') %}
     </ul>
 </div>
 
