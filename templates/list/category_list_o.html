@@ -19,7 +19,7 @@
 
     <ul class="list-group">
         {% for rec in infos %}
-        <li class="list-group-item"><a href="/post/{{ rec.uid }}.html">{{ rec.title }}</a>
+        <li class="list-group-item"><a href="/post/{{ rec.uid }}">{{ rec.title }}</a>
             <span class="post_cat">{% module post_catalogs(rec.uid) %}</span>
         </li>
         {% end %}
