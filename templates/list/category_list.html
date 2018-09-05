@@ -8,14 +8,7 @@
 
 
 {% block zhuti %}
-<!--
-<div class="panel panel-black">
-    <div class="panel-heading">
-        所在位置： <a href="/">地图</a> > 地图 > {{ catinfo.name }}
 
-    </div>
-</div>z
--->
 <div class="panel panel-black">
     <div class="panel-heading">
         {{ catinfo.name }}
@@ -54,8 +47,28 @@
 
 
 {% block right %}
+{% if kwd['kind'] == 'm' %}
+{% module ext_category_list(catid = catinfo.uid,userinfo = userinfo) %}
+{% module ext_category_menu(kind = kwd['kind'],catid = catinfo.uid,userinfo = userinfo) %}
+{% else %}
 
- {% module ext_category_list(catid = catinfo.uid,userinfo = userinfo) %}
-{% module ext_category_menu(kind = 'm',catid = catinfo.uid,userinfo = userinfo) %}
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <center>
+
+
+         文档分类
+            </center>
+
+        </h3>
+    </div>
+</div>
+
+<div class="panel penel-info">
+{% module ext_category_list(catid = catinfo.uid,userinfo = userinfo) %}
+</div>
+{% end %}
 
 {% end %}
