@@ -53,21 +53,14 @@
 {% else %}
 
 
-<div class="panel panel-black">
+
+<div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">
-            <center>
-
-
-         文档分类
-            </center>
-
-        </h3>
+       文档分类
     </div>
-</div>
-
-<div class="panel penel-info">
-{% module ext_category_list(catid = catinfo.uid,userinfo = userinfo) %}
+    <ul class="list-group list-font">
+        {% module category_menu() %}
+    </ul>
 </div>
 {% end %}
 
