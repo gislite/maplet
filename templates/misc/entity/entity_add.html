@@ -1,18 +1,18 @@
 {% extends "../../theme/base_zhu.html" %}
 {% block base_top_header %}
 <div class="container">
-     <div style="padding-top: 80px"></div>
+    <div style="padding-top: 80px"></div>
     <div class="row">
 
-            <ul class="breadcrumb">
-                <li><a href="/">首页</a></li>
-                <li class="active">上传文件</li>
-                {% if userinfo and( userinfo.role[1] >= '2') %}
-                <li class="fr">
-                    <a href="/entity/" class="btn btn-primary btn-xs">查看文件列表</a>
-                </li>
-                {% end %}
-            </ul>
+        <ul class="breadcrumb">
+            <li><a href="/">首页</a></li>
+            <li class="active">上传文件</li>
+            {% if userinfo and( userinfo.role[1] >= '2') %}
+            <li class="fr">
+                <a href="/entity/" class="btn btn-primary btn-xs">查看文件列表</a>
+            </li>
+            {% end %}
+        </ul>
 
         <div class="row">
             <div class="col-sm-12">
@@ -32,11 +32,18 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" id="entitypic">
                                 <label class="col-sm-2 control-label"></label>
 
                                 <div class="col-sm-4">
-                                    <input name="file" type="file" id="entityfile">
+                                    <input name="file" type="file" accept=".jpg,.jpeg,.gif,.png,.tif,.bmp">
+                                </div>
+                            </div>
+                            <div class="form-group" id="entityfile" hidden>
+                                <label class="col-sm-2 control-label"></label>
+
+                                <div class="col-sm-4">
+                                    <input name="file" type="file" accept=".pdf,.doc,.docx,.zip,.rar,.ppt,.7z,.xlsx">
                                 </div>
                             </div>
                             <div class="form-group" id="entitytext" hidden>
@@ -68,22 +75,24 @@
             </div>
         </div>
         <script type="text/javascript">
-
             function hiddenXX() {
                 var objS = document.getElementById("kind");
                 var value = objS.options[objS.selectedIndex].value;
 
                 if (value == 1) {
-                    $("#entityfile").show();
+                    $("#entitypic").show();
+                    $("#entityfile").hide();
                     $("#entitytext").hide();
                 }
-                else if (value == 3) {
-                    $("#entityfile").hide();
-                    $("#entitytext").show();
+                else if (value == 2) {
+                    $("#entityfile").show();
+                    $("#entitypic").hide();
+                    $("#entitytext").hide();
                 }
                 else {
-                    $("#entityfile").show();
-                    $("#entitytext").hide();
+                    $("#entitytext").show();
+                    $("#entityfile").hide();
+                    $("#entitypic").hide();
                 }
             }
         </script>
