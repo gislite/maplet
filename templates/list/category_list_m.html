@@ -1,0 +1,50 @@
+{% extends "../theme/base_map.html" %}
+
+{% block head %}
+<title>在线地图按分类列出</title>
+<meta name="keywords" content="{{ catinfo.name }}地图,在线地图,历史地图,分类地图,">
+<meta name="description" content="{{ catinfo.name }}地图,在线地图,历史地图,在线地图按分类列出">
+{% end %}
+
+
+{% block show_map %}
+
+<div class="panel panel-black">
+    <div class="panel-heading">
+        {{ catinfo.name }}
+    </div>
+
+
+    <ul class="list-group">
+        {% for rec in infos %}
+        <li class="list-group-item">
+            <a href="/{{router}}/{{ rec.uid }}">
+
+                <span class="glyphicon glyphicon-map-marker"></span>
+
+                {{ rec.title }}
+            </a>
+            <span class="app_tag">{% module map_catalogs(rec.uid ) %}</span>
+        </li>
+        {% end %}
+    </ul>
+
+
+    <div class="panel-footer">
+
+        <div class="widget_baidu_share">{% module baidu_share() %}</div>
+
+
+    </div>
+</div>
+<div>
+    {% module catalog_pager( kwd['cat_slug'], kwd['current_page'] ) %}
+
+</div>
+
+<div style="clear: both"></div>
+{% end %}
+
+
+
+
