@@ -150,12 +150,6 @@ footer.duomi-page-footer .list-inline a, footer.authenticated-footer .list-inlin
 
 
 
-
-
-
-
-
-
 /* Sidebar */
 
 .sidebar {
@@ -165,11 +159,6 @@ footer.duomi-page-footer .list-inline a, footer.authenticated-footer .list-inlin
 
 }
 
-.sidebar form {
-	padding: 20px 15px 5px 15px;
-	border-bottom: 1px solid #eee;
-	margin-bottom: 20px;
-}
 
 @media (min-width: 768px) {
 	.sidebar {
@@ -185,7 +174,7 @@ footer.duomi-page-footer .list-inline a, footer.authenticated-footer .list-inlin
 		overflow-x: hidden;
 		overflow-y: auto;
 		background-color: #fff;
-		box-shadow: 1px 0px 10px rgba(0, 0, 0, .05);
+		box-shadow: 1px 0px 10px rgba(0, 0, 0, .5);
 	}
 
 }

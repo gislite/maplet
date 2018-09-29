@@ -1,45 +1,34 @@
 {% set ii = 1 %}
 
-<div class="panel-group" id="accordion">
+<ul id="main-nav" class="main-nav nav nav-tabs nav-stacked" style="">
     {% for x in recs %}
-    {% if x.uid.endswith('00') %}
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">
-                <center>
-                    <a href="/list/{{ x.slug }}" title="{{ x.name }}" class="flbt">
-                        {{ x.name }}
-                    </a>
-                </center>
+    <li>
+        {% if x.uid.endswith('00') %}
 
-            </h3>
-        </div>
-    </div>
 
-    <div class="panel panel-info">
+        <a href="/list/{{ x.slug }}" title="{{ x.name }}" class="flbt">
+            {{ x.name }}
+        </a>
+
         {% else %}
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <span class="glyphicon glyphicon-list"></span>
-                <a data-toggle="collapse" data-parent="#accordion"
-                   href="#collapse{{ii}}">
 
-                    {{ x.name }}
-                </a>
-                  <span class="fr"><a class="btn btn-primary btn-xs" href="/list/{{ x.slug }}"> 更多</a></span>
-            </h4>
 
-        </div>
+        <a href="#configSetting{{ii}}" class="nav-header collapsed" data-toggle="collapse">
+            <i class="glyphicon glyphicon-credit-card"></i>
+            {{ x.name }}
+            <span class="pull-right glyphicon  glyphicon-chevron-toggle"></span>
+        </a>
+        <ul id="configSetting{{ii}}" class="nav nav-list secondmenu collapse  {% if catid == x.uid %} in {% end %}">
 
-        <div id="collapse{{ii}}" class="panel-collapse collapse {% if catid == x.uid %} in {% end %}">
-            <ul class="list-group">
-                {% module post_cat_recent(x.uid, num = 15, with_date = False, with_catalog= False, order = False ) %}
-            </ul>
-        </div>
+
+            {% module post_cat_recent(x.uid, num = 15, with_date = False, with_catalog= False, order = False ) %}
+        </ul>
+
 
         {% set ii = ii + 1 %}
         {% end %}
-        {% end %}
+    </li>
+    {% end %}
 
-    </div>
-</div>
+</ul>
+

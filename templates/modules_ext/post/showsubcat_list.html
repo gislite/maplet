@@ -1,18 +1,18 @@
 {% for x in recs %}
 {% if x.uid.endswith('00') %}
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3 class="panel-title">
-            <center>
 
-                <a href="/list/{{ x.slug }}" title="{{ x.name }}" class="flbt">
-                    {{ x.name }}
-                </a>
-            </center>
 
-        </h3>
-    </div>
-</div>
+
+    <li>
+
+
+
+        <a href="/list/{{ x.slug }}" title="{{ x.name }}" class="flbt">
+            {{ x.name }}
+        </a>
+</li>
+
+
 {% end %}
 {% end %}
 
