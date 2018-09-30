@@ -6,7 +6,8 @@
         {% if x.uid.endswith('00') %}
 
 
-        <a href="/list/{{ x.slug }}" title="{{ x.name }}" style="background: #3C4049; color: #fff; text-align: center; font-size: 16px; font-weight: lighter">
+        <a href="/list/{{ x.slug }}" title="{{ x.name }}"
+           style="background: #3C4049; color: #fff; text-align: center; font-size: 16px; font-weight: lighter">
            <i class="glyphicon glyphicon-globe"></i> {{ x.name }}
         </a>
         {% else %}
@@ -17,7 +18,7 @@
             {{ x.name }}
             <span class="pull-right glyphicon  glyphicon-chevron-toggle"></span>
         </a>
-        <ul id="configSetting{{ii}}" class="nav nav-list secondmenu collapse  {% if catid == x.uid %} in {% end %}">
+        <ul id="configSetting{{ii}}" class="  secondmenu collapse  {% if catid == x.uid %} in {% end %}">
 
 
             {% module post_cat_recent(x.uid, num = 15, with_date = False, with_catalog= False, order = False ) %}
