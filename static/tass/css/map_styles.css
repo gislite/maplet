@@ -1,7 +1,4 @@
-html {
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-}
+
 
 .main-nav {
     margin-left: 1px;
@@ -62,44 +59,11 @@ html {
     content: "\e113";
 }
 
-footer.duomi-page-footer {
-    background-color: white;
-}
 
-footer.duomi-page-footer .beta-message {
-    color: #a4a4a4;
-}
-
-footer.duomi-page-footer .beta-message a {
-    color: #53a2e4;
-}
-
-footer.duomi-page-footer .list-inline a, footer.authenticated-footer .list-inline li {
-    color: #a4a4a4;
-    padding-bottom: 30px;
-}
-
-footer.duomi-page-footer {
-    background-color: white;
-}
-
-footer.duomi-page-footer .beta-message {
-    color: #a4a4a4;
-}
-
-footer.duomi-page-footer .beta-message a {
-    color: #53a2e4;
-}
-
-footer.duomi-page-footer .list-inline a, footer.authenticated-footer .list-inline li {
-    color: #a4a4a4;
-    padding-bottom: 30px;
-}
 
 .secondmenu a {
     font-size: 12px;
     color: #4A515B;
-    text-align: center;
     border-radius: 4px;
 }
 
@@ -122,18 +86,6 @@ footer.duomi-page-footer .list-inline a, footer.authenticated-footer .list-inlin
 .navbar-static-top {
     background-color: #212121;
     margin-bottom: 5px;
-}
-
-.navbar-brand {
-    background: url('http://static-res.ruyo.net/ruyo_net_w_32.png') no-repeat 10px 8px;
-    display: inline-block;
-    vertical-align: middle;
-    padding-left: 50px;
-    color: #fff;
-}
-
-.navbar-brand:hover {
-    color: #fff;
 }
 
 .collapse.glyphicon-chevron-toggle, .glyphicon-chevron-toggle:before {
@@ -168,7 +120,6 @@ footer.duomi-page-footer .list-inline a, footer.authenticated-footer .list-inlin
 		bottom: 0;
 		left: 0;
 		z-index: 1000;
-		display: block;
 		margin: 0;
 		padding: 0;
 		overflow-x: hidden;
