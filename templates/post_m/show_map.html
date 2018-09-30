@@ -221,42 +221,44 @@
                 <div class="panel-heading">保存视图</div>
 
 
+                <ul class="list-group">
+                    <li class="list-group-item">
 
-                    <ul class="list-group">
-                        <li class="list-group-item">
-
-                            <a id="save_view" class="btn btn-xs btn-primary"><span
-                                    class="glyphicon glyphicon-save">保存视图</span></a>
-                            <a id="current_view_url" href="{{ kwd['url'] }}">{% module site_url() %}{{kwd['url'] }}</a>
-                        </li>
-                    </ul>
-
+                        <a id="save_view" class="btn btn-xs btn-primary"><span
+                                class="glyphicon glyphicon-save">保存视图</span></a>
+                        <a id="current_view_url" href="{{ kwd['url'] }}">{% module site_url() %}{{kwd['url'] }}</a>
+                    </li>
+                </ul>
+                {% if userinfo %}
                 <div class="panel-heading">用户视图链接</div>
 
-                    <ul class="list-group">
-
-                        {% if userinfo %}
-                        {% module app_layout(postinfo.uid, userinfo.uid) %}
-                        {% end %}
+                <ul class="list-group">
 
 
-                    </ul>
+                    {% module app_layout(postinfo.uid, userinfo.uid) %}
 
-       <div class="panel-heading">用户地图数据</div>
-                 <ul class="list-group">
-                     {% if userinfo is None%}
-                     <li class="list-group-item">
-                         全屏后可进行数据编辑
-                     </li>
-                     {% end %}
-                        {% if userinfo %}
-                        {% module app_json(postinfo.uid, userinfo.uid) %}
-                        {% end %}
-                       </ul>
-                </div>
+                </ul>
+
+
+                {% end %}
+
+
+            </div>
+            <div class="panel panel-black">
+                <div class="panel-heading">用户地图数据</div>
+                <ul class="list-group">
+
+                    {% if userinfo %}
+                    {% module app_json(postinfo.uid, userinfo.uid) %}
+                    {% else %}
+                    <li class="list-group-item">
+                        <div class="alert alert-danger">全屏后可进行数据编辑</div>
+                    </li>
+                    {% end %}
+                </ul>
             </div>
 
-
+        </div>
         </div>
     </div>
 
