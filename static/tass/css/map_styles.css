@@ -1,5 +1,4 @@
 
-
 .main-nav {
     margin-left: 1px;
 }
@@ -59,8 +58,6 @@
     content: "\e113";
 }
 
-
-
 .secondmenu a {
     font-size: 12px;
     color: #4A515B;
@@ -73,10 +70,21 @@
     color: #fff;
 }
 
+.secondmenu li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+}
+
 .secondmenu li.active {
     background-color: #6f7782;
     border-color: #428bca;
     border-radius: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
 }
 
 .secondmenu li.active > a {
@@ -96,36 +104,29 @@
     content: "\e114";
 }
 
-
-
-
-
-
-
 /* Sidebar */
 
 .sidebar {
-	display: block;
-	background-color: #fff;
-	padding: 0;
+    display: block;
+    background-color: #fff;
+    padding: 0;
 
 }
 
-
 @media (min-width: 768px) {
-	.sidebar {
-		display: block;
-  		position: fixed;
-		top: 50px;
-		bottom: 0;
-		left: 0;
-		z-index: 1000;
-		margin: 0;
-		padding: 0;
-		overflow-x: hidden;
-		overflow-y: auto;
-		background-color: #fff;
-		box-shadow: 1px 0px 10px rgba(0, 0, 0, .5);
-	}
+    .sidebar {
+        display: block;
+        position: fixed;
+        top: 50px;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-color: #fff;
+        box-shadow: 1px 0px 10px rgba(0, 0, 0, .5);
+    }
 
 }
