@@ -14,7 +14,6 @@ from torcms.model.post_model import MPost
 from torcms_maplet.model.layout_model import MLayout
 
 
-
 class MapPostHandler(PostHandler):
     '''
     For meta handler of map.
@@ -143,6 +142,8 @@ class MapPostHandler(PostHandler):
                 tmpl = 'post_{0}_v2/full_screen.html'.format(self.kind)
             else:
                 tmpl = 'post_{0}/full_screen.html'.format(self.kind)
+        elif 'view3d' in self.request.arguments:
+            tmpl = 'post_{0}/view3d.html'.format(self.kind)
         else:
             tmpl = 'post_{0}/show_map.html'.format(self.kind)
         return tmpl
@@ -238,4 +239,3 @@ class MapOverlayHandler(BaseHandler):
         #     self.render('html/404.html',
         #                 kwd=kwd,
         #                 userinfo=self.userinfo)
-

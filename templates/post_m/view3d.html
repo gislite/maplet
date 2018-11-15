@@ -1,0 +1,76 @@
+{% extends "../theme/map_calcubic_full.html" %}
+{% block head %}
+<title>{{ postinfo.title }}|地图画板|在线地图|Maplet|三维视图</title>
+
+<script src="{{ static_url('f2elib/cesium_1.51/Cesium.js') }}"></script>
+<link rel="stylesheet" href="{{ static_url('f2elib/cesium_1.51/Widgets/widgets.css')}}" type="text/css"
+      media="all">
+
+
+<script type="text/javascript" src="{{ static_url('jslib/dst/leafedit.js') }}"></script>
+
+
+
+<style type="text/css">
+    html, body, #cesiumContainer {
+           width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+       }
+
+     #bottom2{
+
+      width:100%;
+         height:1000px;
+      float:left;
+     }
+</style>
+<script>
+window.ondragstart = function() { return false; };
+var map_uid = "{{ postinfo.uid[1:] }}";
+var vlon = {{ kwd['vlon'] if 'vlon' in kwd else postinfo.extinfo['ext_lon'] }};
+var vlat = {{ kwd['vlat'] if 'vlat' in kwd else postinfo.extinfo['ext_lat'] }};
+var vzoom_current = {{ kwd['vzoom'] if 'vzoom' in kwd else postinfo.extinfo['ext_zoom_current'] }};
+var vzoom_max = {{ postinfo.extinfo['ext_zoom_max'] }};
+var vzoom_min = {{ postinfo.extinfo['ext_zoom_min'] }};
+var vmarker = {{ kwd['marker']}};
+var geojsonid = "{{ kwd['geojson'] }}";
+var login = {{ kwd['login'] }};
+</script>
+
+{% block headinfo %}
+{% end %}
+{% end %}
+{% block zhuti %}
+
+
+
+<div id="bottom2"></div>
+<script>
+    function startup(Cesium) {
+        widget = new Cesium.Viewer('bottom2');
+        url = 'http://wcs.osgeo.cn:8088/service?';   //wms地址
+        layers = widget.scene.globe.imageryLayers;
+        layers.removeAll();
+        var blackMarble = layers.addImageryProvider(new Cesium.WebMapServiceImageryProvider({  //加载一个新的图层
+            url: url,
+            layers: 'maplet_' + map_uid,// Here just give layer name
+            version: '1.1.0'
+        }));
+        // Start off looking at Australia.
+        widget.camera.setView({
+            destination: Cesium.Rectangle.fromDegrees(-100, 0, 310, 80)  //给地图显示页定位
+        });
+        //Sandcastle_End
+        Sandcastle.finishedLoading();  //加载地图
+    }
+    if (typeof Cesium !== "undefined") {  //调用starup()
+        startup(Cesium);
+    } else if (typeof require === "function") {
+        require(["Cesium"], startup);
+    }
+</script>
+
+
+
+{% end %}
+
+
