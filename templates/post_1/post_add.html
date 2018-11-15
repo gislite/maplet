@@ -5,13 +5,11 @@
 
 <div class="panel panel-black">
 
-    <div class="panel-heading">添加
-    </div>
+    <div class="panel-heading">添加</div>
 
     <div class="panel-body">
 
-
-        <form action="" method="post" class="form-horizontal" id="form_add">
+        <form  method="post" class="form-horizontal" id="form_add">
             <input type="hidden" id="uid" name="uid" value="{{ kwd['uid'] }}">
 
 
@@ -23,7 +21,6 @@
                 </div>
             </div>
 
-
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="tags">标签</label>
 
@@ -32,63 +29,50 @@
                 </div>
             </div>
 
-
+            {% for ii in range(0,5) %}
             <div class="form-group">
-                <label class="col-sm-2 control-label" for="keywords">关键词</label>
-
-                <div class="col-sm-10">
-                    <input class="form-control" id="keywords" name="keywords" type="text" value="">
-                </div>
-            </div>
-
-
-                     {% for ii in range(0,5) %}
-                <div class="form-group">
-                    {% if ii == 0 %}
-                    <label for="pcat0" class="col-sm-2 control-label">分类</label>
-                    {% else %}
-                    <label for="pcatx" class="col-sm-2 control-label"></label>
-                    {% end %}
-                    <div class="col-sm-3">
-                        <select name="pcat{{ii}}" id="pcat{{ii}}" class="form-control"
-                                onchange="g_load_postcat({{ii}})">
-                            <option value="">请选择</option>
-                            {% for taginfo in tag_infos %}
-                            {% if taginfo.uid.endswith('00') %}
-                            <option value="{{ taginfo.uid }}">{{ taginfo.name }}
-                            </option>
-                            {% else %}
-                            {% end %}
-                            {% end %}
-                        </select>
-                    </div>
-                    <div class="col-sm-4">
-                        <select name="gcat{{ii}}" id="gcat{{ii}}" class="form-control">
-
-                        </select>
-                    </div>
-                </div>
+                {% if ii == 0 %}
+                <label for="pcat0" class="col-sm-2 control-label">分类</label>
+                {% else %}
+                <label for="pcatx" class="col-sm-2 control-label"></label>
                 {% end %}
+                <div class="col-sm-3">
+                    <select name="pcat{{ii}}" id="pcat{{ii}}" class="form-control"
+                            onchange="g_load_postcat({{ii}})">
+                        <option value="">请选择</option>
+                        {% for taginfo in tag_infos %}
+                        {% if taginfo.uid.endswith('00') %}
+                        <option value="{{ taginfo.uid }}">{{ taginfo.name }}
+                        </option>
+                        {% else %}
+                        {% end %}
+                        {% end %}
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <select name="gcat{{ii}}" id="gcat{{ii}}" class="form-control">
+
+                    </select>
+                </div>
+            </div>
+            {% end %}
 
 
             <div class="form-group">
-                <label class="col-sm-2 control-label" for="logo">特色图片</label>
+                <label class="col-sm-2 control-label" for="logo">图片</label>
 
                 <div class="col-sm-10">
-                    <input id="logo" name="logo" type="text" class="form-control">
+
+                    <input type="text" id="logo" name="logo" class="form-control" readonly/>
+
+                    <br>
+
+                    <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                        上传图片
+                    </a>
+
                 </div>
             </div>
-
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label" for="up"></label>
-
-                <div class="col-sm-10">
-                    <label class="col-sm-2 control-label" id="up">
-                        <a href="/entry/add" class="btn btn-primary" target="_blank">上传图片</a></label>
-                </div>
-            </div>
-
 
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="cnt_md">内容</label>
@@ -106,8 +90,8 @@
                 </div>
             </div>
 
-
         </form>
+        {% module upload_pic() %}
 
     </div>
 </div>

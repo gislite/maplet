@@ -28,7 +28,7 @@
 
         {% if userinfo and userinfo.role[1] >= '2' %}
         <span class="split">|</span>
-        <a href="/page/edit/{{ postinfo.uid }}" class="btn btn-warning btn-xs">{{ _('Edit') }}</a>
+        <a href="/page/_edit/{{ postinfo.uid }}" class="btn btn-warning btn-xs">{{ _('Edit') }}</a>
         <span class="cmts"><a href="/wiki_man/view/{{ postinfo.uid  }}"
                       class="btn btn-xs btn-danger"> {{ _('Review') }}</a></span>
         {% end %}
