@@ -17,10 +17,12 @@
 
 </head>
 <body>
-<a href="https://github.com/gislite/maplet"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+<a href="https://github.com/gislite/maplet"><img style="position: absolute; top: 0; right: 0; border: 0;"
+                                                 src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"
+                                                 alt="Fork me on GitHub"></a>
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
+
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -32,8 +34,30 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/geojson/">画图</a></li>
-                <li><a href="/post/recent">文档</a></li>
+
+
+                <li class="dropdown">
+                    <a href="/" class="dropdown-toggle" data-toggle="dropdown">在线地图<b
+                            class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+
+                        <li><a href="/list/ggeneral">普通地图</a></li>
+                        <li><a href="/list/gzgls">中国历史地图</a></li>
+                        <li><a href="/list/gfenguo">国外地图</a></li>
+                        <li><a href="/list/gsjls">世界历史地图</a></li>
+                        <li><a href="/list/gnature">自然地理地图</a></li>
+                        <li><a href="/list/grenwen">人文社科地图</a></li>
+                        <li><a href="/list/gsthj">生态环境地图</a></li>
+                        <li><a href="/list/mdisaster">灾害地图</a></li>
+                        <li><a href="/list/mraster">栅格数据</a></li>
+                        <li><a href="/list/mvector">矢量数据</a></li>
+
+                    </ul>
+                </li>
+                <li><a href="/geojson/">绘图</a></li>
+                <li><a href="/post/index">文档</a></li>
+                <li><a href="/filter/k100">图书</a></li>
                 <li class="dropdown">
                     <a href="/page/help" class="dropdown-toggle" data-toggle="dropdown">用户<b
                             class="caret"></b>
@@ -70,10 +94,9 @@
 
             </ul>
         </div>
-    </div>
+   
+
 </div>
-
-
 {% block map_zhuti %}
 {% block base_top_header %}
 
@@ -107,6 +130,7 @@
 
                 <div class="row" style="font-size:.9em; color:darkgray; text-align: center; ">
                     <p>&copy; 2017 地图云集|maphub.cn 版权所有</p>
+
                     <p>中国科学院东北地理与农业生态研究所 吉ICP备05002032号</p>
 
                     <p>Powered by <a href="https://github.com/bukun/TorCMS" target="_blank">TorCMS</a></p>
@@ -123,27 +147,30 @@
 </body>
 <script type="text/javascript" src="{{ static_url('jslib/dst/gscript.js') }}"></script>
 
-        {% if userinfo and userinfo.role[2] >= '1' %}
-    {% else %}
+{% if userinfo and userinfo.role[2] >= '1' %}
+{% else %}
 
 <!-- Piwik -->
 <script type="text/javascript">
-  var _paq = _paq || [];
-  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u="//121.42.45.218/piwik/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', '4']);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
+    var _paq = _paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function () {
+        var u = "//121.42.45.218/piwik/";
+        _paq.push(['setTrackerUrl', u + 'piwik.php']);
+        _paq.push(['setSiteId', '4']);
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+        g.type = 'text/javascript';
+        g.async = true;
+        g.defer = true;
+        g.src = u + 'piwik.js';
+        s.parentNode.insertBefore(g, s);
+    })();
 </script>
 <!-- End Piwik Code -->
 
 {% end %}
-
 
 
 </html>

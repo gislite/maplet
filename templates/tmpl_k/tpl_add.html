@@ -1,0 +1,155 @@
+{% extends "./tmplinfo.html" %}
+{% block typebody %}
+<ol class="breadcrumb">
+    <li>当前位置: <a href="/">首页</a></li>
+    <li><a href="/info/">信息</a></li>
+    <li class="active"> 发布信息</li>
+</ol>
+<div class="panel panel-black" id="guarantee">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-sm-3">发布信息</div>
+            <div class="col-sm-9"> {% module BreadcrumbPublish(2) %}</div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" role="form" id="form_add_info" name="form_add_info" method="post"
+              enctype="multipart/form-data">
+            <input type='hidden' name="uid" value="{% raw kwd['uid'] %}">
+            <input type='hidden' name="gcat0" value="{% raw kwd['gcat0'] %}">
+            <input name="action" value="dopost" type="hidden">
+            <input name="ismember" value="0" type="hidden">
+            <input name="id" value="" type="hidden">
+            <input name="mixcode" value="4c9734774f6b40682d35c0ccee0b0845" type="hidden">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label "></label>
+
+                <div class="col-sm-10">
+                    <b>基本数据信息 : {{ kwd['parentname'] }} > {{ kwd['catname'] }}</b>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label ">
+                    <a class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></a>
+                    标题：
+                </label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="title" id="title" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label ">
+                    <a class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></a> 标签 ： </label>
+
+                <div class="col-sm-10">
+                    <input id="tags" name="tags" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                    <label class="col-sm-2 control-label" for="logo">图片</label>
+
+                    <div class="col-sm-10">
+
+                        <input type="text" id="logo" name="logo" class="form-control" readonly/>
+
+                        <br>
+
+                        <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                            上传图片
+                        </a>
+
+
+                    </div>
+                </div>
+
+
+
+            {% if kwd['gcat0'][:2] == '23' %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label ">
+                    <a class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></a>
+                    ID：
+                </label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ext_uid" id="ext_uid">
+                </div>
+            </div>
+            {% elif kwd['gcat0'][:2] == '22'%}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="extra_yaml">数据</label>
+
+                <div class="col-sm-10">
+                    <textarea rows=16 id="extra_yaml" name="extra_yaml" cols="70" class="form-control"></textarea>
+                </div>
+            </div>
+            {% elif kwd['gcat0'][:2] == '26'%}
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    <a class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></a> 主页： </label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ext_homepage" id="ext_homepage">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    <a class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></a> 最新版本： </label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ext_version" id="ext_version">
+                </div>
+            </div>
+            {% elif kwd['gcat0'][:2] == '27'%}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="ext_dm">
+                    <a class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></a>
+                    代码
+                </label>
+
+                <div class="col-sm-10">
+                    <textarea rows=16 id="ext_dm" name="ext_dm" cols="70" class="form-control"></textarea>
+                </div>
+            </div>
+            {% elif kwd['gcat0'][:2] == '28'%}
+            <div class="form-group">
+                <label class="col-sm-2 control-label ">
+                    <a class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></a>
+                    网址
+                </label>
+
+                <div class="col-sm-10">
+                    <input type="url" class="form-control" name="ext_url" id="ext_url">
+                </div>
+            </div>
+            {% else %}
+            {% end %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label ">
+                    <a class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></a>
+                    内容（Markdown） ：
+                </label>
+
+                <div class="col-sm-10">
+                    <textarea class="form-control" rows=26 id="cnt_md" name="cnt_md"></textarea>
+                </div>
+            </div>
+            <hr/>
+            {% block extrainfo %}{% end %}
+            <hr/>
+            <div class="form-group">
+                <label class="col-sm-2 control-label "> </label>
+
+                <div class="col-sm-10">
+                    <input type="submit" name="post_submit" value="提交" id="Button1"
+                           class="btn btn-primary" role="button"/>
+                </div>
+            </div>
+        </form>
+        {% module upload_pic() %}
+    </div>
+</div>
+{% end %}

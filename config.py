@@ -5,27 +5,29 @@ from torcms.core.tools import get_cfg
 DB_CON, SMTP_CFG, SITE_CFG, ROLE_CFG = get_cfg()
 
 DB_CFG = {
-        'conn': DB_CON,
-        'kind': 'p',  # 'p' for PostgresQL, 's' for SQLite.
-        }
+    'conn': DB_CON,
+    'kind': 'p',  # 'p' for PostgresQL, 's' for SQLite.
+}
 
 wcs_svr = cfg.SITE_CFG['wcs']
 
 CMS_CFG = {
     'list_num': 10,
     'site_type': 2,
-    'tpl2': ['9'],
+    'tpl2': ['9', 'm', 'k'],
     'redis_kw': 'lsadfkj'}
 
 router_post = {'1': 'post',
-               'm': 'map'}
+               'm': 'map',
+               'k': 'books'}
 
 post_type = {
     '1': '<span style="color:green;" class="glyphicon glyphicon-list-alt">[{0}]</span>'.format('文档'),
     'm': '<span style="color:red;" class="glyphicon glyphicon-map-marker">[{0}]</span>'.format('地图'),
+    'k': '<span style="color:red;" class="glyphicon glyphicon-book">[{0}]</span>'.format('图书'),
 }
 
-kind_arr = ['m']
+kind_arr = ['m', 'k']
 post_emails = ['gislite@osgeo.cn', '118171@qq.com']
 email_cfg = {
     'title': '好久没登录了',
