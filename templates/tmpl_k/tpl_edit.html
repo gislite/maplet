@@ -1,0 +1,176 @@
+{% extends "./tmplinfo.html" %}
+{% block typebody %}
+<ol class="breadcrumb">
+    <li>当前位置: <a href="/">首页</a></li>
+    <li><a href="/info/">信息</a></li>
+    <li class="active"> 修改 -{{ postinfo.title }} </li>
+</ol>
+<div class="panel panel-black" id="guarantee">
+    <div class="panel-heading">
+         修改-{{ postinfo.title }}
+
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" role="form" id="form_add_info" name="form_add_info" method="post"
+              enctype="multipart/form-data">
+            <div class="form-group">
+                <label class="col-sm-2 control-label "></label>
+
+                <div class="col-sm-10"><b> 基本数据信息 : {{ kwd['parentname'] }} > {{ kwd['catname'] }}</b></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label ">
+                    <a class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></a>
+                    标题：
+                </label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="title" id="title"
+                           value="{{ postinfo.title }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="gcat0">
+                    <span class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></span>
+                    分类：
+                </label>
+
+                <div class="col-sm-10">
+                    <select class="form-control" name="gcat0" id="gcat0">
+                        {% for taginfo in cat_enum %}
+                        {% if not taginfo.uid.endswith('00') %}
+                        <option value="{{ taginfo.uid }}" {% if taginfo.uid== postinfo.extinfo['def_cat_uid'] %}
+                        selected="selected"
+                        {% end %} >{{taginfo.uid[:2]}}_{{ taginfo.name }}</option>
+                        {% end %}
+                        {% end %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label ">
+                    <a class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></a>
+                    标签 ：
+                </label>
+
+                <div class="col-sm-10">
+                    <input type="text" id="tags" name="tags" value="{% for x in app2label_info %}
+                {{ x.tag_name}},
+                {% end  %}" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                    <label for="logo" class="col-sm-2 control-label">图片</label>
+
+                    <div class="col-sm-10">
+                        <input id="logo" name="logo" type="text" value="{{ postinfo.logo }}"  class="form-control" readonly />
+                        <br>
+                        <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">上传图片</a>
+                    </div>
+                </div>
+            {% if kwd['gcat0'][:2] == '23' %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label ">
+                    <a class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></a>
+                    ID：
+                </label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ext_uid" id="ext_uid"
+                           value="{{postinfo.extinfo['ext_uid'] if 'ext_uid' in postinfo.extinfo else '' }}">
+                </div>
+            </div>
+            {% elif kwd['gcat0'][:2] == '22'%}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="extra_yaml">数据</label>
+
+                <div class="col-sm-10">
+                    <textarea rows=16 id="extra_yaml" name="extra_yaml" class="form-control">
+                        {% if 'ext_yaml' in postinfo.extinfo %}
+                        {{ postinfo.extinfo['ext_yaml']}}
+                        {% elif 'extra_yaml' in postinfo.extinfo %}
+                        {{ postinfo.extinfo['extra_yaml']}}
+                        {% else %}
+                        {% end %}
+                    </textarea>
+                </div>
+            </div>
+            {% elif kwd['gcat0'][:2] == '26'%}
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    <a class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></a> 主页：
+                </label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ext_homepage" id="ext_homepage"
+                           value="{{ postinfo.extinfo['ext_homepage'] if 'ext_homepage' in postinfo.extinfo else '' }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    <a class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></a> 最新版本： </label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ext_version" id="ext_version"
+                           value="{{ postinfo.extinfo['ext_version'] if 'ext_version' in postinfo.extinfo else '' }}">
+                </div>
+            </div>
+            {% elif kwd['gcat0'][:2] == '27'%}
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="ext_dm">
+                    <a class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></a>
+                    代码
+                </label>
+
+                <div class="col-sm-10">
+                    <textarea rows=16 id="ext_dm" name="ext_dm" cols="70" class="form-control">
+                        {% if 'ext_dm' in postinfo.extinfo %}
+                        {{ postinfo.extinfo['ext_dm']}}
+                        {% end %}
+                    </textarea>
+                </div>
+            </div>
+            {% elif kwd['gcat0'][:2] == '28'%}
+            <div class="form-group">
+                <label class="col-sm-2 control-label ">
+                    <a class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></a>
+                    网址
+                </label>
+
+                <div class="col-sm-10">
+                    <input type="url" class="form-control" name="ext_url" id="ext_url"
+                           value="{{postinfo.extinfo['ext_url'] if 'ext_url' in postinfo.extinfo else '' }}">
+                </div>
+            </div>
+            {% else %}
+            {% end %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label ">
+                    <a class="glyphicon glyphicon-star" style="color: red;font-size: xx-small;"></a>
+                    内容（Markdown） ：
+                </label>
+
+                <div class="col-sm-10">
+                    <textarea class="form-control" rows=26 id="cnt_md" name="cnt_md">
+                        {{ postinfo.cnt_md }}
+                    </textarea>
+                </div>
+            </div>
+            <hr/>
+            {% block extrainfo %}{% end %}
+            <hr/>
+            <div class="form-group">
+                <label class="col-sm-2 control-label "> </label>
+
+                <div class="col-sm-10">
+                    <input type="submit" name="post_submit" value="提交" id="Button1"
+                           class="btn btn-primary" role="button"/>
+                </div>
+            </div>
+        </form>
+          {% module upload_pic() %}
+    </div>
+</div>
+
+
+{% end %}

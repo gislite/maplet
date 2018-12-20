@@ -1,0 +1,156 @@
+{% extends "./tmplinfo.html" %}
+{% block head %}
+<title>{{ postinfo.title }} OSGeo中国中心 | 开放地理空间实验室</title>
+<meta name="keywords" content="{{ postinfo.keywords }}">
+<meta name="description" content="{% module generate_description(postinfo.cnt_html) %}">
+{% end %}
+{% block typebody %}
+<script>
+    var post_uid = "{{ postinfo.uid }}";
+    var login = {{ kwd['login'] }};
+</script>
+<div class="row">
+    <div class="col-sm-9">
+        <ol class="breadcrumb">
+            <li>当前位置：<a href="/info/"> 信息</a></li>
+            <li><a href="/filter/{{pcatinfo.uid}}">{{pcatinfo.name}}</a></li>
+            {% if catinfo %}
+            <li><a href="/filter/{{catinfo.uid}}">{{catinfo.name}}</a></li>
+            {% end %}
+            {% if postinfo %}
+            <li><a href="/info/{{ postinfo.uid }}"> {{ postinfo.title }}</a></li>
+            {% end %}
+        </ol>
+        <div class="panel panel-black">
+            <div class="panel-heading">{{ postinfo.title }}</div>
+            <div class="panel-body">
+                <div class="row">
+                    {% if postinfo.logo != ''%}
+                    <div class="col-sm-12 bor_bottom ">
+                        <div class="col-sm-6 ">
+                            <img src="{{ postinfo.logo }}" class="img-thumbnail">
+                        </div>
+                        <div class="col-sm-6">
+                            <p>
+                                {% if userinfo %}
+                                {% module collect(userinfo.uid, postinfo.uid) %}
+                                {% end %}
+                                {% module widget_editor( kwd['router'] , postinfo.uid, userinfo) %}
+                            </p>
+
+                            <p><strong>标签:</strong><span class="post_label">
+                          {% set iii = 1 %}
+                    {% for x in tag_info %}
+                    <a href="/label/{{postinfo.kind}}/{{ x.tag_uid }}" class="tag{{ iii }}">{{ x.tag_name }}</a>
+                    {% set iii = iii + 1 %}
+                    {% end %}
+                </span>
+                            </p>
+
+                            <p><strong>发布日期：</strong> {{
+                                datetime.datetime.fromtimestamp(postinfo.time_create).strftime('%Y-%m-%d') }}</p>
+
+                            <p><strong>浏览次数：</strong> {% raw postinfo.view_count %}</p>
+
+                            <p>
+                                {% if 'ext_url' in postinfo.extinfo %}
+
+                            <div style="white-space:nowrap;overflow:hidden;"><strong>网址：</strong>
+                                <a href="{{postinfo.extinfo['ext_url']}}" target="_blank">
+                                    {{postinfo.extinfo['ext_url']}}
+                                </a>
+                            </div>
+                            {% end %}
+                            </p>
+
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="col-sm-12 bor_bottom">
+                        {% block extrainfo %} {% end %}
+                        <p><strong>标签:</strong><span class="post_label">
+                          {% set iii = 1 %}
+                    {% for x in tag_info %}
+                    <a href="/label/{{postinfo.kind}}/{{ x.tag_uid }}" class="tag{{ iii }}">{{ x.tag_name }}</a>
+                    {% set iii = iii + 1 %}
+                    {% end %}
+                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <strong>发布日期：</strong>
+                            {{ datetime.datetime.fromtimestamp(postinfo.time_create).strftime('%Y-%m-%d') }} &nbsp;&nbsp;&nbsp;&nbsp;<strong>浏览次数：</strong>
+                            {% raw postinfo.view_count %}&nbsp;&nbsp;&nbsp;&nbsp;
+                            {% if userinfo %}
+                            {% module collect(userinfo.uid, postinfo.uid) %}
+                            {% end %}
+                            {% module widget_editor( kwd['router'] , postinfo.uid, userinfo) %}
+                        </p>
+                        {% if 'ext_url' in postinfo.extinfo %}
+                        <div style="white-space:nowrap;overflow:hidden;"><strong>网址：</strong><a
+                                href="{{postinfo.extinfo['ext_url']}}"
+                                target="_blank">{{postinfo.extinfo['ext_url']}}</a></div>
+                        {% end %}
+                    </div>
+                    <bR>
+                    {% end %}
+                </div>
+                <div class="col-sm-12">
+                    <div class="listinfo_content">{% raw unescape(postinfo.cnt_html) %}</div>
+                </div>
+                <Br><br>
+
+                <div class="col-sm-12">
+                    {% module ContactInfo(postinfo) %}
+                </div>
+                <Br><br>
+
+                <div class="row">
+                    <span id="showCnt"></span>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-8">
+                        本文链接： <a href="/info/{{ postinfo.uid }}" style="color: #003366">{{ postinfo.title }}</a>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="widget_baidu_share"> {% module baidu_share() %}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="panel panel-info">
+            <div class="panel-heading"> 相关信息</div>
+            <ul class="list-group">
+                {% for s in relations %}
+                <li class="list-group-item">
+                    <a href="/info/{{ s.post_id }}">
+                        <span class="glyphicon glyphicon-list-alt"></span> {{ s.post_title }}
+                    </a>
+                </li>
+                {% end %}
+            </ul>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <span class="title colorme">{% for taginfo in cat_enum %}
+                {% if taginfo.uid.endswith('00') %}
+               {{ taginfo.name }}
+                {% end %}
+                {% end %}</span>
+            </div>
+            <ul class="list-group">
+                {% for taginfo in cat_enum %}
+                {% if not taginfo.uid.endswith('00') %}
+                <li class="list-group-item"><a href="/filter/{{ taginfo.uid }}">{{ taginfo.name }}</a></li>
+                {% end %}
+                {% end %}
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+{% end %}
+
+
