@@ -76,9 +76,12 @@
                 发布 {{ widget_info['catname'] }} 数据</a></li>
             {% end %}
         </ol>
+
+
         <ul class="list-group">
             {% block infolist %} {% end %}
         </ul>
+            
         <div class="clear"></div>
         <div class="iga_pagination">
             <span id="resultFenye"></span>
@@ -107,7 +110,7 @@
         <ul class="list-group">
             {% block infoselect %} {% end %}
         </ul>
-        <div class="panel panel-info">
+        <div class="panel panel-black">
             <div class="panel-heading">
                 <span class="title colorme">
                 {% for taginfo in cat_enum %}
