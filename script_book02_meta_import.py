@@ -4,7 +4,6 @@
 Import books metadata which ID extracted from XLSX.
 '''
 
-import sys
 import os
 
 import pathlib
@@ -13,9 +12,6 @@ from openpyxl import load_workbook
 from torcms.model.category_model import MCategory
 from torcms.model.post2catalog_model import MPost2Catalog
 from torcms.model.post_model import MPost
-
-
-# import xlrd  # 删除
 
 
 def update_category(uid, postdata, kwargs):
@@ -91,51 +87,44 @@ def chuli_meta(sig, metafile):
 
 
 def get_meta(catid, sig, cell_cars):
-    uid = sig[2:]
+    uid = sig
     meta_base = './static/xx_books_meta'
     if os.path.exists(meta_base):
         pass
     else:
         return False
 
+    pp_data = {'logo': '', 'kind': 'k'}
+
+    pp_data['title'] = cell_cars[1]
+    pp_data['cnt_md'] = cell_cars[1]
+
+    pp_data['user_name'] = 'admin'
+    pp_data['def_cat_uid'] = catid
+    pp_data['def_cat_pid'] = catid[:2] + '00'
+
+    pp_data['extinfo'] = {
+        'zlink': cell_cars[3]
+    }
+
     for wroot, wdirs, wfiles in os.walk(meta_base):
         for wdir in wdirs:
-            # if wdir.lower().endswith(sig):
-            ds_base = pathlib.Path(os.path.join(wroot, wdir))
+            if wdir.lower().endswith(sig):
+                ds_base = pathlib.Path(os.path.join(wroot, wdir))
+                for uu in ds_base.iterdir():
+                    if uu.name.endswith('.xlsx'):
+                        meta_dic = chuli_meta(sig[2:], uu)
 
-            pp_data = {'logo': '', 'kind': 'k'}
-            for uu in ds_base.iterdir():
-                if uu.name.endswith('.xlsx'):
-                    meta_dic = chuli_meta('u' + sig[2:], uu)
+                    elif uu.name.startswith('thumbnail_'):
+                        pp_data['logo'] = os.path.join(wroot, wdir, uu.name).strip('.')
 
-                    pp_data['title'] = cell_cars[1]
-                    pp_data['cnt_md'] = cell_cars[1]
-
-                    # pp_data['title'] = meta_dic['title']
-                    # pp_data['cnt_md'] = meta_dic['anytext']
-                    pp_data['user_name'] = 'admin'
-                    pp_data['def_cat_uid'] = catid
-                    pp_data['def_cat_pid'] = catid[:2] + '00'
-
-                    pp_data['extinfo'] = {
-                        'zlink': cell_cars[3]
-                    }
-
-                    print(uu.name)
-
-                    # print(xlsx.absolute())
-                    # MPost.update_misc(post_uid, def_tab_path = xlsx.absolute())
-
-                elif uu.name.startswith('thumbnail_'):
-                    pp_data['logo'] = os.path.join(wroot, wdir, uu.name).strip('.')
-
-            kwargsa = {
-                'def_cat_uid': catid,
-                'cat_id': catid,
-            }
-            MPost.add_or_update('k' + uid, pp_data)
-            update_category('k' + uid, pp_data, kwargsa)
-            MPost2Catalog.add_record('k' + uid, catid)
+    kwargsa = {
+        'def_cat_uid': catid,
+        'cat_id': catid,
+    }
+    MPost.add_or_update(uid, pp_data)
+    update_category(uid, pp_data, kwargsa)
+    MPost2Catalog.add_record(uid, catid)
 
 
 def import_meta():
