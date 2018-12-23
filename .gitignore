@@ -83,3 +83,5 @@ templates/modules
 torcms_helper
 
 static/jslib/node_modules
+# 图书的信息
+script_helper/k*

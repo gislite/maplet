@@ -22,7 +22,7 @@
             {% end %}
         </ol>
         <div class="panel panel-black">
-            <div class="panel-heading">{{ postinfo.title }}</div>
+            <div class="panel-heading"><h2>{{ postinfo.title }}</h2></div>
             <div class="panel-body">
                 <div class="row">
 
@@ -96,8 +96,10 @@
                 <div class="col-sm-12">
                     <div class="listinfo_content">
 
-                                <a href="{{postinfo.extinfo['zlink']}}" target="_blank" style="float: right;" class="btn btn-danger">
-                                   打开购买
+                                <a href="{{postinfo.extinfo['zlink']}}" target="_blank" style="float: right; padding:0px 0px 5px 10px; margin:0px 0px 5px 10px;text-decoration: none;color:#0b7ad1;" class="">
+
+                                    <img src='/static/fixed/amazon2.jpg' width="120"/>
+<span style="display: block;text-align: center;">                                 购买本书</span>
                                 </a>
 
                         {% raw unescape(postinfo.cnt_html) %}</div>

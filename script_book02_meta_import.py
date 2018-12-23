@@ -88,7 +88,7 @@ def chuli_meta(sig, metafile):
 
 def get_meta(catid, sig, cell_cars):
     uid = sig
-    meta_base = './static/xx_books_meta'
+    meta_base = './script_helper'
     if os.path.exists(meta_base):
         pass
     else:
@@ -97,24 +97,26 @@ def get_meta(catid, sig, cell_cars):
     pp_data = {'logo': '', 'kind': 'k'}
 
     pp_data['title'] = cell_cars[1]
-    pp_data['cnt_md'] = cell_cars[1]
+    # pp_data['cnt_md'] = cell_cars[1]
 
     pp_data['user_name'] = 'admin'
     pp_data['def_cat_uid'] = catid
     pp_data['def_cat_pid'] = catid[:2] + '00'
 
     pp_data['extinfo'] = {
-        'zlink': cell_cars[3]
+        # ad_link 不存在则使用 raw_link
+        'zlink': cell_cars[3] if cell_cars[3] else cell_cars[4]
     }
 
     for wroot, wdirs, wfiles in os.walk(meta_base):
         for wdir in wdirs:
-            if wdir.lower().endswith(sig):
+            if wdir.lower() == sig:
                 ds_base = pathlib.Path(os.path.join(wroot, wdir))
                 for uu in ds_base.iterdir():
                     if uu.name.endswith('.xlsx'):
                         meta_dic = chuli_meta(sig[2:], uu)
-
+                    elif uu.name.endswith('.md'):
+                        pp_data['cnt_md'] = open(str(uu.absolute())).read()
                     elif uu.name.startswith('thumbnail_'):
                         pp_data['logo'] = os.path.join(wroot, wdir, uu.name).strip('.')
 
@@ -153,7 +155,7 @@ def import_meta():
                     pass
                 else:
                     continue
-                cell_vars = [ws.cell(row=i, column=tt).value for tt in range(1, cols + 1)]
+                cell_vars = [ws.cell(row=i, column=tt).value if ws.cell(row=i, column=tt) else '' for tt in range(1, cols + 1)]
                 print(sig)
                 if sig:
                     pass
