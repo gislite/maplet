@@ -76,17 +76,27 @@
                 发布 {{ widget_info['catname'] }} 数据</a></li>
             {% end %}
         </ol>
-        <ul class="list-group">
-            {% block infolist %} {% end %}
-        </ul>
-        <div class="clear"></div>
-        <div class="iga_pagination">
-            <span id="resultFenye"></span>
-        </div>
-        <div class="clear"></div>
-        <div class="row">
-            <div class="col-sm-12">
-                {% module baidu_share() %}
+
+        <div class="panel panel-black">
+            <div class="panel-heading">
+                <b>{{ widget_info['catname'] }}</b><em></em>
+
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    {% block infolist %} {% end %}
+                </ul>
+
+                <div class="clear"></div>
+                <div class="iga_pagination">
+                    <span id="resultFenye"></span>
+                </div>
+                <div class="clear"></div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% module baidu_share() %}
+                    </div>
+                </div>
             </div>
         </div>
         <br>
@@ -98,7 +108,7 @@
             <span id="del_key_{{ ii }}">
                 <a href="/info_tag/{{ x }}">{{ x }}</a>
                 <a onclick="keyword_del('{{ x }}', {{ ii }} );">
-                <span style="color: red; cursor: pointer">x</span>
+                    <span style="color: red; cursor: pointer">x</span>
                 </a>
             </span>
             {% set ii = ii + 1 %}
@@ -107,7 +117,7 @@
         <ul class="list-group">
             {% block infoselect %} {% end %}
         </ul>
-        <div class="panel panel-info">
+        <div class="panel panel-black">
             <div class="panel-heading">
                 <span class="title colorme">
                 {% for taginfo in cat_enum %}

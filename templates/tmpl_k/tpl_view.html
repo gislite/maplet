@@ -25,10 +25,11 @@
             <div class="panel-heading">{{ postinfo.title }}</div>
             <div class="panel-body">
                 <div class="row">
+
                     {% if postinfo.logo != ''%}
                     <div class="col-sm-12 bor_bottom ">
                         <div class="col-sm-6 ">
-                            <img src="{{ postinfo.logo }}" class="img-thumbnail">
+                            <img src="{{ postinfo.logo }}" class="img-thumbnail" style="width:240px;">
                         </div>
                         <div class="col-sm-6">
                             <p>
@@ -53,11 +54,11 @@
                             <p><strong>浏览次数：</strong> {% raw postinfo.view_count %}</p>
 
                             <p>
-                                {% if 'ext_url' in postinfo.extinfo %}
+                                {% if 'zlink' in postinfo.extinfo %}
 
                             <div style="white-space:nowrap;overflow:hidden;"><strong>网址：</strong>
-                                <a href="{{postinfo.extinfo['ext_url']}}" target="_blank">
-                                    {{postinfo.extinfo['ext_url']}}
+                                <a href="{{postinfo.extinfo['zlink']}}" target="_blank">
+                                    {{postinfo.extinfo['zlink']}}
                                 </a>
                             </div>
                             {% end %}
@@ -93,7 +94,13 @@
                     {% end %}
                 </div>
                 <div class="col-sm-12">
-                    <div class="listinfo_content">{% raw unescape(postinfo.cnt_html) %}</div>
+                    <div class="listinfo_content">
+
+                                <a href="{{postinfo.extinfo['zlink']}}" target="_blank" style="float: right;" class="btn btn-danger">
+                                   打开购买
+                                </a>
+
+                        {% raw unescape(postinfo.cnt_html) %}</div>
                 </div>
                 <Br><br>
 
