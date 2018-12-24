@@ -10,7 +10,7 @@
     var login = {{ kwd['login'] }};
 </script>
 <div class="row">
-    <div class="col-sm-9">
+    <div class="col-sm-8">
         <ol class="breadcrumb">
             <li>当前位置：<a href="/info/"> 信息</a></li>
             <li><a href="/filter/{{pcatinfo.uid}}">{{pcatinfo.name}}</a></li>
@@ -127,8 +127,8 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
-        <div class="panel panel-info">
+    <div class="col-sm-4">
+        <div class="panel panel-black">
             <div class="panel-heading"> 相关信息</div>
             <ul class="list-group">
                 {% for s in relations %}
@@ -140,7 +140,7 @@
                 {% end %}
             </ul>
         </div>
-        <div class="panel panel-info">
+        <div class="panel panel-black">
             <div class="panel-heading">
                 <span class="title colorme">{% for taginfo in cat_enum %}
                 {% if taginfo.uid.endswith('00') %}
