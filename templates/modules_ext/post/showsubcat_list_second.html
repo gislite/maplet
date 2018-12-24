@@ -8,7 +8,7 @@
 
         <a href="/list/{{ x.slug }}" title="{{ x.name }}"
            style="background: #3C4049; color: #fff; text-align: center; font-size: 16px; font-weight: lighter">
-           <i class="glyphicon glyphicon-globe"></i> {{ x.name }}
+            <i class="glyphicon glyphicon-globe"></i> {{ x.name }}
         </a>
         {% else %}
 
@@ -22,6 +22,13 @@
 
 
             {% module post_cat_recent(x.uid, num = 15, with_date = False, with_catalog= False, order = False ) %}
+
+            <li class="text_center">
+                <br>
+
+                <p><a href="/list/{{ x.slug }}" class="btn btn-primary btn-sm " style="color: #fff">查看更多 > {{ x.name }}</a></p>
+
+            </li>
         </ul>
 
         {% end %}
