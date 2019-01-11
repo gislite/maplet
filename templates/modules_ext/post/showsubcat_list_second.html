@@ -1,3 +1,6 @@
+<script src="/static/tass/ext/zepto.min.js"></script>
+<script src="/static/tass/ext/loadmore.js"></script>
+
 {% set ii = 1 %}
 
 <ul id="main-nav" class="main-nav nav nav-tabs nav-stacked" style="">
@@ -18,23 +21,95 @@
             {{ x.name }}
             <span class="pull-right glyphicon  glyphicon-chevron-toggle"></span>
         </a>
-        <ul id="configSetting{{ii}}" class="  secondmenu collapse  {% if catid == x.uid %} in {% end %}">
+
+        <ul id="configSetting{{ii}}" class=" secondmenu collapse  {% if catid == x.uid %} in {% end %}">
+            <div class="js-blog-list{{ii}}"></div>
 
 
-            {% module post_cat_recent(x.uid, num = 15, with_date = False, with_catalog= False, order = False ) %}
+            <script>
 
-            <li class="text_center">
-                <br>
+                $(function () {
+                    var catid = "{{x.uid}}";
+                    var ii = "{{ii}}";
 
-                <p><a href="/list/{{ x.slug }}" class="btn btn-primary btn-sm " style="color: #fff">查看更多 > {{ x.name }}</a></p>
+                    function getData(config, offset, size) {
+                        config.isAjax = true;
 
-            </li>
+                        $.ajax({
+                            type: 'GET',
+                            url: '/list/j_list_catalog/' + catid,
+                            dataType: 'json',
+                            success: function (reponse) {
+
+                                config.isAjax = false;
+
+                                var result = '';
+
+                                var arr_uid = new Array();
+                                var arr_title = new Array();
+                                var j = 0;
+                                for (var key in reponse) {
+
+                                    arr_uid[j] = key;
+                                    arr_title[j] = reponse[key];
+                                    j++;
+                                }
+
+
+                                var sum = arr_uid.length;
+
+
+                                if (sum - offset < size) {
+                                    size = sum - offset;
+                                }
+
+
+                                /*使用for循环模拟SQL里的limit(offset,size)*/
+                                for (var i = offset; i < (offset + size); i++) {
+
+                                    result += '<li class="list-group-item">' +
+
+                                            '<a href="/map/' + arr_uid[i] + '"><span class="glyphicon glyphicon-map-marker"></span> ' + arr_title[i] + '</a>' +
+
+                                            '</li>';
+
+                                }
+
+
+                                $('.js-blog-list'+ii).append(result);
+
+
+                                /*隐藏more*/
+
+
+                                if (offset + size >= sum) {
+                                    $("#js-load-more" + ii).hide();
+                                    config.isEnd = true;
+
+
+                                } else {
+                                     $("#js-load-more" + ii).show();
+                                    /*停止滚动加载请求*/
+                                    //提示没有了
+                                }
+                            },
+                            error: function (xhr, type) {
+                                alert('Ajax error!');
+                            }
+                        });
+                    }
+
+                    $.loadmore.get(getData, {scroll: true, size: 1},ii);
+
+                });
+            </script>
+
+            <li class="list-group-item "><span id="js-load-more{{ii}}" class="btn btn-danger btn-sm ">加载更多</span></li>
         </ul>
 
         {% end %}
     </li>
     {% set ii = ii + 1 %}
     {% end %}
-
 </ul>
 
