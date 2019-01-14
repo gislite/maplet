@@ -12,7 +12,7 @@ DB_CFG = {
 wcs_svr = cfg.SITE_CFG['wcs']
 
 CMS_CFG = {
-    'list_num': 10,
+    'list_num': 15,
     'site_type': 2,
     'tpl2': ['9', 'm', 'k'],
     'redis_kw': 'lsadfkj'}
