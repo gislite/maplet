@@ -6,17 +6,21 @@
 {% block map_zhuti %}
 <link href="/static/tass/css/map_styles.css" rel="stylesheet">
 <div style="padding-top: 80px"></div>
-
+<div class="row">
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+    <div class="row">
         <div style="padding-top: 10px"></div>
     {% module ext_category_list(catid = catinfo.uid,userinfo = userinfo) %}
     <br>
     {% module ext_category_menu(kind = 'm',catid = catinfo.uid,userinfo = userinfo) %}
-
+</div>
 <div style="clear: both"></div>
 </div>
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
     {% block show_map%} {% end %}
+        </div>
 </div>
 <div style="clear: both"></div>
+    </div>
 {% end %}
