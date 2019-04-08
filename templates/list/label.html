@@ -3,17 +3,17 @@
 {% block zhuti %}
 
 <div class="panel panel-default">
-    <div class="panel-heading"><b>文档 - 查找结果</b></div>
+    <div class="panel-heading"><b>{{ kwd['tag_name'] }}</b></div>
     <ul class="list-group">
         {% for rec in infos %}
-        <li class="list-group-item"><a href="/post/{{ rec.uid }}">{{ rec.title }}</a>
+        <li class="list-group-item"><a href="/{{kwd['router']}}/{{ rec.uid }}">{{ rec.title }}</a>
         </li>
         {% end %}
     </ul>
 </div>
 <div class="row">
     <div class="col-sm-12">
-        {% module label_pager('1', kwd['tag_slug'], kwd['current_page'] ) %}
+        {% module label_pager(kwd['kind'],kwd['tag_slug'], kwd['current_page'] ) %}
     </div>
 </div>
 {% end %}
@@ -29,7 +29,7 @@
     </div>
 
     <ul class="list-group">
-        {% module app_recent_used('1', num = 8, userinfo = userinfo, glyph='glyphicon glyphicon-list-alt') %}
+        {% module app_recent_used(kwd['kind'], num = 8, userinfo = userinfo, glyph='glyphicon glyphicon-list-alt') %}
 
     </ul>
 
@@ -43,7 +43,7 @@
     </div>
 
     <ul class="list-group">
-        {% module app_recent_used('1', num = 8, userinfo = userinfo, glyph='glyphicon glyphicon-list-alt') %}
+        {% module app_most_used(kwd['kind'],num = 8, userinfo = userinfo, glyph='glyphicon glyphicon-list-alt') %}
     </ul>
 
 </div>
