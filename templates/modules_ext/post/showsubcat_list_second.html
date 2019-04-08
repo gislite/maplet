@@ -2,8 +2,8 @@
 <script src="/static/tass/ext/loadmore.js"></script>
 
 {% set ii = 1 %}
-
-<ul id="main-nav" class="main-nav nav nav-tabs nav-stacked" style="">
+<div class="col-sm-12">
+<ul id="main-nav" class="main-nav nav nav-tabs nav-stacked" style="border-bottom: 0 ">
     {% for x in recs %}
     <li>
         {% if x.uid.endswith('00') %}
@@ -22,7 +22,7 @@
             <span class="pull-right glyphicon  glyphicon-chevron-toggle"></span>
         </a>
 
-        <ul id="configSetting{{ii}}" class=" secondmenu collapse  {% if catid == x.uid %} in {% end %}">
+        <ul id="configSetting{{ii}}" class=" secondmenu collapse  {% if catid == x.uid %} in {% end %}" >
             <div class="js-blog-list{{ii}}"></div>
 
 
@@ -104,7 +104,7 @@
                 });
             </script>
 
-            <li class="list-group-item " style="text-align: center"><span id="js-load-more{{ii}}" class="btn btn-danger btn-sm ">加载更多</span></li>
+ <li class="list-group-item " style="text-align: center;border: 0"><span id="js-load-more{{ii}}" class="btn btn-danger btn-sm ">加载更多</span></li>
         </ul>
 
         {% end %}
@@ -112,4 +112,4 @@
     {% set ii = ii + 1 %}
     {% end %}
 </ul>
-
+</div>

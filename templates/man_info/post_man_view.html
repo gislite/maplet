@@ -10,39 +10,14 @@
 
         <h2>{{ view.title }}</h2>
         <span>{{ str(view.date)[:10] }}</span>
-        <span>Author: <a href="http://www.osgeo.cn/">OSGeo中国中心</a></span>
+         <span>Author: <a href="http://www.maphub.cn/">地图云集</a></span>
         <span>Browse: {{ view.view_count }} </span>
 
 
-        {% if postinfo.kind == '1' %}
-
-        {% module widget_editor('post', postinfo.uid, userinfo) %}
-
-        <span class="cmts"><a href="/post/{{postinfo.uid}}" class="btn btn-xs btn-primary"> View</a></span>
-
-
-        {% elif postinfo.kind == '2' %}
-
-        {% module widget_editor('info', postinfo.uid, userinfo) %}
-        <span class="cmts"><a href="/{{ router }}/{{postinfo.uid}}" class="btn btn-xs btn-primary">View</a></span>
-        {% elif postinfo.kind == 'm' %}
-
-        {% module widget_editor('map', postinfo.uid, userinfo) %}
-        <span class="cmts"><a href="/{{ router }}/{{postinfo.uid}}" class="btn btn-xs btn-primary">View</a></span>
-        {% elif postinfo.kind == 's' %}
-
-        {% module widget_editor('app', postinfo.uid, userinfo) %}
-        <span class="cmts"><a href="/{{ router }}/{{postinfo.uid}}" class="btn btn-xs btn-primary">View</a></span>
-        {% elif postinfo.kind == 'w' %}
-
-        {% module widget_editor('wetland', postinfo.uid, userinfo) %}
-        <span class="cmts"><a href="/{{ router }}/{{postinfo.uid}}" class="btn btn-xs btn-primary">View</a></span>
-        {% else %}
-
-        {% module widget_editor('meta', postinfo.uid, userinfo) %}
-        <span class="cmts"><a href="/{{ router }}/{{postinfo.uid}}" class="btn btn-xs btn-primary">View</a></span>
-
-        {% end %}
+        {% module widget_editor(router, postinfo.uid, userinfo) %}
+        <span class="cmts">
+            <a href="/{{ router }}/{{postinfo.uid}}" class="btn btn-xs btn-primary"> View </a>
+        </span>
 
     </div>
 
@@ -57,19 +32,18 @@
 
 
                 {% if userinfo and userinfo.role[1] >= '1' %}
-        <div class="bg-info"><a href="/post_man/restore/{{ diff_dic['hist_uid'] }}" class="btn btn-xs btn-warning">Restore</a>
-        <a href="/post_man/delete/{{ diff_dic['hist_uid'] }}" class="btn btn-xs btn-danger">Delete</a>
-        </div>
-        {% end %}
+                <div class="bg-info"><a href="/post_man/restore/{{ diff_dic['hist_uid'] }}"
+                                        class="btn btn-xs btn-warning">Restore</a>
+                    <a href="/post_man/delete/{{ diff_dic['hist_uid'] }}" class="btn btn-xs btn-danger">Delete</a>
+                </div>
+                {% end %}
                 {% raw (diff_dic['html_diff']) %}
 
-                <p> </p>
+                <p></p>
                 {% end %}
 
             </div>
         </div>
-
-
 
 
     </div>
