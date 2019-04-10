@@ -1,7 +1,11 @@
 <div class="row">
     <div class="col-md-10">
         <div class="panel panel-default">
-            <div class="panel-heading"><span class="glyphicon glyphicon-envelope"></span> 单页列表</div>
+            <div class="panel-heading"><span class="glyphicon glyphicon-envelope"></span>
+
+                {% if kwd['kind'] == '2' %} Page {% else %} Wiki {% end %} 列表
+
+            </div>
             <div class="panel-body">
                 <table class="table table-striped">
                     <thead>
@@ -18,10 +22,10 @@
                             <a href="/page/{{ x.uid }}" title="{{x.title}}">{{x.title}}</a>
                         </td>
                         <td>
-                            <em class="date">{{ str(x.date)[:-15]}}</em>
+                            <em class="date">{{ datetime.datetime.fromtimestamp(x.time_create).strftime('%Y-%m-%d')  }}</em>
                         </td>
                         <td>
-                            <a href="/page/modify/{{ x.uid }}" target="_blank">
+                            <a href="/page/_edit/{{ x.uid }}">
                                 <span class="glyphicon glyphicon-pencil"></span> 修改
                             </a>
                         </td>
