@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ static_url('tass/css/style.css')}}">
 
     {% block head %}{% end %}
+
+    {#
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97124616-2"></script>
 <script>
@@ -23,6 +25,8 @@
 
   gtag('config', 'UA-97124616-2');
 </script>
+#}
+
 {% if kwd.get('ad', True) %}
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
@@ -32,6 +36,7 @@ enable_page_level_ads: true
 });
 </script>
 {% end %}
+
 </head>
 <body>
 <a href="https://github.com/gislite/maplet"><img style="position: absolute; top: 0; right: 0; border: 0;"
