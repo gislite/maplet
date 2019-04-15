@@ -23,7 +23,7 @@
 
   gtag('config', 'UA-97124616-2');
 </script>
-
+{% if kwd.get('ad', True) %}
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({
@@ -31,6 +31,7 @@ google_ad_client: "ca-pub-4505825019574578",
 enable_page_level_ads: true
 });
 </script>
+{% end %}
 </head>
 <body>
 <a href="https://github.com/gislite/maplet"><img style="position: absolute; top: 0; right: 0; border: 0;"
