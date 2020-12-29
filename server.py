@@ -10,7 +10,7 @@ PORT = SITE_CFG['PORT']
 
 if __name__ == "__main__":
     tornado.locale.set_default_locale('zh_CN')
-    tornado.locale.load_gettext_translations('locale', 'yunsuan')
+    # tornado.locale.load_gettext_translations('locale', 'yunsuan')
     if len(sys.argv) > 1:
         PORT = sys.argv[1]
 

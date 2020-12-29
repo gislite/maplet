@@ -7,9 +7,8 @@ Handlers for Map application.
 import tornado.escape
 import tornado.web
 from torcms.core.base_handler import BaseHandler
-from torcms.core.tools import average_array
 from torcms.model.post_model import MPost
-
+from torcms_maplet.core.tools import average_array
 
 class MapViewHandler(BaseHandler):
     '''

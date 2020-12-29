@@ -8,7 +8,6 @@ import tornado.escape
 import tornado.web
 import config
 from torcms.core.base_handler import BaseHandler
-from torcms.core.tools import average_array
 from torcms.handlers.post_handler import PostHandler
 from torcms.model.post_model import MPost
 from torcms_maplet.model.layout_model import MLayout
@@ -46,7 +45,7 @@ class MapPostHandler(PostHandler):
             'modify': '_edit',
             'edit': '_edit',
             'delete': '_delete',
-            'ajax_count_plus': 'j_count_plus',
+
         }
         sig = url_arr[0]
         for sig_enum in pre_dic:
@@ -79,10 +78,7 @@ class MapPostHandler(PostHandler):
             self._to_edit(url_arr[1])
         elif url_arr[0] == '_delete':
             self.delete(url_arr[1])
-        elif url_arr[0] == 'j_delete':
-            self.j_delete(url_arr[1])
-        elif url_arr[0] == 'j_count_plus':
-            self.j_count_plus(url_arr[1])
+
         elif len(url_arr) == 1 and url_str.endswith('.html'):
             # Deprecated
             self.redirect('/post/{uid}'.format(uid=url_str.split('.')[0]))
